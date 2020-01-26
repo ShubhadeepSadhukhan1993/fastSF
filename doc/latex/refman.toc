@@ -1,0 +1,44 @@
+\contentsline {chapter}{\numberline {1}File Index}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}File List}{1}{section.1.1}
+\contentsline {chapter}{\numberline {2}File Documentation}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}src/\discretionary {-}{}{}Kolmogorov41.cc File Reference}{3}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Detailed Description}{6}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Function Documentation}{7}{subsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.2.1}compute\discretionary {-}{}{}\_\discretionary {-}{}{}time\discretionary {-}{}{}\_\discretionary {-}{}{}elapsed}{7}{subsubsection.2.1.2.1}
+\contentsline {subsubsection}{\numberline {2.1.2.2}int\discretionary {-}{}{}\_\discretionary {-}{}{}to\discretionary {-}{}{}\_\discretionary {-}{}{}str}{7}{subsubsection.2.1.2.2}
+\contentsline {subsubsection}{\numberline {2.1.2.3}magnitude}{7}{subsubsection.2.1.2.3}
+\contentsline {subsubsection}{\numberline {2.1.2.4}magnitude}{7}{subsubsection.2.1.2.4}
+\contentsline {subsubsection}{\numberline {2.1.2.5}main}{7}{subsubsection.2.1.2.5}
+\contentsline {subsubsection}{\numberline {2.1.2.6}pow\discretionary {-}{}{}Int}{7}{subsubsection.2.1.2.6}
+\contentsline {subsubsection}{\numberline {2.1.2.7}read\discretionary {-}{}{}\_\discretionary {-}{}{}2\discretionary {-}{}{}D}{8}{subsubsection.2.1.2.7}
+\contentsline {subsubsection}{\numberline {2.1.2.8}read\discretionary {-}{}{}\_\discretionary {-}{}{}3\discretionary {-}{}{}D}{8}{subsubsection.2.1.2.8}
+\contentsline {subsubsection}{\numberline {2.1.2.9}Read\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Init}{8}{subsubsection.2.1.2.9}
+\contentsline {subsubsection}{\numberline {2.1.2.10}Read\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Init}{8}{subsubsection.2.1.2.10}
+\contentsline {subsubsection}{\numberline {2.1.2.11}Read\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Init}{9}{subsubsection.2.1.2.11}
+\contentsline {subsubsection}{\numberline {2.1.2.12}Read\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Init}{9}{subsubsection.2.1.2.12}
+\contentsline {subsubsection}{\numberline {2.1.2.13}Read\discretionary {-}{}{}\_\discretionary {-}{}{}para}{9}{subsubsection.2.1.2.13}
+\contentsline {subsubsection}{\numberline {2.1.2.14}S\discretionary {-}{}{}F\discretionary {-}{}{}\_\discretionary {-}{}{}scalar\discretionary {-}{}{}\_\discretionary {-}{}{}2\discretionary {-}{}{}D}{9}{subsubsection.2.1.2.14}
+\contentsline {subsubsection}{\numberline {2.1.2.15}S\discretionary {-}{}{}F\discretionary {-}{}{}\_\discretionary {-}{}{}scalar\discretionary {-}{}{}\_\discretionary {-}{}{}2\discretionary {-}{}{}D}{9}{subsubsection.2.1.2.15}
+\contentsline {subsubsection}{\numberline {2.1.2.16}S\discretionary {-}{}{}F\discretionary {-}{}{}\_\discretionary {-}{}{}scalar\discretionary {-}{}{}\_\discretionary {-}{}{}3\discretionary {-}{}{}D}{11}{subsubsection.2.1.2.16}
+\contentsline {subsubsection}{\numberline {2.1.2.17}S\discretionary {-}{}{}F\discretionary {-}{}{}\_\discretionary {-}{}{}scalar\discretionary {-}{}{}\_\discretionary {-}{}{}3\discretionary {-}{}{}D}{11}{subsubsection.2.1.2.17}
+\contentsline {subsubsection}{\numberline {2.1.2.18}S\discretionary {-}{}{}Func2\discretionary {-}{}{}D}{11}{subsubsection.2.1.2.18}
+\contentsline {subsubsection}{\numberline {2.1.2.19}S\discretionary {-}{}{}Func2\discretionary {-}{}{}D}{13}{subsubsection.2.1.2.19}
+\contentsline {subsubsection}{\numberline {2.1.2.20}S\discretionary {-}{}{}Func3\discretionary {-}{}{}D}{13}{subsubsection.2.1.2.20}
+\contentsline {subsubsection}{\numberline {2.1.2.21}S\discretionary {-}{}{}Func3\discretionary {-}{}{}D}{14}{subsubsection.2.1.2.21}
+\contentsline {subsubsection}{\numberline {2.1.2.22}S\discretionary {-}{}{}Func\discretionary {-}{}{}\_\discretionary {-}{}{}long\discretionary {-}{}{}\_\discretionary {-}{}{}2\discretionary {-}{}{}D}{14}{subsubsection.2.1.2.22}
+\contentsline {subsubsection}{\numberline {2.1.2.23}S\discretionary {-}{}{}Func\discretionary {-}{}{}\_\discretionary {-}{}{}long\discretionary {-}{}{}\_\discretionary {-}{}{}2\discretionary {-}{}{}D}{15}{subsubsection.2.1.2.23}
+\contentsline {subsubsection}{\numberline {2.1.2.24}S\discretionary {-}{}{}Func\discretionary {-}{}{}\_\discretionary {-}{}{}long\discretionary {-}{}{}\_\discretionary {-}{}{}3\discretionary {-}{}{}D}{15}{subsubsection.2.1.2.24}
+\contentsline {subsubsection}{\numberline {2.1.2.25}S\discretionary {-}{}{}Func\discretionary {-}{}{}\_\discretionary {-}{}{}long\discretionary {-}{}{}\_\discretionary {-}{}{}3\discretionary {-}{}{}D}{15}{subsubsection.2.1.2.25}
+\contentsline {subsubsection}{\numberline {2.1.2.26}write\discretionary {-}{}{}\_\discretionary {-}{}{}2\discretionary {-}{}{}D}{16}{subsubsection.2.1.2.26}
+\contentsline {subsubsection}{\numberline {2.1.2.27}write\discretionary {-}{}{}\_\discretionary {-}{}{}3\discretionary {-}{}{}D}{16}{subsubsection.2.1.2.27}
+\contentsline {subsubsection}{\numberline {2.1.2.28}write\discretionary {-}{}{}\_\discretionary {-}{}{}4\discretionary {-}{}{}D}{16}{subsubsection.2.1.2.28}
+\contentsline {subsection}{\numberline {2.1.3}Variable Documentation}{17}{subsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.3.1}counter\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Grid}{17}{subsubsection.2.1.3.1}
+\contentsline {subsubsection}{\numberline {2.1.3.2}counter\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Grid2\discretionary {-}{}{}D}{17}{subsubsection.2.1.3.2}
+\contentsline {subsubsection}{\numberline {2.1.3.3}field\discretionary {-}{}{}\_\discretionary {-}{}{}procedure}{17}{subsubsection.2.1.3.3}
+\contentsline {subsubsection}{\numberline {2.1.3.4}grid\discretionary {-}{}{}\_\discretionary {-}{}{}switch}{17}{subsubsection.2.1.3.4}
+\contentsline {subsubsection}{\numberline {2.1.3.5}longitudinal}{17}{subsubsection.2.1.3.5}
+\contentsline {subsubsection}{\numberline {2.1.3.6}q1}{17}{subsubsection.2.1.3.6}
+\contentsline {subsubsection}{\numberline {2.1.3.7}q2}{17}{subsubsection.2.1.3.7}
+\contentsline {subsubsection}{\numberline {2.1.3.8}scalar\discretionary {-}{}{}\_\discretionary {-}{}{}switch}{17}{subsubsection.2.1.3.8}
+\contentsline {subsubsection}{\numberline {2.1.3.9}two\discretionary {-}{}{}\_\discretionary {-}{}{}dimension\discretionary {-}{}{}\_\discretionary {-}{}{}switch}{18}{subsubsection.2.1.3.9}

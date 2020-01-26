@@ -1,0 +1,3733 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2019.2.19)  22 JAN 2020 20:45
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Kolmogorov41_8cc.tex
+(./Kolmogorov41_8cc.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 4 languages loaded.
+! Undefined control sequence.
+l.1 \hypertarget
+                {Kolmogorov41_8cc}{\section{src/\-Kolmogorov41.cc File Refer...
+
+? 
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \hypertarget{K
+                  olmogorov41_8cc}{\section{src/\-Kolmogorov41.cc File Refer...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1 \hypertarget{Kolmogorov41_
+                              8cc}{\section{src/\-Kolmogorov41.cc File Refer...
+
+? 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 1.
+! Extra }, or forgotten $.
+l.1 \hypertarget{Kolmogorov41_8cc}
+                                  {\section{src/\-Kolmogorov41.cc File Refer...
+
+? 
+! Undefined control sequence.
+l.1 \hypertarget{Kolmogorov41_8cc}{\section
+                                           {src/\-Kolmogorov41.cc File Refer...
+
+? 
+Missing character: There is no - in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.4 
+    
+? 
+
+Overfull \hbox (195.5486pt too wide) in paragraph at lines 1--4
+[]$[]\OML/cmm/m/it/10 cc[]$ 
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.6 C
+     ode to compute structure functions using velocity or scalar field data.
+? 
+Missing character: There is no C in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no . in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 6--7
+[]
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.9 {\ttfamily \#
+                 include \char`\"{}h5si.\-h\char`\"{}}\\*
+? 
+! Undefined control sequence.
+<recently read> \subsection 
+                            
+l.21 \subsection
+                *{Functions}
+? 
+Missing character: There is no * in font nullfont!
+Missing character: There is no F in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no s in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactItemize undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.22 \begin{DoxyCompactItemize}
+                               
+? 
+
+Overfull \hbox (61.99963pt too wide) in paragraph at lines 9--24
+[]\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (36.74968pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 "h5si.-
+ []
+
+
+Overfull \hbox (10.49991pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 h" 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (86.52711pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 yaml-cpp/yaml.-
+ []
+
+
+Overfull \hbox (13.02776pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 h$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (57.55524pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 iostream$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (52.30528pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 fstream$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (39.27753pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 hdf5.-
+ []
+
+
+Overfull \hbox (13.02776pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 h$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (52.30528pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 sstream$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (76.0272pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 blitz/array.-
+ []
+
+
+Overfull \hbox (13.02776pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 h$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (34.02757pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 omp.-
+ []
+
+
+Overfull \hbox (13.02776pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 h$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (34.02757pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 mpi.-
+ []
+
+
+Overfull \hbox (13.02776pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 h$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (60.27734pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 sys/time.-
+ []
+
+
+Overfull \hbox (13.02776pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 h$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (49.77744pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 limits.-
+ []
+
+
+Overfull \hbox (13.02776pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 h$\OML/cmm/m/it/10 >$ 
+ []
+
+
+Overfull \hbox (41.99963pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 #include
+ []
+
+
+Overfull \hbox (49.77744pt too wide) in paragraph at lines 9--24
+\OML/cmm/m/it/10 <$\OT1/cmtt/m/n/10 unistd.-
+ []
+
+
+Overfull \hbox (13.02776pt too wide) in paragraph at lines 9--24
+\OT1/cmtt/m/n/10 h$\OML/cmm/m/it/10 >$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.24 v
+      oid \hyperlink{Kolmogorov41_8cc_a2b9e63f5c7d28def453cfba49b74859a}{Rea...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.24 void \hyperlink
+                    {Kolmogorov41_8cc_a2b9e63f5c7d28def453cfba49b74859a}{Rea...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.24 void \hyperlink{Kolmogorov41_
+                                  8cc_a2b9e63f5c7d28def453cfba49b74859a}{Rea...
+
+? 
+! Extra }, or forgotten $.
+l.24 ...v41_8cc_a2b9e63f5c7d28def453cfba49b74859a}
+                                                  {Read\-\_\-para} ()
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 \begin{DoxyCompactList}
+                            \small\item\em Function to open the yaml file an...
+
+? 
+! Undefined control sequence.
+l.25 \begin{DoxyCompactList}\small
+                                  \item\em Function to open the yaml file an...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 \begin{DoxyCompactList}\small\item
+                                       \em Function to open the yaml file an...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 \begin{DoxyCompactList}\small\item\em
+                                           Function to open the yaml file an...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 \begin{DoxyCompactList}\small\item\em
+                                           Function to open the yaml file an...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 \begin{DoxyCompactList}\small\item\em
+                                           Function to open the yaml file an...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 25.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 \begin{DoxyCompactList}\small\item\em
+                                           Function to open the yaml file an...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 ...arse the parameters. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 ...the parameters. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.26 v
+      oid \hyperlink{Kolmogorov41_8cc_a16aede7be50f9f4215d24de0dad9179b}{wri...
+
+? 
+
+Overfull \hbox (482.5972pt too wide) in paragraph at lines 24--26
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 b\OT1/cmr/m/n/10 9\OML
+/cmm/m/it/10 e\OT1/cmr/m/n/10 63\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 5\OML/cmm/m/i
+t/10 c\OT1/cmr/m/n/10 7\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 28\OML/cmm/m/it/10 def
+\OT1/cmr/m/n/10 453\OML/cmm/m/it/10 cfba\OT1/cmr/m/n/10 49\OML/cmm/m/it/10 b\OT
+1/cmr/m/n/10 74859\OML/cmm/m/it/10 a[]\OT1/cmr/m/n/10 ()\OML/cmm/m/it/10 Functi
+ontoopentheyamlfileandparsetheparameters:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.26 v
+      oid \hyperlink{Kolmogorov41_8cc_a16aede7be50f9f4215d24de0dad9179b}{wri...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.26 void \hyperlink
+                    {Kolmogorov41_8cc_a16aede7be50f9f4215d24de0dad9179b}{wri...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.26 void \hyperlink{Kolmogorov41_
+                                  8cc_a16aede7be50f9f4215d24de0dad9179b}{wri...
+
+? 
+! Extra }, or forgotten $.
+l.26 ...v41_8cc_a16aede7be50f9f4215d24de0dad9179b}
+                                                  {write\-\_\-2\-D} (Array$<...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 \begin{DoxyCompactList}
+                            \small\item\em Function to write the structure f...
+
+? 
+! Undefined control sequence.
+l.27 \begin{DoxyCompactList}\small
+                                  \item\em Function to write the structure f...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 \begin{DoxyCompactList}\small\item
+                                       \em Function to write the structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 27.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 ...as a 2\-D hdf5 file. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 ...2\-D hdf5 file. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.28 v
+      oid \hyperlink{Kolmogorov41_8cc_a6e486782767b522541885ab5c5a7e32e}{wri...
+
+? 
+
+Overfull \hbox (608.31323pt too wide) in paragraph at lines 26--28
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 16\OML/cmm/m/it/10 aede\OT1/cmr/m/n/10 7
+\OML/cmm/m/it/10 be\OT1/cmr/m/n/10 50\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 9\OML/cm
+m/m/it/10 f\OT1/cmr/m/n/10 4215\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 24\OML/cmm/m/i
+t/10 de\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 dad\OT1/cmr/m/n/10 9179\OML/cmm/m/it/1
+0 b[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Array$$double; \OT1/cmr/m/n/10 2$$\OML/c
+mm/m/it/10 A; stringfile\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Functiontowritethestr
+ucturefunctionsasfunctionoflasa\OT1/cmr/m/n/10 2\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (68.86101pt too wide) in paragraph at lines 26--28
+\OML/cmm/m/it/10 Dhdf\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 file:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.28 v
+      oid \hyperlink{Kolmogorov41_8cc_a6e486782767b522541885ab5c5a7e32e}{wri...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.28 void \hyperlink
+                    {Kolmogorov41_8cc_a6e486782767b522541885ab5c5a7e32e}{wri...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.28 void \hyperlink{Kolmogorov41_
+                                  8cc_a6e486782767b522541885ab5c5a7e32e}{wri...
+
+? 
+! Extra }, or forgotten $.
+l.28 ...v41_8cc_a6e486782767b522541885ab5c5a7e32e}
+                                                  {write\-\_\-3\-D} (Array$<...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 \begin{DoxyCompactList}
+                            \small\item\em Function to write the structure f...
+
+? 
+! Undefined control sequence.
+l.29 \begin{DoxyCompactList}\small
+                                  \item\em Function to write the structure f...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 \begin{DoxyCompactList}\small\item
+                                       \em Function to write the structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 29.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 ...as a 2\-D hdf5 file. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 ...2\-D hdf5 file. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.30 v
+      oid \hyperlink{Kolmogorov41_8cc_a952e4e10ef79a9b18af65437730f1080}{wri...
+
+? 
+
+Overfull \hbox (645.77226pt too wide) in paragraph at lines 28--30
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 6\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 48678
+2767\OML/cmm/m/it/10 b\OT1/cmr/m/n/10 522541885\OML/cmm/m/it/10 ab\OT1/cmr/m/n/
+10 5\OML/cmm/m/it/10 c\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 7\OML/
+cmm/m/it/10 e\OT1/cmr/m/n/10 32\OML/cmm/m/it/10 e[]\OT1/cmr/m/n/10 (\OML/cmm/m/
+it/10 Array$$double; \OT1/cmr/m/n/10 3$$\OML/cmm/m/it/10 A; stringfile; intq\OT
+1/cmr/m/n/10 )\OML/cmm/m/it/10 Functiontowritethestructurefunctionsasfunctionof
+lx; lzasa\OT1/cmr/m/n/10 2\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (68.86101pt too wide) in paragraph at lines 28--30
+\OML/cmm/m/it/10 Dhdf\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 file:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.30 v
+      oid \hyperlink{Kolmogorov41_8cc_a952e4e10ef79a9b18af65437730f1080}{wri...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.30 void \hyperlink
+                    {Kolmogorov41_8cc_a952e4e10ef79a9b18af65437730f1080}{wri...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.30 void \hyperlink{Kolmogorov41_
+                                  8cc_a952e4e10ef79a9b18af65437730f1080}{wri...
+
+? 
+! Extra }, or forgotten $.
+l.30 ...v41_8cc_a952e4e10ef79a9b18af65437730f1080}
+                                                  {write\-\_\-4\-D} (Array$<...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 \begin{DoxyCompactList}
+                            \small\item\em Function to write the structure f...
+
+? 
+! Undefined control sequence.
+l.31 \begin{DoxyCompactList}\small
+                                  \item\em Function to write the structure f...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 \begin{DoxyCompactList}\small\item
+                                       \em Function to write the structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 31.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 \begin{DoxyCompactList}\small\item\em
+                                           Function to write the structure f...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 ...as a 3\-D hdf5 file. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 ...3\-D hdf5 file. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.32 v
+      oid \hyperlink{Kolmogorov41_8cc_ae3ae6d31f602caf58200506ae0d963a0}{rea...
+
+? 
+
+Overfull \hbox (662.95639pt too wide) in paragraph at lines 30--32
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 952\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 4\O
+ML/cmm/m/it/10 e\OT1/cmr/m/n/10 10\OML/cmm/m/it/10 ef\OT1/cmr/m/n/10 79\OML/cmm
+/m/it/10 a\OT1/cmr/m/n/10 9\OML/cmm/m/it/10 b\OT1/cmr/m/n/10 18\OML/cmm/m/it/10
+ af\OT1/cmr/m/n/10 65437730\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 1080[](\OML/cmm/m/
+it/10 Array$$double; \OT1/cmr/m/n/10 4$$\OML/cmm/m/it/10 A; stringfile; intq\OT
+1/cmr/m/n/10 )\OML/cmm/m/it/10 Functiontowritethestructurefunctionsasfunctionof
+lx; ly; lzasa\OT1/cmr/m/n/10 3\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (68.86101pt too wide) in paragraph at lines 30--32
+\OML/cmm/m/it/10 Dhdf\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 file:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 v
+      oid \hyperlink{Kolmogorov41_8cc_ae3ae6d31f602caf58200506ae0d963a0}{rea...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.32 void \hyperlink
+                    {Kolmogorov41_8cc_ae3ae6d31f602caf58200506ae0d963a0}{rea...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.32 void \hyperlink{Kolmogorov41_
+                                  8cc_ae3ae6d31f602caf58200506ae0d963a0}{rea...
+
+? 
+! Extra }, or forgotten $.
+l.32 ...v41_8cc_ae3ae6d31f602caf58200506ae0d963a0}
+                                                  {read\-\_\-2\-D} (Array$<$...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \begin{DoxyCompactList}
+                            \small\item\em Function to read a 2\-D field fro...
+
+? 
+! Undefined control sequence.
+l.33 \begin{DoxyCompactList}\small
+                                  \item\em Function to read a 2\-D field fro...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \begin{DoxyCompactList}\small\item
+                                       \em Function to read a 2\-D field fro...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \begin{DoxyCompactList}\small\item\em
+                                           Function to read a 2\-D field fro...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \begin{DoxyCompactList}\small\item\em
+                                           Function to read a 2\-D field fro...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \begin{DoxyCompactList}\small\item\em
+                                           Function to read a 2\-D field fro...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 33.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \begin{DoxyCompactList}\small\item\em
+                                           Function to read a 2\-D field fro...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 ...d from an hdf5 file. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 ...m an hdf5 file. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.34 s
+      tring \hyperlink{Kolmogorov41_8cc_a226edad97255b1ecf9cb6ccbaf68922b}{i...
+
+? 
+
+Overfull \hbox (426.92107pt too wide) in paragraph at lines 32--34
+[]\OML/cmm/m/it/10 cc[]e\OT1/cmr/m/n/10 3\OML/cmm/m/it/10 ae\OT1/cmr/m/n/10 6\O
+ML/cmm/m/it/10 d\OT1/cmr/m/n/10 31\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 602\OML/cmm
+/m/it/10 caf\OT1/cmr/m/n/10 58200506\OML/cmm/m/it/10 ae\OT1/cmr/m/n/10 0\OML/cm
+m/m/it/10 d\OT1/cmr/m/n/10 963\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 0[](\OML/cmm/m/
+it/10 Array$$double; \OT1/cmr/m/n/10 2$$\OML/cmm/m/it/10 A; stringfile\OT1/cmr/
+m/n/10 )\OML/cmm/m/it/10 Functiontoreada\OT1/cmr/m/n/10 2\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (125.33066pt too wide) in paragraph at lines 32--34
+\OML/cmm/m/it/10 Dfieldfromanhdf\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 file:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.34 s
+      tring \hyperlink{Kolmogorov41_8cc_a226edad97255b1ecf9cb6ccbaf68922b}{i...
+
+? 
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+! Undefined control sequence.
+l.34 string \hyperlink
+                      {Kolmogorov41_8cc_a226edad97255b1ecf9cb6ccbaf68922b}{i...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.34 string \hyperlink{Kolmogorov41_
+                                    8cc_a226edad97255b1ecf9cb6ccbaf68922b}{i...
+
+? 
+! Extra }, or forgotten $.
+l.34 ...v41_8cc_a226edad97255b1ecf9cb6ccbaf68922b}
+                                                  {int\-\_\-to\-\_\-str} (in...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+! Undefined control sequence.
+l.34 ...22b}{int\-\_\-to\-\_\-str} (int \hyperlink
+                                                  {Kolmogorov41_8cc_a86cf672...
+
+? 
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 \begin{DoxyCompactList}
+                            \small\item\em Function to convert an integer ty...
+
+? 
+! Undefined control sequence.
+l.35 \begin{DoxyCompactList}\small
+                                  \item\em Function to convert an integer ty...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 \begin{DoxyCompactList}\small\item
+                                       \em Function to convert an integer ty...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 \begin{DoxyCompactList}\small\item\em
+                                           Function to convert an integer ty...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 \begin{DoxyCompactList}\small\item\em
+                                           Function to convert an integer ty...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 \begin{DoxyCompactList}\small\item\em
+                                           Function to convert an integer ty...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 35.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 \begin{DoxyCompactList}\small\item\em
+                                           Function to convert an integer ty...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 ...ype value to string. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 ...alue to string. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.36 v
+      oid \hyperlink{Kolmogorov41_8cc_ab0e9217b9dd150e770e3423b9a670447}{com...
+
+? 
+
+Overfull \hbox (724.27547pt too wide) in paragraph at lines 34--36
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 226\OML/cmm/m/it/10 edad\OT1/cmr/m/n/10 
+97255\OML/cmm/m/it/10 b\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 ecf\OT1/cmr/m/n/10 9\O
+ML/cmm/m/it/10 cb\OT1/cmr/m/n/10 6\OML/cmm/m/it/10 ccbaf\OT1/cmr/m/n/10 68922\O
+ML/cmm/m/it/10 b[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 int[][]\OT1/cmr/m/n/10 )\OM
+L/cmm/m/it/10 Functiontoconvertanintegertypevaluetostring:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 v
+      oid \hyperlink{Kolmogorov41_8cc_ab0e9217b9dd150e770e3423b9a670447}{com...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.36 void \hyperlink
+                    {Kolmogorov41_8cc_ab0e9217b9dd150e770e3423b9a670447}{com...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.36 void \hyperlink{Kolmogorov41_
+                                  8cc_ab0e9217b9dd150e770e3423b9a670447}{com...
+
+? 
+! Extra }, or forgotten $.
+l.36 ...v41_8cc_ab0e9217b9dd150e770e3423b9a670447}
+                                                  {compute\-\_\-time\-\_\-el...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \begin{DoxyCompactList}
+                            \small\item\em Function to compute the time elap...
+
+? 
+! Undefined control sequence.
+l.37 \begin{DoxyCompactList}\small
+                                  \item\em Function to compute the time elap...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \begin{DoxyCompactList}\small\item
+                                       \em Function to compute the time elap...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \begin{DoxyCompactList}\small\item\em
+                                           Function to compute the time elap...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \begin{DoxyCompactList}\small\item\em
+                                           Function to compute the time elap...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \begin{DoxyCompactList}\small\item\em
+                                           Function to compute the time elap...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 37.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \begin{DoxyCompactList}\small\item\em
+                                           Function to compute the time elap...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...te the time elapsed. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...e time elapsed. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.38 d
+      ouble \hyperlink{Kolmogorov41_8cc_a4ed42719c00a36bb33994eace7a5fcc1}{p...
+
+? 
+
+Overfull \hbox (325.73102pt too wide) in paragraph at lines 36--38
+[]\OML/cmm/m/it/10 cc[]b\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 9217
+\OML/cmm/m/it/10 b\OT1/cmr/m/n/10 9\OML/cmm/m/it/10 dd\OT1/cmr/m/n/10 150\OML/c
+mm/m/it/10 e\OT1/cmr/m/n/10 770\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 3423\OML/cmm/m
+/it/10 b\OT1/cmr/m/n/10 9\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 670447[](\OML/cmm/m/
+it/10 timevalstart
+ []
+
+
+Overfull \hbox (58.08412pt too wide) in paragraph at lines 36--38
+\OML/cmm/m/it/10 t; timevalend
+ []
+
+
+Overfull \hbox (257.54825pt too wide) in paragraph at lines 36--38
+\OML/cmm/m/it/10 t; double\OT1/cmr/m/n/10 &\OML/cmm/m/it/10 elapsed\OT1/cmr/m/n
+/10 )\OML/cmm/m/it/10 Functiontocomputethetimeelapsed:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.38 d
+      ouble \hyperlink{Kolmogorov41_8cc_a4ed42719c00a36bb33994eace7a5fcc1}{p...
+
+? 
+Missing character: There is no d in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+! Undefined control sequence.
+l.38 double \hyperlink
+                      {Kolmogorov41_8cc_a4ed42719c00a36bb33994eace7a5fcc1}{p...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.38 double \hyperlink{Kolmogorov41_
+                                    8cc_a4ed42719c00a36bb33994eace7a5fcc1}{p...
+
+? 
+! Extra }, or forgotten $.
+l.38 ...v41_8cc_a4ed42719c00a36bb33994eace7a5fcc1}
+                                                  {pow\-Int} (double x, int n)
+? 
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 \begin{DoxyCompactList}
+                            \small\item\em Function which conducts exponenti...
+
+? 
+! Undefined control sequence.
+l.39 \begin{DoxyCompactList}\small
+                                  \item\em Function which conducts exponenti...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 \begin{DoxyCompactList}\small\item
+                                       \em Function which conducts exponenti...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 \begin{DoxyCompactList}\small\item\em
+                                           Function which conducts exponenti...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 \begin{DoxyCompactList}\small\item\em
+                                           Function which conducts exponenti...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 \begin{DoxyCompactList}\small\item\em
+                                           Function which conducts exponenti...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 39.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 \begin{DoxyCompactList}\small\item\em
+                                           Function which conducts exponenti...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 ...eger as an exponent. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 ...as an exponent. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.40 v
+      oid \hyperlink{Kolmogorov41_8cc_ad4f02dee0a6ff4dd152134cfd2f5ccac}{rea...
+
+? 
+
+Overfull \hbox (594.661pt too wide) in paragraph at lines 38--40
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 4\OML/cmm/m/it/10 ed\OT1/cmr/m/n/10 4271
+9\OML/cmm/m/it/10 c\OT1/cmr/m/n/10 00\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 36\OML/c
+mm/m/it/10 bb\OT1/cmr/m/n/10 33994\OML/cmm/m/it/10 eace\OT1/cmr/m/n/10 7\OML/cm
+m/m/it/10 a\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 fcc\OT1/cmr/m/n/10 1[](\OML/cmm/m/
+it/10 doublex; intn\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Functionwhichconductsexpon
+entiationwithanintegerasanexponent:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.40 v
+      oid \hyperlink{Kolmogorov41_8cc_ad4f02dee0a6ff4dd152134cfd2f5ccac}{rea...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.40 void \hyperlink
+                    {Kolmogorov41_8cc_ad4f02dee0a6ff4dd152134cfd2f5ccac}{rea...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.40 void \hyperlink{Kolmogorov41_
+                                  8cc_ad4f02dee0a6ff4dd152134cfd2f5ccac}{rea...
+
+? 
+! Extra }, or forgotten $.
+l.40 ...v41_8cc_ad4f02dee0a6ff4dd152134cfd2f5ccac}
+                                                  {read\-\_\-3\-D} (Array$<$...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 \begin{DoxyCompactList}
+                            \small\item\em Function to read a 3\-D field fro...
+
+? 
+! Undefined control sequence.
+l.41 \begin{DoxyCompactList}\small
+                                  \item\em Function to read a 3\-D field fro...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 \begin{DoxyCompactList}\small\item
+                                       \em Function to read a 3\-D field fro...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 \begin{DoxyCompactList}\small\item\em
+                                           Function to read a 3\-D field fro...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 \begin{DoxyCompactList}\small\item\em
+                                           Function to read a 3\-D field fro...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 \begin{DoxyCompactList}\small\item\em
+                                           Function to read a 3\-D field fro...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 41.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 \begin{DoxyCompactList}\small\item\em
+                                           Function to read a 3\-D field fro...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 ...d from an hdf5 file. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 ...m an hdf5 file. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 v
+      oid \hyperlink{Kolmogorov41_8cc_aaeaf80f44d91adffa51dca33da5a8b1b}{S\-...
+
+? 
+
+Overfull \hbox (428.20699pt too wide) in paragraph at lines 40--42
+[]\OML/cmm/m/it/10 cc[]d\OT1/cmr/m/n/10 4\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 02\O
+ML/cmm/m/it/10 dee\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 6\OML/cmm/
+m/it/10 ff\OT1/cmr/m/n/10 4\OML/cmm/m/it/10 dd\OT1/cmr/m/n/10 152134\OML/cmm/m/
+it/10 cfd\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 c
+cac[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Array$$double; \OT1/cmr/m/n/10 3$$\OML/c
+mm/m/it/10 A; stringfile\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Functiontoreada\OT1/c
+mr/m/n/10 3\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (125.33066pt too wide) in paragraph at lines 40--42
+\OML/cmm/m/it/10 Dfieldfromanhdf\OT1/cmr/m/n/10 5\OML/cmm/m/it/10 file:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.42 v
+      oid \hyperlink{Kolmogorov41_8cc_aaeaf80f44d91adffa51dca33da5a8b1b}{S\-...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.42 void \hyperlink
+                    {Kolmogorov41_8cc_aaeaf80f44d91adffa51dca33da5a8b1b}{S\-...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.42 void \hyperlink{Kolmogorov41_
+                                  8cc_aaeaf80f44d91adffa51dca33da5a8b1b}{S\-...
+
+? 
+! Extra }, or forgotten $.
+l.42 ...v41_8cc_aaeaf80f44d91adffa51dca33da5a8b1b}
+                                                  {S\-Func2\-D} (Array$<$ do...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 \begin{DoxyCompactList}
+                            \small\item\em Function to calculate structure f...
+
+? 
+! Undefined control sequence.
+l.43 \begin{DoxyCompactList}\small
+                                  \item\em Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 \begin{DoxyCompactList}\small\item
+                                       \em Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 43.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 ...2\-D velocity field. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 ...velocity field. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.44 v
+      oid \hyperlink{Kolmogorov41_8cc_a7045c373a28e9e12d84552f406ab1839}{S\-...
+
+? 
+
+Overfull \hbox (473.56146pt too wide) in paragraph at lines 42--44
+[]\OML/cmm/m/it/10 cc[]aeaf\OT1/cmr/m/n/10 80\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 
+44\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 91\OML/cmm/m/it/10 adffa\OT1/cmr/m/n/10 51\
+OML/cmm/m/it/10 dca\OT1/cmr/m/n/10 33\OML/cmm/m/it/10 da\OT1/cmr/m/n/10 5\OML/c
+mm/m/it/10 a\OT1/cmr/m/n/10 8\OML/cmm/m/it/10 b\OT1/cmr/m/n/10 1\OML/cmm/m/it/1
+0 b[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Array$$double; \OT1/cmr/m/n/10 2$$\OML/c
+mm/m/it/10 Ux; Array$$double; \OT1/cmr/m/n/10 2$$\OML/cmm/m/it/10 Uz; Array$$do
+uble; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 42--44
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (107.73969pt too wide) in paragraph at lines 42--44
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 42--44
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (23.83333pt too wide) in paragraph at lines 42--44
+\OML/cmm/m/it/10 Node
+ []
+
+
+Overfull \hbox (116.18776pt too wide) in paragraph at lines 42--44
+\OML/cmm/m/it/10 p; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 counter
+
+ []
+
+
+Overfull \hbox (237.64764pt too wide) in paragraph at lines 42--44
+\OML/cmm/m/it/10 Node\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Functiontocalculatestruc
+turefunctionsusing\OT1/cmr/m/n/10 2\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (88.3293pt too wide) in paragraph at lines 42--44
+\OML/cmm/m/it/10 Dvelocityfield:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.44 v
+      oid \hyperlink{Kolmogorov41_8cc_a7045c373a28e9e12d84552f406ab1839}{S\-...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.44 void \hyperlink
+                    {Kolmogorov41_8cc_a7045c373a28e9e12d84552f406ab1839}{S\-...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.44 void \hyperlink{Kolmogorov41_
+                                  8cc_a7045c373a28e9e12d84552f406ab1839}{S\-...
+
+? 
+! Extra }, or forgotten $.
+l.44 ...v41_8cc_a7045c373a28e9e12d84552f406ab1839}
+                                                  {S\-Func2\-D} (Array$<$ do...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 \begin{DoxyCompactList}
+                            \small\item\em Function to calculate structure f...
+
+? 
+! Undefined control sequence.
+l.45 \begin{DoxyCompactList}\small
+                                  \item\em Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 \begin{DoxyCompactList}\small\item
+                                       \em Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 45.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 ... as function of (l). \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 ...unction of (l). \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.46 v
+      oid \hyperlink{Kolmogorov41_8cc_ac0484229466aa1bb410a8432aebb0f3f}{S\-...
+
+? 
+
+Overfull \hbox (470.6321pt too wide) in paragraph at lines 44--46
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 7045\OML/cmm/m/it/10 c\OT1/cmr/m/n/10 37
+3\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 28\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 9\OML/cm
+m/m/it/10 e\OT1/cmr/m/n/10 12\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 84552\OML/cmm/m/
+it/10 f\OT1/cmr/m/n/10 406\OML/cmm/m/it/10 ab\OT1/cmr/m/n/10 1839[](\OML/cmm/m/
+it/10 Array$$double; \OT1/cmr/m/n/10 2$$\OML/cmm/m/it/10 Ux; Array$$double; \OT
+1/cmr/m/n/10 2$$\OML/cmm/m/it/10 Uz; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cm
+m/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (107.73969pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (5.03125pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 p
+ []
+
+
+Overfull \hbox (134.98984pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 coun
+ter
+ []
+
+
+Overfull \hbox (107.73969pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 3$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (26.30186pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Grid\OT1/cmr/m/n/10 2
+ []
+
+
+Overfull \hbox (8.55695pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 D
+ []
+
+
+Overfull \hbox (11.3924pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 pll
+ []
+
+
+Overfull \hbox (107.73969pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 3$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (26.30186pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Grid\OT1/cmr/m/n/10 2
+ []
+
+
+Overfull \hbox (8.55695pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 D
+ []
+
+
+Overfull \hbox (19.50813pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 perp
+ []
+
+
+Overfull \hbox (134.98984pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 3$$&\OML/cmm/m/it/10 coun
+ter
+ []
+
+
+Overfull \hbox (26.30186pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Grid\OT1/cmr/m/n/10 2
+ []
+
+
+Overfull \hbox (8.55695pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 D
+ []
+
+
+Overfull \hbox (237.64764pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Node\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Functiontocalculatestruc
+turefunctionsusing\OT1/cmr/m/n/10 2\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (405.65038pt too wide) in paragraph at lines 44--46
+\OML/cmm/m/it/10 Dvelocityfieldasfunctionof\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 lx
+; lz\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 inadditiontothestructurefunctionsasfuncti
+onof\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 l\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 :[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 v
+      oid \hyperlink{Kolmogorov41_8cc_ac0484229466aa1bb410a8432aebb0f3f}{S\-...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.46 void \hyperlink
+                    {Kolmogorov41_8cc_ac0484229466aa1bb410a8432aebb0f3f}{S\-...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.46 void \hyperlink{Kolmogorov41_
+                                  8cc_ac0484229466aa1bb410a8432aebb0f3f}{S\-...
+
+? 
+! Extra }, or forgotten $.
+l.46 ...v41_8cc_ac0484229466aa1bb410a8432aebb0f3f}
+                                                  {S\-Func\-\_\-long\-\_\-2\...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \begin{DoxyCompactList}
+                            \small\item\em A less computationally intensive ...
+
+? 
+! Undefined control sequence.
+l.47 \begin{DoxyCompactList}\small
+                                  \item\em A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \begin{DoxyCompactList}\small\item
+                                       \em A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 47.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 ...2\-D velocity field. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 ...velocity field. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.48 v
+      oid \hyperlink{Kolmogorov41_8cc_aa690ba615c6dd5cb4e4cb8968a2f91bb}{S\-...
+
+? 
+
+Overfull \hbox (489.34853pt too wide) in paragraph at lines 46--48
+[]\OML/cmm/m/it/10 cc[]c\OT1/cmr/m/n/10 0484229466\OML/cmm/m/it/10 aa\OT1/cmr/m
+/n/10 1\OML/cmm/m/it/10 bb\OT1/cmr/m/n/10 410\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 
+8432\OML/cmm/m/it/10 aebb\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 3\O
+ML/cmm/m/it/10 f[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Array$$double; \OT1/cmr/m/n
+/10 2$$\OML/cmm/m/it/10 Ux; Array$$double; \OT1/cmr/m/n/10 2$$\OML/cmm/m/it/10 
+Uz; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 46--48
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (134.98984pt too wide) in paragraph at lines 46--48
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 coun
+ter
+ []
+
+
+Overfull \hbox (463.02557pt too wide) in paragraph at lines 46--48
+\OML/cmm/m/it/10 Node\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Alesscomputationallyinte
+nsivefunctiontocalculateonlythelongitudinalstructurefunctionsusing\OT1/cmr/m/n/
+10 2\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (88.3293pt too wide) in paragraph at lines 46--48
+\OML/cmm/m/it/10 Dvelocityfield:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.48 v
+      oid \hyperlink{Kolmogorov41_8cc_aa690ba615c6dd5cb4e4cb8968a2f91bb}{S\-...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.48 void \hyperlink
+                    {Kolmogorov41_8cc_aa690ba615c6dd5cb4e4cb8968a2f91bb}{S\-...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.48 void \hyperlink{Kolmogorov41_
+                                  8cc_aa690ba615c6dd5cb4e4cb8968a2f91bb}{S\-...
+
+? 
+! Extra }, or forgotten $.
+l.48 ...v41_8cc_aa690ba615c6dd5cb4e4cb8968a2f91bb}
+                                                  {S\-Func\-\_\-long\-\_\-2\...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 \begin{DoxyCompactList}
+                            \small\item\em A less computationally intensive ...
+
+? 
+! Undefined control sequence.
+l.49 \begin{DoxyCompactList}\small
+                                  \item\em A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 \begin{DoxyCompactList}\small\item
+                                       \em A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 49.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 ...2\-D velocity field. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 ...velocity field. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.50 v
+      oid \hyperlink{Kolmogorov41_8cc_a7c906faa1c5d93193db8fa749410e113}{S\-...
+
+? 
+
+Overfull \hbox (486.44684pt too wide) in paragraph at lines 48--50
+[]\OML/cmm/m/it/10 cc[]a\OT1/cmr/m/n/10 690\OML/cmm/m/it/10 ba\OT1/cmr/m/n/10 6
+15\OML/cmm/m/it/10 c\OT1/cmr/m/n/10 6\OML/cmm/m/it/10 dd\OT1/cmr/m/n/10 5\OML/c
+mm/m/it/10 cb\OT1/cmr/m/n/10 4\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 4\OML/cmm/m/it/
+10 cb\OT1/cmr/m/n/10 8968\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 f\
+OT1/cmr/m/n/10 91\OML/cmm/m/it/10 bb[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Array$$
+double; \OT1/cmr/m/n/10 2$$\OML/cmm/m/it/10 Ux; Array$$double; \OT1/cmr/m/n/10 
+2$$\OML/cmm/m/it/10 Uz; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (134.98984pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 coun
+ter
+ []
+
+
+Overfull \hbox (107.73969pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 3$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (26.30186pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 Grid\OT1/cmr/m/n/10 2
+ []
+
+
+Overfull \hbox (8.55695pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 D
+ []
+
+
+Overfull \hbox (11.3924pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 pll
+ []
+
+
+Overfull \hbox (134.98984pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 3$$&\OML/cmm/m/it/10 coun
+ter
+ []
+
+
+Overfull \hbox (26.30186pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 Grid\OT1/cmr/m/n/10 2
+ []
+
+
+Overfull \hbox (8.55695pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 D
+ []
+
+
+Overfull \hbox (674.49028pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 Node\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Alesscomputationallyinte
+nsivefunctiontocalculateonlythelongitudinalstructurefunctionsasfunctionsof\OT1/
+cmr/m/n/10 (\OML/cmm/m/it/10 lx; lz\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 inaddition
+tofunctionof\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 l\OT1/cmr/m/n/10 )\OML/cmm/m/it/1
+0 using\OT1/cmr/m/n/10 2\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (88.3293pt too wide) in paragraph at lines 48--50
+\OML/cmm/m/it/10 Dvelocityfield:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.50 v
+      oid \hyperlink{Kolmogorov41_8cc_a7c906faa1c5d93193db8fa749410e113}{S\-...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.50 void \hyperlink
+                    {Kolmogorov41_8cc_a7c906faa1c5d93193db8fa749410e113}{S\-...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.50 void \hyperlink{Kolmogorov41_
+                                  8cc_a7c906faa1c5d93193db8fa749410e113}{S\-...
+
+? 
+! Extra }, or forgotten $.
+l.50 ...v41_8cc_a7c906faa1c5d93193db8fa749410e113}
+                                                  {S\-Func3\-D} (Array$<$ do...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \begin{DoxyCompactList}
+                            \small\item\em Function to calculate structure f...
+
+? 
+! Undefined control sequence.
+l.51 \begin{DoxyCompactList}\small
+                                  \item\em Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \begin{DoxyCompactList}\small\item
+                                       \em Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 51.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 ...3\-D velocity field. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 ...velocity field. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.52 v
+      oid \hyperlink{Kolmogorov41_8cc_a07a9ae43ac80dcae7cf66b7153f1def7}{S\-...
+
+? 
+
+Overfull \hbox (554.36623pt too wide) in paragraph at lines 50--52
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 7\OML/cmm/m/it/10 c\OT1/cmr/m/n/10 906\O
+ML/cmm/m/it/10 faa\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 c\OT1/cmr/m/n/10 5\OML/cmm/
+m/it/10 d\OT1/cmr/m/n/10 93193\OML/cmm/m/it/10 db\OT1/cmr/m/n/10 8\OML/cmm/m/it
+/10 fa\OT1/cmr/m/n/10 749410\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 113[](\OML/cmm/m/
+it/10 Array$$double; \OT1/cmr/m/n/10 3$$\OML/cmm/m/it/10 Ux; Array$$double; \OT
+1/cmr/m/n/10 3$$\OML/cmm/m/it/10 Uy; Array$$double; \OT1/cmr/m/n/10 3$$\OML/cmm
+/m/it/10 Uz; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 50--52
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (107.73969pt too wide) in paragraph at lines 50--52
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 50--52
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (23.83333pt too wide) in paragraph at lines 50--52
+\OML/cmm/m/it/10 Node
+ []
+
+
+Overfull \hbox (116.18776pt too wide) in paragraph at lines 50--52
+\OML/cmm/m/it/10 p; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 counter
+
+ []
+
+
+Overfull \hbox (237.64764pt too wide) in paragraph at lines 50--52
+\OML/cmm/m/it/10 Node\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Functiontocalculatestruc
+turefunctionsusing\OT1/cmr/m/n/10 3\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (88.3293pt too wide) in paragraph at lines 50--52
+\OML/cmm/m/it/10 Dvelocityfield:[]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.52 v
+      oid \hyperlink{Kolmogorov41_8cc_a07a9ae43ac80dcae7cf66b7153f1def7}{S\-...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.52 void \hyperlink
+                    {Kolmogorov41_8cc_a07a9ae43ac80dcae7cf66b7153f1def7}{S\-...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.52 void \hyperlink{Kolmogorov41_
+                                  8cc_a07a9ae43ac80dcae7cf66b7153f1def7}{S\-...
+
+? 
+! Extra }, or forgotten $.
+l.52 ...v41_8cc_a07a9ae43ac80dcae7cf66b7153f1def7}
+                                                  {S\-Func3\-D} (Array$<$ do...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 \begin{DoxyCompactList}
+                            \small\item\em Function to calculate structure f...
+
+? 
+! Undefined control sequence.
+l.53 \begin{DoxyCompactList}\small
+                                  \item\em Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 \begin{DoxyCompactList}\small\item
+                                       \em Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 53.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 \begin{DoxyCompactList}\small\item\em
+                                           Function to calculate structure f...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 ... as function of (l). \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 ...unction of (l). \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.54 v
+      oid \hyperlink{Kolmogorov41_8cc_a2cf2860cf69440c07bcdafc05b64a79a}{S\-...
+
+? 
+
+Overfull \hbox (554.26439pt too wide) in paragraph at lines 52--54
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 07\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 9\OM
+L/cmm/m/it/10 ae\OT1/cmr/m/n/10 43\OML/cmm/m/it/10 ac\OT1/cmr/m/n/10 80\OML/cmm
+/m/it/10 dcae\OT1/cmr/m/n/10 7\OML/cmm/m/it/10 cf\OT1/cmr/m/n/10 66\OML/cmm/m/i
+t/10 b\OT1/cmr/m/n/10 7153\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 d
+ef\OT1/cmr/m/n/10 7[](\OML/cmm/m/it/10 Array$$double; \OT1/cmr/m/n/10 3$$\OML/c
+mm/m/it/10 Ux; Array$$double; \OT1/cmr/m/n/10 3$$\OML/cmm/m/it/10 Uy; Array$$do
+uble; \OT1/cmr/m/n/10 3$$\OML/cmm/m/it/10 Uz; Array$$double; \OT1/cmr/m/n/10 2$
+$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (107.73969pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (5.03125pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 p
+ []
+
+
+Overfull \hbox (134.98984pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 coun
+ter
+ []
+
+
+Overfull \hbox (107.73969pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 4$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (21.30185pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Grid
+ []
+
+
+Overfull \hbox (11.3924pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 pll
+ []
+
+
+Overfull \hbox (107.73969pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 4$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (21.30185pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Grid
+ []
+
+
+Overfull \hbox (19.50813pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 perp
+ []
+
+
+Overfull \hbox (134.98984pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 4$$&\OML/cmm/m/it/10 coun
+ter
+ []
+
+
+Overfull \hbox (21.30185pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Grid
+ []
+
+
+Overfull \hbox (237.64764pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Node\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Functiontocalculatestruc
+turefunctionsusing\OT1/cmr/m/n/10 3\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (418.53696pt too wide) in paragraph at lines 52--54
+\OML/cmm/m/it/10 Dvelocityfieldasfunctionof\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 lx
+; ly; lz\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 inadditiontothestructurefunctionsasfu
+nctionof\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 l\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 :[
+]$ 
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.54 v
+      oid \hyperlink{Kolmogorov41_8cc_a2cf2860cf69440c07bcdafc05b64a79a}{S\-...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.54 void \hyperlink
+                    {Kolmogorov41_8cc_a2cf2860cf69440c07bcdafc05b64a79a}{S\-...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.54 void \hyperlink{Kolmogorov41_
+                                  8cc_a2cf2860cf69440c07bcdafc05b64a79a}{S\-...
+
+? 
+! Extra }, or forgotten $.
+l.54 ...v41_8cc_a2cf2860cf69440c07bcdafc05b64a79a}
+                                                  {S\-Func\-\_\-long\-\_\-3\...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.55 \begin{DoxyCompactList}
+                            \small\item\em A less computationally intensive ...
+
+? 
+! Undefined control sequence.
+l.55 \begin{DoxyCompactList}\small
+                                  \item\em A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.55 \begin{DoxyCompactList}\small\item
+                                       \em A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.55 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.55 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.55 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+LaTeX Font Warning: Command \em invalid in math mode on input line 55.
+
+
+! LaTeX Error: Command \itshape invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.55 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: \begin{document} ended by \end{DoxyCompactList}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.55 ...3\-D velocity field. \end{DoxyCompactList}
+                                                  \item
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.55 ...velocity field. \end{DoxyCompactList}\item
+                                                  
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.56 v
+      oid \hyperlink{Kolmogorov41_8cc_ac72b8e548ece94d62dd87b2a9c1c5fe7}{S\-...
+
+? 
+
+Overfull \hbox (571.91026pt too wide) in paragraph at lines 54--56
+[]\OML/cmm/m/it/10 cc[]\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 cf\OT1/cmr/m/n/10 2860
+\OML/cmm/m/it/10 cf\OT1/cmr/m/n/10 69440\OML/cmm/m/it/10 c\OT1/cmr/m/n/10 07\OM
+L/cmm/m/it/10 bcdafc\OT1/cmr/m/n/10 05\OML/cmm/m/it/10 b\OT1/cmr/m/n/10 64\OML/
+cmm/m/it/10 a\OT1/cmr/m/n/10 79\OML/cmm/m/it/10 a[]\OT1/cmr/m/n/10 (\OML/cmm/m/
+it/10 Array$$double; \OT1/cmr/m/n/10 3$$\OML/cmm/m/it/10 Ux; Array$$double; \OT
+1/cmr/m/n/10 3$$\OML/cmm/m/it/10 Uy; Array$$double; \OT1/cmr/m/n/10 3$$\OML/cmm
+/m/it/10 Uz; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 S
+ []
+
+
+Overfull \hbox (7.81946pt too wide) in paragraph at lines 54--56
+\OML/cmm/m/it/10 F
+ []
+
+
+Overfull \hbox (134.98984pt too wide) in paragraph at lines 54--56
+\OML/cmm/m/it/10 Node; Array$$double; \OT1/cmr/m/n/10 2$$&\OML/cmm/m/it/10 coun
+ter
+ []
+
+
+Overfull \hbox (463.02557pt too wide) in paragraph at lines 54--56
+\OML/cmm/m/it/10 Node\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 Alesscomputationallyinte
+nsivefunctiontocalculateonlythelongitudinalstructurefunctionsusing\OT1/cmr/m/n/
+10 3\OT1/cmr/m/it/10 -
+ []
+
+
+Overfull \hbox (88.3293pt too wide) in paragraph at lines 54--56
+\OML/cmm/m/it/10 Dvelocityfield:[]$ 
+ []
+
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.56 v
+      oid \hyperlink{Kolmogorov41_8cc_ac72b8e548ece94d62dd87b2a9c1c5fe7}{S\-...
+
+? 
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+! Undefined control sequence.
+<write> \newlabel{Kolmogorov41_8cc}{{}{\thepage 
+                                                }}
+l.56 v
+      oid \hyperlink{Kolmogorov41_8cc_ac72b8e548ece94d62dd87b2a9c1c5fe7}{S\-...
+
+? 
+\newlabel{Kolmogorov41_8cc}{{}{}}
+]
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.56 v
+      oid \hyperlink{Kolmogorov41_8cc_ac72b8e548ece94d62dd87b2a9c1c5fe7}{S\-...
+
+? 
+Missing character: There is no v in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Undefined control sequence.
+l.56 void \hyperlink
+                    {Kolmogorov41_8cc_ac72b8e548ece94d62dd87b2a9c1c5fe7}{S\-...
+
+? 
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 1 in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.56 void \hyperlink{Kolmogorov41_
+                                  8cc_ac72b8e548ece94d62dd87b2a9c1c5fe7}{S\-...
+
+? 
+! Extra }, or forgotten $.
+l.56 ...v41_8cc_ac72b8e548ece94d62dd87b2a9c1c5fe7}
+                                                  {S\-Func\-\_\-long\-\_\-3\...
+
+? 
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no < in font nullfont!
+Missing character: There is no > in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+! LaTeX Error: Environment DoxyCompactList undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.57 \begin{DoxyCompactList}
+                            \small\item\em A less computationally intensive ...
+
+? 
+! Undefined control sequence.
+l.57 \begin{DoxyCompactList}\small
+                                  \item\em A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.57 \begin{DoxyCompactList}\small\item
+                                       \em A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.57 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? 
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.57 \begin{DoxyCompactList}\small\item\em
+                                           A less computationally intensive ...
+
+? X
+ 
+Here is how much of TeX's memory you used:
+ 20 strings out of 494985
+ 500 string characters out of 6180356
+ 62641 words of memory out of 5000000
+ 3332 multiletter control sequences out of 15000+600000
+ 4154 words of font info for 16 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 18i,5n,12p,527b,234s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Kolmogorov41_8cc.pdf (1 page, 64539 bytes).
+PDF statistics:
+ 32 PDF objects out of 1000 (max. 8388607)
+ 22 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
