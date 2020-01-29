@@ -9,7 +9,7 @@ tags:
 
 authors:
   - name: Shubhadeep Sadhukhan
-    orcid: 0000-0001-
+    orcid: 0000-0002-7278-5041
     affiliation: 1
   - name: Shashwat Bhattacharya
     orcid: 0000-0002-1280-9881
