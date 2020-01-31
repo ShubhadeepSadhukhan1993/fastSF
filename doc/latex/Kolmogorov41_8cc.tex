@@ -24,14 +24,14 @@ Code to compute structure functions using velocity or scalar field data.
 void \hyperlink{Kolmogorov41_8cc_a2b9e63f5c7d28def453cfba49b74859a}{Read\-\_\-para} ()
 \begin{DoxyCompactList}\small\item\em Function to open the yaml file and parse the parameters. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a16aede7be50f9f4215d24de0dad9179b}{write\-\_\-2\-D} (Array$<$ double, 2 $>$ A, string file)
-\begin{DoxyCompactList}\small\item\em Function to write the structure functions as function of l as a 2\-D hdf5 file. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to write the structure functions as function of $ l $ as a 2\-D hdf5 file. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a6e486782767b522541885ab5c5a7e32e}{write\-\_\-3\-D} (Array$<$ double, 3 $>$ A, string file, int q)
 \begin{DoxyCompactList}\small\item\em Function to write the structure functions as function of lx,lz as a 2\-D hdf5 file. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a952e4e10ef79a9b18af65437730f1080}{write\-\_\-4\-D} (Array$<$ double, 4 $>$ A, string file, int q)
-\begin{DoxyCompactList}\small\item\em Function to write the structure functions as function of lx,ly,lz as a 3\-D hdf5 file. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to write the structure functions as function of $ (l_x,l_y,l_z) $ as a 3\-D hdf5 file. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a08bfe922b48296ebd38787354a0b87fe}{read\-\_\-2\-D} (Array$<$ double, 2 $>$ A, string fold, string file)
 \begin{DoxyCompactList}\small\item\em Function to read a 2\-D field from an hdf5 file. \end{DoxyCompactList}\item 
-string \hyperlink{Kolmogorov41_8cc_a226edad97255b1ecf9cb6ccbaf68922b}{int\-\_\-to\-\_\-str} (int \hyperlink{Kolmogorov41_8cc_a86cf672daa4e0ad11ad10efc894d19c8}{num})
+string \hyperlink{Kolmogorov41_8cc_a0ef75a22d560fac1397951e44a99685c}{int\-\_\-to\-\_\-str} (int number)
 \begin{DoxyCompactList}\small\item\em Function to convert an integer type value to string. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_ab480edbbae700c7a118450b0f91c44e8}{V\-E\-C\-T\-O\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D} ()
 \begin{DoxyCompactList}\small\item\em Test function to validate the calculation of structure functions of 3\-D velocity field data. \end{DoxyCompactList}\item 
@@ -50,19 +50,19 @@ void \hyperlink{Kolmogorov41_8cc_aed55606b6e28ce261a32fbb67004642e}{read\-\_\-3\
 void \hyperlink{Kolmogorov41_8cc_aaeaf80f44d91adffa51dca33da5a8b1b}{S\-Func2\-D} (Array$<$ double, 2 $>$ Ux, Array$<$ double, 2 $>$ Uz, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node\-\_\-p, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node)
 \begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 2\-D velocity field. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a7045c373a28e9e12d84552f406ab1839}{S\-Func2\-D} (Array$<$ double, 2 $>$ Ux, Array$<$ double, 2 $>$ Uz, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&S\-F\-\_\-p\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node, Array$<$ double, 3 $>$ \&S\-F\-\_\-\-Grid2\-D\-\_\-pll\-\_\-\-Node, Array$<$ double, 3 $>$ \&S\-F\-\_\-\-Grid2\-D\-\_\-perp\-\_\-\-Node, Array$<$ double, 3 $>$ \&counter\-\_\-\-Grid2\-D\-\_\-\-Node)
-\begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 2\-D velocity field as function of (lx, lz) in addition to the structure functions as function of (l). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 2\-D velocity field as function of $(l_x, l_z) $ in addition to the structure functions as function of $ l $. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_ac0484229466aa1bb410a8432aebb0f3f}{S\-Func\-\_\-long\-\_\-2\-D} (Array$<$ double, 2 $>$ Ux, Array$<$ double, 2 $>$ Uz, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node)
 \begin{DoxyCompactList}\small\item\em A less computationally intensive function to calculate only the longitudinal structure functions using 2\-D velocity field. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_aa690ba615c6dd5cb4e4cb8968a2f91bb}{S\-Func\-\_\-long\-\_\-2\-D} (Array$<$ double, 2 $>$ Ux, Array$<$ double, 2 $>$ Uz, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node, Array$<$ double, 3 $>$ \&S\-F\-\_\-\-Grid2\-D\-\_\-pll\-\_\-\-Node, Array$<$ double, 3 $>$ \&counter\-\_\-\-Grid2\-D\-\_\-\-Node)
-\begin{DoxyCompactList}\small\item\em A less computationally intensive function to calculate only the longitudinal structure functions as functions of (lx,lz) in addition to function of (l) using 2\-D velocity field. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A less computationally intensive function to calculate only the longitudinal structure functions as functions of $(l_x,l_z) $ in addition to function of $ l $ using 2\-D velocity field. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a7c906faa1c5d93193db8fa749410e113}{S\-Func3\-D} (Array$<$ double, 3 $>$ Ux, Array$<$ double, 3 $>$ Uy, Array$<$ double, 3 $>$ Uz, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node\-\_\-p, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node)
 \begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 3\-D velocity field. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a07a9ae43ac80dcae7cf66b7153f1def7}{S\-Func3\-D} (Array$<$ double, 3 $>$ Ux, Array$<$ double, 3 $>$ Uy, Array$<$ double, 3 $>$ Uz, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&S\-F\-\_\-p\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node, Array$<$ double, 4 $>$ \&S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node, Array$<$ double, 4 $>$ \&S\-F\-\_\-\-Grid\-\_\-perp\-\_\-\-Node, Array$<$ double, 4 $>$ \&counter\-\_\-\-Grid\-\_\-\-Node)
-\begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 3\-D velocity field as function of (lx, ly, lz) in addition to the structure functions as function of (l). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 3\-D velocity field as function of $ (l_x, l_y, l_z) $ in addition to the structure functions as function of $ l $. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a4d2109ac253b8ba570101a85c8882597}{S\-Func\-\_\-long\-\_\-3\-D} (Array$<$ double, 3 $>$ Ux, Array$<$ double, 3 $>$ Uy, Array$<$ double, 3 $>$ Uz, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node)
 \begin{DoxyCompactList}\small\item\em A less computationally intensive function to calculate only the longitudinal structure functions using 3\-D velocity field. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_ac72b8e548ece94d62dd87b2a9c1c5fe7}{S\-Func\-\_\-long\-\_\-3\-D} (Array$<$ double, 3 $>$ Ux, Array$<$ double, 3 $>$ Uy, Array$<$ double, 3 $>$ Uz, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node, Array$<$ double, 4 $>$ \&S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node, Array$<$ double, 4 $>$ \&counter\-\_\-\-Grid\-\_\-\-Node)
-\begin{DoxyCompactList}\small\item\em A less computationally intensive function to calculate only the longitudinal structure functions as functions of (lx,ly,lz) in addition to function of (l) using 3\-D velocity field. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A less computationally intensive function to calculate only the longitudinal structure functions as functions of $ (l_x,l_y,l_z) $ in addition to function of $ l $ using 3\-D velocity field. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a74b18de8e8b7373822b819bada29f965}{Read\-\_\-\-Init} (Array$<$ double, 2 $>$ \&Ux, Array$<$ double, 2 $>$ \&Uz)
 \begin{DoxyCompactList}\small\item\em Function to assign an exponential function to the 2\-D velocity field. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a093ad1a7cd8cea6da650dcc4fec661f9}{Read\-\_\-\-Init} (Array$<$ double, 3 $>$ \&Ux, Array$<$ double, 3 $>$ \&Uy, Array$<$ double, 3 $>$ \&Uz)
@@ -74,83 +74,79 @@ void \hyperlink{Kolmogorov41_8cc_a7bf1a39a993f8781e16dab3c9227f976}{Read\-\_\-\-
 void \hyperlink{Kolmogorov41_8cc_a1ac097cb5c8b7c10149fe5afe2493c81}{S\-F\-\_\-scalar\-\_\-3\-D} (Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_a5b36daf4e0da59acd9285fb46cf268ea}{T}, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node)
 \begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 3\-D scalar field. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a3bd4fa7e667782e54bd2953c53daf82e}{S\-F\-\_\-scalar\-\_\-3\-D} (Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_a5b36daf4e0da59acd9285fb46cf268ea}{T}, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node, Array$<$ double, 4 $>$ \&S\-F\-\_\-\-Grid\-\_\-\-Node, Array$<$ double, 4 $>$ \&counter\-\_\-\-Grid\-\_\-\-Node)
-\begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 3\-D scalar field as function of (lx, ly, lz) in addition to the structure functions as function of (l). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 3\-D scalar field as function of $ (l_x, l_y, l_z) $ in addition to the structure functions as function of $ l $. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a070ee3ae2e4784f49a379d7205e7698c}{S\-F\-\_\-scalar\-\_\-2\-D} (Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_a5b36daf4e0da59acd9285fb46cf268ea}{T}, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node)
 \begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 2\-D scalar field. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a3819509d2d9399db0ae8826370414ff2}{S\-F\-\_\-scalar\-\_\-2\-D} (Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_a5b36daf4e0da59acd9285fb46cf268ea}{T}, Array$<$ double, 2 $>$ \&S\-F\-\_\-\-Node, Array$<$ double, 2 $>$ \&counter\-\_\-\-Node, Array$<$ double, 3 $>$ \&S\-F\-\_\-\-Grid\-\_\-\-Node, Array$<$ double, 3 $>$ \&counter\-\_\-\-Grid\-\_\-\-Node)
-\begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 2\-D scalar field as function of (lx, lz) in addition to the structure functions as function of (l). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to calculate structure functions using 2\-D scalar field as function of $ (l_x, l_z) $ in addition to the structure functions as function of $ l $. \end{DoxyCompactList}\item 
 int \hyperlink{Kolmogorov41_8cc_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\begin{DoxyCompactList}\small\item\em The main function of the \char`\"{}\-Strunc\char`\"{} code. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The main function of the \char`\"{}\-Kolmogorov41\char`\"{}. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_ad623b53bb9fae62a9a25d08e3ffd9f74}{magnitude} (Tiny\-Vector$<$ double, 3 $>$ A, double \&mag)
-\begin{DoxyCompactList}\small\item\em Function to compute the magnitude of a 3\-D vector A. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to compute the magnitude of a 3\-D vector. \end{DoxyCompactList}\item 
 void \hyperlink{Kolmogorov41_8cc_a58e65d7e297f35291362d88607ad3b40}{magnitude} (Tiny\-Vector$<$ double, 2 $>$ A, double \&mag)
-\begin{DoxyCompactList}\small\item\em Function to compute the magnitude of a 2\-D vector A. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function to compute the magnitude of a 2\-D vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \hypertarget{Kolmogorov41_8cc_a5b36daf4e0da59acd9285fb46cf268ea}{Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_a5b36daf4e0da59acd9285fb46cf268ea}{T}}\label{Kolmogorov41_8cc_a5b36daf4e0da59acd9285fb46cf268ea}
 
-\begin{DoxyCompactList}\small\item\em 3\-D array storing the scalar field. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 3\-D array storing the input 3\-D scalar field. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a793e2580f28485ee24c5fa81dc49d6f5}{Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_a793e2580f28485ee24c5fa81dc49d6f5}{V1}}\label{Kolmogorov41_8cc_a793e2580f28485ee24c5fa81dc49d6f5}
 
-\begin{DoxyCompactList}\small\item\em 3\-D array storing the x-\/component of the 3\-D velocity field. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 3\-D array storing the x-\/component of the input 3\-D velocity field. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_ab0e2fd1e10444329e59dc7024a4dca61}{Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_ab0e2fd1e10444329e59dc7024a4dca61}{V2}}\label{Kolmogorov41_8cc_ab0e2fd1e10444329e59dc7024a4dca61}
 
-\begin{DoxyCompactList}\small\item\em 3\-D array storing the y-\/component of the 3\-D velocity field. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 3\-D array storing the y-\/component of the input 3\-D velocity field. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a5a1dcc2241b131dda5545ee918b87d46}{Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_a5a1dcc2241b131dda5545ee918b87d46}{V3}}\label{Kolmogorov41_8cc_a5a1dcc2241b131dda5545ee918b87d46}
 
-\begin{DoxyCompactList}\small\item\em 3\-D array storing the z-\/component of the 3\-D velocity field. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 3\-D array storing the z-\/component of the input 3\-D velocity field. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a7cf4d825a1476fb60015ad46531ea361}{Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_a7cf4d825a1476fb60015ad46531ea361}{T\-\_\-2\-D}}\label{Kolmogorov41_8cc_a7cf4d825a1476fb60015ad46531ea361}
 
-\begin{DoxyCompactList}\small\item\em 2\-D array storing the 2\-D scalar field. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 2\-D array storing the input 2\-D scalar field. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a8aabfce1918e76b1a9bcd9b8f393097c}{Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_a8aabfce1918e76b1a9bcd9b8f393097c}{V1\-\_\-2\-D}}\label{Kolmogorov41_8cc_a8aabfce1918e76b1a9bcd9b8f393097c}
 
-\begin{DoxyCompactList}\small\item\em 3\-D array storing the x-\/component of the 3\-D velocity field. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 2\-D array storing the x-\/component of the input 2\-D velocity field. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a6b5cd2337ce83f1b30584612b88fa54c}{Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_a6b5cd2337ce83f1b30584612b88fa54c}{V3\-\_\-2\-D}}\label{Kolmogorov41_8cc_a6b5cd2337ce83f1b30584612b88fa54c}
 
-\begin{DoxyCompactList}\small\item\em 2\-D array storing the z-\/component of the 2\-D velocity field. \end{DoxyCompactList}\item 
-\hypertarget{Kolmogorov41_8cc_a9dccb635ea2de8c1b091798c112bc801}{Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_a9dccb635ea2de8c1b091798c112bc801}{S\-F}}\label{Kolmogorov41_8cc_a9dccb635ea2de8c1b091798c112bc801}
-
+\begin{DoxyCompactList}\small\item\em 2\-D array storing the z-\/component of the input 2\-D velocity field. \end{DoxyCompactList}\item 
+Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_a9dccb635ea2de8c1b091798c112bc801}{S\-F}
 \begin{DoxyCompactList}\small\item\em 2\-D array storing the computed longitudinal structure functions or scalar structure functions and their corresponding orders. \end{DoxyCompactList}\item 
-\hypertarget{Kolmogorov41_8cc_ae80f1e666112772dc40391b8ca72cbac}{Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_ae80f1e666112772dc40391b8ca72cbac}{S\-F\-\_\-perp}}\label{Kolmogorov41_8cc_ae80f1e666112772dc40391b8ca72cbac}
-
+Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_ae80f1e666112772dc40391b8ca72cbac}{S\-F\-\_\-perp}
 \begin{DoxyCompactList}\small\item\em 2\-D array storing the computed transverse structure functions and their corresponding orders. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_acb2c9adf66eddc3b8da9adaca24ba056}{Array$<$ double, 2 $>$ \hyperlink{Kolmogorov41_8cc_acb2c9adf66eddc3b8da9adaca24ba056}{counter}}\label{Kolmogorov41_8cc_acb2c9adf66eddc3b8da9adaca24ba056}
 
-\begin{DoxyCompactList}\small\item\em 2\-D array storing the values to divide S\-F and S\-F\-\_\-perp for averaging. \end{DoxyCompactList}\item 
-\hypertarget{Kolmogorov41_8cc_ab24458a64d17b475028ddcb3d6873f97}{Array$<$ double, 4 $>$ \hyperlink{Kolmogorov41_8cc_ab24458a64d17b475028ddcb3d6873f97}{S\-F\-\_\-\-Grid\-\_\-pll}}\label{Kolmogorov41_8cc_ab24458a64d17b475028ddcb3d6873f97}
+\begin{DoxyCompactList}\small\item\em 2\-D array for storing the values to divide S\-F and S\-F\-\_\-perp for averaging. \end{DoxyCompactList}\item 
+Array$<$ double, 4 $>$ \hyperlink{Kolmogorov41_8cc_ab24458a64d17b475028ddcb3d6873f97}{S\-F\-\_\-\-Grid\-\_\-pll}
+\begin{DoxyCompactList}\small\item\em 4\-D array storing the computed longitudinal structure functions as function of the displacement vector. \end{DoxyCompactList}\item 
+Array$<$ double, 4 $>$ \hyperlink{Kolmogorov41_8cc_a2e7454bfcd2a402145f5b1f0bc545058}{S\-F\-\_\-\-Grid\-\_\-perp}
+\begin{DoxyCompactList}\small\item\em 4\-D array storing the computed transverse structure functions as function of the displacement vector. \end{DoxyCompactList}\item 
+\hypertarget{Kolmogorov41_8cc_a76cdfe984b21aaa9c0b85f21a1cf006a}{Array$<$ double, 4 $>$ \hyperlink{Kolmogorov41_8cc_a76cdfe984b21aaa9c0b85f21a1cf006a}{counter\-\_\-\-Grid}}\label{Kolmogorov41_8cc_a76cdfe984b21aaa9c0b85f21a1cf006a}
 
-\begin{DoxyCompactList}\small\item\em 4\-D array storing the computed longitudinal structure functions as function of (lx, ly, lz, p), where p is the order. \end{DoxyCompactList}\item 
-\hypertarget{Kolmogorov41_8cc_a2e7454bfcd2a402145f5b1f0bc545058}{Array$<$ double, 4 $>$ \hyperlink{Kolmogorov41_8cc_a2e7454bfcd2a402145f5b1f0bc545058}{S\-F\-\_\-\-Grid\-\_\-perp}}\label{Kolmogorov41_8cc_a2e7454bfcd2a402145f5b1f0bc545058}
+\begin{DoxyCompactList}\small\item\em 4\-D array storing the values to divide S\-F\-\_\-\-Grid\-\_\-pll and S\-F\-\_\-\-Grid\-\_\-perp for averaging. \end{DoxyCompactList}\item 
+Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_a4d6284fb43435e4968d78bf0b6781ab5}{S\-F\-\_\-\-Grid2\-D\-\_\-pll}
+\begin{DoxyCompactList}\small\item\em 3\-D array storing the computed longitudinal structure functions or scalar structure functions as function of the displacement vector. \end{DoxyCompactList}\item 
+Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_a17c9f2694ab7bf5db2a1517f8fa7b222}{S\-F\-\_\-\-Grid2\-D\-\_\-perp}
+\begin{DoxyCompactList}\small\item\em 3\-D array storing the computed transverse structure functions as function of the displacement vector. \end{DoxyCompactList}\item 
+\hypertarget{Kolmogorov41_8cc_adc892d1cf95116c2c9967977c8034d48}{Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_adc892d1cf95116c2c9967977c8034d48}{counter\-\_\-\-Grid2\-D}}\label{Kolmogorov41_8cc_adc892d1cf95116c2c9967977c8034d48}
 
-\begin{DoxyCompactList}\small\item\em 4\-D array storing the computed transverse structure functions as function of (lx, ly, lz, p), where p is the order. \end{DoxyCompactList}\item 
-Array$<$ double, 4 $>$ \hyperlink{Kolmogorov41_8cc_a76cdfe984b21aaa9c0b85f21a1cf006a}{counter\-\_\-\-Grid}
-\begin{DoxyCompactList}\small\item\em 4\-D array storing the counter array for averaging S\-F\-\_\-\-Grid\-\_\-pll and S\-F\-\_\-\-Grid\-\_\-perp \end{DoxyCompactList}\item 
-\hypertarget{Kolmogorov41_8cc_a4d6284fb43435e4968d78bf0b6781ab5}{Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_a4d6284fb43435e4968d78bf0b6781ab5}{S\-F\-\_\-\-Grid2\-D\-\_\-pll}}\label{Kolmogorov41_8cc_a4d6284fb43435e4968d78bf0b6781ab5}
-
-\begin{DoxyCompactList}\small\item\em 3\-D array storing the computed longitudinal structure functions as function of (lx, lz, p), where p is the order. \end{DoxyCompactList}\item 
-\hypertarget{Kolmogorov41_8cc_a17c9f2694ab7bf5db2a1517f8fa7b222}{Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_a17c9f2694ab7bf5db2a1517f8fa7b222}{S\-F\-\_\-\-Grid2\-D\-\_\-perp}}\label{Kolmogorov41_8cc_a17c9f2694ab7bf5db2a1517f8fa7b222}
-
-\begin{DoxyCompactList}\small\item\em 3\-D array storing the computed transverse structure functions as function of (lx, ly, lz, p), where p is the order. \end{DoxyCompactList}\item 
-Array$<$ double, 3 $>$ \hyperlink{Kolmogorov41_8cc_adc892d1cf95116c2c9967977c8034d48}{counter\-\_\-\-Grid2\-D}
-\begin{DoxyCompactList}\small\item\em 3\-D array storing the counter array for averaging S\-F\-\_\-\-Grid\-\_\-pll and S\-F\-\_\-\-Grid\-\_\-perp \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 3\-D array storing the values to divide S\-F\-\_\-\-Grid\-\_\-pll and S\-F\-\_\-\-Grid\-\_\-perp for averaging. \end{DoxyCompactList}\item 
 bool \hyperlink{Kolmogorov41_8cc_a6229099a636aa31393cfa130c26452f8}{two\-\_\-dimension\-\_\-switch}
 \begin{DoxyCompactList}\small\item\em This variable decides whether the structure functions are to be calculated using 2\-D or 3\-D velocity field data. \end{DoxyCompactList}\item 
 bool \hyperlink{Kolmogorov41_8cc_a920fbb672c00642a691eee2415e31c06}{scalar\-\_\-switch}
 \begin{DoxyCompactList}\small\item\em This variable decides whether the scalar or velocity structure functions are to be evaluated. \end{DoxyCompactList}\item 
 bool \hyperlink{Kolmogorov41_8cc_a20e04df29613e9ca17e5d1740907a43e}{grid\-\_\-switch}
-\begin{DoxyCompactList}\small\item\em This variable decides whether the structure functions as function of (lx, ly, lz), or of (lx, lz) in case of 2\-D, needs to be calculated in addition to the structure functions as function of (l). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This variable decides whether the structure functions as function of $ (l_x, l_y, l_z) $, or of $ (l_x, l_z) $ in case of 2\-D, needs to be calculated in addition to the structure functions as function of $ l $. \end{DoxyCompactList}\item 
 bool \hyperlink{Kolmogorov41_8cc_a70c213bcc57b57816ceae212036b6681}{test\-\_\-switch}
 \begin{DoxyCompactList}\small\item\em This variable decides whether the test cases are required to run. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_abfda77b016218238359bcc3e5c1600b0}{int \hyperlink{Kolmogorov41_8cc_abfda77b016218238359bcc3e5c1600b0}{Nx}}\label{Kolmogorov41_8cc_abfda77b016218238359bcc3e5c1600b0}
 
-\begin{DoxyCompactList}\small\item\em Number of gridpoints in the x direction. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of gridpoints in the $ x $ direction. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_adcc9183c4659dc09e04e5ede1d79215b}{int \hyperlink{Kolmogorov41_8cc_adcc9183c4659dc09e04e5ede1d79215b}{Ny}}\label{Kolmogorov41_8cc_adcc9183c4659dc09e04e5ede1d79215b}
 
-\begin{DoxyCompactList}\small\item\em Number of gridpoints in the y direction. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of gridpoints in the $ y $ direction. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a7a7576e08f5980d322da5f48c7385edc}{int \hyperlink{Kolmogorov41_8cc_a7a7576e08f5980d322da5f48c7385edc}{Nz}}\label{Kolmogorov41_8cc_a7a7576e08f5980d322da5f48c7385edc}
 
-\begin{DoxyCompactList}\small\item\em Number of gridpoints in the z direction. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of gridpoints in the $ z $ direction. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a86cf672daa4e0ad11ad10efc894d19c8}{int \hyperlink{Kolmogorov41_8cc_a86cf672daa4e0ad11ad10efc894d19c8}{num}}\label{Kolmogorov41_8cc_a86cf672daa4e0ad11ad10efc894d19c8}
 
 \begin{DoxyCompactList}\small\item\em Number of Open\-M\-P threads. \end{DoxyCompactList}\item 
@@ -165,13 +161,13 @@ bool \hyperlink{Kolmogorov41_8cc_a6f513fa8d2e2fe662c220f6dd41a1e15}{longitudinal
 \begin{DoxyCompactList}\small\item\em This variable decides whether to calculate both transverse and longitudinal structure functions or only the longitudinal structure functions using a less computationally expensive technique. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a229d11aff11a7482259d1296b9b70b8a}{double \hyperlink{Kolmogorov41_8cc_a229d11aff11a7482259d1296b9b70b8a}{dx}}\label{Kolmogorov41_8cc_a229d11aff11a7482259d1296b9b70b8a}
 
-\begin{DoxyCompactList}\small\item\em This variable stores the distance between two consecutive gridpoints in the x direction. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This variable stores the distance between two consecutive gridpoints in the $ x $ direction. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a9deb6f886b19d50e714d890c3c268efc}{double \hyperlink{Kolmogorov41_8cc_a9deb6f886b19d50e714d890c3c268efc}{dy}}\label{Kolmogorov41_8cc_a9deb6f886b19d50e714d890c3c268efc}
 
-\begin{DoxyCompactList}\small\item\em This variable stores the distance between two consecutive gridpoints in the y direction. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This variable stores the distance between two consecutive gridpoints in the $ y $ direction. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a5a198de8c3f38514f4e55231aa69cd10}{double \hyperlink{Kolmogorov41_8cc_a5a198de8c3f38514f4e55231aa69cd10}{dz}}\label{Kolmogorov41_8cc_a5a198de8c3f38514f4e55231aa69cd10}
 
-\begin{DoxyCompactList}\small\item\em This variable stores the distance between two consecutive gridpoints in the z direction. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This variable stores the distance between two consecutive gridpoints in the $ z $ direction. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a0fb9745468202e28d4aedcd2f202bd12}{int \hyperlink{Kolmogorov41_8cc_a0fb9745468202e28d4aedcd2f202bd12}{rank\-\_\-mpi}}\label{Kolmogorov41_8cc_a0fb9745468202e28d4aedcd2f202bd12}
 
 \begin{DoxyCompactList}\small\item\em This variable stores the rank of the M\-P\-I process. \end{DoxyCompactList}\item 
@@ -180,7 +176,7 @@ bool \hyperlink{Kolmogorov41_8cc_a6f513fa8d2e2fe662c220f6dd41a1e15}{longitudinal
 \begin{DoxyCompactList}\small\item\em This variable stores the length of the domain. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_a9b3d111ccf7f82fb80aeb6f8b229c21b}{double \hyperlink{Kolmogorov41_8cc_a9b3d111ccf7f82fb80aeb6f8b229c21b}{Ly}}\label{Kolmogorov41_8cc_a9b3d111ccf7f82fb80aeb6f8b229c21b}
 
-\begin{DoxyCompactList}\small\item\em This variable stores the breadth of the domain. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This variable stores the width of the domain. \end{DoxyCompactList}\item 
 \hypertarget{Kolmogorov41_8cc_aca5546164a9496b15d9ec38f2086d0e5}{double \hyperlink{Kolmogorov41_8cc_aca5546164a9496b15d9ec38f2086d0e5}{Lz}}\label{Kolmogorov41_8cc_aca5546164a9496b15d9ec38f2086d0e5}
 
 \begin{DoxyCompactList}\small\item\em This variable stores the height of the domain. \end{DoxyCompactList}\item 
@@ -191,7 +187,7 @@ bool \hyperlink{Kolmogorov41_8cc_a6f513fa8d2e2fe662c220f6dd41a1e15}{longitudinal
 
 \subsection{Detailed Description}
 Code to compute structure functions using velocity or scalar field data. \begin{DoxyAuthor}{Author}
-Shashwat Bhattacharya, Shubhadeep Sadhukhan 
+Shubhadeep Sadhukhan, Shashwat Bhattacharya 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
 Jan 2020 
@@ -226,22 +222,20 @@ This function computes the time elapsed in seconds between a start point and an 
 {\em elapsed} & stores the time elapsed in seconds \\
 \hline
 \end{DoxyParams}
-\hypertarget{Kolmogorov41_8cc_a226edad97255b1ecf9cb6ccbaf68922b}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!int\-\_\-to\-\_\-str@{int\-\_\-to\-\_\-str}}
+\hypertarget{Kolmogorov41_8cc_a0ef75a22d560fac1397951e44a99685c}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!int\-\_\-to\-\_\-str@{int\-\_\-to\-\_\-str}}
 \index{int\-\_\-to\-\_\-str@{int\-\_\-to\-\_\-str}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
 \subsubsection[{int\-\_\-to\-\_\-str}]{\setlength{\rightskip}{0pt plus 5cm}string int\-\_\-to\-\_\-str (
 \begin{DoxyParamCaption}
-\item[{int}]{num}
+\item[{int}]{number}
 \end{DoxyParamCaption}
-)}}\label{Kolmogorov41_8cc_a226edad97255b1ecf9cb6ccbaf68922b}
+)}}\label{Kolmogorov41_8cc_a0ef75a22d560fac1397951e44a99685c}
 
 
 Function to convert an integer type value to string. 
 
-This function converts an integer type value to a string.
-
 
 \begin{DoxyParams}{Parameters}
-{\em num} & is the integer value of to be converted.\\
+{\em number} & is the integer value to be converted.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -257,7 +251,7 @@ The value as a string.
 )}}\label{Kolmogorov41_8cc_ad623b53bb9fae62a9a25d08e3ffd9f74}
 
 
-Function to compute the magnitude of a 3\-D vector A. 
+Function to compute the magnitude of a 3\-D vector. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -276,7 +270,7 @@ Function to compute the magnitude of a 3\-D vector A.
 )}}\label{Kolmogorov41_8cc_a58e65d7e297f35291362d88607ad3b40}
 
 
-Function to compute the magnitude of a 2\-D vector A. 
+Function to compute the magnitude of a 2\-D vector. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -295,9 +289,9 @@ Function to compute the magnitude of a 2\-D vector A.
 )}}\label{Kolmogorov41_8cc_a0ddf1224851353fc92bfbff6f499fa97}
 
 
-The main function of the \char`\"{}\-Strunc\char`\"{} code. 
+The main function of the \char`\"{}\-Kolmogorov41\char`\"{}. 
 
-This function is the main function of the \char`\"{}\-Strunc\char`\"{} code for computing the velocity and scalar structure functions. The M\-P\-I decomposition and integration are also carried out in this function. \hypertarget{Kolmogorov41_8cc_a4ed42719c00a36bb33994eace7a5fcc1}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!pow\-Int@{pow\-Int}}
+This function is the main function of the \char`\"{}\-Kolmogorov41\char`\"{} for computing the velocity and scalar structure functions. The M\-P\-I decomposition and integration are also carried out in this function. \hypertarget{Kolmogorov41_8cc_a4ed42719c00a36bb33994eace7a5fcc1}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!pow\-Int@{pow\-Int}}
 \index{pow\-Int@{pow\-Int}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
 \subsubsection[{pow\-Int}]{\setlength{\rightskip}{0pt plus 5cm}double pow\-Int (
 \begin{DoxyParamCaption}
@@ -309,7 +303,7 @@ This function is the main function of the \char`\"{}\-Strunc\char`\"{} code for 
 
 Function which conducts exponentiation with an integer as an exponent. 
 
-This function calculates x raised to the power n, where n is an integer. This function is faster than the standard pow(x,n) function for n$>$2. Note that this function cannot accept a non-\/integer exponent.
+This function calculates $ x^n $, where $ n $ is an integer. This function is faster than the standard pow(x,n) function for $ n>2 $. Note that this function cannot accept a non-\/integer exponent.
 
 
 \begin{DoxyParams}{Parameters}
@@ -334,7 +328,7 @@ The value as a string.
 
 Function to read a 2\-D field from an hdf5 file. 
 
-This function reads an hdf5 file containing a 2\-D field, which can be the x or z component of a 2\-D velocity field. The dimensions of the 2\-D field is $(N_x \times N_z)$, where $N_x$ and $N_z$ are the number of gridpoints in x and z directions respectively. The hdf5 file should have only one dataset, and the names of the hdf5 file and the dataset must be identical. This function make use of the H5\-S\-I library for reading the hdf5 file.
+This function reads an hdf5 file containing a 2\-D field, which can be the $ x $ or $ z $ component of a 2\-D velocity field. The dimensions of the 2\-D field is $(N_x \times N_z)$, where $N_x$ and $N_z$ are the number of gridpoints in $ x $ and $ z $ directions respectively. The hdf5 file should have only one dataset, and the names of the hdf5 file and the dataset must be identical. This function makes use of the H5\-S\-I library for reading the hdf5 file.
 
 
 \begin{DoxyParams}{Parameters}
@@ -358,7 +352,7 @@ This function reads an hdf5 file containing a 2\-D field, which can be the x or 
 
 Function to read a 3\-D field from an hdf5 file. 
 
-This function reads an hdf5 file containing a 4\-D field, which can be the x y, or z component of a 3\-D velocity field. The dimensions of the 3\-D field is $(N_x \times N_y \times N_z)$, where $N_x$, $N_y$, and $N_z$ are the number of gridpoints in x, y, and z directions respectively. The hdf5 file should have only one dataset, and the names of the hdf5 file and the dataset must be identical. This function make use of the H5\-S\-I library for reading the hdf5 file.
+This function reads an hdf5 file containing a 4\-D field, which can be the $ x $, $ y $, or $ z $ component of a 3\-D velocity field. The dimensions of the 3\-D field is $(N_x \times N_y \times N_z)$, where $N_x$, $N_y$, and $N_z$ are the number of gridpoints in $ x $, $ y $, and $ z $ directions respectively. The hdf5 file should have only one dataset, and the names of the hdf5 file and the dataset must be identical. This function makes use of the H5\-S\-I library for reading the hdf5 file.
 
 
 \begin{DoxyParams}{Parameters}
@@ -381,7 +375,7 @@ This function reads an hdf5 file containing a 4\-D field, which can be the x y, 
 
 Function to assign an exponential function to the 2\-D velocity field. 
 
-This function assigns the following exponential function to the 2\-D velocity field. $U_x = x, \quad U_z = z$.
+This function assigns the following exponential function to the 2\-D velocity field. $u_x = x, \quad u_z = z$.
 
 
 \begin{DoxyParams}{Parameters}
@@ -403,7 +397,7 @@ This function assigns the following exponential function to the 2\-D velocity fi
 
 Function to assign an exponential function to the 3\-D velocity field. 
 
-This function assigns the following exponential function to the 3\-D velocity field. $U_x = x, \quad U_y = y, \quad U_z = z$.
+This function assigns the following exponential function to the 3\-D velocity field. $u_x = x, \quad u_y = y, \quad u_z = z$.
 
 
 \begin{DoxyParams}{Parameters}
@@ -425,7 +419,7 @@ This function assigns the following exponential function to the 3\-D velocity fi
 
 Function to assign an exponential function to a 2\-D scalar field. 
 
-This function assigns the following exponential function to the scalar field. $T = x + z $
+This function assigns the following exponential function to the scalar field. $\theta = x + z $
 
 
 \begin{DoxyParams}{Parameters}
@@ -443,7 +437,7 @@ This function assigns the following exponential function to the scalar field. $T
 
 Function to assign an exponential function to a 3\-D scalar field. 
 
-This function assigns the following exponential function to the scalar field. $T = x + y + z $
+This function assigns the following exponential function to the scalar field. $\theta = x + y + z $
 
 
 \begin{DoxyParams}{Parameters}
@@ -472,7 +466,7 @@ The function opens the parameters.\-yaml file and parses the simulation paramete
 
 Test function to validate the calculation of structure functions of 2\-D scalar field data. 
 
-This function validates the calculation of the structure functions computed using 3\-D scalar field data. The scalar field is generated as $ \theta = x + z $. For such field, the structure functions of order $ q $ is given as $ S_q^u(l_x, l_z) = (l_x^2 + l_z^2)^q $. In this function, the theoretical values obtained from the aforementioned equation are compared with the computed values. If the difference between the two values is less than $1 \times 10^{-10} $, the test is passed. \hypertarget{Kolmogorov41_8cc_a06c546f4066b4b9858c9f64e8a7401b8}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-C\-A\-L\-A\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D@{S\-C\-A\-L\-A\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D}}
+This function validates the calculation of the structure functions computed using 3\-D scalar field data. The scalar field is generated as $ \theta = x + z $. For such field, the structure functions of order $ q $ is given as $ S_q^u(l_x, l_z) = (l_x^2 + l_z^2)^q $. In this function, the theoretical values obtained from the aforementioned equation are compared with the computed values. If the percentage difference between the two values is less than $1 \times 10^{-10} $, the test is passed. \hypertarget{Kolmogorov41_8cc_a06c546f4066b4b9858c9f64e8a7401b8}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-C\-A\-L\-A\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D@{S\-C\-A\-L\-A\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D}}
 \index{S\-C\-A\-L\-A\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D@{S\-C\-A\-L\-A\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
 \subsubsection[{S\-C\-A\-L\-A\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D}]{\setlength{\rightskip}{0pt plus 5cm}void S\-C\-A\-L\-A\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D (
 \begin{DoxyParamCaption}
@@ -483,7 +477,7 @@ This function validates the calculation of the structure functions computed usin
 
 Test function to validate the calculation of structure functions of 3\-D scalar field data. 
 
-This function validates the calculation of the structure functions computed using 3\-D scalar field data. The scalar field is generated as $ \theta = x + y + z $. For such field, the structure functions of order $ q $ is given as $ S_q^u(l_x, l_y, l_z) = (l_x^2 + l_y^2 + l_z^2)^q $. In this function, the theoretical values obtained from the aforementioned equation are compared with the computed values. If the difference between the two values is less than $1 \times 10^{-10} $, the test is passed. \hypertarget{Kolmogorov41_8cc_a070ee3ae2e4784f49a379d7205e7698c}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-F\-\_\-scalar\-\_\-2\-D@{S\-F\-\_\-scalar\-\_\-2\-D}}
+This function validates the calculation of the structure functions computed using 3\-D scalar field data. The scalar field is generated as $ \theta = x + y + z $. For such field, the structure functions of order $ q $ is given as $ S_q^u(l_x, l_y, l_z) = (l_x^2 + l_y^2 + l_z^2)^q $. In this function, the theoretical values obtained from the aforementioned equation are compared with the computed values. If the percentage difference between the two values is less than $1 \times 10^{-10} $, the test is passed. \hypertarget{Kolmogorov41_8cc_a070ee3ae2e4784f49a379d7205e7698c}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-F\-\_\-scalar\-\_\-2\-D@{S\-F\-\_\-scalar\-\_\-2\-D}}
 \index{S\-F\-\_\-scalar\-\_\-2\-D@{S\-F\-\_\-scalar\-\_\-2\-D}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
 \subsubsection[{S\-F\-\_\-scalar\-\_\-2\-D}]{\setlength{\rightskip}{0pt plus 5cm}void S\-F\-\_\-scalar\-\_\-2\-D (
 \begin{DoxyParamCaption}
@@ -520,7 +514,7 @@ The following function computes both the nodal structure functions of 2\-D scala
 )}}\label{Kolmogorov41_8cc_a3819509d2d9399db0ae8826370414ff2}
 
 
-Function to calculate structure functions using 2\-D scalar field as function of (lx, lz) in addition to the structure functions as function of (l). 
+Function to calculate structure functions using 2\-D scalar field as function of $ (l_x, l_z) $ in addition to the structure functions as function of $ l $. 
 
 The following function computes both the nodal structure functions of 2\-D scalar field using four nested for-\/loops. The outer two for-\/loops correspond to the vector $\mathbf{r}$ and the inner two loops correspond to the vector $\mathbf{r+l}$. The second for-\/loop is parallelized using Open\-M\-P.
 
@@ -528,11 +522,11 @@ The following function computes both the nodal structure functions of 2\-D scala
 \begin{DoxyParams}{Parameters}
 {\em T} & is a 2\-D array representing the scalar field \\
 \hline
-{\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal structure functions as function of (l) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal structure functions as function of $ l $ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Node} & is a 2\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Node so as to get the average. \\
 \hline
-{\em S\-F\-\_\-\-Grid\-\_\-\-Node} & is a 3\-D array containing the values of the nodal structure functions as function of (lx,lz) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Grid\-\_\-\-Node} & is a 3\-D array containing the values of the nodal structure functions as function of $ (l_x,l_z) $ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Grid\-\_\-\-Node} & is a 3\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node so as to get the average. \\
 \hline
@@ -574,7 +568,7 @@ The following function computes both the nodal structure functions of 3\-D scala
 )}}\label{Kolmogorov41_8cc_a3bd4fa7e667782e54bd2953c53daf82e}
 
 
-Function to calculate structure functions using 3\-D scalar field as function of (lx, ly, lz) in addition to the structure functions as function of (l). 
+Function to calculate structure functions using 3\-D scalar field as function of $ (l_x, l_y, l_z) $ in addition to the structure functions as function of $ l $. 
 
 The following function computes both the nodal structure functions of 3\-D scalar field using six nested for-\/loops. The outer three for-\/loops correspond to the vector $\mathbf{r}$ and the inner three loops correspond to the vector $\mathbf{r+l}$. The second for-\/loop is parallelized using Open\-M\-P.
 
@@ -582,11 +576,11 @@ The following function computes both the nodal structure functions of 3\-D scala
 \begin{DoxyParams}{Parameters}
 {\em T} & is a 3\-D array representing the scalar field \\
 \hline
-{\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal structure functions as function of (l) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal structure functions as function of $ l $ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Node} & is a 2\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Node so as to get the average. \\
 \hline
-{\em S\-F\-\_\-\-Grid\-\_\-\-Node} & is a 4\-D array containing the values of the nodal structure functions as function of (lx,ly,lz) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Grid\-\_\-\-Node} & is a 4\-D array containing the values of the nodal structure functions as function of $ (l_x,l_y,l_z) $ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Grid\-\_\-\-Node} & is a 4\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node so as to get the average. \\
 \hline
@@ -616,7 +610,7 @@ The following function computes both the nodal longitudinal and transverse struc
 \hline
 {\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user. \\
 \hline
-{\em S\-F\-\_\-\-Node\-\_\-p} & is a 2\-D array containing the values of the nodal transverse structure functions for orders q1 to q2. \\
+{\em S\-F\-\_\-\-Node\-\_\-p} & is a 2\-D array containing the values of the nodal transverse structure functions for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Node} & is a 2\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Node and S\-F\-\_\-\-Node\-\_\-p so as to get the average. \\
 \hline
@@ -637,7 +631,7 @@ The following function computes both the nodal longitudinal and transverse struc
 )}}\label{Kolmogorov41_8cc_a7045c373a28e9e12d84552f406ab1839}
 
 
-Function to calculate structure functions using 2\-D velocity field as function of (lx, lz) in addition to the structure functions as function of (l). 
+Function to calculate structure functions using 2\-D velocity field as function of $(l_x, l_z) $ in addition to the structure functions as function of $ l $. 
 
 The following function computes both the nodal longitudinal and transverse structure functions of 2\-D velocity field using six nested for-\/loops. The outer three for-\/loops correspond to the vector $\mathbf{r}$ and the inner three loops correspond to the vector $\mathbf{r+l}$. The second for-\/loop is parallelized using Open\-M\-P.
 
@@ -647,15 +641,15 @@ The following function computes both the nodal longitudinal and transverse struc
 \hline
 {\em Uz} & is a 2\-D array representing the z-\/component of velocity field \\
 \hline
-{\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal longitudinal structure functions as function of (l) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal longitudinal structure functions as function of $ l $ for a range of orders specified by the user. \\
 \hline
-{\em S\-F\-\_\-p\-\_\-\-Node} & is a 2\-D array containing the values of the nodal transverse structure functions for as function of (l) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-p\-\_\-\-Node} & is a 2\-D array containing the values of the nodal transverse structure functions for as function of $ l $ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Node} & is a 2\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Node and S\-F\-\_\-\-Node\-\_\-p so as to get the average. \\
 \hline
-{\em S\-F\-\_\-\-Grid2\-D\-\_\-pll\-\_\-\-Node} & is a 3\-D array containing the values of the nodal longitudinal structure functions as function of (lx,lz) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Grid2\-D\-\_\-pll\-\_\-\-Node} & is a 3\-D array containing the values of the nodal longitudinal structure functions as function of $(l_x,l_z)$ for a range of orders specified by the user. \\
 \hline
-{\em S\-F\-\_\-\-Grid2\-D\-\_\-perp\-\_\-\-Node} & is a 3\-D array containing the values of the nodal transverse structure functions for as function of (lx,lz) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Grid2\-D\-\_\-perp\-\_\-\-Node} & is a 3\-D array containing the values of the nodal transverse structure functions for as function of $(l_x,l_z)$ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Grid2\-D\-\_\-\-Node} & is a 3\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node and S\-F\-\_\-\-Grid\-\_\-perp\-\_\-\-Node\-\_\-p so as to get the average. \\
 \hline
@@ -688,7 +682,7 @@ The following function computes both the nodal longitudinal and transverse struc
 \hline
 {\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user. \\
 \hline
-{\em S\-F\-\_\-\-Node\-\_\-p} & is a 2\-D array containing the values of the nodal transverse structure functions for orders q1 to q2. \\
+{\em S\-F\-\_\-\-Node\-\_\-p} & is a 2\-D array containing the values of the nodal transverse structure functions for orders for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Node} & is a 2\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Node and S\-F\-\_\-\-Node\-\_\-p so as to get the average. \\
 \hline
@@ -710,7 +704,7 @@ The following function computes both the nodal longitudinal and transverse struc
 )}}\label{Kolmogorov41_8cc_a07a9ae43ac80dcae7cf66b7153f1def7}
 
 
-Function to calculate structure functions using 3\-D velocity field as function of (lx, ly, lz) in addition to the structure functions as function of (l). 
+Function to calculate structure functions using 3\-D velocity field as function of $ (l_x, l_y, l_z) $ in addition to the structure functions as function of $ l $. 
 
 The following function computes both the nodal longitudinal and transverse structure functions of 3\-D velocity field using six nested for-\/loops. The outer three for-\/loops correspond to the vector $\mathbf{r}$ and the inner three loops correspond to the vector $\mathbf{r+l}$. The second for-\/loop is parallelized using Open\-M\-P.
 
@@ -722,15 +716,15 @@ The following function computes both the nodal longitudinal and transverse struc
 \hline
 {\em Uz} & is a 3\-D array representing the z-\/component of velocity field \\
 \hline
-{\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal longitudinal structure functions as function of (l) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal longitudinal structure functions as function of $ l $ for a range of orders specified by the user. \\
 \hline
-{\em S\-F\-\_\-p\-\_\-\-Node} & is a 2\-D array containing the values of the nodal transverse structure functions for as function of (l) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-p\-\_\-\-Node} & is a 2\-D array containing the values of the nodal transverse structure functions for as function of $ l $ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Node} & is a 2\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Node and S\-F\-\_\-\-Node\-\_\-p so as to get the average. \\
 \hline
-{\em S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node} & is a 4\-D array containing the values of the nodal longitudinal structure functions as function of (lx,ly,lz) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node} & is a 4\-D array containing the values of the nodal longitudinal structure functions as function of $ (l_x,l_y,l_z) $ for a range of orders specified by the user. \\
 \hline
-{\em S\-F\-\_\-\-Grid\-\_\-perp\-\_\-\-Node} & is a 4\-D array containing the values of the nodal transverse structure functions for as function of (lx,ly,lz) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Grid\-\_\-perp\-\_\-\-Node} & is a 4\-D array containing the values of the nodal transverse structure functions for as function of $ (l_x,l_y,l_z) $ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Grid\-\_\-\-Node} & is a 4\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node and S\-F\-\_\-\-Grid\-\_\-perp\-\_\-\-Node\-\_\-p so as to get the average. \\
 \hline
@@ -749,13 +743,13 @@ The following function computes both the nodal longitudinal and transverse struc
 
 A less computationally intensive function to calculate only the longitudinal structure functions using 2\-D velocity field. 
 
-The following function computes the only longitudinal structure function using 2\-D velocity field data. This function is less computationally expensive compared to S\-Func3\-D. The function exploits the fact that $ \langle du(l)^p \rangle = \langle du(-l)^p \rangle $, where $ du(l) $ is the component parallel to l. Thus, although this function uses four nested loops, the innermost loop starts from z1 instead of 0, where z1 is the iteration number of the second for-\/loop. The rest of the structure is similar to the function S\-Func2\-D.
+The following function computes the only longitudinal structure function using 2\-D velocity field data. This function is less computationally expensive compared to S\-Func2\-D. The function exploits the fact that $ \langle du(l)^p \rangle = \langle du(-l)^p \rangle $, where $ du(l) $ is the component parallel to l. Thus, although this function uses four nested loops, the innermost loop starts from z1 instead of 0, where z1 is the iteration number of the second for-\/loop. The rest of the structure is similar to the function S\-Func2\-D.
 
 
 \begin{DoxyParams}{Parameters}
-{\em Ux} & is a 3\-D array representing the x-\/component of velocity field \\
+{\em Ux} & is a 2\-D array representing the x-\/component of velocity field \\
 \hline
-{\em Uz} & is a 3\-D array representing the z-\/component of velocity field \\
+{\em Uz} & is a 2\-D array representing the z-\/component of velocity field \\
 \hline
 {\em S\-F\-\_\-\-Node} & is a 2\-D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user. \\
 \hline
@@ -776,7 +770,7 @@ The following function computes the only longitudinal structure function using 2
 )}}\label{Kolmogorov41_8cc_aa690ba615c6dd5cb4e4cb8968a2f91bb}
 
 
-A less computationally intensive function to calculate only the longitudinal structure functions as functions of (lx,lz) in addition to function of (l) using 2\-D velocity field. 
+A less computationally intensive function to calculate only the longitudinal structure functions as functions of $(l_x,l_z) $ in addition to function of $ l $ using 2\-D velocity field. 
 
 The following function computes the only longitudinal structure function using 2\-D velocity field data. This function is less computationally expensive compared to S\-Func2\-D. The function exploits the fact that $ \langle du(l)^p \rangle = \langle du(-l)^p \rangle $, where $ du(l) $ is the component parallel to l. Thus, although this function uses six nested loops, the innermost loop starts from z1 instead of 0, where z1 is the iteration number of the third for-\/loop. The rest of the structure is similar to the function S\-Func3\-D.
 
@@ -790,7 +784,7 @@ The following function computes the only longitudinal structure function using 2
 \hline
 {\em counter\-\_\-\-Node} & is a 2\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Node so as to get the average. \\
 \hline
-{\em S\-F\-\_\-\-Grid2\-D\-\_\-pll\-\_\-\-Node} & is a 3\-D array containing the values of the nodal longitudinal structure functions as function of (lx,lz) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Grid2\-D\-\_\-pll\-\_\-\-Node} & is a 3\-D array containing the values of the nodal longitudinal structure functions as function of $(l_x,l_z)$ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Grid2\-D\-\_\-\-Node} & is a 3\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node so as to get the average. \\
 \hline
@@ -840,9 +834,9 @@ The following function computes the only longitudinal structure function using 3
 )}}\label{Kolmogorov41_8cc_ac72b8e548ece94d62dd87b2a9c1c5fe7}
 
 
-A less computationally intensive function to calculate only the longitudinal structure functions as functions of (lx,ly,lz) in addition to function of (l) using 3\-D velocity field. 
+A less computationally intensive function to calculate only the longitudinal structure functions as functions of $ (l_x,l_y,l_z) $ in addition to function of $ l $ using 3\-D velocity field. 
 
-The following function computes the only longitudinal structure function using 3\-D velocity field data. This function is less computationally expensive compared to S\-Func3\-D. The function exploits the fact that $ \langle du(l)^p \rangle = \langle du(-l)^p \rangle $, where $ du(l) $ is the component parallel to l. Thus, although this function uses six nested loops, the innermost loop starts from z1 instead of 0, where z1 is the iteration number of the third for-\/loop. The rest of the structure is similar to the function S\-Func3\-D.
+The following function computes the only longitudinal structure function using 3\-D velocity field data. This function is less computationally expensive compared to S\-Func3\-D. The function exploits the fact that $ \langle du(l)^p \rangle = \langle du(-l)^p \rangle $, where $ du(l) $ is the component parallel to $ l $. Thus, although this function uses six nested loops, the innermost loop starts from z1 instead of 0, where z1 is the iteration number of the third for-\/loop. The rest of the structure is similar to the function S\-Func3\-D.
 
 
 \begin{DoxyParams}{Parameters}
@@ -856,7 +850,7 @@ The following function computes the only longitudinal structure function using 3
 \hline
 {\em counter\-\_\-\-Node} & is a 2\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Node so as to get the average. \\
 \hline
-{\em S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node} & is a 4\-D array containing the values of the nodal longitudinal structure functions as function of (lx,ly,lz) for a range of orders specified by the user. \\
+{\em S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node} & is a 4\-D array containing the values of the nodal longitudinal structure functions as function of $ (l_x,l_y,l_z) $ for a range of orders specified by the user. \\
 \hline
 {\em counter\-\_\-\-Grid\-\_\-\-Node} & is a 4\-D array containing the numbers for dividing the values of S\-F\-\_\-\-Grid\-\_\-pll\-\_\-\-Node and S\-F\-\_\-\-Grid\-\_\-perp\-\_\-\-Node\-\_\-p so as to get the average. \\
 \hline
@@ -872,7 +866,7 @@ The following function computes the only longitudinal structure function using 3
 
 Test function to validate the calculation of structure functions of 2\-D velocity field data. 
 
-This function validates the calculation of the structure functions computed using 2\-D velocity field data. The velocity field is generated as $ \mathbf{u} = x \hat{x} + z \hat{z} $. For such field, the velocity structure functions of order $ q $ is given as $ S_q^u(l_x, l_z) = (\sqrt{l_x^2 + l_z^2})^q $. In this function, the theoretical values obtained from the aforementioned equation are compared with the computed values. If the difference between the two values is less than $1 \times 10^{-10} $, the test is passed. \hypertarget{Kolmogorov41_8cc_ab480edbbae700c7a118450b0f91c44e8}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!V\-E\-C\-T\-O\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D@{V\-E\-C\-T\-O\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D}}
+This function validates the calculation of the structure functions computed using 2\-D velocity field data. The velocity field is generated as $ \mathbf{u} = x \hat{x} + z \hat{z} $. For such field, the velocity structure functions of order $ q $ is given as $ S_q^u(l_x, l_z) = (\sqrt{l_x^2 + l_z^2})^q $. In this function, the analytically obtained values obtained from the aforementioned equation are compared with the computed values. If the percentage difference between the two values is less than $1 \times 10^{-10} $, the test is passed. \hypertarget{Kolmogorov41_8cc_ab480edbbae700c7a118450b0f91c44e8}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!V\-E\-C\-T\-O\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D@{V\-E\-C\-T\-O\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D}}
 \index{V\-E\-C\-T\-O\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D@{V\-E\-C\-T\-O\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
 \subsubsection[{V\-E\-C\-T\-O\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D}]{\setlength{\rightskip}{0pt plus 5cm}void V\-E\-C\-T\-O\-R\-\_\-\-T\-E\-S\-T\-\_\-\-C\-A\-S\-E\-\_\-3\-D (
 \begin{DoxyParamCaption}
@@ -883,7 +877,7 @@ This function validates the calculation of the structure functions computed usin
 
 Test function to validate the calculation of structure functions of 3\-D velocity field data. 
 
-This function validates the calculation of the structure functions computed using 3\-D velocity field data. The velocity field is generated as $ \mathbf{u} = x \hat{x} + y \hat{y} + z \hat{z} $. For such field, the velocity structure functions of order $ q $ is given as $ S_q^u(l_x, l_y, l_z) = (\sqrt{l_x^2 + l_y^2 + l_z^2})^q $. In this function, the theoretical values obtained from the aforementioned equation are compared with the computed values. If the difference between the two values is less than $1 \times 10^{-10} $, the test is passed. \hypertarget{Kolmogorov41_8cc_a16aede7be50f9f4215d24de0dad9179b}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!write\-\_\-2\-D@{write\-\_\-2\-D}}
+This function validates the calculation of the structure functions computed using 3\-D velocity field data. The velocity field is generated as $ \mathbf{u} = x \hat{x} + y \hat{y} + z \hat{z} $. For such field, the velocity structure functions of order $ q $ is given as $ S_q^u(l_x, l_y, l_z) = (\sqrt{l_x^2 + l_y^2 + l_z^2})^q $. In this function, the theoretical values obtained from the aforementioned equation are compared with the computed values. If the percentage difference between the two values is less than $1 \times 10^{-10} $, the test is passed. \hypertarget{Kolmogorov41_8cc_a16aede7be50f9f4215d24de0dad9179b}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!write\-\_\-2\-D@{write\-\_\-2\-D}}
 \index{write\-\_\-2\-D@{write\-\_\-2\-D}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
 \subsubsection[{write\-\_\-2\-D}]{\setlength{\rightskip}{0pt plus 5cm}void write\-\_\-2\-D (
 \begin{DoxyParamCaption}
@@ -893,9 +887,9 @@ This function validates the calculation of the structure functions computed usin
 )}}\label{Kolmogorov41_8cc_a16aede7be50f9f4215d24de0dad9179b}
 
 
-Function to write the structure functions as function of l as a 2\-D hdf5 file. 
+Function to write the structure functions as function of $ l $ as a 2\-D hdf5 file. 
 
-This function reads writes the structure functions as a 2\-D array of dimensions (N x p). Here, N = $\sqrt{Nx^2 + Ny^2 + Nz^2}$ is the number of equidistant points from 0 to L, where L is the length of the diagonal of the domain in which the structure functions are calculated. p is the order of the structure functions.
+This function reads writes the structure functions as a 2\-D array of dimensions $ (N_l \times p) $. Here, $N_l = \sqrt{Nx^2 + Ny^2 + Nz^2}$ is the number of equidistant points from $ 0 $ to $ L $, where $ L $ is the length of the diagonal of the domain in which the structure functions are calculated. $ p $ is the order of the structure functions.
 
 
 \begin{DoxyParams}{Parameters}
@@ -917,7 +911,7 @@ This function reads writes the structure functions as a 2\-D array of dimensions
 
 Function to write the structure functions as function of lx,lz as a 2\-D hdf5 file. 
 
-This function reads the structure functions as a 4\-D array of dimensions (lx x lz x np), where np is the order of the structure function. The structure functions of different orders are then stored as separate 2\-D hdf5 files.
+This function reads the structure functions as a 3\-D array of dimensions $ (l_x \times l_z \times p) $, where $ p $ is the number of orders of the structure function. The structure functions of different orders are then stored as separate 2\-D hdf5 files.
 
 
 \begin{DoxyParams}{Parameters}
@@ -939,9 +933,9 @@ This function reads the structure functions as a 4\-D array of dimensions (lx x 
 )}}\label{Kolmogorov41_8cc_a952e4e10ef79a9b18af65437730f1080}
 
 
-Function to write the structure functions as function of lx,ly,lz as a 3\-D hdf5 file. 
+Function to write the structure functions as function of $ (l_x,l_y,l_z) $ as a 3\-D hdf5 file. 
 
-This function reads the structure functions as a 4\-D array of dimensions (lx x ly x lz x np), where np is the order of the structure function. The structure functions of different orders are then stored as separate 3\-D hdf5 files.
+This function reads the structure functions as a 4\-D array of dimensions $ (l_x \times l_y \times l_z \times p)$, where $ p $ is the order of the number of orders of structure function. The structure functions of different orders are then stored as separate 3\-D hdf5 files.
 
 
 \begin{DoxyParams}{Parameters}
@@ -955,28 +949,14 @@ This function reads the structure functions as a 4\-D array of dimensions (lx x 
 
 
 \subsection{Variable Documentation}
-\hypertarget{Kolmogorov41_8cc_a76cdfe984b21aaa9c0b85f21a1cf006a}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!counter\-\_\-\-Grid@{counter\-\_\-\-Grid}}
-\index{counter\-\_\-\-Grid@{counter\-\_\-\-Grid}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
-\subsubsection[{counter\-\_\-\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}Array$<$double,4$>$ counter\-\_\-\-Grid}}\label{Kolmogorov41_8cc_a76cdfe984b21aaa9c0b85f21a1cf006a}
-
-
-4\-D array storing the counter array for averaging S\-F\-\_\-\-Grid\-\_\-pll and S\-F\-\_\-\-Grid\-\_\-perp 
-
-\hypertarget{Kolmogorov41_8cc_adc892d1cf95116c2c9967977c8034d48}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!counter\-\_\-\-Grid2\-D@{counter\-\_\-\-Grid2\-D}}
-\index{counter\-\_\-\-Grid2\-D@{counter\-\_\-\-Grid2\-D}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
-\subsubsection[{counter\-\_\-\-Grid2\-D}]{\setlength{\rightskip}{0pt plus 5cm}Array$<$double,3$>$ counter\-\_\-\-Grid2\-D}}\label{Kolmogorov41_8cc_adc892d1cf95116c2c9967977c8034d48}
-
-
-3\-D array storing the counter array for averaging S\-F\-\_\-\-Grid\-\_\-pll and S\-F\-\_\-\-Grid\-\_\-perp 
-
 \hypertarget{Kolmogorov41_8cc_a20e04df29613e9ca17e5d1740907a43e}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!grid\-\_\-switch@{grid\-\_\-switch}}
 \index{grid\-\_\-switch@{grid\-\_\-switch}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
 \subsubsection[{grid\-\_\-switch}]{\setlength{\rightskip}{0pt plus 5cm}bool grid\-\_\-switch}}\label{Kolmogorov41_8cc_a20e04df29613e9ca17e5d1740907a43e}
 
 
-This variable decides whether the structure functions as function of (lx, ly, lz), or of (lx, lz) in case of 2\-D, needs to be calculated in addition to the structure functions as function of (l). 
+This variable decides whether the structure functions as function of $ (l_x, l_y, l_z) $, or of $ (l_x, l_z) $ in case of 2\-D, needs to be calculated in addition to the structure functions as function of $ l $. 
 
-If the value is T\-R\-U\-E, then the structure functions as function of (lx, ly, lz) / (lx, lz) will be computed in addtion to the structure functions as function of (l). \hypertarget{Kolmogorov41_8cc_a6f513fa8d2e2fe662c220f6dd41a1e15}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!longitudinal@{longitudinal}}
+If the value is T\-R\-U\-E, then the structure functions as function of $ (l_x, l_y, l_z) $ or $ (l_x, l_z) $ will be computed in addtion to the structure functions as function of $ l $. \hypertarget{Kolmogorov41_8cc_a6f513fa8d2e2fe662c220f6dd41a1e15}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!longitudinal@{longitudinal}}
 \index{longitudinal@{longitudinal}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
 \subsubsection[{longitudinal}]{\setlength{\rightskip}{0pt plus 5cm}bool longitudinal}}\label{Kolmogorov41_8cc_a6f513fa8d2e2fe662c220f6dd41a1e15}
 
@@ -1004,7 +984,49 @@ Entered by the user. \hypertarget{Kolmogorov41_8cc_a920fbb672c00642a691eee2415e3
 
 This variable decides whether the scalar or velocity structure functions are to be evaluated. 
 
-If the value is T\-R\-U\-E, then scalar structure functions will be evaluated, else the vector (velocity) structure functions will be evaluated. \hypertarget{Kolmogorov41_8cc_a70c213bcc57b57816ceae212036b6681}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!test\-\_\-switch@{test\-\_\-switch}}
+If the value is \char`\"{}true\char`\"{}, then scalar structure functions will be evaluated, else the vector (velocity) structure functions will be evaluated. \hypertarget{Kolmogorov41_8cc_a9dccb635ea2de8c1b091798c112bc801}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-F@{S\-F}}
+\index{S\-F@{S\-F}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
+\subsubsection[{S\-F}]{\setlength{\rightskip}{0pt plus 5cm}Array$<$double,2$>$ S\-F}}\label{Kolmogorov41_8cc_a9dccb635ea2de8c1b091798c112bc801}
+
+
+2\-D array storing the computed longitudinal structure functions or scalar structure functions and their corresponding orders. 
+
+The dimensions of this array is $N_l \times p$, where $N_l$ is the number of points along the diagonal of the computation domain, and $p $ is the number of orders of the structure functions to be computed. Thus, each column of the array represents a particular order of the structure functions. \hypertarget{Kolmogorov41_8cc_a17c9f2694ab7bf5db2a1517f8fa7b222}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-F\-\_\-\-Grid2\-D\-\_\-perp@{S\-F\-\_\-\-Grid2\-D\-\_\-perp}}
+\index{S\-F\-\_\-\-Grid2\-D\-\_\-perp@{S\-F\-\_\-\-Grid2\-D\-\_\-perp}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
+\subsubsection[{S\-F\-\_\-\-Grid2\-D\-\_\-perp}]{\setlength{\rightskip}{0pt plus 5cm}Array$<$double,3$>$ S\-F\-\_\-\-Grid2\-D\-\_\-perp}}\label{Kolmogorov41_8cc_a17c9f2694ab7bf5db2a1517f8fa7b222}
+
+
+3\-D array storing the computed transverse structure functions as function of the displacement vector. 
+
+This array stores the structure functions as function of the displacement vector $ \mathbf{l} = (l_x, l_z )$. The third dimension corresponds to the order of the structure functions that are calculated. \hypertarget{Kolmogorov41_8cc_a4d6284fb43435e4968d78bf0b6781ab5}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-F\-\_\-\-Grid2\-D\-\_\-pll@{S\-F\-\_\-\-Grid2\-D\-\_\-pll}}
+\index{S\-F\-\_\-\-Grid2\-D\-\_\-pll@{S\-F\-\_\-\-Grid2\-D\-\_\-pll}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
+\subsubsection[{S\-F\-\_\-\-Grid2\-D\-\_\-pll}]{\setlength{\rightskip}{0pt plus 5cm}Array$<$double,3$>$ S\-F\-\_\-\-Grid2\-D\-\_\-pll}}\label{Kolmogorov41_8cc_a4d6284fb43435e4968d78bf0b6781ab5}
+
+
+3\-D array storing the computed longitudinal structure functions or scalar structure functions as function of the displacement vector. 
+
+This array stores the structure functions as function of the displacement vector $ \mathbf{l} = (l_x, l_z )$. The third dimension corresponds to the order of the structure functions that are calculated. \hypertarget{Kolmogorov41_8cc_a2e7454bfcd2a402145f5b1f0bc545058}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-F\-\_\-\-Grid\-\_\-perp@{S\-F\-\_\-\-Grid\-\_\-perp}}
+\index{S\-F\-\_\-\-Grid\-\_\-perp@{S\-F\-\_\-\-Grid\-\_\-perp}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
+\subsubsection[{S\-F\-\_\-\-Grid\-\_\-perp}]{\setlength{\rightskip}{0pt plus 5cm}Array$<$double,4$>$ S\-F\-\_\-\-Grid\-\_\-perp}}\label{Kolmogorov41_8cc_a2e7454bfcd2a402145f5b1f0bc545058}
+
+
+4\-D array storing the computed transverse structure functions as function of the displacement vector. 
+
+This array stores the structure functions as function of the displacement vector $ \mathbf{l} = (l_x, l_y, l_z )$. The fourth dimension corresponds to the order of the structure functions that are calculated. \hypertarget{Kolmogorov41_8cc_ab24458a64d17b475028ddcb3d6873f97}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-F\-\_\-\-Grid\-\_\-pll@{S\-F\-\_\-\-Grid\-\_\-pll}}
+\index{S\-F\-\_\-\-Grid\-\_\-pll@{S\-F\-\_\-\-Grid\-\_\-pll}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
+\subsubsection[{S\-F\-\_\-\-Grid\-\_\-pll}]{\setlength{\rightskip}{0pt plus 5cm}Array$<$double,4$>$ S\-F\-\_\-\-Grid\-\_\-pll}}\label{Kolmogorov41_8cc_ab24458a64d17b475028ddcb3d6873f97}
+
+
+4\-D array storing the computed longitudinal structure functions as function of the displacement vector. 
+
+This array stores the structure functions as function of the displacement vector $ \mathbf{l} = (l_x, l_y, l_z )$. The fourth dimension corresponds to the order of the structure functions that are calculated. \hypertarget{Kolmogorov41_8cc_ae80f1e666112772dc40391b8ca72cbac}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!S\-F\-\_\-perp@{S\-F\-\_\-perp}}
+\index{S\-F\-\_\-perp@{S\-F\-\_\-perp}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
+\subsubsection[{S\-F\-\_\-perp}]{\setlength{\rightskip}{0pt plus 5cm}Array$<$double,2$>$ S\-F\-\_\-perp}}\label{Kolmogorov41_8cc_ae80f1e666112772dc40391b8ca72cbac}
+
+
+2\-D array storing the computed transverse structure functions and their corresponding orders. 
+
+The dimensions of this array is $N_l \times p$, where $N_l$ is the number of points along the diagonal of the computation domain, and $p $ is the number of orders of the structure functions to be computed. Thus, each column of the array represents a particular order of the structure functions. \hypertarget{Kolmogorov41_8cc_a70c213bcc57b57816ceae212036b6681}{\index{Kolmogorov41.\-cc@{Kolmogorov41.\-cc}!test\-\_\-switch@{test\-\_\-switch}}
 \index{test\-\_\-switch@{test\-\_\-switch}!Kolmogorov41.cc@{Kolmogorov41.\-cc}}
 \subsubsection[{test\-\_\-switch}]{\setlength{\rightskip}{0pt plus 5cm}bool test\-\_\-switch}}\label{Kolmogorov41_8cc_a70c213bcc57b57816ceae212036b6681}
 
@@ -1018,4 +1040,4 @@ If the value is \char`\"{}true\char`\"{}, then the input fields will be generate
 
 This variable decides whether the structure functions are to be calculated using 2\-D or 3\-D velocity field data. 
 
-If true, then the code will read 2\-D velocity fields and calculate the corresponding structure functions. Otherwise, it will read 3\-D velocity fields. Entered by the user 
+If \char`\"{}true\char`\"{}, then the code will read 2\-D velocity fields and calculate the corresponding structure functions. Otherwise, it will read 3\-D velocity fields. Entered by the user 

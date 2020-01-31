@@ -10,7 +10,8 @@ var indexSectionsWithContent =
   0: "cdgiklmnpqrstvw",
   1: "k",
   2: "cimprsvw",
-  3: "cdglnpqrstv"
+  3: "cdglnpqrstv",
+  4: "k"
 };
 
 var indexSectionNames =
@@ -18,7 +19,8 @@ var indexSectionNames =
   0: "all",
   1: "files",
   2: "functions",
-  3: "variables"
+  3: "variables",
+  4: "pages"
 };
 
 function convertToId(search)

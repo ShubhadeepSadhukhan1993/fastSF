@@ -1166,7 +1166,7 @@ double powInt(double x, int n) {
  * \brief   Function to convert an integer type value to string.
  *
  * 
- * \param   number is the integer value of to be converted.
+ * \param   number is the integer value to be converted.
  * 
  * \return  The value as a string.
  * 
