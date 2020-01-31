@@ -91,49 +91,49 @@ void SF_scalar_2D(Array<double,2>, Array<double,2>&, Array<double,2>&, Array<dou
 
 /**
  ********************************************************************************************************************************************
- * \brief   3D array storing the scalar field.   
+ * \brief   3D array storing the input 3D scalar field.   
  ********************************************************************************************************************************************
  */
 Array <double,3> T;
 
 /**
  ********************************************************************************************************************************************
- * \brief   3D array storing the x-component of the 3D velocity field.   
+ * \brief   3D array storing the x-component of the input 3D velocity field.   
  ********************************************************************************************************************************************
  */
 Array <double,3> V1;
 
 /**
  ********************************************************************************************************************************************
- * \brief   3D array storing the y-component of the 3D velocity field.   
+ * \brief   3D array storing the y-component of the input 3D velocity field.   
  ********************************************************************************************************************************************
  */
 Array <double,3> V2;
 
 /**
  ********************************************************************************************************************************************
- * \brief   3D array storing the z-component of the 3D velocity field.   
+ * \brief   3D array storing the z-component of the input 3D velocity field.   
  ********************************************************************************************************************************************
  */
 Array <double,3> V3;
 
 /**
  ********************************************************************************************************************************************
- * \brief   2D array storing the 2D scalar field.   
+ * \brief   2D array storing the input 2D scalar field.   
  ********************************************************************************************************************************************
  */
 Array <double,2> T_2D;
 
 /**
  ********************************************************************************************************************************************
- * \brief   3D array storing the x-component of the 3D velocity field.   
+ * \brief   2D array storing the x-component of the input 2D velocity field.   
  ********************************************************************************************************************************************
  */
 Array<double,2> V1_2D;
 
 /**
  ********************************************************************************************************************************************
- * \brief   2D array storing the z-component of the 2D velocity field.   
+ * \brief   2D array storing the z-component of the input 2D velocity field.   
  ********************************************************************************************************************************************
  */ 
 Array<double,2> V3_2D;
@@ -141,7 +141,11 @@ Array<double,2> V3_2D;
 
 /**
  ********************************************************************************************************************************************
- * \brief   2D array storing the computed longitudinal structure functions or scalar structure functions and their corresponding orders.   
+ * \brief   2D array storing the computed longitudinal structure functions or scalar structure functions and their corresponding orders.
+ *
+ *          The dimensions of this array is \f$N_l \times p\f$, where \f$N_l\f$ is the number of points along the diagonal of the computation
+ *          domain, and \f$p \f$ is the number of orders of the structure functions to be computed. Thus, each column of the array represents
+ *          a particular order of the structure functions.
  ********************************************************************************************************************************************
  */ 
 Array<double,2> SF;
@@ -149,55 +153,72 @@ Array<double,2> SF;
 /**
  ********************************************************************************************************************************************
  * \brief   2D array storing the computed transverse structure functions and their corresponding orders.   
+
+ *          The dimensions of this array is \f$N_l \times p\f$, where \f$N_l\f$ is the number of points along the diagonal of the computation
+ *          domain, and \f$p \f$ is the number of orders of the structure functions to be computed. Thus, each column of the array represents
+ *          a particular order of the structure functions.
  ********************************************************************************************************************************************
  */  
 Array<double,2> SF_perp;
 
 /**
  ********************************************************************************************************************************************
- * \brief   2D array storing the values to divide SF and SF_perp for averaging.   
+ * \brief   2D array for storing the values to divide SF and SF_perp for averaging. 
+ *
  ********************************************************************************************************************************************
  */  
 Array<double,2> counter;
 
 /**
  ********************************************************************************************************************************************
- * \brief   4D array storing the computed longitudinal structure functions as function of (lx, ly, lz, p), where p is the order.   
+ * \brief   4D array storing the computed longitudinal structure functions as function of the displacement vector.   
+ *
+ *          This array stores the structure functions as function of the displacement vector \f$ \mathbf{l} = (l_x, l_y, l_z )\f$. The fourth
+ *          dimension corresponds to the order of the structure functions that are calculated.
  ********************************************************************************************************************************************
  */
 Array<double,4> SF_Grid_pll;
 
 /**
  ********************************************************************************************************************************************
- * \brief   4D array storing the computed transverse structure functions as function of (lx, ly, lz, p), where p is the order.   
+ * \brief   4D array storing the computed transverse structure functions as function of the displacement vector.   
+ *
+ *          This array stores the structure functions as function of the displacement vector \f$ \mathbf{l} = (l_x, l_y, l_z )\f$. The fourth
+ *          dimension corresponds to the order of the structure functions that are calculated.
  ********************************************************************************************************************************************
  */
 Array<double,4> SF_Grid_perp;
 
 /**
  ********************************************************************************************************************************************
- * \brief   4D array storing the counter array for averaging SF_Grid_pll and SF_Grid_perp
+ * \brief   4D array storing the values to divide SF_Grid_pll and SF_Grid_perp for averaging.
  ********************************************************************************************************************************************
  */
 Array<double,4> counter_Grid;
 
 /**
  ********************************************************************************************************************************************
- * \brief   3D array storing the computed longitudinal structure functions as function of (lx, lz, p), where p is the order.   
+ * \brief   3D array storing the computed longitudinal structure functions or scalar structure functions as function of the displacement vector.   
+ *
+ *          This array stores the structure functions as function of the displacement vector \f$ \mathbf{l} = (l_x, l_z )\f$. The third
+ *          dimension corresponds to the order of the structure functions that are calculated.
  ********************************************************************************************************************************************
  */
 Array<double,3> SF_Grid2D_pll;
 
-/**
+ /**
  ********************************************************************************************************************************************
- * \brief   3D array storing the computed transverse structure functions as function of (lx, ly, lz, p), where p is the order.   
+ * \brief   3D array storing the computed transverse structure functions as function of the displacement vector.   
+ *
+ *          This array stores the structure functions as function of the displacement vector \f$ \mathbf{l} = (l_x, l_z )\f$. The third
+ *          dimension corresponds to the order of the structure functions that are calculated.
  ********************************************************************************************************************************************
  */
 Array<double,3> SF_Grid2D_perp;
 
 /**
  ********************************************************************************************************************************************
- * \brief   3D array storing the counter array for averaging SF_Grid_pll and SF_Grid_perp
+ * \brief   3D array storing the values to divide SF_Grid_pll and SF_Grid_perp for averaging.
  ********************************************************************************************************************************************
  */
 Array<double,3> counter_Grid2D;
@@ -206,7 +227,7 @@ Array<double,3> counter_Grid2D;
  ********************************************************************************************************************************************
  * \brief   This variable decides whether the structure functions are to be calculated using 2D or 3D velocity field data.
  * 
- * If true, then the code will read 2D velocity fields and calculate the corresponding structure functions. Otherwise, it will read 3D velocity
+ * If "true", then the code will read 2D velocity fields and calculate the corresponding structure functions. Otherwise, it will read 3D velocity
  * fields. Entered by the user  
  ********************************************************************************************************************************************
  */  
@@ -216,18 +237,18 @@ bool two_dimension_switch;
  ********************************************************************************************************************************************
  * \brief    This variable decides whether the scalar or velocity structure functions are to be evaluated. 
  *
- * If the value is TRUE, then scalar structure functions will be evaluated, else the vector (velocity) structure functions will be evaluated.
+ * If the value is "true", then scalar structure functions will be evaluated, else the vector (velocity) structure functions will be evaluated.
  ********************************************************************************************************************************************
  */
 bool scalar_switch;
 
 /**
  ********************************************************************************************************************************************
- * \brief    This variable decides whether the structure functions as function of (lx, ly, lz), or of (lx, lz) in case of 2D, needs to be
- *           calculated in addition to the structure functions as function of (l).
+ * \brief    This variable decides whether the structure functions as function of \f$ (l_x, l_y, l_z) \f$, or of \f$ (l_x, l_z) \f$ in case of 
+ *           2D, needs to be calculated in addition to the structure functions as function of \f$ l \f$.
  *
- * If the value is TRUE, then the structure functions as function of (lx, ly, lz) / (lx, lz) will be computed in addtion to the structure 
- * functions as function of (l).
+ * If the value is TRUE, then the structure functions as function of \f$ (l_x, l_y, l_z) \f$ or \f$  (l_x, l_z) \f$ will be computed in addtion to the structure 
+ * functions as function of \f$ l \f$.
  ********************************************************************************************************************************************
  */
 bool grid_switch;
@@ -244,21 +265,21 @@ bool test_switch;
 
 /**
  ********************************************************************************************************************************************
- * \brief   Number of gridpoints in the x direction.    
+ * \brief   Number of gridpoints in the \f$ x \f$ direction.    
  ********************************************************************************************************************************************
  */  
 int Nx;
 
 /**
  ********************************************************************************************************************************************
- * \brief   Number of gridpoints in the y direction.   
+ * \brief   Number of gridpoints in the \f$ y \f$ direction.   
  ********************************************************************************************************************************************
  */   
 int Ny;
 
 /**
  ********************************************************************************************************************************************
- * \brief   Number of gridpoints in the z direction.    
+ * \brief   Number of gridpoints in the \f$ z \f$ direction.    
  ********************************************************************************************************************************************
  */   
 int Nz; 
@@ -305,7 +326,7 @@ bool longitudinal;
 
 /**
  ********************************************************************************************************************************************
- * \brief   This variable stores the distance between two consecutive gridpoints in the x direction.
+ * \brief   This variable stores the distance between two consecutive gridpoints in the \f$ x \f$ direction.
  * 
  ********************************************************************************************************************************************
  */
@@ -313,7 +334,7 @@ double dx;
 
 /**
  ********************************************************************************************************************************************
- * \brief   This variable stores the distance between two consecutive gridpoints in the y direction.
+ * \brief   This variable stores the distance between two consecutive gridpoints in the \f$ y \f$ direction.
  * 
  ********************************************************************************************************************************************
  */
@@ -321,7 +342,7 @@ double dy;
 
 /**
  ********************************************************************************************************************************************
- * \brief   This variable stores the distance between two consecutive gridpoints in the z direction.
+ * \brief   This variable stores the distance between two consecutive gridpoints in the \f$ z \f$ direction.
  * 
  ********************************************************************************************************************************************
  */
@@ -345,7 +366,7 @@ double Lx;
 
 /**
  ********************************************************************************************************************************************
- * \brief   This variable stores the breadth of the domain.
+ * \brief   This variable stores the width of the domain.
  * 
  ********************************************************************************************************************************************
  */ 
@@ -373,16 +394,16 @@ int P;
 
 /**
  ********************************************************************************************************************************************
- * \brief   The main function of the "Strunc" code.
+ * \brief   The main function of the "Kolmogorov41".
  *
- *          This function is the main function of the "Strunc" code for computing the velocity and scalar structure functions. The MPI 
+ *          This function is the main function of the "Kolmogorov41" for computing the velocity and scalar structure functions. The MPI 
  *          decomposition and integration are also carried out in this function.
  *     
  * 
  ********************************************************************************************************************************************
  */
 int main(int argc, char *argv[]) {
-  num=omp_get_max_threads();//strtol(argv[1],NULL,10);  //omp_get_max_threads();//(shaheen)
+  //num=omp_get_max_threads();//strtol(argv[1],NULL,10);  //omp_get_max_threads();//(shaheen)
   char hostname[HOST_NAME_MAX];
   gethostname(hostname, HOST_NAME_MAX);
   MPI_Init(NULL, NULL);
@@ -808,8 +829,8 @@ int main(int argc, char *argv[]) {
  *          This function validates the calculation of the structure functions computed using 3D velocity field data. The velocity field is
  *          generated as \f$ \mathbf{u} = x \hat{x} + y \hat{y} + z \hat{z} \f$. For such field, the velocity structure functions of order
  *          \f$ q \f$ is given as \f$ S_q^u(l_x, l_y, l_z) = (\sqrt{l_x^2 + l_y^2 + l_z^2})^q \f$. In this function, the theoretical values 
- *          obtained from the aforementioned equation are compared with the computed values. If the difference between the two values is less
-            than \f$1 \times 10^{-10} \f$, the test is passed. 
+ *          obtained from the aforementioned equation are compared with the computed values. If the percentage difference between the two values 
+ *          is less than \f$1 \times 10^{-10} \f$, the test is passed. 
  * 
  ********************************************************************************************************************************************
  */
@@ -906,8 +927,8 @@ void VECTOR_TEST_CASE_3D()
  *
  *          This function validates the calculation of the structure functions computed using 2D velocity field data. The velocity field is
  *          generated as \f$ \mathbf{u} = x \hat{x} + z \hat{z} \f$. For such field, the velocity structure functions of order
- *          \f$ q \f$ is given as \f$ S_q^u(l_x, l_z) = (\sqrt{l_x^2 + l_z^2})^q \f$. In this function, the theoretical values 
- *          obtained from the aforementioned equation are compared with the computed values. If the difference between the two values is less
+ *          \f$ q \f$ is given as \f$ S_q^u(l_x, l_z) = (\sqrt{l_x^2 + l_z^2})^q \f$. In this function, the analytically obtained  values 
+ *          obtained from the aforementioned equation are compared with the computed values. If the percentage difference between the two values is less
             than \f$1 \times 10^{-10} \f$, the test is passed. 
  * 
  ********************************************************************************************************************************************
@@ -1001,7 +1022,7 @@ void VECTOR_TEST_CASE_2D()
  *          This function validates the calculation of the structure functions computed using 3D scalar field data. The scalar field is
  *          generated as \f$ \theta = x + z \f$. For such field, the structure functions of order
  *          \f$ q \f$ is given as \f$ S_q^u(l_x, l_z) = (l_x^2 + l_z^2)^q \f$. In this function, the theoretical values 
- *          obtained from the aforementioned equation are compared with the computed values. If the difference between the two values is less
+ *          obtained from the aforementioned equation are compared with the computed values. If the percentage difference between the two values is less
  *          than \f$1 \times 10^{-10} \f$, the test is passed. 
  * 
  ********************************************************************************************************************************************
@@ -1058,7 +1079,7 @@ void SCALAR_TEST_CASE_2D()
  *          This function validates the calculation of the structure functions computed using 3D scalar field data. The scalar field is
  *          generated as \f$ \theta = x + y + z \f$. For such field, the structure functions of order
  *          \f$ q \f$ is given as \f$ S_q^u(l_x, l_y, l_z) = (l_x^2 + l_y^2 + l_z^2)^q \f$. In this function, the theoretical values 
- *          obtained from the aforementioned equation are compared with the computed values. If the difference between the two values is less
+ *          obtained from the aforementioned equation are compared with the computed values. If the percentage difference between the two values is less
  *          than \f$1 \times 10^{-10} \f$, the test is passed. 
  * 
  ********************************************************************************************************************************************
@@ -1112,8 +1133,8 @@ void SCALAR_TEST_CASE_3D(){
  ********************************************************************************************************************************************
  * \brief   Function which conducts exponentiation with an integer as an exponent. 
  *
- *          This function calculates x raised to the power n, where n is an integer. This function is faster than the standard pow(x,n) function
- *          for n>2. Note that this function cannot accept a non-integer exponent.
+ *          This function calculates \f$ x^n \f$, where \f$ n \f$ is an integer. This function is faster than the standard pow(x,n) function
+ *          for \f$ n>2 \f$. Note that this function cannot accept a non-integer exponent.
  * 
  * \param   x is the base of double-precision floating point datatype.
  * \param   n is the exponent of integer datatype
@@ -1144,9 +1165,8 @@ double powInt(double x, int n) {
  ********************************************************************************************************************************************
  * \brief   Function to convert an integer type value to string.
  *
- *          This function converts an integer type value to a string.
  * 
- * \param   num is the integer value of to be converted.
+ * \param   number is the integer value of to be converted.
  * 
  * \return  The value as a string.
  * 
@@ -1181,11 +1201,11 @@ void compute_time_elapsed(timeval start_t, timeval end_t, double& elapsed){
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to write the structure functions as function of l as a 2D hdf5 file.
+ * \brief   Function to write the structure functions as function of \f$ l \f$ as a 2D hdf5 file.
  *
- *          This function reads writes the structure functions as a 2D array of dimensions (N x p). Here, N = \f$\sqrt{Nx^2 + Ny^2 + Nz^2}\f$ is the 
- *          number of equidistant points from 0 to L, where L is the length of the diagonal of the domain in which the structure functions are 
- *          calculated. p is the order of the structure functions. 
+ *          This function reads writes the structure functions as a 2D array of dimensions \f$ (N_l \times p) \f$. Here, \f$N_l = \sqrt{Nx^2 + Ny^2 + Nz^2}\f$ is the 
+ *          number of equidistant points from \f$ 0 \f$ to \f$ L \f$, where \f$ L \f$ is the length of the diagonal of the domain in which the structure functions are 
+ *          calculated. \f$ p \f$ is the order of the structure functions. 
  * 
  * \param   A is the 2D array to store the structure functions.
  * \param   file is the name of the hdf5 file and the dataset in which the structure functions are stored.
@@ -1201,9 +1221,10 @@ void write_2D(Array<double,2> A,string file) {
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to write the structure functions as function of lx,ly,lz as a 3D hdf5 file.
+ * \brief   Function to write the structure functions as function of \f$ (l_x,l_y,l_z) \f$ as a 3D hdf5 file.
  *
- *          This function reads the structure functions as a 4D array of dimensions (lx x ly x lz x np), where np is the order of the structure function.
+ *          This function reads the structure functions as a 4D array of dimensions \f$ (l_x \times l_y \times l_z \times p)\f$, where \f$ p \f$ is the order of the number of orders of 
+ *          structure function.
  *          The structure functions of different orders are then stored as separate 3D hdf5 files.
  * 
  * \param   A is the 4D array representing the structure functions.
@@ -1226,7 +1247,7 @@ void write_4D(Array<double,4> A, string file,int q) {
  ********************************************************************************************************************************************
  * \brief   Function to write the structure functions as function of lx,lz as a 2D hdf5 file.
  *
- *          This function reads the structure functions as a 4D array of dimensions (lx x lz x np), where np is the order of the structure function.
+ *          This function reads the structure functions as a 3D array of dimensions \f$ (l_x \times l_z \times p) \f$, where \f$ p \f$ is the number of orders of the structure function.
  *          The structure functions of different orders are then stored as separate 2D hdf5 files.
  * 
  * \param   A is the 3D array representing the structure functions.
@@ -1250,10 +1271,10 @@ void write_3D(Array<double,3> A, string file,int q) {
  ********************************************************************************************************************************************
  * \brief   Function to read a 2D field from an hdf5 file.
  *
- *          This function reads an hdf5 file containing a 2D field, which can be the x or z component of a 2D velocity field. The dimensions of the
- *          2D field is \f$(N_x \times N_z)\f$, where \f$N_x\f$ and \f$N_z\f$ are the number of gridpoints in x and z directions respectively. 
+ *          This function reads an hdf5 file containing a 2D field, which can be the \f$ x \f$ or \f$ z \f$ component of a 2D velocity field. The dimensions of the
+ *          2D field is \f$(N_x \times N_z)\f$, where \f$N_x\f$ and \f$N_z\f$ are the number of gridpoints in \f$ x \f$ and \f$ z \f$ directions respectively. 
  *          The hdf5 file should have only 
- *          one dataset, and the names of the hdf5 file and the dataset must be identical. This function make use of the H5SI library for reading the 
+ *          one dataset, and the names of the hdf5 file and the dataset must be identical. This function makes use of the H5SI library for reading the 
  *          hdf5 file.
  * 
  * \param   A is the 2D array to store the field that is read from the file.
@@ -1270,10 +1291,10 @@ void read_2D(Array<double,2> A, string fold, string file) {
  ********************************************************************************************************************************************
  * \brief   Function to read a 3D field from an hdf5 file.
  *          
- *          This function reads an hdf5 file containing a 4D field, which can be the x y, or z component of a 3D velocity field. The dimensions of the
- *          3D field is \f$(N_x \times N_y \times N_z)\f$, where \f$N_x\f$, \f$N_y\f$, and \f$N_z\f$ are the number of gridpoints in x, y, and z directions 
+ *          This function reads an hdf5 file containing a 4D field, which can be the \f$ x \f$, \f$ y \f$, or \f$ z \f$ component of a 3D velocity field. The dimensions of the
+ *          3D field is \f$(N_x \times N_y \times N_z)\f$, where \f$N_x\f$, \f$N_y\f$, and \f$N_z\f$ are the number of gridpoints in \f$ x \f$, \f$ y \f$, and \f$ z \f$ directions 
  *          respectively. The hdf5 file should 
- *          have only one dataset, and the names of the hdf5 file and the dataset must be identical. This function make use of the H5SI library for 
+ *          have only one dataset, and the names of the hdf5 file and the dataset must be identical. This function makes use of the H5SI library for 
  *          reading the hdf5 file.
  * 
  * \param A is the 3D array to store the field that is read from the file.
@@ -1322,6 +1343,7 @@ void Read_para() {
   para["program"]["Only_longitudinal"]>>longitudinal;
   para["program"]["grid_switch"]>>grid_switch;
   para["program"]["2D_switch"]>>two_dimension_switch;
+  para["program"]["Number_of_OpenMP_processors"]>>num;
   para["grid"]["Nx"]>>Nx;
   para["grid"]["Ny"]>>Ny;
   para["grid"]["Nz"]>>Nz;
@@ -1358,7 +1380,7 @@ void Read_para() {
  * \brief   Function to assign an exponential function to the 3D velocity field.
  *
  *          This function assigns the following exponential function to the 3D velocity field.
- *          \f$U_x = x, \quad U_y = y, \quad U_z = z\f$.
+ *          \f$u_x = x, \quad u_y = y, \quad u_z = z\f$.
  * 
  * \param Ux is a 3D array representing the x-component of 3D velocity field.
  * \param Uy is a 3D array representing the y-component of 3D velocity field.
@@ -1388,7 +1410,7 @@ void Read_Init(Array<double,3>& Ux, Array<double,3>& Uy, Array<double,3>& Uz){
  * \brief   Function to assign an exponential function to the 2D velocity field.
  *
  *          This function assigns the following exponential function to the 2D velocity field.
- *          \f$U_x = x, \quad U_z = z\f$.
+ *          \f$u_x = x, \quad u_z = z\f$.
  * 
  * \param Ux is a 2D array representing the x-component of 2D velocity field.
  * \param Uz is a 2D array representing the z-component of 2D velocity field.
@@ -1414,7 +1436,7 @@ void Read_Init(Array<double,2>& Ux, Array<double,2>& Uz){
  * \brief   Function to assign an exponential function to a 2D scalar field.
  *
  *          This function assigns the following exponential function to the scalar field.
- *          \f$T = x + z \f$
+ *          \f$\theta = x + z \f$
  * 
  * \param T is a 2D array representing the x-component of 2D velocity field.
  ********************************************************************************************************************************************
@@ -1438,7 +1460,7 @@ void Read_Init(Array<double,2>& T) {
  * \brief   Function to assign an exponential function to a 3D scalar field.
  *
  *          This function assigns the following exponential function to the scalar field.
- *          \f$T = x + y + z \f$
+ *          \f$\theta = x + y + z \f$
  * 
  * \param T is a 3D array representing the x-component of 2D velocity field.
  ********************************************************************************************************************************************
@@ -1461,7 +1483,7 @@ void Read_Init(Array<double,3>& T) {
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to compute the magnitude of a 3D vector A.
+ * \brief   Function to compute the magnitude of a 3D vector.
  * 
  * \param A is a tiny vector representing the 3D velocity field.
  * \param mag is the variable that stores the magnitude calculated in this function.
@@ -1473,7 +1495,7 @@ void magnitude(TinyVector<double,3> A,double& mag){
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to compute the magnitude of a 2D vector A.
+ * \brief   Function to compute the magnitude of a 2D vector.
  * 
  * \param A is a tiny vector representing the 2D velocity field.
  * \param mag is the variable that stores the magnitude calculated in this function.
@@ -1496,7 +1518,7 @@ void magnitude(TinyVector<double,2> A, double& mag){
  * \param Uy is a 3D array representing the y-component of velocity field
  * \param Uz is a 3D array representing the z-component of velocity field 
  * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
- * \param SF_Node_p is a 2D array containing the values of the nodal transverse structure functions for orders q1 to q2.
+ * \param SF_Node_p is a 2D array containing the values of the nodal transverse structure functions for orders for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node and SF_Node_p so as to get the average. 
  ********************************************************************************************************************************************
  */
@@ -1644,7 +1666,7 @@ void SFunc_long_3D(Array<double,3> Ux,
  * \param Ux is a 2D array representing the x-component of velocity field
  * \param Uz is a 2D array representing the z-component of velocity field 
  * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
- * \param SF_Node_p is a 2D array containing the values of the nodal transverse structure functions for orders q1 to q2.
+ * \param SF_Node_p is a 2D array containing the values of the nodal transverse structure functions for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node and SF_Node_p so as to get the average. 
  ********************************************************************************************************************************************
  */
@@ -1710,12 +1732,12 @@ void SFunc2D(Array<double,2> Ux,
  * \brief   A less computationally intensive function to calculate only the longitudinal structure functions using 2D velocity field.
  *
  *          The following function computes the only longitudinal structure function using 2D velocity field data. This function is less computationally 
- *          expensive compared to SFunc3D. The function exploits the fact that \f$ \langle du(l)^p \rangle = \langle du(-l)^p \rangle \f$, where \f$ du(l) \f$ 
+ *          expensive compared to SFunc2D. The function exploits the fact that \f$ \langle du(l)^p \rangle = \langle du(-l)^p \rangle \f$, where \f$ du(l) \f$ 
  *          is the component parallel to l. Thus, although this function uses four nested loops, the innermost loop starts from z1 instead of 0, where z1 is 
  *          the iteration number of the second for-loop. The rest of the structure is similar to the function SFunc2D. 
  * 
- * \param Ux is a 3D array representing the x-component of velocity field
- * \param Uz is a 3D array representing the z-component of velocity field 
+ * \param Ux is a 2D array representing the x-component of velocity field
+ * \param Uz is a 2D array representing the z-component of velocity field 
  * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average. 
  ********************************************************************************************************************************************
@@ -1898,8 +1920,8 @@ void SF_scalar_2D(Array<double,2> T,
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to calculate structure functions using 3D velocity field as function of (lx, ly, lz) in addition to the structure functions
- *          as function of (l).
+ * \brief   Function to calculate structure functions using 3D velocity field as function of \f$ (l_x, l_y, l_z) \f$ in addition to the structure functions
+ *          as function of \f$ l \f$.
  *
  *          The following function computes both the nodal longitudinal and transverse structure functions of 3D velocity field using six nested for-loops.
  *          The outer three for-loops correspond to the vector \f$\mathbf{r}\f$ and the inner three loops correspond to the vector \f$\mathbf{r+l}\f$. 
@@ -1908,11 +1930,11 @@ void SF_scalar_2D(Array<double,2> T,
  * \param Ux is a 3D array representing the x-component of velocity field
  * \param Uy is a 3D array representing the y-component of velocity field
  * \param Uz is a 3D array representing the z-component of velocity field 
- * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions as function of (l) for a range of orders specified by the user.
- * \param SF_p_Node is a 2D array containing the values of the nodal transverse structure functions for as function of (l) for a range of orders specified by the user.
+ * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
+ * \param SF_p_Node is a 2D array containing the values of the nodal transverse structure functions for as function of \f$ l \f$ for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node and SF_Node_p so as to get the average. 
- * \param SF_Grid_pll_Node is a 4D array containing the values of the nodal longitudinal structure functions as function of (lx,ly,lz) for a range of orders specified by the user.
- * \param SF_Grid_perp_Node is a 4D array containing the values of the nodal transverse structure functions for as function of (lx,ly,lz) for a range of orders specified by the user.
+ * \param SF_Grid_pll_Node is a 4D array containing the values of the nodal longitudinal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
+ * \param SF_Grid_perp_Node is a 4D array containing the values of the nodal transverse structure functions for as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
  * \param counter_Grid_Node is a 4D array containing the numbers for dividing the values of SF_Grid_pll_Node and SF_Grid_perp_Node_p so as to get the average. 
  ********************************************************************************************************************************************
  */
@@ -2004,12 +2026,12 @@ void SFunc3D(
 
 /**
  ********************************************************************************************************************************************
- * \brief   A less computationally intensive function to calculate only the longitudinal structure functions as functions of (lx,ly,lz) in
- *          addition to function of (l) using 3D velocity field.
+ * \brief   A less computationally intensive function to calculate only the longitudinal structure functions as functions of \f$ (l_x,l_y,l_z) \f$ in
+ *          addition to function of \f$ l \f$ using 3D velocity field.
  *
  *          The following function computes the only longitudinal structure function using 3D velocity field data. This function is less computationally 
  *          expensive compared to SFunc3D. The function exploits the fact that \f$ \langle du(l)^p \rangle = \langle du(-l)^p \rangle \f$, where \f$ du(l) \f$ 
- *          is the component parallel to l. Thus, although this function uses six nested loops, the innermost loop starts from z1 instead of 0, where z1 is 
+ *          is the component parallel to \f$ l \f$. Thus, although this function uses six nested loops, the innermost loop starts from z1 instead of 0, where z1 is 
  *          the iteration number of the third for-loop. The rest of the structure is similar to the function SFunc3D. 
  * 
  * \param Ux is a 3D array representing the x-component of velocity field
@@ -2017,7 +2039,7 @@ void SFunc3D(
  * \param Uz is a 3D array representing the z-component of velocity field 
  * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average. 
- * \param SF_Grid_pll_Node is a 4D array containing the values of the nodal longitudinal structure functions as function of (lx,ly,lz) for a range of orders specified by the user.
+ * \param SF_Grid_pll_Node is a 4D array containing the values of the nodal longitudinal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
  * \param counter_Grid_Node is a 4D array containing the numbers for dividing the values of SF_Grid_pll_Node and SF_Grid_perp_Node_p so as to get the average. 
  ********************************************************************************************************************************************
  */
@@ -2102,8 +2124,8 @@ void SFunc_long_3D(
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to calculate structure functions using 2D velocity field as function of (lx, lz) in addition to the structure functions
- *          as function of (l).
+ * \brief   Function to calculate structure functions using 2D velocity field as function of \f$(l_x, l_z) \f$ in addition to the structure functions
+ *          as function of \f$ l \f$.
  *
  *          The following function computes both the nodal longitudinal and transverse structure functions of 2D velocity field using six nested for-loops.
  *          The outer three for-loops correspond to the vector \f$\mathbf{r}\f$ and the inner three loops correspond to the vector \f$\mathbf{r+l}\f$. 
@@ -2111,11 +2133,11 @@ void SFunc_long_3D(
  * 
  * \param Ux is a 2D array representing the x-component of velocity field
  * \param Uz is a 2D array representing the z-component of velocity field 
- * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions as function of (l) for a range of orders specified by the user.
- * \param SF_p_Node is a 2D array containing the values of the nodal transverse structure functions for as function of (l) for a range of orders specified by the user.
+ * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
+ * \param SF_p_Node is a 2D array containing the values of the nodal transverse structure functions for as function of \f$ l \f$ for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node and SF_Node_p so as to get the average. 
- * \param SF_Grid2D_pll_Node is a 3D array containing the values of the nodal longitudinal structure functions as function of (lx,lz) for a range of orders specified by the user.
- * \param SF_Grid2D_perp_Node is a 3D array containing the values of the nodal transverse structure functions for as function of (lx,lz) for a range of orders specified by the user.
+ * \param SF_Grid2D_pll_Node is a 3D array containing the values of the nodal longitudinal structure functions as function of \f$(l_x,l_z)\f$ for a range of orders specified by the user.
+ * \param SF_Grid2D_perp_Node is a 3D array containing the values of the nodal transverse structure functions for as function of \f$(l_x,l_z)\f$ for a range of orders specified by the user.
  * \param counter_Grid2D_Node is a 3D array containing the numbers for dividing the values of SF_Grid_pll_Node and SF_Grid_perp_Node_p so as to get the average. 
  ********************************************************************************************************************************************
  */
@@ -2203,8 +2225,8 @@ void SFunc2D(
 
 /**
  ********************************************************************************************************************************************
- * \brief   A less computationally intensive function to calculate only the longitudinal structure functions as functions of (lx,lz) in
- *          addition to function of (l) using 2D velocity field.
+ * \brief   A less computationally intensive function to calculate only the longitudinal structure functions as functions of \f$(l_x,l_z) \f$ in
+ *          addition to function of \f$ l \f$ using 2D velocity field.
  *
  *          The following function computes the only longitudinal structure function using 2D velocity field data. This function is less computationally 
  *          expensive compared to SFunc2D. The function exploits the fact that \f$ \langle du(l)^p \rangle = \langle du(-l)^p \rangle \f$, where \f$ du(l) \f$ 
@@ -2215,7 +2237,7 @@ void SFunc2D(
  * \param Uz is a 2D array representing the z-component of velocity field 
  * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average. 
- * \param SF_Grid2D_pll_Node is a 3D array containing the values of the nodal longitudinal structure functions as function of (lx,lz) for a range of orders specified by the user.
+ * \param SF_Grid2D_pll_Node is a 3D array containing the values of the nodal longitudinal structure functions as function of \f$(l_x,l_z)\f$ for a range of orders specified by the user.
  * \param counter_Grid2D_Node is a 3D array containing the numbers for dividing the values of SF_Grid_pll_Node so as to get the average. 
  ********************************************************************************************************************************************
  */
@@ -2288,20 +2310,19 @@ void SFunc_long_2D(
 
 
 
-//SCALAR STRUCTURE FUNCTION 3D GRID
 /**
  ********************************************************************************************************************************************
- * \brief   Function to calculate structure functions using 3D scalar field as function of (lx, ly, lz) in addition to the structure functions
- *          as function of (l).
+ * \brief   Function to calculate structure functions using 3D scalar field as function of \f$ (l_x, l_y, l_z) \f$ in addition to the structure functions
+ *          as function of \f$ l \f$.
  *
  *          The following function computes both the nodal structure functions of 3D scalar field using six nested for-loops.
  *          The outer three for-loops correspond to the vector \f$\mathbf{r}\f$ and the inner three loops correspond to the vector \f$\mathbf{r+l}\f$. 
  *          The second for-loop is parallelized using OpenMP.
  * 
  * \param T is a 3D array representing the scalar field 
- * \param SF_Node is a 2D array containing the values of the nodal structure functions as function of (l) for a range of orders specified by the user.
+ * \param SF_Node is a 2D array containing the values of the nodal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average. 
- * \param SF_Grid_Node is a 4D array containing the values of the nodal structure functions as function of (lx,ly,lz) for a range of orders specified by the user.
+ * \param SF_Grid_Node is a 4D array containing the values of the nodal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
  * \param counter_Grid_Node is a 4D array containing the numbers for dividing the values of SF_Grid_pll_Node so as to get the average. 
  ********************************************************************************************************************************************
  */
@@ -2368,17 +2389,17 @@ void SF_scalar_3D(Array<double,3> T,
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to calculate structure functions using 2D scalar field as function of (lx, lz) in addition to the structure functions
- *          as function of (l).
+ * \brief   Function to calculate structure functions using 2D scalar field as function of \f$ (l_x, l_z) \f$ in addition to the structure functions
+ *          as function of \f$ l \f$.
  *
  *          The following function computes both the nodal structure functions of 2D scalar field using four nested for-loops.
  *          The outer two for-loops correspond to the vector \f$\mathbf{r}\f$ and the inner two loops correspond to the vector \f$\mathbf{r+l}\f$. 
  *          The second for-loop is parallelized using OpenMP.
  * 
  * \param T is a 2D array representing the scalar field 
- * \param SF_Node is a 2D array containing the values of the nodal structure functions as function of (l) for a range of orders specified by the user.
+ * \param SF_Node is a 2D array containing the values of the nodal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average. 
- * \param SF_Grid_Node is a 3D array containing the values of the nodal structure functions as function of (lx,lz) for a range of orders specified by the user.
+ * \param SF_Grid_Node is a 3D array containing the values of the nodal structure functions as function of \f$ (l_x,l_z) \f$ for a range of orders specified by the user.
  * \param counter_Grid_Node is a 3D array containing the numbers for dividing the values of SF_Grid_pll_Node so as to get the average. 
  ********************************************************************************************************************************************
  */
