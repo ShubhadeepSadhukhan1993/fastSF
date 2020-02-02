@@ -1,7 +1,6 @@
 # Hybrid Parallel C++ Code: Kolmogorov41
 
-Kolmogorov41 is open source and is a hybrid parallel C++ code. This means that it depends on people to give some of their free time to improve it and make it even better.
-
+Kolmogorov41 is open source and is a hybrid parallel C++ code.
 ## Getting the Source Code
 
 Kolmogorov41 is hosted on GitHub:
