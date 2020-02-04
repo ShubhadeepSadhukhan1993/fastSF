@@ -8,10 +8,9 @@ Kolmogorov41 is hosted on GitHub. You can download the source code from the foll
 
 https://github.com/ShubhadeepSadhukhan1993/Kolmogorov41
 
-[Click here to download] (https://github.com/ShubhadeepSadhukhan1993/Kolmogorov41)
+## Installing Kolmogorov41
 
-
-## Required Libraries
+### Required Libraries
 
 The following libraries are required for installing and running Kolmogorov41:
 
@@ -22,9 +21,10 @@ The following libraries are required for installing and running Kolmogorov41:
 5. HDF5
 6. H5SI
 
-The instructions to download and install these libraries are provided in the following website [Click Here] (http://turbulencehub.org/index.php/codes/tarang/installing-tarang/).
+The instructions to download and install these libraries are provided in the following website:(http://turbulencehub.org/index.php/codes/tarang/installing-tarang/).
 
-##  Installation Procedure
+###  Compiling instruction
+
 Go into the "src" folder from terminal and run the command "make". An executable named "Kolmogorov41.out" will be created inside the "src" folder.
 
 ## Input Procedure
