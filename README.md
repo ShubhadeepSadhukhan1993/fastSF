@@ -1,8 +1,3 @@
-<script type="text/javascript" async
-src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js? 
-config=TeX-MML-AM_CHTML"
-</script>
-
 # Hybrid Parallel C++ Code: Kolmogorov41
 
 Kolmogorov41 is an open source hybrid parallel C++ code to compute structure functions for a given velocity or scalar field.
@@ -40,41 +35,51 @@ After downloading Kolmogorov41, change into "Kolmogorov41-master/src" directory 
 
 #### program: grid_switch
 
-The user can enter "true" or "false" 
+You can enter "true" or "false" 
 
-"true": The code saves the structure function output as a function of the difference vector ($\mathbf{l}$), in addition to the magnitude of the difference vector ($l$).
+"true": Save the structure function output as a function of the difference vector in addition to the magnitude of the difference vector.
  
-"false": The code saves structure functions as a function of the magnitude of the difference vector only.
+"false": Save structure functions as a function of the magnitude of the difference vector only.
 
 #### program: scalar_switch
-true: Calculate the structure function of a scalar field. 
 
-false: Calculate the structure function of a vector field. 
+You can enter "true" or "false"
+
+"true": Calculate the structure function of a scalar field. 
+
+"false": Calculate the structure function of a vector field. 
 
 #### program: 2D_switch
-true: Calculate the structure function two dimensional field. 
 
-false: Calculate the structure function three dimensional field.
+You can enter "true" or "false".
+
+"true": Calculate the structure function for two dimensional field. 
+
+"false": Calculate the structure function for three dimensional field.
 
 #### program: Only_logitudinal
-It is valid for structure function of vector fields only
-true: Calculate the structure functions using the two point difference of the vector field along the difference vector direction
 
-false: Calculate the structure functions using the two point difference of the vector field in both the parallel and perpendicular to the difference vector direction
+This entry is for structure function of velocity  fields only. You can enter "true" or "false".
 
-#### grid: Nx, Ny, Nz 
-It is the number of points along x, y, and z direction respectively of the  grid. Valid for both the vector and scalar fields. 
-For two dimensional fields you need to provide Nx and Nz. Ny should be set to 1.
+"true": Compute only the longitudinal structure function.
 
+"false": Compute both longitudinal and transverse structure functions.
+
+#### grid: Nx, Ny, Nz
+
+The number of points along x, y, and z direction respectively of the  grid. Valid for both the vector and scalar fields. 
+For two dimensional fields you need to provide Nx and Nz.
 
 #### domain_dimension: Lx, Ly, Lz
-Length of the cubical box along x, y, and z direction respectively 
+
+Length of the cubical box along x, y, and z direction respectively. 
+For two dimensional fields, you need to provide Lx and Lz. 
 
 
 #### structure_function: q1, q2
-The lower and the upper limit of the order of the structure functions to be computed
+The lower and the upper limit of the order of the structure functions to be computed.
 
-### test: test_switch
+#### test: test_switch
 true: It will take some input from inside and test the code for some known result implemented inside. (For testing lower grid size is recommended as it takes a lot of time.)
 
 false: It is recommended for calculation from your real data which will be read from the "in" folder
