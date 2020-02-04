@@ -25,19 +25,19 @@ The instructions to download and install these libraries are provided in the fol
 
 ###  Compiling instruction
 
-Go into the "src" folder from terminal and run the command "make". An executable named "Kolmogorov41.out" will be created inside the "src" folder.
+After downloading Kolmogorov41, change into "Kolmogorov41-master/src" directory and run the command "make" in the terminal. An executable named "Kolmogorov41.out" will be created inside the "Kolmogorov41-master/src" folder.
 
-## Input Procedure
-Your input is taken from the "in" folder. A "para.yaml" file inside the "in" folder will contain all the parameters for your code. 
+## Running Kolmogorov
+"Kolmogorov41-master" has a folder named "in". This folder contains the input field files in hdf5 format, and a parameters file named "para.yaml". You need to provide the required input parameters in this file. The details of the entries are as follows:
 
 
-
-### i) para.yaml Instructions
+### para.yaml details
 
 #### program: grid_switch
-true:  It will save the structure function output as a function of the difference vector.
+true:  The code saves the structure function output as a function of the difference vector ($\mathbf{l}$), in addition to the magnitude of the difference vector ($l$).
  
 false: It will save structure functions as a function of the magnitude of the difference vector.
+
 #### program: scalar_switch
 true: Calculate the structure function of a scalar field. 
 
