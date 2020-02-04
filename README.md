@@ -34,7 +34,7 @@ After downloading Kolmogorov41, change into "Kolmogorov41-master/src" directory 
 ### para.yaml details
 
 #### program: grid_switch
-true:  The code saves the structure function output as a function of the difference vector ($\mathbf{l}$), in addition to the magnitude of the difference vector ($l$).
+#####true:  The code saves the structure function output as a function of the difference vector ($\mathbf{l}$), in addition to the magnitude of the difference vector ($l$).
  
 false: It will save structure functions as a function of the magnitude of the difference vector.
 
