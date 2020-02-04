@@ -1,17 +1,20 @@
 # Hybrid Parallel C++ Code: Kolmogorov41
 
-Kolmogorov41 is open source and is a hybrid parallel C++ code.
+Kolmogorov41 is an open source hybrid parallel C++ code to compute structure functions for a given velocity or scalar field.
+
 ## Getting the Source Code
 
-Kolmogorov41 is hosted on GitHub:
+Kolmogorov41 is hosted on GitHub. You can download the source code from the following link:
 
 https://github.com/ShubhadeepSadhukhan1993/Kolmogorov41
 
 [Click here to download] (https://github.com/ShubhadeepSadhukhan1993/Kolmogorov41)
 
-Here you can get the source code.
 
 ## Required Libraries
+
+The following libraries are required for installing and running Kolmogorov41:
+
 1. CMake
 2. Blitz++
 3. YAML-cpp 
@@ -19,8 +22,8 @@ Here you can get the source code.
 5. HDF5
 6. H5SI
 
+The instructions to download and install these libraries are provided in the following website [Click Here] (http://turbulencehub.org/index.php/codes/tarang/installing-tarang/).
 
-You can find a python script and all the instructions to install these libraries in our group website [Click Here] (http://turbulencehub.org/index.php/codes/tarang/installing-tarang/).
 ##  Installation Procedure
 Go into the "src" folder from terminal and run the command "make". An executable named "Kolmogorov41.out" will be created inside the "src" folder.
 
