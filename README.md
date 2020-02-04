@@ -1,3 +1,8 @@
+<script type="text/javascript" async
+src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js? 
+config=TeX-MML-AM_CHTML"
+</script>
+
 # Hybrid Parallel C++ Code: Kolmogorov41
 
 Kolmogorov41 is an open source hybrid parallel C++ code to compute structure functions for a given velocity or scalar field.
@@ -34,9 +39,12 @@ After downloading Kolmogorov41, change into "Kolmogorov41-master/src" directory 
 ### para.yaml details
 
 #### program: grid_switch
-#####true:  The code saves the structure function output as a function of the difference vector ($\mathbf{l}$), in addition to the magnitude of the difference vector ($l$).
+
+The user can enter "true" or "false" 
+
+"true": The code saves the structure function output as a function of the difference vector ($\mathbf{l}$), in addition to the magnitude of the difference vector ($l$).
  
-false: It will save structure functions as a function of the magnitude of the difference vector.
+"false": The code saves structure functions as a function of the magnitude of the difference vector only.
 
 #### program: scalar_switch
 true: Calculate the structure function of a scalar field. 
