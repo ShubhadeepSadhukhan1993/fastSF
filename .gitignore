@@ -33,3 +33,7 @@
 
 #Output files
 out/*
+test/test_scalar_2D/out/*
+test/test_scalar_3D/out/*
+test/test_velocity_2D/out/*
+test/test_velocity_3D/out/*
