@@ -27,15 +27,19 @@ The instructions to download and install these libraries are provided in the fol
 
 After downloading Kolmogorov41, change into "Kolmogorov41-master/src" directory and run the command "make" in the terminal. An executable named "Kolmogorov41.out" will be created inside the "Kolmogorov41-master/src" folder.
 
-## Running Kolmogorov
-"Kolmogorov41-master" has a folder named "in". This folder contains the input field files in hdf5 format, and a parameters file named "para.yaml". You need to provide the required input parameters in this file. The details of the entries are as follows:
+## Testing Kolmogorov41
+`Kolmogorov41` offers an automated testing process to validate the code after installation. The relevant test scripts can be found in the `tests/` folder of the solver. Executing the Bash shell script `runTest.sh`, will compile `Kolmogorov41`, and run it with a pre-defined set of parameters. 
 
 
-### i) para.yaml details
+## Running Kolmogorov41
+`Kolmogorov41-master` has a folder named `in`. This folder contains the input field files in `hdf5` format, and a parameters file named `para.yaml`. You need to provide the required input parameters in this file. The details of the entries are as follows:
+
+
+### i) `para.yaml` details
 
 #### program: grid_switch
 
-You can enter *true* or *false* 
+You can enter `true` or `false` 
 
 *true*: Save the structure function output as a function of the difference vector (**l**) in addition to the magnitude of the difference vector (*l*).
  
@@ -64,6 +68,10 @@ This entry is for structure function of velocity  fields only. You can enter *tr
 *true*: Compute only the longitudinal structure function.
 
 *false*: Compute both longitudinal and transverse structure functions.
+
+#### program: Number_of_OpenMP_processors
+
+Enter the number of OpenMP processors. 
 
 #### grid: Nx, Ny, Nz
 
@@ -110,33 +118,34 @@ Size of the array stored in these files should be (*Nx, Ny, Nz*).
 
 *Important:* Dataset name should be the same as the file name. For example, the dataset inside the file *U.V1r.h5* should be named *U.V1r*.
 
-## Running Instructions
+
+### iii) Running Instructions
 Open the terminal change into "Kolmogorov41-master/in" folder. Open "para.yaml" to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the "in" folder run the command
 
 "mpirun -np [number of MPI processors] src/Kolmogorov41.out"
 
 
-## Output Information
+### iii) Output Information
 
-### i) If *grid_switch* is set to *false*:
+#### a) If *grid_switch* is set to *false*:
 
-#### Velocity structure functions:
+**Velocity structure functions**:
 
 The logitudinal  structure functions of order *q1* to *q2* are stored in the files *SF.h5* and *SF_perp.h5* respectively as two dimensional arrays. Here, the first index is for different *n*, which ranges from 0 to *Nl*, where *Nl* is the number of gridpoints along the diagonal of the domain. The second index is for the order.
 
-#### Scalar structure functions:
+**Scalar structure functions**:
 
 The structure functions of order *q1* to *q2* are stored in the files *SF.h5* as two dimensional array. Here, the first index is for different *n*, which ranges from 0 to *Nl*, where *Nl* is the number of gridpoints along the diagonal of the domain. The second index is for the order.
 
-### ii) If *grid_switch* is set to *true*
+#### b) If *grid_switch* is set to *true*
 
-#### Velocity structure functions:
+**Velocity structure functions**:
 
 The logitudinal and transverse structure functions of order *q* are stored in the files *SF_Grid_pll*+*q*+*.h5* and *SF_Grid_perp*+*q*+*.h5* respectively as two/three dimensional arrays for two/three dimensional input fields. 
 
 Note: If you only want the logitudinal structure function then it will store the data for positive *lz* only as it saves computation time and computer memory
 
-#### Scalar structure functions:
+**Scalar structure functions**:
 
 The structure functions of order *q* are stored in the files *SF_Grid_pll*+*q*+*.h5* as two/three dimensional arrays for two/three dimensional input fields. 
 
