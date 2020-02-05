@@ -147,9 +147,9 @@ The logitudinal  structure functions of order `q1` to `q2` are stored in the fil
 
 **Scalar structure functions**:
 
-The structure functions of order `q1` to `q2` are stored in the files `SF.h5` as two dimensional array. Here, the first index is for different *n*, which ranges from 0 to *Nl*, where *Nl* is the number of gridpoints along the diagonal of the domain. The second index is for the order.
+The structure functions of order `q1` to `q2` are stored in the files `SF.h5` as two dimensional array. Here, the first index is for different *n*, which ranges from 0 to *N<sub>l<\sub>*, where *N<sub>l<\sub>* is the number of gridpoints along the diagonal of the domain. The second index is for the order.
 
-#### b) If *grid_switch* is set to `true`
+#### b) If `grid_switch` is set to `true`
 
 **Velocity structure functions**:
 
@@ -167,5 +167,5 @@ The documentation can be found in `Kolmogorov41-master/doc/html/index.html`
 
 ## License
 
-Kolmogorov41 is released under the terms of BSD New License.
+`Kolmogorov41` is released under the terms of BSD New License.
 
