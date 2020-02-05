@@ -1092,7 +1092,7 @@ void SCALAR_TEST_CASE_3D(){
 	double err=0;
     Array<double,3> test1;
 	int count=0;
-	test1.resize(2*Nx-1,2*Nz-1);
+	test1.resize(2*Nx-1, 2*Ny-1, 2*Nz-1);
 	for (int order=0 ; order<q2-q1; order++){
 		string name=int_to_str(order+q1);
 		read_3D(test1,"out/","SF_Grid_pll"+name);	
