@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['nr',['Nr',['../Kolmogorov41_8cc.html#a7a14aa552991b97c25b8d9ff3c7d66e0',1,'Kolmogorov41.cc']]],
-  ['num',['num',['../Kolmogorov41_8cc.html#a86cf672daa4e0ad11ad10efc894d19c8',1,'Kolmogorov41.cc']]],
-  ['nx',['Nx',['../Kolmogorov41_8cc.html#abfda77b016218238359bcc3e5c1600b0',1,'Kolmogorov41.cc']]],
-  ['ny',['Ny',['../Kolmogorov41_8cc.html#adcc9183c4659dc09e04e5ede1d79215b',1,'Kolmogorov41.cc']]],
-  ['nz',['Nz',['../Kolmogorov41_8cc.html#a7a7576e08f5980d322da5f48c7385edc',1,'Kolmogorov41.cc']]]
+  ['magnitude',['magnitude',['../Kolmogorov41_8cc.html#ad623b53bb9fae62a9a25d08e3ffd9f74',1,'magnitude(TinyVector&lt; double, 3 &gt; A, double &amp;mag):&#160;Kolmogorov41.cc'],['../Kolmogorov41_8cc.html#a58e65d7e297f35291362d88607ad3b40',1,'magnitude(TinyVector&lt; double, 2 &gt; A, double &amp;mag):&#160;Kolmogorov41.cc']]],
+  ['main',['main',['../Kolmogorov41_8cc.html#a0ddf1224851353fc92bfbff6f499fa97',1,'Kolmogorov41.cc']]]
 ];

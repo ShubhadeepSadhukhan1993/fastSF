@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['int_5fto_5fstr',['int_to_str',['../Kolmogorov41_8cc.html#a0ef75a22d560fac1397951e44a99685c',1,'Kolmogorov41.cc']]]
+  ['hybrid_20parallel_20c_2b_2b_20code_3a_20_60kolmogorov41_60',['Hybrid Parallel C++ Code: `Kolmogorov41`',['../md_README.html',1,'']]]
 ];

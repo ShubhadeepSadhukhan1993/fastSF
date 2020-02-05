@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Kolmogorov41: Kolmogorov41</title>
+<title>Kolmogorov41: Hybrid Parallel C++ Code: `Kolmogorov41`</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -81,14 +81,103 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Kolmogorov41 </div>  </div>
+<div class="title">Hybrid Parallel C++ Code: `Kolmogorov41` </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>A hybrid parallel C++ code to compute structure function of different order </p>
+<div class="textblock"><p><code>Kolmogorov41</code> is an open source hybrid parallel C++ code to compute structure functions for a given velocity or scalar field.</p>
+<h2>Getting the Source Code</h2>
+<p><code>Kolmogorov41</code> is hosted on GitHub. You can download the source code from the following link:</p>
+<p><a href="https://github.com/ShubhadeepSadhukhan1993/Kolmogorov41">https://github.com/ShubhadeepSadhukhan1993/Kolmogorov41</a></p>
+<h2>Installing <code>Kolmogorov41</code></h2>
+<h3>Required Libraries</h3>
+<p>The following libraries are required for installing and running Kolmogorov41:</p>
+<ol type="1">
+<li><code>CMake</code></li>
+<li><code>Blitz++</code></li>
+<li><code>YAML-cpp</code></li>
+<li><code>MPICH</code></li>
+<li><code>HDF5</code></li>
+<li><code>H5SI</code></li>
+</ol>
+<p>The instructions to download and install these libraries are provided in the following website:(<a href="http://turbulencehub.org/index.php/codes/tarang/installing-tarang/">http://turbulencehub.org/index.php/codes/tarang/installing-tarang/</a>).</p>
+<h3>Compiling instruction</h3>
+<p>After downloading <code>Kolmogorov41</code>, change into <code>Kolmogorov41-master/src</code> directory and run the command <code>make</code> in the terminal. An executable named <code>Kolmogorov41.out</code> will be created inside the <code>Kolmogorov41-master/src</code> folder.</p>
+<h2>Testing <code>Kolmogorov41</code></h2>
+<p><code>Kolmogorov41</code> offers an automated testing process to validate the code after installation. The relevant test scripts can be found in the <code>tests/</code> folder of the code. To execute the tesing process, change into <code>\Kolmogorov41-master</code> and run the command <code>bash runTest.sh</code>. The code then runs two test cases; these are as follows.</p>
+<ul>
+<li>In one case, the code will generate a 2D velocity field given by <b>u</b> = [<em>x, y, z</em>], and compute the structure functions for the given field. For this case, the longitudinal structure functions should equal <em>l<sup>q</sup></em>.</li>
+<li>In the second case, the code will generate a 2D scalar field given by <em>T = x + y + z</em>, and compute the structure functions for the given field. Fir this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.</li>
+</ul>
+<p>For both the cases, <code>Kolmogorov41</code> will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed.</p>
+<p>Finally, for visualization purpose, the python script <code>test/test.py</code> is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus <em>l</em>, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:</p>
+<ol type="1">
+<li><code>h5py</code></li>
+<li><code>numpy</code></li>
+<li><code>matplotlib</code></li>
+</ol>
+<h2>Running <code>Kolmogorov41</code></h2>
+<p><code>Kolmogorov41-master</code> has a folder named <code>in</code>. This folder contains the input field files in <code>hdf5</code> format, and a parameters file named <code>para.yaml</code>. You need to provide the required input parameters in this file. The details of the entries are as follows:</p>
+<h3>i) <code>para.yaml</code> details</h3>
+<h4><code>program: grid_switch</code></h4>
+<p>You can enter <code>true</code> or <code>false</code></p>
+<p><code>true</code>: Save the structure function output as a function of the difference vector (<b>l</b>) in addition to the magnitude of the difference vector (<em>l</em>).</p>
+<p><code>false</code>: Save structure functions as a function of the magnitude of the difference vector (<em>l</em>) only.</p>
+<h4><code>program: scalar_switch</code></h4>
+<p>You can enter <code>true</code> or <code>false</code></p>
+<p><code>true</code>: Calculate the structure function of a scalar field.</p>
+<p><code>false</code>: Calculate the structure function of a vector field.</p>
+<h4><code>program: 2D_switch</code></h4>
+<p>You can enter <code>true</code> or <code>false</code>.</p>
+<p><code>true</code>: Calculate the structure function for two dimensional field.</p>
+<p><code>false</code>: Calculate the structure function for three dimensional field.</p>
+<h4><code>program: Only_logitudinal</code></h4>
+<p>This entry is for structure function of velocity fields only. You can enter <code>true</code> or <code>false</code>.</p>
+<p><code>true</code>: Compute only the longitudinal structure function.</p>
+<p><code>false</code>: Compute both longitudinal and transverse structure functions.</p>
+<h4><code>program: Number_of_OpenMP_processors</code></h4>
+<p>Enter the number of OpenMP processors.</p>
+<h4><code>grid: Nx, Ny, Nz</code></h4>
+<p>The number of points along <em>x</em>, <em>y</em>, and <em>z</em> direction respectively of the grid. Valid for both the vector and scalar fields. For two dimensional fields you need to provide <code>Nx</code> and <code>Nz</code>.</p>
+<h4><code>domain_dimension: Lx, Ly, Lz</code></h4>
+<p>Length of the cubical box along <em>x</em>, <em>y</em>, and <em>z</em> direction respectively. For two dimensional fields, you need to provide <code>Lx</code> and <code>Lz</code>.</p>
+<h4><code>structure_function: q1, q2</code></h4>
+<p>The lower and the upper limit of the order of the structure functions to be computed.</p>
+<h4><code>test: test_switch</code></h4>
+<p><code>true</code>: For running in test mode. Idealized velocity and scalar fields are generated internally by the code. Computed structure functions are compared with analytical results. The code is PASSED if the percentage difference between the two results is less than <code>1e-10</code>.</p>
+<p><code>false</code>: The "regular" mode, in which the code reads the fields from the hdf5 files in the <code>in</code> folder.</p>
+<h3>ii) Files Required:</h3>
+<p>All the files storing the input fields should be inside the <code>in</code> folder.</p>
+<h4>For two dimensional fields</h4>
+<p>For vector field, two files named as <code>U.V1r.h5</code> and <code>U.V3r.h5</code> are required. Each file has one dataset.</p>
+<p>For scalar field, one file named as <code>T.Fr.h5</code> is required. Each file has one dataset.</p>
+<p>Size of the array stored in these files should be (<code>Nx,Nz</code>).</p>
+<p><em>Important:</em> Dataset name should be the same as the file name. For example, the dataset inside the file <code>U.V1r.h5</code> should be named <code>U.V1r</code>.</p>
+<h4>For three dimensional fields</h4>
+<p>For vector field, three files named as <code>U.V1r.h5</code>, <code>U.V2r.h5</code>, and <code>U.V3r.h5</code> are required. Each file has one dataset.</p>
+<p>For scalar field, one file named as <code>T.Fr.h5</code> is required. Each file has one dataset.</p>
+<p>Size of the array stored in these files should be (<code>Nx, Ny, Nz</code>).</p>
+<p><em>Important:</em> Dataset name should be the same as the file name. For example, the dataset inside the file <code>U.V1r.h5</code> should be named <code>U.V1r</code>.</p>
+<h3>iii) Running Instructions</h3>
+<p>Open the terminal change into <code>Kolmogorov41-master/in</code> folder. Open <code>para.yaml</code> to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the <code>in</code> folder run the command</p>
+<p><code>mpirun -np [number of MPI processors] src/Kolmogorov41.out</code></p>
+<h3>iii) Output Information</h3>
+<h4>a) If <code>grid_switch</code> is set to <code>false</code>:</h4>
+<p><b>Velocity structure functions</b>:</p>
+<p>The logitudinal structure functions of order <code>q1</code> to <code>q2</code> are stored in the files <code>SF.h5</code> and <code>SF_perp.h5</code> respectively as two dimensional arrays. Here, the first index is for different <em>n</em>, which ranges from 0 to <em>Nl</em>, where <em>Nl</em> is the number of gridpoints along the diagonal of the domain. The second index is for the order.</p>
+<p><b>Scalar structure functions</b>:</p>
+<p>The structure functions of order <code>q1</code> to <code>q2</code> are stored in the files <code>SF.h5</code> as two dimensional array. Here, the first index is for different <em>n</em>, which ranges from 0 to <em>Nl</em>, where <em>Nl</em> is the number of gridpoints along the diagonal of the domain. The second index is for the order.</p>
+<h4>b) If <em>grid_switch</em> is set to <code>true</code></h4>
+<p><b>Velocity structure functions</b>:</p>
+<p>The logitudinal and transverse structure functions of order <code>q</code> are stored in the files <code>SF_Grid_pll</code>+<code>q</code>+<code>.h5</code> and <code>SF_Grid_perp</code>+<code>q</code>+<code>.h5</code> respectively as two/three dimensional arrays for two/three dimensional input fields.</p>
+<p>Note: If you only want the logitudinal structure function then it will store the data for positive <code>lz</code> only as it saves computation time and computer memory</p>
+<p><b>Scalar structure functions</b>:</p>
+<p>The structure functions of order <code>q</code> are stored in the files <code>SF_Grid_pll</code>+<code>q</code>+<code>.h5</code> as two/three dimensional arrays for two/three dimensional input fields.</p>
+<h2>License</h2>
+<p>Kolmogorov41 is released under the terms of BSD New License. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 31 2020 20:58:59 for Kolmogorov41 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Feb 5 2020 16:30:14 for Kolmogorov41 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
