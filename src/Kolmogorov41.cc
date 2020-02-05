@@ -418,7 +418,6 @@ int main(int argc, char *argv[]) {
   
   Read_para();
 
-  Nr = (int)ceil(sqrt(pow(Nx-1,2)+pow(Ny-1,2)+pow(Nz-1,2)))+1;
   //Resizing the input fields
   
 
@@ -431,6 +430,7 @@ int main(int argc, char *argv[]) {
           V1_2D.resize(Nx, Nz);
           V3_2D.resize(Nx, Nz);
       }
+      Nr = (int)ceil(sqrt(pow(Nx-1,2)+pow(Nz-1,2)))+1;
   }
   else{
       if (scalar_switch) {
@@ -441,6 +441,7 @@ int main(int argc, char *argv[]) {
           V2.resize(Nx,Ny,Nz);
           V3.resize(Nx,Ny,Nz);
       }
+      Nr = (int)ceil(sqrt(pow(Nx-1,2)+pow(Ny-1,2)+pow(Nz-1,2)))+1;
   }
 
   //Defining the input fields
@@ -1166,7 +1167,7 @@ double powInt(double x, int n) {
  * \brief   Function to convert an integer type value to string.
  *
  * 
- * \param   number is the integer value to be converted.
+ * \param   number is the integer value of to be converted.
  * 
  * \return  The value as a string.
  * 
