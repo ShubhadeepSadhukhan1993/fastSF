@@ -28,13 +28,19 @@ The instructions to download and install these libraries are provided in the fol
 After downloading `Kolmogorov41`, change into `Kolmogorov41-master/src` directory and run the command `make` in the terminal. An executable named `Kolmogorov41.out` will be created inside the `Kolmogorov41-master/src` folder.
 
 ## Testing `Kolmogorov41`
-`Kolmogorov41` offers an automated testing process to validate the code after installation. The relevant test scripts can be found in the `tests/` folder of the code. Executing the Bash shell script `runTest.sh`, will compile `Kolmogorov41`, and run it for two cases. These cases are as follows:
+`Kolmogorov41` offers an automated testing process to validate the code after installation. The relevant test scripts can be found in the `tests/` folder of the code. To execute the tesing process, change into `\Kolmogorov41-master` and run the command `bash runTest.sh`. The code then runs two test cases; these are as follows. 
 
 * In one case, the code will generate a 2D velocity field given by **u** = [*x, y, z*], and compute the structure functions for the given field. For this case, the longitudinal structure functions should equal *l<sup>q</sup>*. 
 
-* In the second case, the code will generate a 2D scalar field given by *T = x + y + z*, and compute the structure functions for the given field. Fir this case, the structure functions should equal *(l<sub>x</sub> + l<sub>y</sub> + l<sub>z</sub>)<sup>q</sup>.
+* In the second case, the code will generate a 2D scalar field given by *T = x + y + z*, and compute the structure functions for the given field. Fir this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.
 
-For both
+For both the cases, `Kolmogorov41` will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10<\sup>, the code is deemed to have passed. 
+
+Finally, for visualization purpose, the python script `test/test.py` is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus *l*, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:
+
+1. `h5py`
+2. `numpy`
+3. `matplotlib`
 
 
 ## Running `Kolmogorov41`
