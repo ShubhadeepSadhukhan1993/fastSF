@@ -161,6 +161,10 @@ Note: If you only want the logitudinal structure function then it will store the
 
 The structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`.h5` as two/three dimensional arrays for two/three dimensional input fields. 
 
+## Documentation
+
+The documentation can be found in `Kolmogorov41-master/doc/html/index.html`
+
 ## License
 
 Kolmogorov41 is released under the terms of BSD New License.
