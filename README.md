@@ -41,44 +41,44 @@ After downloading Kolmogorov41, change into "Kolmogorov41-master/src" directory 
 
 You can enter `true` or `false` 
 
-*true*: Save the structure function output as a function of the difference vector (**l**) in addition to the magnitude of the difference vector (*l*).
+`true`: Save the structure function output as a function of the difference vector (**l**) in addition to the magnitude of the difference vector (*l*).
  
-*false*: Save structure functions as a function of the magnitude of the difference vector (*l*) only.
+`false`: Save structure functions as a function of the magnitude of the difference vector (*l*) only.
 
 #### program: scalar_switch
 
-You can enter *true* or *false*
+You can enter `true` or `false`
 
-*true*: Calculate the structure function of a scalar field. 
+`true`: Calculate the structure function of a scalar field. 
 
-*false*: Calculate the structure function of a vector field. 
+`false`: Calculate the structure function of a vector field. 
 
 #### program: 2D_switch
 
-You can enter *true* or *false*.
+You can enter `true` or `false`.
 
-*true*: Calculate the structure function for two dimensional field. 
+`true`: Calculate the structure function for two dimensional field. 
 
-*false*: Calculate the structure function for three dimensional field.
+`false`: Calculate the structure function for three dimensional field.
 
 #### program: Only_logitudinal
 
-This entry is for structure function of velocity  fields only. You can enter *true* or *false*.
+This entry is for structure function of velocity  fields only. You can enter `true` or `false`.
 
-*true*: Compute only the longitudinal structure function.
+`true`: Compute only the longitudinal structure function.
 
-*false*: Compute both longitudinal and transverse structure functions.
+`false`: Compute both longitudinal and transverse structure functions.
 
-#### program: Number_of_OpenMP_processors
+#### `program: Number_of_OpenMP_processors`
 
 Enter the number of OpenMP processors. 
 
-#### grid: Nx, Ny, Nz
+#### `grid: Nx, Ny, Nz`
 
 The number of points along *x*, *y*, and *z* direction respectively of the  grid. Valid for both the vector and scalar fields. 
 For two dimensional fields you need to provide *Nx* and *Nz*.
 
-#### domain_dimension: Lx, Ly, Lz
+#### `domain_dimension: Lx, Ly, Lz`
 
 Length of the cubical box along *x*, *y*, and *z* direction respectively. 
 For two dimensional fields, you need to provide *Lx* and *Lz*. 
@@ -90,9 +90,9 @@ The lower and the upper limit of the order of the structure functions to be comp
 
 #### test: test_switch
 
-*true*: For running in test mode. Idealized velocity and scalar fields are generated internally by the code. Computed structure functions are compared with analytical results. The code is PASSED if the percentage difference between the two results is less than 1e10.
+`true`: For running in test mode. Idealized velocity and scalar fields are generated internally by the code. Computed structure functions are compared with analytical results. The code is PASSED if the percentage difference between the two results is less than `1e-10`.
 
-*false*: The "regular" mode, in which the code reads the fields from the hdf5 files in the "in" folder.
+`false`: The "regular" mode, in which the code reads the fields from the hdf5 files in the "in" folder.
 
 ### ii) Files Required:
 
@@ -100,34 +100,34 @@ All the files storing the input fields should be inside the "in" folder.
 
 #### For two dimensional fields
 
-For vector field, two files named as *U.V1r.h5* and *U.V3r.h5* are required. Each file has one dataset.
+For vector field, two files named as `U.V1r.h5` and `U.V3r.h5` are required. Each file has one dataset.
 
-For scalar field, one file named as *T.Fr.h5* is required. Each file has one dataset.
+For scalar field, one file named as `T.Fr.h5` is required. Each file has one dataset.
 
 Size of the array stored in these files should be (*Nx,Nz*). 
 
-*Important:* Dataset name should be the same as the file name. For example, the dataset inside the file *U.V1r.h5* should be named *U.V1r*.
+*Important:* Dataset name should be the same as the file name. For example, the dataset inside the file `U.V1r.h5` should be named `U.V1r`.
 
 #### For three dimensional fields
 
-For vector field, three files named as *U.V1r.h5*, *U.V2r.h5", and *U.V3r.h5* are required. Each file has one dataset.
+For vector field, three files named as `U.V1r.h5`, `U.V2r.h5`, and `U.V3r.h5` are required. Each file has one dataset.
 
-For scalar field, one file named as *T.Fr.h5* is required. Each file has one dataset.
+For scalar field, one file named as `T.Fr.h5` is required. Each file has one dataset.
 
-Size of the array stored in these files should be (*Nx, Ny, Nz*). 
+Size of the array stored in these files should be (`Nx, Ny, Nz`). 
 
-*Important:* Dataset name should be the same as the file name. For example, the dataset inside the file *U.V1r.h5* should be named *U.V1r*.
+*Important:* Dataset name should be the same as the file name. For example, the dataset inside the file `U.V1r.h5` should be named `U.V1r`.
 
 
 ### iii) Running Instructions
-Open the terminal change into "Kolmogorov41-master/in" folder. Open "para.yaml" to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the "in" folder run the command
+Open the terminal change into `Kolmogorov41-master/in` folder. Open "para.yaml" to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the `in` folder run the command
 
-"mpirun -np [number of MPI processors] src/Kolmogorov41.out"
+`mpirun -np [number of MPI processors] src/Kolmogorov41.out`
 
 
 ### iii) Output Information
 
-#### a) If *grid_switch* is set to *false*:
+#### a) If *grid_switch* is set to `false`:
 
 **Velocity structure functions**:
 
@@ -137,7 +137,7 @@ The logitudinal  structure functions of order *q1* to *q2* are stored in the fil
 
 The structure functions of order *q1* to *q2* are stored in the files *SF.h5* as two dimensional array. Here, the first index is for different *n*, which ranges from 0 to *Nl*, where *Nl* is the number of gridpoints along the diagonal of the domain. The second index is for the order.
 
-#### b) If *grid_switch* is set to *true*
+#### b) If *grid_switch* is set to `true`
 
 **Velocity structure functions**:
 
