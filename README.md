@@ -143,7 +143,7 @@ Open the terminal change into `Kolmogorov41-master/in` folder. Open `para.yaml` 
 
 **Velocity structure functions**:
 
-The logitudinal  structure functions of order `q1` to `q2` are stored in the files `SF.h5` and `SF_perp.h5` respectively as two dimensional arrays. Here, the first index is for different *n*, which ranges from 0 to *Nl*, where *Nl* is the number of gridpoints along the diagonal of the domain. The second index is for the order.
+The logitudinal  structure functions of order `q1` to `q2` are stored in the files `SF.h5` and `SF_perp.h5` respectively as two dimensional arrays. Here, the first index is for different *n*, which ranges from 0 to *N<sub>l</sub>*, where *N<sub>l,/sub>* is the number of gridpoints along the diagonal of the domain. The second index is for the order.
 
 **Scalar structure functions**:
 
