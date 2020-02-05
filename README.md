@@ -34,7 +34,7 @@ After downloading `Kolmogorov41`, change into `Kolmogorov41-master/src` director
 
 * In the second case, the code will generate a 2D scalar field given by *T = x + y + z*, and compute the structure functions for the given field. Fir this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.
 
-For both the cases, `Kolmogorov41` will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10<\sup>, the code is deemed to have passed. 
+For both the cases, `Kolmogorov41` will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed. 
 
 Finally, for visualization purpose, the python script `test/test.py` is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus *l*, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:
 
