@@ -44,6 +44,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -68,7 +70,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -107,10 +109,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>The code then runs two test cases; these are as follows.</p>
 <ul>
 <li>In one case, the code will generate a 2D velocity field given by <b>u</b> = [<em>x, y, z</em>], and compute the structure functions for the given field. For this case, the longitudinal structure functions should equal <em>l<sup>q</sup></em>.</li>
-<li>In the second case, the code will generate a 2D scalar field given by <em>T = x + y + z</em>, and compute the structure functions for the given field. Fir this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.</li>
+<li>In the second case, the code will generate a 2D scalar field given by <em>T = x + y + z</em>, and compute the structure functions for the given field. For this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.</li>
 </ul>
 <p>For both the cases, <code>Kolmogorov41</code> will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed.</p>
-<p>Finally, for visualization purpose, the python script <code>test/test.py</code> is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus <em>l</em>, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:</p>
+<p>Finally, for visualization purpose, the python script <code><a class="el" href="test_8py.html" title="Kolmogorov41. ">test/test.py</a></code> is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus <em>l</em>, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:</p>
 <ol type="1">
 <li><code>h5py</code></li>
 <li><code>numpy</code></li>
@@ -177,13 +179,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p><b>Scalar structure functions</b>:</p>
 <p>The structure functions of order <code>q</code> are stored in the files <code>SF_Grid_pll</code>+<code>q</code>+<code>.h5</code> as two/three dimensional arrays for two/three dimensional input fields.</p>
 <h2>Documentation</h2>
-<p>The documentation can be found in <code>Kolmogorov41-master/doc/html/index.html</code></p>
+<p>The documentation can be found in <code>Kolmogorov41-master/docs/index.html</code></p>
 <h2>License</h2>
 <p><code>Kolmogorov41</code> is released under the terms of BSD New License. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 6 2020 18:48:47 for Kolmogorov41 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 6 2020 19:23:46 for Kolmogorov41 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

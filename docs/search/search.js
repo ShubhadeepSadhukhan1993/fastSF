@@ -7,10 +7,20 @@
 
 var indexSectionsWithContent =
 {
+  0: "cdgiklmnpqrstvw",
+  1: "kt",
+  2: "cimprsvw",
+  3: "cdglnpqrstv",
+  4: "p"
 };
 
 var indexSectionNames =
 {
+  0: "all",
+  1: "files",
+  2: "functions",
+  3: "variables",
+  4: "pages"
 };
 
 function convertToId(search)
