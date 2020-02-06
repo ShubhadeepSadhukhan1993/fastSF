@@ -27,10 +27,10 @@ The instructions to download and install these libraries are provided in the fol
 
 ###  Compiling instruction
 
-After downloading `Kolmogorov41`, change into `Kolmogorov41-master/src` directory and run the command `make` in the terminal. An executable named `Kolmogorov41.out` will be created inside the `Kolmogorov41-master/src` folder.
+After downloading `Kolmogorov41`, change into `Kolmogorov41/src` directory and run the command `make` in the terminal. An executable named `Kolmogorov41.out` will be created inside the `Kolmogorov41/src` folder.
 
 ## Testing `Kolmogorov41`
-`Kolmogorov41` offers an automated testing process to validate the code. The relevant test scripts can be found in the `tests/` folder of the code. To execute the tesing process, change into `\Kolmogorov41-master` and run the command 
+`Kolmogorov41` offers an automated testing process to validate the code. The relevant test scripts can be found in the `tests/` folder of the code. To execute the tesing process, change into `\Kolmogorov41` and run the command 
 
 `bash runTest.sh`. 
 
@@ -53,7 +53,7 @@ Finally, for visualization purpose, the python script `test/test.py` is invoked.
 
 This section provides a detailed procedure to execute `Kolmogorov41` for a given velocity or scalar field.
 
-`Kolmogorov41-master` has a folder named `in`. This folder contains the input field files in `hdf5` format, and a parameters file named `para.yaml`. You need to provide the required input parameters in this file. The details of the entries are as follows:
+`Kolmogorov41` has a folder named `in`. This folder contains the input field files in `hdf5` format, and a parameters file named `para.yaml`. You need to provide the required input parameters in this file. The details of the entries are as follows:
 
 
 ### i) `para.yaml` details
@@ -145,7 +145,7 @@ Size of the array stored in these files should be (`Nx, Ny, Nz`).
 
 
 ### iii) Running Instructions
-Open the terminal change into `Kolmogorov41-master/in` folder. Open `para.yaml` to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the `in` folder run the command
+Open the terminal change into `Kolmogorov41/in` folder. Open `para.yaml` to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the `in` folder run the command
 
 `mpirun -np [number of MPI processors] src/Kolmogorov41.out`
 
@@ -176,7 +176,7 @@ The structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`
 
 ## Documentation
 
-The documentation can be found in `Kolmogorov41-master/docs/index.html`
+The documentation can be found in `Kolmogorov41/docs/index.html`
 
 ## License
 
