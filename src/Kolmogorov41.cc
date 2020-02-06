@@ -34,8 +34,8 @@
  *
  *  \brief Code to compute structure functions using velocity or scalar field data.
  * 
- *  \author Shubhadeep Sadhukhan, Shashwat Bhattacharya
- *  \date Jan 2020
+ *  \author Shubhadeep Sadhukhan, Shashwat Bhattacharya, Mahendra K. Verma
+ *  \date Feb 2020
  *  \copyright New BSD License
  *
  ********************************************************************************************************************************************
