@@ -21,14 +21,20 @@ The following libraries are required for installing and running Kolmogorov41:
 5. `HDF5`
 6. `H5SI`
 
-The instructions to download and install these libraries are provided in the following website:(http://turbulencehub.org/index.php/codes/tarang/installing-tarang/).
+The instructions to download and install these libraries are provided in the following website:
+
+(http://turbulencehub.org/index.php/codes/tarang/installing-tarang/).
 
 ###  Compiling instruction
 
 After downloading `Kolmogorov41`, change into `Kolmogorov41-master/src` directory and run the command `make` in the terminal. An executable named `Kolmogorov41.out` will be created inside the `Kolmogorov41-master/src` folder.
 
 ## Testing `Kolmogorov41`
-`Kolmogorov41` offers an automated testing process to validate the code after installation. The relevant test scripts can be found in the `tests/` folder of the code. To execute the tesing process, change into `\Kolmogorov41-master` and run the command `bash runTest.sh`. The code then runs two test cases; these are as follows. 
+`Kolmogorov41` offers an automated testing process to validate the code. The relevant test scripts can be found in the `tests/` folder of the code. To execute the tesing process, change into `\Kolmogorov41-master` and run the command 
+
+`bash runTest.sh`. 
+
+The code then runs two test cases; these are as follows. 
 
 * In one case, the code will generate a 2D velocity field given by **u** = [*x, y, z*], and compute the structure functions for the given field. For this case, the longitudinal structure functions should equal *l<sup>q</sup>*. 
 
@@ -43,7 +49,10 @@ Finally, for visualization purpose, the python script `test/test.py` is invoked.
 3. `matplotlib`
 
 
-## Running `Kolmogorov41`
+## Detailed instruction for running `Kolmogorov41`
+
+This section provides a detailed procedure to execute `Kolmogorov41` for a given velocity or scalar field.
+
 `Kolmogorov41-master` has a folder named `in`. This folder contains the input field files in `hdf5` format, and a parameters file named `para.yaml`. You need to provide the required input parameters in this file. The details of the entries are as follows:
 
 
