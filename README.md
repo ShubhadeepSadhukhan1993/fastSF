@@ -38,7 +38,7 @@ The code then runs two test cases; these are as follows.
 
 * In one case, the code will generate a 2D velocity field given by **u** = [*x, y, z*], and compute the structure functions for the given field. For this case, the longitudinal structure functions should equal *l<sup>q</sup>*. 
 
-* In the second case, the code will generate a 2D scalar field given by *T = x + y + z*, and compute the structure functions for the given field. Fir this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.
+* In the second case, the code will generate a 2D scalar field given by *T = x + y + z*, and compute the structure functions for the given field. For this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.
 
 For both the cases, `Kolmogorov41` will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed. 
 
