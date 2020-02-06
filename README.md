@@ -61,21 +61,21 @@ You can enter `true` or `false`
 
 You can enter `true` or `false`
 
-`true`: Calculate the structure function of a scalar field. 
+`true`: Calculate the structure function for a given scalar field. 
 
-`false`: Calculate the structure function of a vector field. 
+`false`: Calculate the structure function for a given velocity field. 
 
 #### `program: 2D_switch`
 
 You can enter `true` or `false`.
 
-`true`: Calculate the structure function for two dimensional field. 
+`true`: Calculate the structure function for two dimensional fields. 
 
-`false`: Calculate the structure function for three dimensional field.
+`false`: Calculate the structure function for three dimensional fields.
 
 #### `program: Only_logitudinal`
 
-This entry is for structure function of velocity  fields only. You can enter `true` or `false`.
+This entry is for structure functions for velocity  fields only. You can enter `true` or `false`.
 
 `true`: Compute only the longitudinal structure function.
 
@@ -83,12 +83,14 @@ This entry is for structure function of velocity  fields only. You can enter `tr
 
 #### `program: Number_of_OpenMP_processors`
 
-Enter the number of OpenMP processors. 
+Enter the number of OpenMP processors. Only integer values will be accepted. 
 
 #### `grid: Nx, Ny, Nz`
 
 The number of points along *x*, *y*, and *z* direction respectively of the  grid. Valid for both the vector and scalar fields. 
 For two dimensional fields you need to provide `Nx` and `Nz`.
+
+Only integer values will be accepted.
 
 #### `domain_dimension: Lx, Ly, Lz`
 
@@ -101,6 +103,8 @@ For two dimensional fields, you need to provide `Lx` and `Lz`.
 The lower and the upper limit of the order of the structure functions to be computed.
 
 #### `test: test_switch`
+
+You can enter `true` or `false`
 
 `true`: For running in test mode. Idealized velocity and scalar fields are generated internally by the code. Computed structure functions are compared with analytical results. The code is PASSED if the percentage difference between the two results is less than `1e-10`.
 
