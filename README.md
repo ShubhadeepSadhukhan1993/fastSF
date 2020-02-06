@@ -176,7 +176,7 @@ The structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`
 
 ## Documentation
 
-The documentation can be found in `Kolmogorov41-master/doc/html/index.html`
+The documentation can be found in `Kolmogorov41-master/docs/index.html`
 
 ## License
 
