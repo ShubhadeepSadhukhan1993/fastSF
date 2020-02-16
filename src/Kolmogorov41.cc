@@ -95,6 +95,7 @@ void SF_scalar_3D(Array<double,3>, Array<double,2>&, Array<double,2>&, Array<dou
 
 void SF_scalar_2D(Array<double,2>, Array<double,2>&);
 void SF_scalar_2D(Array<double,2>, Array<double,2>&, Array<double,2>&, Array<double,3>&);
+void compute_index_list(Array<int, 2>&);
 
 
 /**
@@ -416,7 +417,12 @@ int main(int argc, char *argv[]) {
   double elapsepdt=0.0;
 
   Read_para();
-
+  if (Nx/2%P!=0){
+  	if (rank_mpi==0){
+  		cout<<"proccesor number should be less or equal to Nx/2 and some power of 2\n Exiting the code\n";
+  		exit(1);
+  	}
+  }
   //Resizing the input fields
 
 
@@ -516,9 +522,10 @@ int main(int argc, char *argv[]) {
   counter_Node = 0;
   Array<double, 4> SF_Grid_pll_Node;
   Array<double, 4> SF_Grid_perp_Node;
- 
   Array<double, 3> SF_Grid2D_pll_Node;
   Array<double, 3> SF_Grid2D_perp_Node;
+  
+
 
 
 
@@ -784,6 +791,21 @@ int main(int argc, char *argv[]) {
 
 
   return 0;
+}
+
+/**
+*************
+*\breif make all index list for one proccesor
+*************
+*/
+
+void compute_index_list(Array<int,2>& index_list){
+	int list_size=Nx/P;
+	index_list.resize(list_size,P);
+	for (int i=0; i<list_size; i+=2){
+		index_list(i, rank_mpi)=rank_mpi+i*P;
+		index_list(i+1, rank_mpi)=Nx-1-rank_mpi-i*P;
+	}
 }
 
 
@@ -1654,15 +1676,21 @@ void SFunc3D(
         Array<double,4>& SF_Grid_perp_Node)
 {
 	if (rank_mpi==0) {
-        cout<<"\nHIII Computing longitudinal and transverse S(l) and S(lx, ly, lz) using 3D velocity field data..\n";
+        cout<<"\nComputing longitudinal and transverse S(l) and S(lx, ly, lz) using 3D velocity field data..\n";
     }
-    int starPt = rank_mpi*(Nx/P);
-    int endPt = (rank_mpi+1)*(Nx/P);
+    //int starPt = rank_mpi*(Nx/P);
+    //int endPt = (rank_mpi+1)*(Nx/P);
+    int starPt = 0;
+    int endPt = Nx/P;
 
-  	for (int x=starPt; x<endPt; x++){
-  		
+    Array<int, 2> index_list;
+  	compute_index_list(index_list);
+  	for (int ix=starPt; ix<endPt; ix++){
+  		int x=index_list(ix, rank_mpi);
   		for(int y=0; y<Ny; y++){
   			for(int z=0; z<Nz; z++){
+
+  				
   				Array<double,3> dUx(Nx-x,Ny-y,Nz-z);
   				Array<double,3> dUy(Nx-x,Ny-y,Nz-z);
   				Array<double,3> dUz(Nx-x,Ny-y,Nz-z);
@@ -1741,11 +1769,16 @@ void SFunc_long_3D(
 if (rank_mpi==0) {
         cout<<"\nHIII Computing longitudinal and transverse S(l) and S(lx, ly, lz) using 3D velocity field data..\n";
     }
-    int starPt = rank_mpi*(Nx/P);
-    int endPt = (rank_mpi+1)*(Nx/P);
+    //int starPt = rank_mpi*(Nx/P);
+    //int endPt = (rank_mpi+1)*(Nx/P);
+    int starPt = 0;
+    int endPt = Nx/P;
 
-  	for (int x=starPt; x<endPt; x++){
-  		
+    Array<int, 2> index_list;
+  	compute_index_list(index_list);
+
+  	for (int ix=starPt; ix<endPt; ix++){
+  		int x=index_list(ix, rank_mpi);
   		for(int y=0; y<Ny; y++){
   			for(int z=0; z<Nz; z++){
   				Array<double,3> dUx(Nx-x,Ny-y,Nz-z);
@@ -1820,10 +1853,16 @@ if (rank_mpi==0) {
          cout<<"\nComputing longitudinal and transverse S(l) and S(lx, lz) using 2D velocity field data..\n";
      }
      
-     int starPt = rank_mpi*(Nx/P);
-     int endPt = (rank_mpi+1)*(Nx/P);
+     //int starPt = rank_mpi*(Nx/P);
+     //int endPt = (rank_mpi+1)*(Nx/P);
+    int starPt = 0;
+    int endPt = Nx/P;
 
-   	for (int x=starPt; x<endPt; x++){
+    Array<int, 2> index_list;
+  	compute_index_list(index_list);
+
+   	for (int ix=starPt; ix<endPt; ix++){
+   		int x=index_list(ix,rank_mpi);
        	for(int z=0; z<Nz; z++){
         	Array<double,2> dUx(Nx-x,Nz-z);
         	Array<double,2> dUz(Nx-x,Nz-z);
@@ -1894,10 +1933,17 @@ void SFunc_long_2D(
          cout<<"\nComputing longitudinal and transverse S(l) and S(lx, lz) using 2D velocity field data..\n";
      }
      
-     int starPt = rank_mpi*(Nx/P);
-     int endPt = (rank_mpi+1)*(Nx/P);
+    //int starPt = rank_mpi*(Nx/P);
+    //int endPt = (rank_mpi+1)*(Nx/P);
+    
+    int starPt = 0;
+    int endPt = Nx/P;
 
-   	for (int x=starPt; x<endPt; x++){
+    Array<int, 2> index_list;
+  	compute_index_list(index_list);
+   	
+   	for (int ix=starPt; ix<endPt; ix++){
+   		int x=index_list(ix, rank_mpi);
        	for(int z=0; z<Nz; z++){
         	Array<double,2> dUx(Nx-x,Nz-z);
         	Array<double,2> dUz(Nx-x,Nz-z);
@@ -1959,13 +2005,18 @@ void SF_scalar_3D(
          cout<<"\nComputing S(l) and S(lx, ly, lz) using 3D scalar field data..\n";
      }
      
-     int starPt = rank_mpi*(Nx/P);
-     int endPt = (rank_mpi+1)*(Nx/P);
+    //int starPt = rank_mpi*(Nx/P);
+    //int endPt = (rank_mpi+1)*(Nx/P);
+    int starPt = 0;
+    int endPt = Nx/P;
 
-   	for (int x=starPt; x<endPt; x++){
+    Array<int, 2> index_list;
+  	compute_index_list(index_list);
+
+   	for (int ix=starPt; ix<endPt; ix++){
+   		int x=index_list(ix, rank_mpi);
       	for(int y=0; y<Ny; y++){
        		for(int z=0; z<Nz; z++){
-
         		Array<double,3> dUx(Nx-x,Ny-y,Nz-z);
         		
         		int count=(Nx-x)*(Ny-y)*(Nz-z);
@@ -2024,12 +2075,19 @@ void SF_scalar_2D(
          cout<<"\nComputing S(l) and S(lx, lz) using 2D scalar field data..\n";
      }
      
-     int starPt = rank_mpi*(Nx/P);
-     int endPt = (rank_mpi+1)*(Nx/P);
+    int starPt = 0;
+    int endPt = Nx/P;
 
-   	for (int x=starPt; x<endPt; x++){
+    Array<int, 2> index_list;
+  	compute_index_list(index_list);
+
+
+
+   	for (int ix=starPt; ix<endPt; ix++){
+   		int x=index_list(ix, rank_mpi);
       	
        	for(int z=0; z<Nz; z++){
+       			
         		Array<double,2> dUx(Nx-x,Nz-z);
         		
         		int count=(Nx-x)*(Nz-z);
