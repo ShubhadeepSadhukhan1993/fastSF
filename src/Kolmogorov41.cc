@@ -1597,9 +1597,11 @@ void SFunc3D(
         int x=index_list(ix, 0, rank_mpi);
         int y=index_list(ix, 1, rank_mpi);
   		for(int z=0; z<Nz/2; z++){
+            //cout<<"FLAG 1"<<endl;
   			dUx.resize(Nx-x,Ny-y,Nz-z);
   			dUy.resize(Nx-x,Ny-y,Nz-z);
   			dUz.resize(Nx-x,Ny-y,Nz-z);
+            dUpll.resize(Nx-x,Ny-y,Nz-z);
         		
         	int count=(Nx-x)*(Ny-y)*(Nz-z);
         	double lx=x*dx;
@@ -1611,17 +1613,22 @@ void SFunc3D(
         	dUy(Range::all(),Range::all(),Range::all())=Uy(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uy(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
         	dUz(Range::all(),Range::all(),Range::all())=Uz(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uz(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
         		
-        	dUpll=(lx*dUx+ly*dUy+lz*dUz)/r;
-        		
+        	//cout<<"FLAG 2"<<endl;
+            dUpll=(lx*dUx+ly*dUy+lz*dUz)/r;
+        	//cout<<"FLAG 2.5"<<endl;
         	dUx=dUx-dUpll*lx/r;
         	dUy=dUy-dUpll*ly/r;
         	dUz=dUz-dUpll*lz/r;
 
+            //cout<<"FLAG 3"<<endl;
         	dUx=pow(dUx*dUx+dUy*dUy+dUz*dUz,0.5);
+            //cout<<"FLAG 4"<<endl;
         	for (int p=0; p<=q2-q1; p++){
         		SF_Grid_pll_Node(x,y,z,p)=sum(pow(dUpll(Range::all(),Range::all(),Range::all()),q1+p))/(count);
         		SF_Grid_perp_Node(x,y,z,p)=sum(pow(dUx(Range::all(),Range::all(),Range::all()),q1+p))/(count);
         	}
+
+            //cout<<"FLAG 5"<<endl;
 
         		
 
