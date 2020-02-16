@@ -57,7 +57,7 @@ using namespace std;
 using namespace blitz;
 
 //Function declarations
-void Read_para(); //Input from the user
+void Read_para(); 
 void write_2D(Array<double,2>, string);
 void write_3D(Array<double,3>, string, int);
 void write_4D(Array<double,4>, string, int);
@@ -68,19 +68,19 @@ void VECTOR_TEST_CASE_2D();
 void SCALAR_TEST_CASE_2D();
 void SCALAR_TEST_CASE_3D();
 void compute_time_elapsed(timeval, timeval, double&);
-//double powInt(double, int);
+
 void read_3D(Array<double,3>, string, string);
 
-void SFunc2D(Array<double,2>, Array<double,2>, Array<double,2>&, Array<double,2>&);
+
 void SFunc2D(Array<double,2>, Array<double,2>, Array<double,2>&, Array<double,2>&, Array<double,2>&, Array<double,3>&, Array<double,3>&);
 
-void SFunc_long_2D(Array<double,2>, Array<double,2>, Array<double,2>&);
+
 void SFunc_long_2D(Array<double,2>, Array<double,2>, Array<double,2>&, Array<double,2>&, Array<double,3>&);
 
-void SFunc3D(Array<double,3>, Array<double,3>, Array<double,3>, Array<double,2>&, Array<double,2>&);
+
 void SFunc3D(Array<double,3>, Array<double,3>, Array<double,3>, Array<double,2>&, Array<double,2>&, Array<double,2>&, Array<double,4>&, Array<double,4>&);
 
-void SFunc_long_3D(Array<double,3>, Array<double,3>, Array<double,3>, Array<double,2>&);
+
 void SFunc_long_3D(Array<double,3>, Array<double,3>, Array<double,3>, Array<double,2>&, Array<double,2>&, Array<double,4>&);
 
 void Read_Init(Array<double,2>&, Array<double,2>&);
@@ -90,10 +90,10 @@ void Read_Init(Array<double,3>&);
 
 double powInt(double, int);
 
-void SF_scalar_3D(Array<double,3>, Array<double,2>&);
+
 void SF_scalar_3D(Array<double,3>, Array<double,2>&, Array<double,2>&, Array<double,4>&);
 
-void SF_scalar_2D(Array<double,2>, Array<double,2>&);
+
 void SF_scalar_2D(Array<double,2>, Array<double,2>&, Array<double,2>&, Array<double,3>&);
 void compute_index_list(Array<int, 2>&);
 
@@ -242,17 +242,6 @@ bool two_dimension_switch;
  */
 bool scalar_switch;
 
-/**
- ********************************************************************************************************************************************
- * \brief    This variable decides whether the structure functions as function of \f$ (l_x, l_y, l_z) \f$, or of \f$ (l_x, l_z) \f$ in case of
- *           2D, needs to be calculated in addition to the structure functions as function of \f$ l \f$.
- *
- * If the value is TRUE, then the structure functions as function of \f$ (l_x, l_y, l_z) \f$ or \f$  (l_x, l_z) \f$ will be computed in addtion to the structure
- * functions as function of \f$ l \f$.
- ********************************************************************************************************************************************
- */
-bool grid_switch;
-
 
 /**
  ********************************************************************************************************************************************
@@ -284,12 +273,6 @@ int Ny;
  */
 int Nz;
 
-/**
- ********************************************************************************************************************************************
- * \brief   Number of OpenMP threads.
- ********************************************************************************************************************************************
- */
-int num;
 
 /**
  ********************************************************************************************************************************************
@@ -403,408 +386,295 @@ int P;
  ********************************************************************************************************************************************
  */
 int main(int argc, char *argv[]) {
-  //num=omp_get_max_threads();//strtol(argv[1],NULL,10);  //omp_get_max_threads();//(shaheen)
-  char hostname[HOST_NAME_MAX];
-  gethostname(hostname, HOST_NAME_MAX);
-  MPI_Init(NULL, NULL);
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank_mpi);
-  MPI_Comm_size(MPI_COMM_WORLD, &P);
-  //Initiallizing h5si
-  h5::init();
-  timeval start_pt, end_pt, start_t, end_t;
-  gettimeofday(&start_t,NULL);
-  double elapsedt=0.0;
-  double elapsepdt=0.0;
+    char hostname[HOST_NAME_MAX];
+    gethostname(hostname, HOST_NAME_MAX);
+    MPI_Init(NULL, NULL);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank_mpi);
+    MPI_Comm_size(MPI_COMM_WORLD, &P);
+    //Initiallizing h5si
+    h5::init();
+    timeval start_pt, end_pt, start_t, end_t;
+    gettimeofday(&start_t,NULL);
+    double elapsedt=0.0;
+    double elapsepdt=0.0;
+    Read_para();
+    if (Nx/2%P!=0){
+        if (rank_mpi==0){
+            cout<<"proccesor number should be less or equal to Nx/4 and some power of 2\n Exiting the code\n";
+            exit(1);
+        }
+    }
+    //Resizing the input fields
 
-  Read_para();
-  if (Nx/2%P!=0){
-  	if (rank_mpi==0){
-  		cout<<"proccesor number should be less or equal to Nx/2 and some power of 2\n Exiting the code\n";
-  		exit(1);
-  	}
-  }
-  //Resizing the input fields
-
-
-
-  if(two_dimension_switch){
-      if (scalar_switch) {
-          T_2D.resize(Nx, Nz);
-      }
-      else {
-          V1_2D.resize(Nx, Nz);
-          V3_2D.resize(Nx, Nz);
-      }
-      Nr = (int)ceil(sqrt(pow(Nx-1,2)+pow(Nz-1,2)))+1;
-  }
-  else{
-      if (scalar_switch) {
-          T.resize(Nx, Ny, Nz);
-      }
-      else {
-          V1.resize(Nx,Ny,Nz);
-          V2.resize(Nx,Ny,Nz);
-          V3.resize(Nx,Ny,Nz);
-      }
-      Nr = (int)ceil(sqrt(pow(Nx-1,2)+pow(Ny-1,2)+pow(Nz-1,2)))+1;
-  }
-
-  //Defining the input fields
-  if (test_switch){
-      if (rank_mpi==0){
-          cout<<"\nWARNING: The code is running in TEST mode. It will generate velocity / scalar fields and will take them as inputs. **grid_switch** has been turned ON. \n";
-      }
-      if (two_dimension_switch) {
-          if (scalar_switch) {
-              Read_Init(T_2D);
-          }
-          else {
-              Read_Init(V1_2D, V3_2D);
-          }
-      }
-      else {
-          if (scalar_switch) {
-              Read_Init(T);
-          }
-          else {
-              Read_Init(V1, V2, V3);
-          }
-      }
-
-  }
-
-  else {
-      if (rank_mpi==0){
-          cout<<"Reading from the hdf5 files\n";
-      }
-      if (two_dimension_switch){
-          if (scalar_switch) {
-              read_2D(T_2D,"in/", "T.Fr");
-          }
-          else {
-              read_2D(V1_2D,"in/","U.V1r");
-              read_2D(V3_2D,"in/","U.V3r");
-          }
-      }
-      else{
-          if (scalar_switch) {
-              read_3D(T, "in/","T.Fr");
-          }
-          else {
-              read_3D(V1, "in/", "U.V1r");
-              read_3D(V2, "in/", "U.V2r");
-              read_3D(V3, "in/", "U.V3r");
-          }
-      }
-  }
-
-
-
-  SF.resize(Nr,q2-q1+1);
-  Array<double, 2> SF_Node(Nr,q2-q1+1);
-
-
-  Array<double, 2> SF_Node_perp;
-  if (not scalar_switch){
-      if (not longitudinal) {
-          SF_perp.resize(Nr,q2-q1+1);
-          SF_Node_perp.resize(Nr,q2-q1+1);
-          SF_perp=0;
-          SF_Node_perp=0;
-      }
-  }
-
- 
-  counter.resize(Nr,q2-q1+1);
-  Array<double, 2> counter_Node(Nr,q2-q1+1);
-  SF = 0;
-  SF_Node = 0;
-  counter_Node = 0;
-  Array<double, 4> SF_Grid_pll_Node;
-  Array<double, 4> SF_Grid_perp_Node;
-  Array<double, 3> SF_Grid2D_pll_Node;
-  Array<double, 3> SF_Grid2D_perp_Node;
-  
-
-
-
-
-
-
-  if (not grid_switch) {
-
-
-      gettimeofday(&start_pt,NULL);
-
-      //Calculating the structure functions
-      if (two_dimension_switch){
-
-          if (scalar_switch) {
-              SF_scalar_2D(T_2D, SF_Node);
-          }
-
-          else {
-
-              if (longitudinal) {
-                  SFunc_long_2D(V1_2D, V3_2D, SF_Node);
-              }
-              else {
-                  SFunc2D(V1_2D, V3_2D, SF_Node, SF_Node_perp);
-              }
-          }
-
-      }
-      else{
-
-          if (scalar_switch) {
-              SF_scalar_3D(T, SF_Node);
-          }
-
-          else {
-              if (longitudinal) {
-        	      SFunc_long_3D(V1, V2, V3, SF_Node);
-              }
-              else {
-        	      SFunc3D(V1, V2, V3, SF_Node, SF_Node_perp);
-              }
-          }
-      }
-      gettimeofday(&end_pt,NULL);
-  }
-  else {
-
-      //Declaring the nodal variables
-
-
-      if (not two_dimension_switch) {
-          if (scalar_switch) {
-              SF_Grid_pll_Node.resize(Nx,Ny,Nz, q2-q1+1);
-              SF_Grid_pll.resize(Nx,Ny,Nz, q2-q1+1);
-             
-          }
-          else {
-              if (longitudinal) {
-                  SF_Grid_pll_Node.resize(Nx,Ny,Nz, q2-q1+1);
-                  SF_Grid_pll.resize(Nx,Ny,Nz, q2-q1+1);
-                  
-              }
-              else {
-                  SF_Grid_pll_Node.resize(Nx,Ny,Nz, q2-q1+1);
-                  SF_Grid_pll.resize(Nx,Ny,Nz, q2-q1+1);
-                  SF_Grid_perp_Node.resize(Nx,Ny,Nz, q2-q1+1);
-                  SF_Grid_perp.resize(Nx,Ny,Nz, q2-q1+1);
-             
-                  SF_Grid_perp = 0;
-                  SF_Grid_perp_Node = 0;
-              }
-          }
-
-          SF_Grid_pll = 0;
-          SF_Grid_pll_Node = 0;
-      }
-      else {
-          if (scalar_switch) {
-              SF_Grid2D_pll_Node.resize(Nx, Nz, q2-q1+1);
-              SF_Grid2D_pll.resize(Nx, Nz, q2-q1+1);
-          }
-          else {
-              if (longitudinal) {
-                  SF_Grid2D_pll_Node.resize(Nx, Nz, q2-q1+1);
-                  SF_Grid2D_pll.resize(Nx, Nz, q2-q1+1);
-               
-              }
-              else {
-                  SF_Grid2D_pll_Node.resize(Nx, Nz, q2-q1+1);
-                  SF_Grid2D_pll.resize(Nx, Nz, q2-q1+1);
-                  SF_Grid2D_perp_Node.resize(Nx, Nz, q2-q1+1);
-                  SF_Grid2D_perp.resize(Nx, Nz, q2-q1+1);
-              
-                  SF_Grid2D_perp = 0;
-                  SF_Grid2D_perp_Node = 0;
-              }
-          }
-
-          SF_Grid2D_pll = 0;
-          
-          SF_Grid2D_pll_Node = 0;
-          
-      }
-
-
-      gettimeofday(&start_pt,NULL);
-
-      //Calculating the structure functions
-      if (two_dimension_switch){
-
-          if (scalar_switch) {
-              SF_scalar_2D(T_2D, SF_Node, counter_Node, SF_Grid2D_pll_Node);
-          }
-
-          else {
-              if (longitudinal) {
-                  SFunc_long_2D(V1_2D, V3_2D, SF_Node, counter_Node, SF_Grid2D_pll_Node);
-              }
-              else {
-                  SFunc2D(V1_2D, V3_2D, SF_Node, SF_Node_perp, counter_Node, SF_Grid2D_pll_Node, SF_Grid2D_perp_Node);
-              }
-          }
-
-      }
-      else{
-
-          if (scalar_switch) {
-              SF_scalar_3D(T, SF_Node, counter_Node, SF_Grid_pll_Node);
-          }
-
-          else {
-              if (longitudinal) {
-        	      SFunc_long_3D(V1, V2, V3, SF_Node, counter_Node, SF_Grid_pll_Node);
-              }
-              else {
-        	      SFunc3D(V1, V2, V3, SF_Node, SF_Node_perp, counter_Node, SF_Grid_pll_Node, SF_Grid_perp_Node);
-              }
-          }
-
-      }
-
-      gettimeofday(&end_pt,NULL);
-  }
-
-  MPI_Reduce(SF_Node.data(), SF.data(), Nr*(q2-q1+1), MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
-  MPI_Reduce(counter_Node.data(), counter.data(), Nr*(q2-q1+1), MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
-  if (not scalar_switch) {
-      if (not longitudinal) {
-          MPI_Reduce(SF_Node_perp.data(), SF_perp.data(), Nr*(q2-q1+1), MPI_DOUBLE_PRECISION,MPI_SUM, 0, MPI_COMM_WORLD);
-      }
-  }
-  
-
-  //Reducing SF Grid
-  if (grid_switch) {
-      int totPoints;
-      if (two_dimension_switch) {
-          totPoints = SF_Grid2D_pll_Node.extent(0)*SF_Grid2D_pll_Node.extent(1)*SF_Grid2D_pll_Node.extent(2);
-          MPI_Reduce(SF_Grid2D_pll_Node.data(), SF_Grid2D_pll.data(), totPoints, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
-          if (not scalar_switch) {
-              if (not longitudinal) {
-                  MPI_Reduce(SF_Grid2D_perp_Node.data(), SF_Grid2D_perp.data(), totPoints, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
-              }
-          }
-      }
-
-      else {
-          totPoints = SF_Grid_pll_Node.extent(0)*SF_Grid_pll_Node.extent(1)*SF_Grid_pll_Node.extent(2)*SF_Grid_pll_Node.extent(3);
-          MPI_Reduce(SF_Grid_pll_Node.data(), SF_Grid_pll.data(), totPoints, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
-          if (not scalar_switch) {
-              if (not longitudinal) {
-                  MPI_Reduce(SF_Grid_perp_Node.data(), SF_Grid_perp.data(), totPoints, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
-              }
-          }
-      }
-
-  }
-
-  gettimeofday(&end_t,NULL);
-  compute_time_elapsed(start_t, end_t, elapsedt);
-  compute_time_elapsed(start_pt, end_pt, elapsepdt);
-
-  if (rank_mpi==0){
-      cout<<"\nTime elapsed for parallel part : "<<elapsepdt<<" sec\n";
-
+    if(two_dimension_switch){
+        if (scalar_switch) {
+            T_2D.resize(Nx, Nz);
+        }
+        else {
+            V1_2D.resize(Nx, Nz);
+            V3_2D.resize(Nx, Nz);
+        }
+        Nr = (int)ceil(sqrt(pow(Nx/2-1,2)+pow(Nz/2-1,2)))+1;
+    }
+    else{
+        if (scalar_switch) {
+            T.resize(Nx, Ny, Nz);
+        }
+        else {
+            V1.resize(Nx,Ny,Nz);
+            V2.resize(Nx,Ny,Nz);
+            V3.resize(Nx,Ny,Nz);
+        }
+        Nr = (int)ceil(sqrt(pow(Nx/2-1,2)+pow(Ny/2-1,2)+pow(Nz/2-1,2)))+1;
+    }
+    //Defining the input fields
+    if (test_switch){
+        if (rank_mpi==0){
+            cout<<"\nWARNING: The code is running in TEST mode. It will generate velocity / scalar fields and will take them as inputs.\n";
+        }
+        if (two_dimension_switch) {
+            if (scalar_switch) {
+                Read_Init(T_2D);
+            }
+            else {
+                Read_Init(V1_2D, V3_2D);
+            }
+        }
+        else {
+            if (scalar_switch) {
+                Read_Init(T);
+            }
+            else {
+                Read_Init(V1, V2, V3);
+            }
+        }
+    } 
+    else {
+        if (rank_mpi==0){
+            cout<<"Reading from the hdf5 files\n";
+        }
+        if (two_dimension_switch){
+            if (scalar_switch) {
+                read_2D(T_2D,"in/", "T.Fr");
+            }
+            else {
+                read_2D(V1_2D,"in/","U.V1r");
+                read_2D(V3_2D,"in/","U.V3r");
+            }
+        }
+        else{
+            if (scalar_switch) {
+                read_3D(T, "in/","T.Fr");
+            }
+            else {
+                read_3D(V1, "in/", "U.V1r");
+                read_3D(V2, "in/", "U.V2r");
+                read_3D(V3, "in/", "U.V3r");
+            }
+        }
+    }
+    SF.resize(Nr,q2-q1+1);
+    Array<double, 2> SF_Node(Nr,q2-q1+1);
+    Array<double, 2> SF_Node_perp;
+    if (not scalar_switch){
+        if (not longitudinal) {
+            SF_perp.resize(Nr,q2-q1+1);
+            SF_Node_perp.resize(Nr,q2-q1+1);
+            SF_perp=0;
+            SF_Node_perp=0;
+        }
+    }
+    counter.resize(Nr,q2-q1+1);
+    Array<double, 2> counter_Node(Nr,q2-q1+1);
+    SF = 0;
+    SF_Node = 0;
+    counter_Node = 0;
+    Array<double, 4> SF_Grid_pll_Node;
+    Array<double, 4> SF_Grid_perp_Node;
+    Array<double, 3> SF_Grid2D_pll_Node;
+    Array<double, 3> SF_Grid2D_perp_Node;
     
-      mkdir("out",0777);
-   
-      SF/=counter;
-      cout<<"\nWriting SF as function of l\n";
-      write_2D(SF,"SF");
-      if (not scalar_switch) {
-          if (not longitudinal) {
-          	  SF_perp/=counter;
-              write_2D(SF_perp,"SF_perp");
-          }
-      }
-      cout<<"\nWriting completed\n";
+    //Declaring the nodal variables
+    if (not two_dimension_switch) {
+        if (scalar_switch) {
+            SF_Grid_pll_Node.resize(Nx/2, Ny/2, Nz/2, q2-q1+1);
+            SF_Grid_pll.resize(Nx/2, Ny/2, Nz/2, q2-q1+1);
+        }
+        else {
+            SF_Grid_pll_Node.resize(Nx/2, Ny/2, Nz/2, q2-q1+1);
+            SF_Grid_pll.resize(Nx/2, Ny/2, Nz/2, q2-q1+1);
+            if (not longitudinal) {
+                SF_Grid_perp_Node.resize(Nx/2, Ny/2, Nz/2, q2-q1+1);
+                SF_Grid_perp.resize(Nx/2, Ny/2, Nz/2, q2-q1+1);
+                SF_Grid_perp = 0;
+                SF_Grid_perp_Node = 0;
+            }
+        }
+        SF_Grid_pll = 0;
+        SF_Grid_pll_Node = 0;
+    }
+    else {
+        if (scalar_switch) {
+            SF_Grid2D_pll_Node.resize(Nx/2, Nz/2, q2-q1+1);
+            SF_Grid2D_pll.resize(Nx/2, Nz/2, q2-q1+1);
+        }
+        else {
+            SF_Grid2D_pll_Node.resize(Nx/2, Nz/2, q2-q1+1);
+            SF_Grid2D_pll.resize(Nx/2, Nz/2, q2-q1+1);
+            if (not longitudinal) {
+                SF_Grid2D_perp_Node.resize(Nx/2, Nz/2, q2-q1+1);
+                SF_Grid2D_perp.resize(Nx/2, Nz/2, q2-q1+1);
+                SF_Grid2D_perp = 0;
+                SF_Grid2D_perp_Node = 0;
+            }
+        }
+        SF_Grid2D_pll = 0;
+        SF_Grid2D_pll_Node = 0;
+    }   
+    gettimeofday(&start_pt,NULL);
 
-      if (grid_switch) {
-          int p1 = q1;
-          while (p1 <= q2) {
-              string name = int_to_str(p1);
-              if (two_dimension_switch) {
-                  cout<<"\nWriting "<<p1<<" order SF has function of lx and lz\n";
-                  write_3D(SF_Grid2D_pll,"SF_Grid_pll"+name, p1);
-                  if (not scalar_switch) {
-                      if (not longitudinal) {
-                          write_3D(SF_Grid2D_perp, "SF_Grid_perp"+name, p1);
-                      }
-                  }
-                  cout<<"\nWriting completed\n";
-              }
-              else {
-                  cout<<"\nWriting "<<p1<<" order SF has function of lx, ly, and ly\n";
-                  write_4D(SF_Grid_pll,"SF_Grid_pll"+name, p1);
-                  if (not scalar_switch) {
-                      if (not longitudinal) {
-                          write_4D(SF_Grid_perp, "SF_Grid_perp"+name, p1);
-                      }
-                  }
-                  cout<<"\nWriting completed\n";
-              }
-              p1++;
-          }
-      }
-
-
-
-
-
-      cout<<"Total time elapsed : "<<elapsedt<<" sec\n";
-
-      cout<<"\nProgram ends\n";
-  }
-
-
-  if(test_switch && rank_mpi==0){
-  	if (scalar_switch){
-  		if (two_dimension_switch){
-  			SCALAR_TEST_CASE_2D();
-
-  		}
-  		else{
-  			SCALAR_TEST_CASE_3D();
-  		}
-
-  	}
-  	else{
-  		if (two_dimension_switch){
-  			VECTOR_TEST_CASE_2D();
-
-  		}
-  		else{
-  			VECTOR_TEST_CASE_3D();
-  		}
-  	}
-
-  }
-
-  h5::finalize();
-  MPI_Finalize();
-
-
-  return 0;
+    //Calculating the structure functions
+    if (two_dimension_switch){
+        if (scalar_switch) {
+            SF_scalar_2D(T_2D, SF_Node, counter_Node, SF_Grid2D_pll_Node);
+        }
+        else {
+            if (longitudinal) {
+                SFunc_long_2D(V1_2D, V3_2D, SF_Node, counter_Node, SF_Grid2D_pll_Node);
+            } 
+            else {
+                SFunc2D(V1_2D, V3_2D, SF_Node, SF_Node_perp, counter_Node, SF_Grid2D_pll_Node, SF_Grid2D_perp_Node);
+            }
+        }
+    }
+    
+    else {
+        if (scalar_switch) {
+            SF_scalar_3D(T, SF_Node, counter_Node, SF_Grid_pll_Node); 
+        }
+        else {
+            if (longitudinal) {
+                SFunc_long_3D(V1, V2, V3, SF_Node, counter_Node, SF_Grid_pll_Node);
+            }
+            else {
+                SFunc3D(V1, V2, V3, SF_Node, SF_Node_perp, counter_Node, SF_Grid_pll_Node, SF_Grid_perp_Node);
+            }
+        }
+    }
+    gettimeofday(&end_pt,NULL);
+    MPI_Reduce(SF_Node.data(), SF.data(), Nr*(q2-q1+1), MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(counter_Node.data(), counter.data(), Nr*(q2-q1+1), MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
+    if (not scalar_switch) {
+        if (not longitudinal) {
+            MPI_Reduce(SF_Node_perp.data(), SF_perp.data(), Nr*(q2-q1+1), MPI_DOUBLE_PRECISION,MPI_SUM, 0, MPI_COMM_WORLD);
+        }
+    }
+    //Reducing SF Grid
+    int totPoints;
+    if (two_dimension_switch) {
+        totPoints = SF_Grid2D_pll_Node.extent(0)*SF_Grid2D_pll_Node.extent(1)*SF_Grid2D_pll_Node.extent(2);
+        MPI_Reduce(SF_Grid2D_pll_Node.data(), SF_Grid2D_pll.data(), totPoints, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
+        if (not scalar_switch) {
+            if (not longitudinal) {
+                MPI_Reduce(SF_Grid2D_perp_Node.data(), SF_Grid2D_perp.data(), totPoints, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
+            }
+        }
+    }
+    else {
+        totPoints = SF_Grid_pll_Node.extent(0)*SF_Grid_pll_Node.extent(1)*SF_Grid_pll_Node.extent(2)*SF_Grid_pll_Node.extent(3);
+        MPI_Reduce(SF_Grid_pll_Node.data(), SF_Grid_pll.data(), totPoints, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
+        if (not scalar_switch) {
+            if (not longitudinal) {
+                MPI_Reduce(SF_Grid_perp_Node.data(), SF_Grid_perp.data(), totPoints, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
+            }
+        }
+    }
+    gettimeofday(&end_t,NULL);
+    compute_time_elapsed(start_t, end_t, elapsedt);
+    compute_time_elapsed(start_pt, end_pt, elapsepdt);
+    if (rank_mpi==0){
+        cout<<"\nTime elapsed for parallel part : "<<elapsepdt<<" sec\n";
+        mkdir("out",0777);
+        SF/=counter;
+        cout<<"\nWriting SF as function of l\n";
+        write_2D(SF,"SF");
+        if (not scalar_switch) {
+            if (not longitudinal) {
+                SF_perp/=counter;
+                write_2D(SF_perp,"SF_perp");
+            }
+        }
+        cout<<"\nWriting completed\n";
+        int p1 = q1;
+        while (p1 <= q2) {
+            string name = int_to_str(p1);
+            if (two_dimension_switch) {
+                cout<<"\nWriting "<<p1<<" order SF has function of lx and lz\n";
+                write_3D(SF_Grid2D_pll,"SF_Grid_pll"+name, p1);
+                if (not scalar_switch) {
+                    if (not longitudinal) {
+                        write_3D(SF_Grid2D_perp, "SF_Grid_perp"+name, p1);
+                    }
+                }
+                cout<<"\nWriting completed\n";
+            }
+            else {
+                cout<<"\nWriting "<<p1<<" order SF has function of lx, ly, and ly\n";
+                write_4D(SF_Grid_pll,"SF_Grid_pll"+name, p1);
+                if (not scalar_switch) {
+                    if (not longitudinal) {
+                        write_4D(SF_Grid_perp, "SF_Grid_perp"+name, p1);
+                    }
+                }
+                cout<<"\nWriting completed\n";
+            }
+            p1++;
+        }
+        cout<<"Total time elapsed : "<<elapsedt<<" sec\n";
+        cout<<"\nProgram ends\n";
+    }
+    if(test_switch && rank_mpi==0){
+        if (scalar_switch){
+            if (two_dimension_switch){
+                SCALAR_TEST_CASE_2D();
+            }
+            else{
+                SCALAR_TEST_CASE_3D();
+            }
+        }
+        else{
+            if (two_dimension_switch){
+                VECTOR_TEST_CASE_2D();
+            }
+            else{
+                VECTOR_TEST_CASE_3D();
+            }
+        }
+    }
+    h5::finalize();
+    MPI_Finalize();
+    return 0;
 }
 
-/**
-*************
-*\breif make all index list for one proccesor
-*************
-*/
 
+/**
+*************************************************************************************************************************************
+*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
+*           
+*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
+*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
+*
+* \param    index_list stores the aforementioned matrix
+*************************************************************************************************************************************
+*/
 void compute_index_list(Array<int,2>& index_list){
-	int list_size=Nx/P;
+	int list_size=Nx/(2*P);
 	index_list.resize(list_size,P);
 	for (int i=0; i<list_size; i+=2){
 		index_list(i, rank_mpi)=rank_mpi+i*P;
-		index_list(i+1, rank_mpi)=Nx-1-rank_mpi-i*P;
+        if (P!=Nx/2) {
+		  index_list(i+1, rank_mpi)=(Nx/2)-1-rank_mpi-i*P;
+        }
 	}
 }
 
@@ -822,13 +692,15 @@ void compute_index_list(Array<int,2>& index_list){
  ********************************************************************************************************************************************
  */
 void VECTOR_TEST_CASE_3D()
-{	double epsilon=1e-10;
+{	
+    cout<<"TESTING CASE (Velocity 3D)"<<endl;
+    double epsilon=1e-10;
     double err1 = 0, err2 = 0;
     double max = 0;
 	Array<double,3> test1,test2;
 
 	if (longitudinal==true){
-		test1.resize(Nx,Ny,Nz);
+		test1.resize(Nx/2,Ny/2,Nz/2);
 
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
@@ -850,6 +722,7 @@ void VECTOR_TEST_CASE_3D()
                             max = err1;
                         }
 
+
 					}
 				}
 			}
@@ -857,9 +730,10 @@ void VECTOR_TEST_CASE_3D()
 
 	}
 	else{
-		test1.resize(Nx,Ny,Nz);
-		test2.resize(Nx,Ny,Nz);
-		for (int order=0 ; order<q2-q1; order++){
+        cout<<"\nTESTING BOTH TRANSVERSE AND LONGITUDINAL\n";
+		test1.resize(Nx/2,Ny/2,Nz/2);
+		test2.resize(Nx/2,Ny/2,Nz/2);
+		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
 
 			read_3D(test1,"out/","SF_Grid_pll"+name);
@@ -881,12 +755,13 @@ void VECTOR_TEST_CASE_3D()
                         err2 = abs(test2(i,j,k));
                         if (err1 > max) {
                             max = err1;
+                            
                         }
 
                         if (err2 > max) {
                             max = err2;
+                    
                         }
-
 
 					}
 				}
@@ -929,7 +804,7 @@ void VECTOR_TEST_CASE_2D()
 	int count=0;
 
 	if (longitudinal==true){
-		test1.resize(Nx,Nz);
+		test1.resize(Nx/2,Nz/2);
 
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
@@ -955,9 +830,9 @@ void VECTOR_TEST_CASE_2D()
 
 	}
 	else{
-		test1.resize(Nx,Nz);
-		test2.resize(Nx,Nz);
-		for (int order=0 ; order<q2-q1; order++){
+		test1.resize(Nx/2,Nz/2);
+		test2.resize(Nx/2,Nz/2);
+		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
 
 			read_2D(test1,"out/","SF_Grid_pll"+name);
@@ -1021,7 +896,7 @@ void SCALAR_TEST_CASE_2D()
 	double err=0;
 	Array<double,2> test1;
 	int count=0;
-	test1.resize(Nx,Nz);
+	test1.resize(Nx/2,Nz/2);
 	for (int order=0 ; order<=q2-q1; order++){
 		string name=int_to_str(order+q1);
 
@@ -1046,8 +921,10 @@ void SCALAR_TEST_CASE_2D()
                 if (err>max) {
                     max = err;
                 }
+                
 
 			}
+            
 		}
 	}
 	if (max > epsilon){
@@ -1079,7 +956,7 @@ void SCALAR_TEST_CASE_3D(){
 	double err=0;
     Array<double,3> test1;
 	int count=0;
-	test1.resize(Nx,Ny,Nz);
+	test1.resize(Nx/2,Ny/2,Nz/2);
 	for (int order=0 ; order<=q2-q1; order++){
 		string name=int_to_str(order+q1);
 		read_3D(test1,"out/","SF_Grid_pll"+name);
@@ -1117,37 +994,7 @@ void SCALAR_TEST_CASE_3D(){
 
 }
 
-/**
- ********************************************************************************************************************************************
- * \brief   Function which conducts exponentiation with an integer as an exponent.
- *
- *          This function calculates \f$ x^n \f$, where \f$ n \f$ is an integer. This function is faster than the standard pow(x,n) function
- *          for \f$ n>2 \f$. Note that this function cannot accept a non-integer exponent.
- *
- * \param   x is the base of double-precision floating point datatype.
- * \param   n is the exponent of integer datatype
- *
- * \return  The value as a string.
- *
- ********************************************************************************************************************************************
- */
-double powInt(double x, int n) {
-	double p = 1;
-	if (n>0) {
-		for (int i=1;i<=n;i++) {
-			p = p*x;
-		}
-	}
-	else if (n<0) {
-		for (int i=-1;i>=n;i--) {
-			p = p/x;
-		}
-	}
-	else {
-		p = 1;
-	}
-	return p;
-}
+
 
 /**
  ********************************************************************************************************************************************
@@ -1304,62 +1151,55 @@ void read_3D(Array<double,3> A, string fold, string file) {
  ********************************************************************************************************************************************
  */
 void Read_para() {
-  YAML::Node para;
-  ifstream para_yaml,input_field;
-  string para_path="in/para.yaml";
-  para_yaml.open(para_path.c_str());
-
-  if (para_yaml.is_open())
-  {
-    try
+    YAML::Node para;
+    ifstream para_yaml,input_field;
+    string para_path="in/para.yaml";
+    para_yaml.open(para_path.c_str());
+  
+    if (para_yaml.is_open())
     {
-      YAML::Parser parser(para_yaml);
-      parser.GetNextDocument(para);
+      try
+      {
+        YAML::Parser parser(para_yaml);
+        parser.GetNextDocument(para);
+      }
+      catch(YAML::ParserException& e)
+      {
+        cerr << "Global::Parse: Error reading parameter file: \n" << e.what() << endl;
+      }
+  
     }
-    catch(YAML::ParserException& e)
+    else
     {
-      cerr << "Global::Parse: Error reading parameter file: \n" << e.what() << endl;
+      cerr << "Global::Parse: Unable to open '" + para_path + "'." << endl;
+      exit(1);
     }
-
-  }
-  else
-  {
-    cerr << "Global::Parse: Unable to open '" + para_path + "'." << endl;
-    exit(1);
-  }
-  para["program"]["scalar_switch"]>>scalar_switch;
-  para["program"]["Only_longitudinal"]>>longitudinal;
-  para["program"]["grid_switch"]>>grid_switch;
-  para["program"]["2D_switch"]>>two_dimension_switch;
-  para["program"]["Number_of_OpenMP_processors"]>>num;
-  para["grid"]["Nx"]>>Nx;
-  para["grid"]["Ny"]>>Ny;
-  para["grid"]["Nz"]>>Nz;
-  para["domain_dimension"]["Lx"]>>Lx;
-  para["domain_dimension"]["Ly"]>>Ly;
-  para["domain_dimension"]["Lz"]>>Lz;
-
-  para["structure_function"]["q1"]>>q1;
-  para["structure_function"]["q2"]>>q2;
-
-
-  para["test"]["test_switch"]>>test_switch;
-
-  if (Nx==1){dx=0;}
-  else{
-    dx=Lx/double(Nx-1);}
-  if (Ny==1){dy=0;}
-  else{
-    dy=Ly/double(Ny-1);}
-  if (Nz==1){dz=0;}
-  else{
-    dz=Lz/double(Nz-1);}
-
-
-   if (test_switch){
-    grid_switch = true;
-   }
-
+    para["program"]["scalar_switch"]>>scalar_switch;
+    para["program"]["Only_longitudinal"]>>longitudinal;
+    para["program"]["2D_switch"]>>two_dimension_switch;
+    para["grid"]["Nx"]>>Nx;
+    para["grid"]["Ny"]>>Ny;
+    para["grid"]["Nz"]>>Nz;
+    para["domain_dimension"]["Lx"]>>Lx;
+    para["domain_dimension"]["Ly"]>>Ly;
+    para["domain_dimension"]["Lz"]>>Lz;
+  
+    para["structure_function"]["q1"]>>q1;
+    para["structure_function"]["q2"]>>q2;
+  
+  
+    para["test"]["test_switch"]>>test_switch;
+  
+    if (Nx==1){dx=0;}
+    else{
+      dx=Lx/double(Nx-1);}
+    if (Ny==1){dy=0;}
+    else{
+      dy=Ly/double(Ny-1);}
+    if (Nz==1){dz=0;}
+    else{
+      dz=Lz/double(Nz-1);}
+  
 }
 
 
@@ -1508,6 +1348,7 @@ void magnitude(TinyVector<double,2> A, double& mag){
  * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
  * \param SF_Node_p is a 2D array containing the values of the nodal transverse structure functions for orders for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node and SF_Node_p so as to get the average.
+ *
  ********************************************************************************************************************************************
  */
 void SFunc3D(Array<double,3> Ux,
@@ -1650,9 +1491,8 @@ void SF_scalar_2D(Array<double,2> T,
  * \brief   Function to calculate structure functions using 3D velocity field as function of \f$ (l_x, l_y, l_z) \f$ in addition to the structure functions
  *          as function of \f$ l \f$.
  *
- *          The following function computes both the nodal longitudinal and transverse structure functions of 3D velocity field using six nested for-loops.
- *          The outer three for-loops correspond to the vector \f$\mathbf{r}\f$ and the inner three loops correspond to the vector \f$\mathbf{r+l}\f$.
- *          The second for-loop is parallelized using OpenMP.
+ *          The following function computes the nodal longitudinal and transverse structure functions for a given 3D velocity field using three nested for-loops corresponding to 
+ *          \f$ l_x \f$, \f$ l_x \f$, and \f$ l_z \f$. 
  *
  * \param Ux is a 3D array representing the x-component of velocity field
  * \param Uy is a 3D array representing the y-component of velocity field
@@ -1662,7 +1502,6 @@ void SF_scalar_2D(Array<double,2> T,
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node and SF_Node_p so as to get the average.
  * \param SF_Grid_pll_Node is a 4D array containing the values of the nodal longitudinal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
  * \param SF_Grid_perp_Node is a 4D array containing the values of the nodal transverse structure functions for as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
- * \param counter_Grid_Node is a 4D array containing the numbers for dividing the values of SF_Grid_pll_Node and SF_Grid_perp_Node_p so as to get the average.
  ********************************************************************************************************************************************
  */
 void SFunc3D(
@@ -1678,17 +1517,15 @@ void SFunc3D(
 	if (rank_mpi==0) {
         cout<<"\nComputing longitudinal and transverse S(l) and S(lx, ly, lz) using 3D velocity field data..\n";
     }
-    //int starPt = rank_mpi*(Nx/P);
-    //int endPt = (rank_mpi+1)*(Nx/P);
     int starPt = 0;
-    int endPt = Nx/P;
+    int endPt = Nx/(2*P);
 
     Array<int, 2> index_list;
   	compute_index_list(index_list);
   	for (int ix=starPt; ix<endPt; ix++){
   		int x=index_list(ix, rank_mpi);
-  		for(int y=0; y<Ny; y++){
-  			for(int z=0; z<Nz; z++){
+  		for(int y=0; y<Ny/2; y++){
+  			for(int z=0; z<Nz/2; z++){
 
   				
   				Array<double,3> dUx(Nx-x,Ny-y,Nz-z);
@@ -1744,10 +1581,8 @@ void SFunc3D(
  * \brief   A less computationally intensive function to calculate only the longitudinal structure functions as functions of \f$ (l_x,l_y,l_z) \f$ in
  *          addition to function of \f$ l \f$ using 3D velocity field.
  *
- *          The following function computes the only longitudinal structure function using 3D velocity field data. This function is less computationally
- *          expensive compared to SFunc3D. The function exploits the fact that \f$ \langle du(l)^p \rangle = \langle du(-l)^p \rangle \f$, where \f$ du(l) \f$
- *          is the component parallel to \f$ l \f$. Thus, although this function uses six nested loops, the innermost loop starts from z instead of 0, where z is
- *          the iteration number of the third for-loop. The rest of the structure is similar to the function SFunc3D.
+ *          The following function computes the nodal longitudinal structure functions for a given 3D velocity field using three nested for-loops corresponding to 
+ *          \f$ l_x \f$, \f$ l_x \f$, and \f$ l_z \f$. 
  *
  * \param Ux is a 3D array representing the x-component of velocity field
  * \param Uy is a 3D array representing the y-component of velocity field
@@ -1755,7 +1590,6 @@ void SFunc3D(
  * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average.
  * \param SF_Grid_pll_Node is a 4D array containing the values of the nodal longitudinal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
- * \param counter_Grid_Node is a 4D array containing the numbers for dividing the values of SF_Grid_pll_Node and SF_Grid_perp_Node_p so as to get the average.
  ********************************************************************************************************************************************
  */
 void SFunc_long_3D(
@@ -1767,20 +1601,18 @@ void SFunc_long_3D(
         Array<double,4>& SF_Grid_pll_Node)
 {
 if (rank_mpi==0) {
-        cout<<"\nHIII Computing longitudinal and transverse S(l) and S(lx, ly, lz) using 3D velocity field data..\n";
+        cout<<"\nComputing longitudinal S(l) and S(lx, ly, lz) using 3D velocity field data..\n";
     }
-    //int starPt = rank_mpi*(Nx/P);
-    //int endPt = (rank_mpi+1)*(Nx/P);
     int starPt = 0;
-    int endPt = Nx/P;
+    int endPt = Nx/(2*P);
 
     Array<int, 2> index_list;
   	compute_index_list(index_list);
 
   	for (int ix=starPt; ix<endPt; ix++){
   		int x=index_list(ix, rank_mpi);
-  		for(int y=0; y<Ny; y++){
-  			for(int z=0; z<Nz; z++){
+  		for(int y=0; y<Ny/2; y++){
+  			for(int z=0; z<Nz/2; z++){
   				Array<double,3> dUx(Nx-x,Ny-y,Nz-z);
   				Array<double,3> dUy(Nx-x,Ny-y,Nz-z);
   				Array<double,3> dUz(Nx-x,Ny-y,Nz-z);
@@ -1824,9 +1656,8 @@ if (rank_mpi==0) {
  * \brief   Function to calculate structure functions using 2D velocity field as function of \f$(l_x, l_z) \f$ in addition to the structure functions
  *          as function of \f$ l \f$.
  *
- *          The following function computes both the nodal longitudinal and transverse structure functions of 2D velocity field using six nested for-loops.
- *          The outer three for-loops correspond to the vector \f$\mathbf{r}\f$ and the inner three loops correspond to the vector \f$\mathbf{r+l}\f$.
- *          The second for-loop is parallelized using OpenMP.
+ *         The following function computes the nodal longitudinal and transverse structure functions for a given 2D velocity field using two nested for-loops corresponding to 
+ *          \f$ l_x \f$ and \f$ l_z \f$. 
  *
  * \param Ux is a 2D array representing the x-component of velocity field
  * \param Uz is a 2D array representing the z-component of velocity field
@@ -1835,11 +1666,8 @@ if (rank_mpi==0) {
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node and SF_Node_p so as to get the average.
  * \param SF_Grid2D_pll_Node is a 3D array containing the values of the nodal longitudinal structure functions as function of \f$(l_x,l_z)\f$ for a range of orders specified by the user.
  * \param SF_Grid2D_perp_Node is a 3D array containing the values of the nodal transverse structure functions for as function of \f$(l_x,l_z)\f$ for a range of orders specified by the user.
- * \param counter_Grid2D_Node is a 3D array containing the numbers for dividing the values of SF_Grid_pll_Node and SF_Grid_perp_Node_p so as to get the average.
  ********************************************************************************************************************************************
  */
-
-
  void SFunc2D(
          Array<double,2> Ux,
          Array<double,2> Uz,
@@ -1852,18 +1680,17 @@ if (rank_mpi==0) {
      if (rank_mpi==0) {
          cout<<"\nComputing longitudinal and transverse S(l) and S(lx, lz) using 2D velocity field data..\n";
      }
-     
-     //int starPt = rank_mpi*(Nx/P);
-     //int endPt = (rank_mpi+1)*(Nx/P);
+
     int starPt = 0;
-    int endPt = Nx/P;
+    int endPt = Nx/(2*P);
 
     Array<int, 2> index_list;
   	compute_index_list(index_list);
 
+
    	for (int ix=starPt; ix<endPt; ix++){
    		int x=index_list(ix,rank_mpi);
-       	for(int z=0; z<Nz; z++){
+       	for(int z=0; z<Nz/2; z++){
         	Array<double,2> dUx(Nx-x,Nz-z);
         	Array<double,2> dUz(Nx-x,Nz-z);
         	Array<double,2> dUpll(Nx-x,Nz-z);
@@ -1887,12 +1714,10 @@ if (rank_mpi==0) {
        		}
        		
         	int l=ceil(sqrt(x*x+z*z));
-            for (int p=0; p<=q2-q1; p++){
-              SF_Node(l,p)+=SF_Grid2D_pll_Node(x,z,p);
-              SF_p_Node(l,p)+=SF_Grid2D_perp_Node(x,z,p);
-			  counter_Node(l,p)+=1;              
-              
-            }
+
+            SF_Node(l,Range::all())+=SF_Grid2D_pll_Node(x,z,Range::all());
+            SF_p_Node(l,Range::all())+=SF_Grid2D_perp_Node(x,z,Range::all());
+            counter_Node(l,Range::all())+=1;
         }
 
     }
@@ -1910,17 +1735,14 @@ if (rank_mpi==0) {
  * \brief   A less computationally intensive function to calculate only the longitudinal structure functions as functions of \f$(l_x,l_z) \f$ in
  *          addition to function of \f$ l \f$ using 2D velocity field.
  *
- *          The following function computes the only longitudinal structure function using 2D velocity field data. This function is less computationally
- *          expensive compared to SFunc2D. The function exploits the fact that \f$ \langle du(l)^p \rangle = \langle du(-l)^p \rangle \f$, where \f$ du(l) \f$
- *          is the component parallel to l. Thus, although this function uses six nested loops, the innermost loop starts from z instead of 0, where z is
- *          the iteration number of the third for-loop. The rest of the structure is similar to the function SFunc3D.
+ *          The following function computes the nodal longitudinal structure functions for a given 2D velocity field using two nested for-loops corresponding to 
+ *          \f$ l_x \f$ and \f$ l_z \f$.
  *
  * \param Ux is a 2D array representing the x-component of velocity field
  * \param Uz is a 2D array representing the z-component of velocity field
  * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average.
  * \param SF_Grid2D_pll_Node is a 3D array containing the values of the nodal longitudinal structure functions as function of \f$(l_x,l_z)\f$ for a range of orders specified by the user.
- * \param counter_Grid2D_Node is a 3D array containing the numbers for dividing the values of SF_Grid_pll_Node so as to get the average.
  ********************************************************************************************************************************************
  */
 void SFunc_long_2D(
@@ -1930,21 +1752,18 @@ void SFunc_long_2D(
         Array<double,2>& counter_Node,
         Array<double,3>& SF_Grid2D_pll_Node)
 {if (rank_mpi==0) {
-         cout<<"\nComputing longitudinal and transverse S(l) and S(lx, lz) using 2D velocity field data..\n";
+         cout<<"\nComputing longitudinal S(l) and S(lx, lz) using 2D velocity field data..\n";
      }
-     
-    //int starPt = rank_mpi*(Nx/P);
-    //int endPt = (rank_mpi+1)*(Nx/P);
-    
     int starPt = 0;
-    int endPt = Nx/P;
+    int endPt = Nx/(2*P);
 
     Array<int, 2> index_list;
   	compute_index_list(index_list);
-   	
+   
+
    	for (int ix=starPt; ix<endPt; ix++){
    		int x=index_list(ix, rank_mpi);
-       	for(int z=0; z<Nz; z++){
+       	for(int z=0; z<Nz/2; z++){
         	Array<double,2> dUx(Nx-x,Nz-z);
         	Array<double,2> dUz(Nx-x,Nz-z);
         	int count=(Nx-x)*(Nz-z);
@@ -1960,11 +1779,9 @@ void SFunc_long_2D(
        		}
        		
         	int l=ceil(sqrt(x*x+z*z));
-            for (int p=0; p<=q2-q1; p++){
-              SF_Node(l,p)+=SF_Grid2D_pll_Node(x,z,p);
-			  counter_Node(l,p)+=1;              
-              
-            }
+
+            SF_Node(l,Range::all())+=SF_Grid2D_pll_Node(x,z,Range::all());
+            counter_Node(l,Range::all())+=1;
         }
 
     }
@@ -1982,19 +1799,15 @@ void SFunc_long_2D(
  * \brief   Function to calculate structure functions using 3D scalar field as function of \f$ (l_x, l_y, l_z) \f$ in addition to the structure functions
  *          as function of \f$ l \f$.
  *
- *          The following function computes both the nodal structure functions of 3D scalar field using six nested for-loops.
- *          The outer three for-loops correspond to the vector \f$\mathbf{r}\f$ and the inner three loops correspond to the vector \f$\mathbf{r+l}\f$.
- *          The second for-loop is parallelized using OpenMP.
+ *          The following function computes the nodal structure functions for a given 3D scalar field using three nested for-loops corresponding to 
+ *          \f$ l_x \f$, \f$ l_y \f$ and \f$ l_z \f$. 
  *
  * \param T is a 3D array representing the scalar field
  * \param SF_Node is a 2D array containing the values of the nodal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average.
  * \param SF_Grid_Node is a 4D array containing the values of the nodal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
- * \param counter_Grid_Node is a 4D array containing the numbers for dividing the values of SF_Grid_pll_Node so as to get the average.
  ********************************************************************************************************************************************
  */
-
-
 void SF_scalar_3D(
          Array<double,3> T,
          Array<double,2>& SF_Node,
@@ -2005,28 +1818,27 @@ void SF_scalar_3D(
          cout<<"\nComputing S(l) and S(lx, ly, lz) using 3D scalar field data..\n";
      }
      
-    //int starPt = rank_mpi*(Nx/P);
-    //int endPt = (rank_mpi+1)*(Nx/P);
     int starPt = 0;
-    int endPt = Nx/P;
+    int endPt = Nx/(2*P);
 
     Array<int, 2> index_list;
   	compute_index_list(index_list);
-
-   	for (int ix=starPt; ix<endPt; ix++){
+    
+   	
+    for (int ix=starPt; ix<endPt; ix++){
    		int x=index_list(ix, rank_mpi);
-      	for(int y=0; y<Ny; y++){
-       		for(int z=0; z<Nz; z++){
-        		Array<double,3> dUx(Nx-x,Ny-y,Nz-z);
+      	for(int y=0; y<Ny/2; y++){
+       		for(int z=0; z<Nz/2; z++){
+        		Array<double,3> dT(Nx-x,Ny-y,Nz-z);
         		
         		int count=(Nx-x)*(Ny-y)*(Nz-z);
         		double r=sqrt(x*x*dx*dx+y*y*dy*dy+z*z*dz*dz);
 
-        		dUx(Range::all(),Range::all(),Range::all())=T(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
+        		dT(Range::all(),Range::all(),Range::all())=T(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
         		
 
         		for (int p=0; p<=q2-q1; p++){
-        			SF_Grid_pll_Node(x,y,z,p)=sum(pow(dUx(Range::all(),Range::all(),Range::all()),q1+p))/(count);
+        			SF_Grid_pll_Node(x,y,z,p)=sum(pow(dT(Range::all(),Range::all(),Range::all()),q1+p))/(count);
         		}
 
         		
@@ -2053,18 +1865,16 @@ void SF_scalar_3D(
  * \brief   Function to calculate structure functions using 2D scalar field as function of \f$ (l_x, l_z) \f$ in addition to the structure functions
  *          as function of \f$ l \f$.
  *
- *          The following function computes both the nodal structure functions of 2D scalar field using four nested for-loops.
- *          The outer two for-loops correspond to the vector \f$\mathbf{r}\f$ and the inner two loops correspond to the vector \f$\mathbf{r+l}\f$.
- *          The second for-loop is parallelized using OpenMP.
+ *          The following function computes the nodal structure functions for a given 2D scalar field using two nested for-loops corresponding to 
+ *          \f$ l_x \f$ and \f$ l_z \f$ .
+ *          
  *
  * \param T is a 2D array representing the scalar field
  * \param SF_Node is a 2D array containing the values of the nodal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
  * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average.
  * \param SF_Grid_Node is a 3D array containing the values of the nodal structure functions as function of \f$ (l_x,l_z) \f$ for a range of orders specified by the user.
- * \param counter_Grid_Node is a 3D array containing the numbers for dividing the values of SF_Grid_pll_Node so as to get the average.
  ********************************************************************************************************************************************
  */
-
 void SF_scalar_2D(
          Array<double,2> T,
          Array<double,2>& SF_Node,
@@ -2076,28 +1886,28 @@ void SF_scalar_2D(
      }
      
     int starPt = 0;
-    int endPt = Nx/P;
+    int endPt = Nx/(2*P);
 
     Array<int, 2> index_list;
   	compute_index_list(index_list);
 
-
+   
 
    	for (int ix=starPt; ix<endPt; ix++){
    		int x=index_list(ix, rank_mpi);
       	
-       	for(int z=0; z<Nz; z++){
+       	for(int z=0; z<Nz/2; z++){
        			
-        		Array<double,2> dUx(Nx-x,Nz-z);
+        		Array<double,2> dT(Nx-x,Nz-z);
         		
         		int count=(Nx-x)*(Nz-z);
         		double r=sqrt(x*x*dx*dx+z*z*dz*dz);
 
-        		dUx(Range::all(),Range::all())=T(Range(x,Nx-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Nz-z-1));
+        		dT(Range::all(),Range::all())=T(Range(x,Nx-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Nz-z-1));
         		
 
         		for (int p=0; p<=q2-q1; p++){
-        			SF_Grid2D_pll_Node(x,z,p)=sum(pow(dUx(Range::all(),Range::all()),q1+p))/(count);
+        			SF_Grid2D_pll_Node(x,z,p)=sum(pow(dT(Range::all(),Range::all()),q1+p))/(count);
         		}
         		
 
