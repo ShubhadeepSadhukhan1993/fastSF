@@ -371,7 +371,13 @@ double Lz;
  */
 int P;
 
-
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the number of the MPI process along x axis.
+ *
+ ********************************************************************************************************************************************
+ */
+int px;
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$//
 
 
@@ -391,6 +397,7 @@ int main(int argc, char *argv[]) {
     MPI_Init(NULL, NULL);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank_mpi);
     MPI_Comm_size(MPI_COMM_WORLD, &P);
+
     //Initiallizing h5si
     h5::init();
     timeval start_pt, end_pt, start_t, end_t;
@@ -398,12 +405,14 @@ int main(int argc, char *argv[]) {
     double elapsedt=0.0;
     double elapsepdt=0.0;
     Read_para();
+
+    /*
     if (Nx/2%P!=0){
         if (rank_mpi==0){
             cout<<"proccesor number should be less or equal to Nx/4 and some power of 2\n Exiting the code\n";
             exit(1);
         }
-    }
+    }*/
     //Resizing the input fields
 
     if(two_dimension_switch){
@@ -658,6 +667,58 @@ int main(int argc, char *argv[]) {
 
 
 /**
+*************
+*************
+*/
+void get_rank(int rank, int py, int& rankx, int& ranky){
+    ranky=rank%py;
+    rankx=(rank-ranky)/py;
+}
+void compute_index_list(Array<int,1>& index_list, int Nx, int px, int rank){
+    int list_size=Nx/px;
+    index_list.resize(list_size);
+    for (int i=0; i<list_size; i+=2){
+        index_list(i)=rank+i*px;
+        if (px!=Nx) {
+          index_list(i+1)=Nx-1-index_list(i);
+        }
+    }
+}
+
+
+void compute_load(Array<int,3> index_list, int rank_id){
+    Array<int,1> load(index_list(Range::all(),0,0).size());
+    load=(Nx-index_list(Range::all(),0,rank_id))*(Ny-index_list(Range::all(),1,rank_id));
+    cout<< sum(load)<<endl;
+}
+
+void compute_index_list(Array<int,3>& index_list, int Nx, int Ny){
+    int list_size=(Nx*Ny)/(4*P);
+    index_list.resize(list_size,2,P);
+
+    int py=(P/px);
+    Array<int,1> x;
+    Array<int,1> y;
+    
+    int rankx,ranky;
+    int nx=Nx/(2*px),ny=Ny/(2*py);
+
+    
+    for (int rank_id=0; rank_id<P; rank_id++){
+        get_rank(rank_id, py, rankx, ranky);
+        compute_index_list(x, Nx/2, px, rankx);
+        compute_index_list(y, Ny/2, py, ranky);
+        for (int i=0; i<nx; i++){
+            index_list(Range(ny*i,(i+1)*ny-1),0,rank_id)=x(i);
+            index_list(Range(ny*i,(i+1)*ny-1),1,rank_id)=y(Range::all());
+        }
+        //compute_load(index_list,rank_id);
+    }
+
+
+}
+
+/**
 *************************************************************************************************************************************
 *\brief     Function to ensure that the load is equally distributed among all the MPI processors.
 *           
@@ -679,6 +740,11 @@ void compute_index_list(Array<int,2>& index_list){
 }
 
 
+
+
+
+
+
 /**
  ********************************************************************************************************************************************
  * \brief   Test function to validate the calculation of structure functions of 3D velocity field data.
@@ -693,7 +759,6 @@ void compute_index_list(Array<int,2>& index_list){
  */
 void VECTOR_TEST_CASE_3D()
 {	
-    cout<<"TESTING CASE (Velocity 3D)"<<endl;
     double epsilon=1e-10;
     double err1 = 0, err2 = 0;
     double max = 0;
@@ -1187,7 +1252,8 @@ void Read_para() {
     para["structure_function"]["q1"]>>q1;
     para["structure_function"]["q2"]>>q2;
   
-  
+    para["number_of_proc_along_x"]>>px;
+
     para["test"]["test_switch"]>>test_switch;
   
     if (Nx==1){dx=0;}
@@ -1518,53 +1584,52 @@ void SFunc3D(
         cout<<"\nComputing longitudinal and transverse S(l) and S(lx, ly, lz) using 3D velocity field data..\n";
     }
     int starPt = 0;
-    int endPt = Nx/(2*P);
+    int endPt = Nx*Ny/(4*P);
 
-    Array<int, 2> index_list;
-  	compute_index_list(index_list);
-  	for (int ix=starPt; ix<endPt; ix++){
-  		int x=index_list(ix, rank_mpi);
-  		for(int y=0; y<Ny/2; y++){
-  			for(int z=0; z<Nz/2; z++){
-
-  				
-  				Array<double,3> dUx(Nx-x,Ny-y,Nz-z);
-  				Array<double,3> dUy(Nx-x,Ny-y,Nz-z);
-  				Array<double,3> dUz(Nx-x,Ny-y,Nz-z);
-  				Array<double,3> dUpll(Nx-x,Ny-y,Nz-z);
+    Array<int, 3> index_list;
+    compute_index_list(index_list, Nx, Ny);
+    Array<double,3> dUx;
+    Array<double,3> dUy;
+    Array<double,3> dUz;
+    Array<double,3> dUpll;
+    
+    for (int ix=starPt; ix<endPt; ix++){
+        int x=index_list(ix, 0, rank_mpi);
+        int y=index_list(ix, 1, rank_mpi);
+  		for(int z=0; z<Nz/2; z++){
+  			dUx.resize(Nx-x,Ny-y,Nz-z);
+  			dUy.resize(Nx-x,Ny-y,Nz-z);
+  			dUz.resize(Nx-x,Ny-y,Nz-z);
         		
-        		int count=(Nx-x)*(Ny-y)*(Nz-z);
-        		double lx=x*dx;
-        		double ly=y*dy;
-        		double lz=z*dz;
+        	int count=(Nx-x)*(Ny-y)*(Nz-z);
+        	double lx=x*dx;
+        	double ly=y*dy;
+        	double lz=z*dz;
 
-        		double r=sqrt(lx*lx+ly*ly+lz*lz);
-        		dUx(Range::all(),Range::all(),Range::all())=Ux(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Ux(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
-        		dUy(Range::all(),Range::all(),Range::all())=Uy(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uy(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
-        		dUz(Range::all(),Range::all(),Range::all())=Uz(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uz(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
+        	double r=sqrt(lx*lx+ly*ly+lz*lz);
+        	dUx(Range::all(),Range::all(),Range::all())=Ux(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Ux(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
+        	dUy(Range::all(),Range::all(),Range::all())=Uy(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uy(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
+        	dUz(Range::all(),Range::all(),Range::all())=Uz(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uz(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
         		
-        		dUpll=(lx*dUx+ly*dUy+lz*dUz)/r;
+        	dUpll=(lx*dUx+ly*dUy+lz*dUz)/r;
         		
-        		dUx=dUx-dUpll*lx/r;
-        		dUy=dUy-dUpll*ly/r;
-        		dUz=dUz-dUpll*lz/r;
+        	dUx=dUx-dUpll*lx/r;
+        	dUy=dUy-dUpll*ly/r;
+        	dUz=dUz-dUpll*lz/r;
 
-        		dUx=pow(dUx*dUx+dUy*dUy+dUz*dUz,0.5);
-        		for (int p=0; p<=q2-q1; p++){
-        			SF_Grid_pll_Node(x,y,z,p)=sum(pow(dUpll(Range::all(),Range::all(),Range::all()),q1+p))/(count);
-        			SF_Grid_perp_Node(x,y,z,p)=sum(pow(dUx(Range::all(),Range::all(),Range::all()),q1+p))/(count);
-        		}
+        	dUx=pow(dUx*dUx+dUy*dUy+dUz*dUz,0.5);
+        	for (int p=0; p<=q2-q1; p++){
+        		SF_Grid_pll_Node(x,y,z,p)=sum(pow(dUpll(Range::all(),Range::all(),Range::all()),q1+p))/(count);
+        		SF_Grid_perp_Node(x,y,z,p)=sum(pow(dUx(Range::all(),Range::all(),Range::all()),q1+p))/(count);
+        	}
 
         		
 
-            	int l=ceil(sqrt(x*x+y*y+z*z));
+            int l=ceil(sqrt(x*x+y*y+z*z));
             	
-              	SF_Node(l,Range::all())+=SF_Grid_pll_Node(x,y,z,Range::all());
-              	SF_p_Node(l,Range::all())+=SF_Grid_perp_Node(x,y,z,Range::all());
-              	counter_Node(l,Range::all())+=1;
-
-
-  			}
+            SF_Node(l,Range::all())+=SF_Grid_pll_Node(x,y,z,Range::all());
+            SF_p_Node(l,Range::all())+=SF_Grid_perp_Node(x,y,z,Range::all());
+            counter_Node(l,Range::all())+=1;	
   		}
   	}
   	SF_Grid_pll_Node(0,0,0,Range::all())=0;
@@ -1604,43 +1669,43 @@ if (rank_mpi==0) {
         cout<<"\nComputing longitudinal S(l) and S(lx, ly, lz) using 3D velocity field data..\n";
     }
     int starPt = 0;
-    int endPt = Nx/(2*P);
+    int endPt = Nx*Ny/(4*P);
 
-    Array<int, 2> index_list;
-  	compute_index_list(index_list);
-
-  	for (int ix=starPt; ix<endPt; ix++){
-  		int x=index_list(ix, rank_mpi);
-  		for(int y=0; y<Ny/2; y++){
-  			for(int z=0; z<Nz/2; z++){
-  				Array<double,3> dUx(Nx-x,Ny-y,Nz-z);
-  				Array<double,3> dUy(Nx-x,Ny-y,Nz-z);
-  				Array<double,3> dUz(Nx-x,Ny-y,Nz-z);
+    Array<int, 3> index_list;
+    compute_index_list(index_list, Nx, Ny);
+    Array<double,3> dUx;
+    Array<double,3> dUy;
+    Array<double,3> dUz;
+    
+    for (int ix=starPt; ix<endPt; ix++){
+        int x=index_list(ix, 0, rank_mpi);
+        int y=index_list(ix, 1, rank_mpi);
+  		for(int z=0; z<Nz/2; z++){
+  			dUx.resize(Nx-x,Ny-y,Nz-z);
+			dUy.resize(Nx-x,Ny-y,Nz-z);
+  			dUz.resize(Nx-x,Ny-y,Nz-z);
         		
-        		int count=(Nx-x)*(Ny-y)*(Nz-z);
-        		double lx=x*dx;
-        		double ly=y*dy;
-        		double lz=z*dz;
+    		int count=(Nx-x)*(Ny-y)*(Nz-z);
+    		double lx=x*dx;
+    		double ly=y*dy;
+    		double lz=z*dz;
 
-        		double r=sqrt(lx*lx+ly*ly+lz*lz);
-        		dUx(Range::all(),Range::all(),Range::all())=Ux(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Ux(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
-        		dUy(Range::all(),Range::all(),Range::all())=Uy(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uy(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
-        		dUz(Range::all(),Range::all(),Range::all())=Uz(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uz(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
-        		
-
-        		for (int p=0; p<=q2-q1; p++){
-        			SF_Grid_pll_Node(x,y,z,p)=sum(pow(lx*dUx(Range::all(),Range::all(),Range::all())+ly*dUy(Range::all(),Range::all(),Range::all())+lz*dUz(Range::all(),Range::all(),Range::all()),q1+p))/(count*pow(r,p+q1));
-        		}
-
+    		double r=sqrt(lx*lx+ly*ly+lz*lz);
+    		dUx(Range::all(),Range::all(),Range::all())=Ux(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Ux(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
+    		dUy(Range::all(),Range::all(),Range::all())=Uy(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uy(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
+    		dUz(Range::all(),Range::all(),Range::all())=Uz(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-Uz(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
         		
 
-            	int l=ceil(sqrt(x*x+y*y+z*z));
+    		for (int p=0; p<=q2-q1; p++){
+    			SF_Grid_pll_Node(x,y,z,p)=sum(pow(lx*dUx(Range::all(),Range::all(),Range::all())+ly*dUy(Range::all(),Range::all(),Range::all())+lz*dUz(Range::all(),Range::all(),Range::all()),q1+p))/(count*pow(r,p+q1));
+    		}
+
+        		
+
+            int l=ceil(sqrt(x*x+y*y+z*z));
             	
-              	SF_Node(l,Range::all())+=SF_Grid_pll_Node(x,y,z,Range::all());
-              	counter_Node(l,Range::all())+=1;
-
-
-  			}
+            SF_Node(l,Range::all())+=SF_Grid_pll_Node(x,y,z,Range::all());
+            counter_Node(l,Range::all())+=1;	
   		}
   	}
   	SF_Grid_pll_Node(0,0,0,Range::all())=0;
@@ -1682,43 +1747,45 @@ if (rank_mpi==0) {
      }
 
     int starPt = 0;
-    int endPt = Nx/(2*P);
+    int endPt = Nx*Nz/(4*P);
 
-    Array<int, 2> index_list;
-  	compute_index_list(index_list);
+    Array<int, 3> index_list;
+    compute_index_list(index_list, Nx, Nz);
+    Array<double,2> dUz;
+    Array<double,2> dUx;
+    Array<double,2> dUpll;
+    
+    for (int ix=starPt; ix<endPt; ix++){
+        int x=index_list(ix, 0, rank_mpi);
+        int z=index_list(ix, 1, rank_mpi);
+        dUx.resize(Nx-x,Nz-z);
+        dUz.resize(Nx-x,Nz-z);
+        dUpll.resize(Nx-x,Nz-z);
+        int count=(Nx-x)*(Nz-z);
+        double lx=x*dx;
+        double lz=z*dz;
+        double r=sqrt(lx*lx+lz*lz);
 
-
-   	for (int ix=starPt; ix<endPt; ix++){
-   		int x=index_list(ix,rank_mpi);
-       	for(int z=0; z<Nz/2; z++){
-        	Array<double,2> dUx(Nx-x,Nz-z);
-        	Array<double,2> dUz(Nx-x,Nz-z);
-        	Array<double,2> dUpll(Nx-x,Nz-z);
-        	int count=(Nx-x)*(Nz-z);
-        	double lx=x*dx;
-        	double lz=z*dz;
-        	double r=sqrt(lx*lx+lz*lz);
-
-        	dUx(Range::all(),Range::all())=Ux(Range(x,Nx-1),Range(z,Nz-1))-Ux(Range(0,Nx-x-1),Range(0,Nz-z-1));
-        	dUz(Range::all(),Range::all())=Uz(Range(x,Nx-1),Range(z,Nz-1))-Uz(Range(0,Nx-x-1),Range(0,Nz-z-1));
+        dUx(Range::all(),Range::all())=Ux(Range(x,Nx-1),Range(z,Nz-1))-Ux(Range(0,Nx-x-1),Range(0,Nz-z-1));
+        dUz(Range::all(),Range::all())=Uz(Range(x,Nx-1),Range(z,Nz-1))-Uz(Range(0,Nx-x-1),Range(0,Nz-z-1));
         	
-        	dUpll=(lx*dUx+lz*dUz)/r;
-        	dUx=dUx-dUpll*lx/r;
-        	dUz=dUz-dUpll*lz/r;
-        	dUx=pow(dUx*dUx+dUz*dUz,0.5);
+        dUpll=(lx*dUx+lz*dUz)/r;
+        dUx=dUx-dUpll*lx/r;
+        dUz=dUz-dUpll*lz/r;
+        dUx=pow(dUx*dUx+dUz*dUz,0.5);
 
-    		for (int p=0; p<=q2-q1; p++){
-      			SF_Grid2D_pll_Node(x,z,p)=sum(pow(dUpll(Range::all(),Range::all()),q1+p))/count;
-       			SF_Grid2D_perp_Node(x,z,p)=sum(pow(dUx,q1+p))/count;
+    	for (int p=0; p<=q2-q1; p++){
+      		SF_Grid2D_pll_Node(x,z,p)=sum(pow(dUpll(Range::all(),Range::all()),q1+p))/count;
+       		SF_Grid2D_perp_Node(x,z,p)=sum(pow(dUx,q1+p))/count;
 
-       		}
+       	}
        		
-        	int l=ceil(sqrt(x*x+z*z));
+        int l=ceil(sqrt(x*x+z*z));
 
-            SF_Node(l,Range::all())+=SF_Grid2D_pll_Node(x,z,Range::all());
-            SF_p_Node(l,Range::all())+=SF_Grid2D_perp_Node(x,z,Range::all());
-            counter_Node(l,Range::all())+=1;
-        }
+        SF_Node(l,Range::all())+=SF_Grid2D_pll_Node(x,z,Range::all());
+        SF_p_Node(l,Range::all())+=SF_Grid2D_perp_Node(x,z,Range::all());
+        counter_Node(l,Range::all())+=1;
+    
 
     }
     SF_Grid2D_pll_Node(0,0,Range::all())=0;
@@ -1755,34 +1822,36 @@ void SFunc_long_2D(
          cout<<"\nComputing longitudinal S(l) and S(lx, lz) using 2D velocity field data..\n";
      }
     int starPt = 0;
-    int endPt = Nx/(2*P);
+    int endPt = Nx*Nz/(4*P);
 
-    Array<int, 2> index_list;
-  	compute_index_list(index_list);
-   
+    Array<int, 3> index_list;
+    compute_index_list(index_list, Nx, Nz);
+    Array<double,2> dUz;
+    Array<double,2> dUx;
+    
+    for (int ix=starPt; ix<endPt; ix++){
+        int x=index_list(ix, 0, rank_mpi);
+        int z=index_list(ix, 1, rank_mpi);
 
-   	for (int ix=starPt; ix<endPt; ix++){
-   		int x=index_list(ix, rank_mpi);
-       	for(int z=0; z<Nz/2; z++){
-        	Array<double,2> dUx(Nx-x,Nz-z);
-        	Array<double,2> dUz(Nx-x,Nz-z);
-        	int count=(Nx-x)*(Nz-z);
-        	double lx=x*dx;
-        	double lz=z*dz;
-        	double r=sqrt(lx*lx+lz*lz);
+    	dUx.resize(Nx-x,Nz-z);
+    	dUz.resize(Nx-x,Nz-z);
+    	int count=(Nx-x)*(Nz-z);
+    	double lx=x*dx;
+    	double lz=z*dz;
+    	double r=sqrt(lx*lx+lz*lz);
 
-        	dUx(Range::all(),Range::all())=Ux(Range(x,Nx-1),Range(z,Nz-1))-Ux(Range(0,Nx-x-1),Range(0,Nz-z-1));
-        	dUz(Range::all(),Range::all())=Uz(Range(x,Nx-1),Range(z,Nz-1))-Uz(Range(0,Nx-x-1),Range(0,Nz-z-1));
+    	dUx(Range::all(),Range::all())=Ux(Range(x,Nx-1),Range(z,Nz-1))-Ux(Range(0,Nx-x-1),Range(0,Nz-z-1));
+    	dUz(Range::all(),Range::all())=Uz(Range(x,Nx-1),Range(z,Nz-1))-Uz(Range(0,Nx-x-1),Range(0,Nz-z-1));
 
-    		for (int p=0; p<=q2-q1; p++){
-      			SF_Grid2D_pll_Node(x,z,p)=sum(pow(lx*dUx(Range::all())+lz*dUz(Range::all()),q1+p))/(count*pow(r,p+q1));
-       		}
+		for (int p=0; p<=q2-q1; p++){
+  			SF_Grid2D_pll_Node(x,z,p)=sum(pow(lx*dUx(Range::all())+lz*dUz(Range::all()),q1+p))/(count*pow(r,p+q1));
+   		}
        		
-        	int l=ceil(sqrt(x*x+z*z));
+    	int l=ceil(sqrt(x*x+z*z));
 
-            SF_Node(l,Range::all())+=SF_Grid2D_pll_Node(x,z,Range::all());
-            counter_Node(l,Range::all())+=1;
-        }
+        SF_Node(l,Range::all())+=SF_Grid2D_pll_Node(x,z,Range::all());
+        counter_Node(l,Range::all())+=1;
+        
 
     }
     SF_Grid2D_pll_Node(0,0,Range::all())=0;
@@ -1808,6 +1877,8 @@ void SFunc_long_2D(
  * \param SF_Grid_Node is a 4D array containing the values of the nodal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
  ********************************************************************************************************************************************
  */
+
+
 void SF_scalar_3D(
          Array<double,3> T,
          Array<double,2>& SF_Node,
@@ -1819,38 +1890,36 @@ void SF_scalar_3D(
      }
      
     int starPt = 0;
-    int endPt = Nx/(2*P);
+    int endPt = Nx*Ny/(4*P);
 
-    Array<int, 2> index_list;
-  	compute_index_list(index_list);
+    Array<int, 3> index_list;
+    compute_index_list(index_list, Nx, Ny);
+    Array<double,3> dT;
     
-   	
     for (int ix=starPt; ix<endPt; ix++){
-   		int x=index_list(ix, rank_mpi);
-      	for(int y=0; y<Ny/2; y++){
-       		for(int z=0; z<Nz/2; z++){
-        		Array<double,3> dT(Nx-x,Ny-y,Nz-z);
-        		
-        		int count=(Nx-x)*(Ny-y)*(Nz-z);
-        		double r=sqrt(x*x*dx*dx+y*y*dy*dy+z*z*dz*dz);
+        int x=index_list(ix, 0, rank_mpi);
+        int y=index_list(ix, 1, rank_mpi);
+        for(int z=0; z<Nz/2; z++){
+            dT.resize(Nx-x,Ny-y,Nz-z);
+                
+            int count=(Nx-x)*(Ny-y)*(Nz-z);
+            double r=sqrt(x*x*dx*dx+y*y*dy*dy+z*z*dz*dz);
 
-        		dT(Range::all(),Range::all(),Range::all())=T(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
-        		
+            dT(Range::all(),Range::all(),Range::all())=T(Range(x,Nx-1),Range(y,Ny-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Ny-y-1),Range(0,Nz-z-1));
+                
 
-        		for (int p=0; p<=q2-q1; p++){
-        			SF_Grid_pll_Node(x,y,z,p)=sum(pow(dT(Range::all(),Range::all(),Range::all()),q1+p))/(count);
-        		}
+            for (int p=0; p<=q2-q1; p++){
+                SF_Grid_pll_Node(x,y,z,p)=sum(pow(dT(Range::all(),Range::all(),Range::all()),q1+p))/(count);
+            }
 
-        		
-            	int l=ceil(sqrt(x*x+y*y+z*z));
-            	
-              	SF_Node(l,Range::all())+=SF_Grid_pll_Node(x,y,z,Range::all());
-              	counter_Node(l,Range::all())+=1;
-              	
-            	
-        	}
-		}
-
+                
+            int l=ceil(sqrt(x*x+y*y+z*z));
+                
+            SF_Node(l,Range::all())+=SF_Grid_pll_Node(x,y,z,Range::all());
+            counter_Node(l,Range::all())+=1;
+                
+                
+        }
     }
     SF_Grid_pll_Node(0,0,0,Range::all())=0;
     SF_Node(0,Range::all())=0;
@@ -1858,7 +1927,6 @@ void SF_scalar_3D(
 
 
  }
-
 
 /**
  ********************************************************************************************************************************************
@@ -1886,39 +1954,33 @@ void SF_scalar_2D(
      }
      
     int starPt = 0;
-    int endPt = Nx/(2*P);
+    int endPt = Nx*Nz/(4*P);
 
-    Array<int, 2> index_list;
-  	compute_index_list(index_list);
-
-   
-
-   	for (int ix=starPt; ix<endPt; ix++){
-   		int x=index_list(ix, rank_mpi);
-      	
-       	for(int z=0; z<Nz/2; z++){
+    Array<int, 3> index_list;
+    compute_index_list(index_list, Nx, Nz);
+    Array<double,2> dT;
+    
+    for (int ix=starPt; ix<endPt; ix++){
+        int x=index_list(ix, 0, rank_mpi);
+        int z=index_list(ix, 1, rank_mpi);
        			
-        		Array<double,2> dT(Nx-x,Nz-z);
+        dT.resize(Nx-x,Nz-z);
         		
-        		int count=(Nx-x)*(Nz-z);
-        		double r=sqrt(x*x*dx*dx+z*z*dz*dz);
+        int count=(Nx-x)*(Nz-z);
+        double r=sqrt(x*x*dx*dx+z*z*dz*dz);
 
-        		dT(Range::all(),Range::all())=T(Range(x,Nx-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Nz-z-1));
-        		
-
-        		for (int p=0; p<=q2-q1; p++){
-        			SF_Grid2D_pll_Node(x,z,p)=sum(pow(dT(Range::all(),Range::all()),q1+p))/(count);
-        		}
+        dT(Range::all(),Range::all())=T(Range(x,Nx-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Nz-z-1));
         		
 
-            int l=ceil(sqrt(x*x+z*z));
-            
-            SF_Node(l,Range::all())+=SF_Grid2D_pll_Node(x,z,Range::all());
-            counter_Node(l,Range::all())+=1;
-            
+        for (int p=0; p<=q2-q1; p++){
+        	SF_Grid2D_pll_Node(x,z,p)=sum(pow(dT(Range::all(),Range::all()),q1+p))/(count);
         }
+        		
 
-
+        int l=ceil(sqrt(x*x+z*z));
+            
+        SF_Node(l,Range::all())+=SF_Grid2D_pll_Node(x,z,Range::all());
+        counter_Node(l,Range::all())+=1;
     }
     SF_Grid2D_pll_Node(0,0,Range::all())=0;
     SF_Node(0,Range::all())=0;
