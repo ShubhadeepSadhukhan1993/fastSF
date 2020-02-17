@@ -10,7 +10,7 @@ program:
     #Please select "true" for computing only the longitudinal structure functions, "false" for computing both the transverse and longitudinal structure functions:
     Only_longitudinal: false
 
-number_of_proc_along_x: 1 
+number_of_proc_along_x: 4 
 
 #Please specify the number of grid points. 
 #Note: Nx - number of points in the x direction, Ny - number of points in the y-direction, Nz - number of points in the z direction.

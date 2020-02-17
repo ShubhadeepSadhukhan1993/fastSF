@@ -577,7 +577,7 @@ int main(int argc, char *argv[]) {
         if (not longitudinal) {
             MPI_Reduce(SF_Node_perp.data(), SF_perp.data(), Nr*(q2-q1+1), MPI_DOUBLE_PRECISION,MPI_SUM, 0, MPI_COMM_WORLD);
         }
-    }
+    } /*
     //Reducing SF Grid
     int totPoints;
     if (two_dimension_switch) {
@@ -597,7 +597,7 @@ int main(int argc, char *argv[]) {
                 MPI_Reduce(SF_Grid_perp_Node.data(), SF_Grid_perp.data(), totPoints, MPI_DOUBLE_PRECISION, MPI_SUM, 0, MPI_COMM_WORLD);
             }
         }
-    }
+    } */
     gettimeofday(&end_t,NULL);
     compute_time_elapsed(start_t, end_t, elapsedt);
     compute_time_elapsed(start_pt, end_pt, elapsepdt);
@@ -1624,11 +1624,44 @@ void SFunc3D(
         	dUx=pow(dUx*dUx+dUy*dUy+dUz*dUz,0.5);
             //cout<<"FLAG 4"<<endl;
         	for (int p=0; p<=q2-q1; p++){
-        		SF_Grid_pll_Node(x,y,z,p)=sum(pow(dUpll(Range::all(),Range::all(),Range::all()),q1+p))/(count);
-        		SF_Grid_perp_Node(x,y,z,p)=sum(pow(dUx(Range::all(),Range::all(),Range::all()),q1+p))/(count);
+        		double Spll = sum(pow(dUpll(Range::all(),Range::all(),Range::all()),q1+p))/(count);
+        		double Sperp =sum(pow(dUx(Range::all(),Range::all(),Range::all()),q1+p))/(count);
+                Array<int, 1> X, Y, Z, p_arr;
+                Array<double, 1> Spll_arr, Sperp_arr;
+                if (rank_mpi==0) {
+                    X.resize(P);
+                    Y.resize(P);
+                    Z.resize(P);
+                    p_arr.resize(P);
+                    Spll_arr.resize(P);
+                    Sperp_arr.resize(P);
+                }
+                //cout<<"FLAG 5"<<endl;
+                MPI_Gather(&x, 1, MPI_INT, X.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+                //cout<<"FLAG 6"<<endl;
+                MPI_Gather(&y, 1, MPI_INT, Y.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
+                //cout<<"FLAG 7"<<endl;
+                MPI_Gather(&z, 1, MPI_INT, Z.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
+                //cout<<"FLAG 8"<<endl;
+                MPI_Gather(&Spll, 1, MPI_DOUBLE_PRECISION, Spll_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+                //cout<<"FLAG 9"<<endl;
+                MPI_Gather(&p, 1, MPI_INT, p_arr.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
+                //cout<<"FLAG 10"<<endl;
+                MPI_Gather(&Sperp, 1, MPI_DOUBLE_PRECISION, Sperp_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+                //cout<<"FLAG 11"<<endl;
+                if (rank_mpi==0) {
+                    //cout<<"FLAG 11.5"<<endl;
+                    for (int i=0; i<P; i++) {
+                        //cout<<"X(i) "<<X(i); //<<" Y(i) "<<Y(i)<<" Z(i) "<<Z(i)<<" p_arr(i) "<<p_arr(i)<<endl;
+                        SF_Grid_pll(X(i), Y(i), Z(i), p_arr(i)) = Spll_arr(i);
+                        SF_Grid_perp(X(i), Y(i), Z(i), p_arr(i)) = Sperp_arr(i);
+                    } 
+                }
+
         	}
 
-            //cout<<"FLAG 5"<<endl;
+            //cout<<"FLAG 12"<<endl;
 
         		
 
