@@ -269,13 +269,6 @@ int Nz;
 
 /**
  ********************************************************************************************************************************************
- * \brief   Total number of gridpoints in the diagonal direction.
- ********************************************************************************************************************************************
- */
-int Nr;
-
-/**
- ********************************************************************************************************************************************
  * \brief   The first order of the range of orders of the structure functions to be computed. Entered by the user.
  ********************************************************************************************************************************************
  */
@@ -402,12 +395,6 @@ int main(int argc, char *argv[]) {
     double elapsepdt=0.0;
 
     Read_para();
-    if (two_dimension_switch) {
-        Nr = (int)ceil(sqrt(pow(Nx/2-1,2)+pow(Nz/2-1,2)))+1;
-    }
-    else {
-        Nr = (int)ceil(sqrt(pow(Nx/2-1,2)+pow(Ny/2-1,2)+pow(Nz/2-1,2)))+1;
-    }
 
     //Resizing the input fields
     Read_fields();
@@ -474,7 +461,7 @@ void Read_fields() {
             V1_2D.resize(Nx, Nz);
             V3_2D.resize(Nx, Nz);
         }
-        Nr = (int)ceil(sqrt(pow(Nx/2-1,2)+pow(Nz/2-1,2)))+1;
+        
     }
     else{
         if (scalar_switch) {
@@ -485,7 +472,7 @@ void Read_fields() {
             V2.resize(Nx,Ny,Nz);
             V3.resize(Nx,Ny,Nz);
         }
-        Nr = (int)ceil(sqrt(pow(Nx/2-1,2)+pow(Ny/2-1,2)+pow(Nz/2-1,2)))+1;
+        
     }
     //Defining the input fields
     if (test_switch){

@@ -2,13 +2,13 @@
 
 program:
     #Please select "true" for computing scalar structure function, "false" for computing velocity structure function:
-    scalar_switch: false
+    scalar_switch: true
   
     #Please select "true" for 2D operations, "false" for 3D operations:
-    2D_switch : false
+    2D_switch : true
 
     #Please select "true" for computing only the longitudinal structure functions, "false" for computing both the transverse and longitudinal structure functions:
-    Only_longitudinal: false
+    Only_longitudinal: true
 
 number_of_proc_along_x: 4 
 
