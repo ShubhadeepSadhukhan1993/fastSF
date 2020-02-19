@@ -66,55 +66,54 @@ The current version of ‘fastSF’ computes the structure functions correctly o
 
 ```
 void SF_scalar_2D(Array<double,2> T)
- {
-     if (rank_mpi==0) {
-         cout<<"\nComputing S(lx, lz) using 2D scalar field data..\n";
-     }
-     
-    int starPt = 0;
-    int endPt = Nx*Nz/(4*P);
-
-    Array<int, 3> index_list;
-    compute_index_list(index_list, Nx, Nz);
-    Array<double,2> dT;
-    
-    for (int ix=starPt; ix<endPt; ix++){
-        int x=index_list(ix, 0, rank_mpi);
-        int z=index_list(ix, 1, rank_mpi);
-       			
-        dT.resize(Nx-x,Nz-z);
-        int count=(Nx-x)*(Nz-z);
-
-        dT(Range::all(),Range::all())=T(Range(x,Nx-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Nz-z-1));
-        		
-        for (int p=0; p<=q2-q1; p++){
-            double St = sum(pow(dT(Range::all(),Range::all()),q1+p))/(count);
-            Array<int, 1> X, Z, p_arr;
-            Array<double, 1> St_arr;
-            
-            if (rank_mpi==0) {
-                X.resize(P);
-                Z.resize(P);
-                p_arr.resize(P);
-                St_arr.resize(P);
-            }
-        
-            MPI_Gather(&x, 1, MPI_INT, X.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-            MPI_Gather(&z, 1, MPI_INT, Z.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-            MPI_Gather(&St, 1, MPI_DOUBLE_PRECISION, St_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
-            MPI_Gather(&p, 1, MPI_INT, p_arr.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-
-            if (rank_mpi==0) {
-                for (int i=0; i<P; i++) {
-                    SF_Grid2D_scalar(X(i), Z(i), p_arr(i)) = St_arr(i);
-                } 
-            }
-        }
-    }
-    if (rank_mpi==0) {
-        SF_Grid2D_scalar(0,0,Range::all())=0;
-    }
+{
+ if (rank_mpi==0) {
+  cout<<"\nComputing S(lx, lz) using 2D scalar field data..\n";
  }
+ int starPt = 0;
+ int endPt = Nx*Nz/(4*P);
+
+ Array<int, 3> index_list;
+ compute_index_list(index_list, Nx, Nz);
+ Array<double,2> dT;
+    
+ for (int ix=starPt; ix<endPt; ix++){
+  int x=index_list(ix, 0, rank_mpi);
+  int z=index_list(ix, 1, rank_mpi);
+  		
+  dT.resize(Nx-x,Nz-z);
+  int count=(Nx-x)*(Nz-z);
+
+  dT(Range::all(),Range::all())=T(Range(x,Nx-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Nz-z-1));
+        		
+  for (int p=0; p<=q2-q1; p++){
+   double St = sum(pow(dT(Range::all(),Range::all()),q1+p))/(count);
+   Array<int, 1> X, Z, p_arr;
+   Array<double, 1> St_arr;
+     
+   if (rank_mpi==0) {
+    X.resize(P);
+    Z.resize(P);
+    p_arr.resize(P);
+    St_arr.resize(P);
+   }
+        
+   MPI_Gather(&x, 1, MPI_INT, X.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
+   MPI_Gather(&z, 1, MPI_INT, Z.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
+   MPI_Gather(&St, 1, MPI_DOUBLE_PRECISION, St_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+   MPI_Gather(&p, 1, MPI_INT, p_arr.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+   if (rank_mpi==0) {
+    for (int i=0; i<P; i++) {
+     SF_Grid2D_scalar(X(i), Z(i), p_arr(i)) = St_arr(i);
+    } 
+   }
+  }
+ }
+ if (rank_mpi==0) {
+  SF_Grid2D_scalar(0,0,Range::all())=0;
+ }
+}
  ```
 
 In the next section, we discuss the validation of our code.
