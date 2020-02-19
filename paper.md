@@ -64,7 +64,7 @@ We employ Message Passing Interface (MPI) to parallelise the code.  The points (
 
 The current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. To save time and memory, ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation.
 
-``
+```
 void SF_scalar_2D(Array<double,2> T)
  {
      if (rank_mpi==0) {
@@ -115,7 +115,7 @@ void SF_scalar_2D(Array<double,2> T)
         SF_Grid2D_scalar(0,0,Range::all())=0;
     }
  }
- ``
+ ```
 
 In the next section, we discuss the validation of our code.
  
