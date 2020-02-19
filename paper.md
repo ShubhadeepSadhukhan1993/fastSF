@@ -60,9 +60,13 @@ Fig. 1 exhibits a brief schematic diagram for the methodology to compute the str
 
 Note that an alternative straighter method is to navigate a pair of points through the entire domain and compute the structure functions for every distance between the two points. However, this requires six nested loops for three-dimensional domains (four nested loops for two dimensional domains) because it is not possible to employ vectorisation using this technique. We remark that the strategy used in our code makes it approximately twenty times faster than what it would have been if six nested `for` loops were used for computing the structure functions.
 
-We employ Message Passing Interface (MPI) to parallelise the code.  The points ($\mathbf{l}$) of the domain are distributed among the processors; thus, each processor computes the structure functions for the points assigned to it. The input fields are accessible to all the processors to minimize the need of communication. The function `compute_index_list` distributes the load equally among the processors. The master processor stores the structure function array; it receives the structure functions computed for different $\mathbf{l}$ from all the processors and assigns them to the appropriate index of the structure function array.  
+We employ Message Passing Interface (MPI) to parallelise the code.  The points ($\mathbf{l}$) of the domain are distributed among the processors along $x$ and $y$ directions for three dimensions, and along $x$ and $z$ directions for two dimensions. Each processor computes the structure functions for the points assigned to it. The input fields are accessible to all the processors to minimize the need of communication. The function `compute_index_list` distributes the load equally among the processors. The master processor stores the structure function array; it receives the structure functions computed for different $\mathbf{l}$ from all the processors and assigns them to the appropriate index of the structure function array.  
 
 The current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. To save time and memory, ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation.
+
+We summarize the computation procedure in the pseudo-code below, taking the example of structure functions for two-dimensional scalar field.
+
+* af
 
 ```
     
