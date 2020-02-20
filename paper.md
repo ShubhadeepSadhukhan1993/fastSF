@@ -76,7 +76,7 @@ Procedure:
     * for $z=0$ to $N_z$:
         * l_z = zdz
         * Define $\delta \mathbf{u} = \mathbf{u}[x:N_x, y:N_y, z:N_z]-\mathbf{u}[0:N_x-x, 0:N_y-y, 0:N_z-z]
-        * Compute $\delta u_{\parallel} = \frac{\delta \mathbf{u} \cdot \mathbf{l}}{|\mathbf{l}|}
+        * Compute $\delta u_{\parallel} = \frac{\delta \mathbf{u} \cdot \mathbf{l}}{|\mathbf{l}|}$
     
   
 
