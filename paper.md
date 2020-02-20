@@ -96,7 +96,8 @@ We summarize the computation procedure in the pseudo-code below, taking the exam
             
 * Stop
 
-In the next section, we discuss the validation of our code.
+In the next section, we discuss the scaling of our code.
+
  
 # Results
 
@@ -140,6 +141,17 @@ We normalize the third, fifth, and seventh-order longitudinal velocity structure
 The figure clearly shows that in the inertial range ($0.2<l<0.8$), the normalized third-order longitudinal velocity structure function is fairly close to $4/5$ (represented by dashed line), consistent with Kolmogorov's theory. Moreover, the normalized fifth and seventh-order structure functions show a plateau for the same range of $l$, thus exhibiting consistency with She-Leveque's model. Note that we expect more accurate results for higher resolution simulations [@Verma:Pramana2013tarang].
 
 The results obtained from Problems 1 and 2 thus validate ``Kolmogorov41``. 
+
+# Scaling of `fastSF`
+
+We test the scaling of `fastSF` by running it to compute the third-order longitudinal structure function for an idealized velocity field of $128^3$ grid resolution, employing a maximum of 1024 processors. The velocity field is given by $$\mathbf{u} = 
+\begin{bmatrix} 
+x \\ y \\z
+\end{bmatrix}.$$
+We perform four runs on Shaheen II for this problem using 16, 64, 256, and 1024 processors. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of processors. The data-points follow $T^{-1} \sim p$ curve to a good approximation. Thus, we conclude that our code exhibits strong scaling. 
+
+![Scaling of `fastSF` for the computation of longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid. \label{Scaling}](SF_scaling.png)
+
 
 # Conclusions
 
