@@ -75,8 +75,8 @@ Procedure:
     * For every processor and $i_x$, determine the column ($x$ and $y$) such that load is evenly distributed among the processors. Note that $l_x=xdx$ and $l_y=ydy$.
     * for $z=0$ to $N_z$:
         * l_z = zdz
-        * Define $\delta \mathbf{u} = \mathbf{u}[x:N_x, y:N_y, z:N_z]-\mathbf{u}[0:N_x-x, 0:N_y-y, 0:N_z-z]
-        * Compute $\delta u_{\parallel} = \frac{\delta \mathbf{u} \cdot \mathbf{l}}{|\mathbf{l}|}$
+        * Define $\delta \mathbf{u} = \mathbf{u}[x:N_x, y:N_y, z:N_z]-\mathbf{u}[0:N_x-x, 0:N_y-y, 0:N_z-z]$.
+        * Compute $\delta u_{\parallel} = \frac{\delta \mathbf{u} \cdot \mathbf{l}}{|\mathbf{l}|}$.
     
   
 
