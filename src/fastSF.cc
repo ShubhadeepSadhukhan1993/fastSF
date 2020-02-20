@@ -58,7 +58,6 @@ using namespace blitz;
 
 //Function declarations
 void Read_para(); 
-void write_2D(Array<double,2>, string);
 void write_3D(Array<double,3>, string, int);
 void write_4D(Array<double,4>, string, int);
 void read_2D(Array<double,2>, string, string);
@@ -383,6 +382,14 @@ int main(int argc, char *argv[]) {
     MPI_Init(NULL, NULL);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank_mpi);
     MPI_Comm_size(MPI_COMM_WORLD, &P);
+
+    //set the number of processors in x direction
+    if (argc>1) {
+        px = std::atoi(argv[1]);
+    }
+    else {
+        px = 1;
+    }
 
     //Initiallizing h5si
     h5::init();
@@ -1158,25 +1165,6 @@ void compute_time_elapsed(timeval start_t, timeval end_t, double& elapsed){
 }
 
 
-/**
- ********************************************************************************************************************************************
- * \brief   Function to write the structure functions as function of \f$ l \f$ as a 2D hdf5 file.
- *
- *          This function reads writes the structure functions as a 2D array of dimensions \f$ (N_l \times p) \f$. Here, \f$N_l = \sqrt{Nx^2 + Ny^2 + Nz^2}\f$ is the
- *          number of equidistant points from \f$ 0 \f$ to \f$ L \f$, where \f$ L \f$ is the length of the diagonal of the domain in which the structure functions are
- *          calculated. \f$ p \f$ is the order of the structure functions.
- *
- * \param   A is the 2D array to store the structure functions.
- * \param   file is the name of the hdf5 file and the dataset in which the structure functions are stored.
- ********************************************************************************************************************************************
- */
-void write_2D(Array<double,2> A,string file) {
-  int np=A(Range::all(),0).size();
-  int nr=A(0,Range::all()).size();
-  h5::File f("out/"+file+".h5", "w");
-  h5::Dataset ds = f.create_dataset(file, h5::shape(np,nr), "double");
-  ds << A.data();
-}
 
 /**
  ********************************************************************************************************************************************
@@ -1310,9 +1298,6 @@ void Read_para() {
   
     para["structure_function"]["q1"]>>q1;
     para["structure_function"]["q2"]>>q2;
-  
-    para["number_of_proc_along_x"]>>px;
-
     para["test"]["test_switch"]>>test_switch;
   
     if (Nx==1){dx=0;}
@@ -1334,13 +1319,13 @@ void Read_para() {
     }
     if (Nx/2%px != 0) {
         if (rank_mpi==0){
-            cout<<"ERROR! Number of processors in x direction should be less or equal to Nx/4 and some power of 2\n Aborting...\n";
+            cout<<"ERROR! Number of processors in x direction should be less or equal to Nx/2 and some power of 2\n Aborting...\n";
             exit(1);
         }
     }
     if (Ny/2%(P/px) != 0) {
         if (rank_mpi==0){
-            cout<<"ERROR! Number of processors in y direction should be less or equal to Ny/4 and some power of 2\n Aborting...\n";
+            cout<<"ERROR! Number of processors in y direction should be less or equal to Ny/2 and some power of 2\n Aborting...\n";
             exit(1);
         }
     }  
@@ -1505,8 +1490,7 @@ void SFunc3D(
 	if (rank_mpi==0) {
         cout<<"\nComputing longitudinal and transverse S(lx, ly, lz) using 3D velocity field data..\n";
     }
-    int starPt = 0;
-    int endPt = Nx*Ny/(4*P);
+    int c_per_proc = Nx*Ny/(4*P);
 
     Array<int, 3> index_list;
     compute_index_list(index_list, Nx, Ny);
@@ -1515,7 +1499,7 @@ void SFunc3D(
     Array<double,3> dUz;
     Array<double,3> dUpll;
     
-    for (int ix=starPt; ix<endPt; ix++){
+    for (int ix=0; ix<c_per_proc; ix++){
         int x=index_list(ix, 0, rank_mpi);
         int y=index_list(ix, 1, rank_mpi);
   		for(int z=0; z<Nz/2; z++){
@@ -1608,8 +1592,8 @@ void SFunc_long_3D(
 if (rank_mpi==0) {
         cout<<"\nComputing longitudinal S(lx, ly, lz) using 3D velocity field data..\n";
     }
-    int starPt = 0;
-    int endPt = Nx*Ny/(4*P);
+    
+    int c_per_proc = Nx*Ny/(4*P);
 
     Array<int, 3> index_list;
     compute_index_list(index_list, Nx, Ny);
@@ -1618,7 +1602,7 @@ if (rank_mpi==0) {
     Array<double,3> dUz;
     Array<double,3> dUpll;
     
-    for (int ix=starPt; ix<endPt; ix++){
+    for (int ix=0; ix<c_per_proc; ix++){
         int x=index_list(ix, 0, rank_mpi);
         int y=index_list(ix, 1, rank_mpi);
   		for(int z=0; z<Nz/2; z++){
@@ -1701,8 +1685,7 @@ if (rank_mpi==0) {
          cout<<"\nComputing longitudinal and transverse S(lx, lz) using 2D velocity field data..\n";
      }
 
-    int starPt = 0;
-    int endPt = Nx*Nz/(4*P);
+    int p_per_proc = Nx*Nz/(4*P);
 
     Array<int, 3> index_list;
     compute_index_list(index_list, Nx, Nz);
@@ -1710,7 +1693,7 @@ if (rank_mpi==0) {
     Array<double,2> dUx;
     Array<double,2> dUpll;
     
-    for (int ix=starPt; ix<endPt; ix++){
+    for (int ix=0; ix<p_per_proc; ix++){
         int x=index_list(ix, 0, rank_mpi);
         int z=index_list(ix, 1, rank_mpi);
         dUx.resize(Nx-x,Nz-z);
@@ -1787,8 +1770,7 @@ void SFunc_long_2D(
          cout<<"\nComputing longitudinal S(lx, lz) using 2D velocity field data..\n";
      }
 
-    int starPt = 0;
-    int endPt = Nx*Nz/(4*P);
+    int p_per_proc = Nx*Nz/(4*P);
 
     Array<int, 3> index_list;
     compute_index_list(index_list, Nx, Nz);
@@ -1796,7 +1778,7 @@ void SFunc_long_2D(
     Array<double,2> dUx;
     Array<double,2> dUpll;
     
-    for (int ix=starPt; ix<endPt; ix++){
+    for (int ix=0; ix<p_per_proc; ix++){
         int x=index_list(ix, 0, rank_mpi);
         int z=index_list(ix, 1, rank_mpi);
         dUx.resize(Nx-x,Nz-z);
@@ -1866,15 +1848,14 @@ void SF_scalar_3D(
      if (rank_mpi==0) {
          cout<<"\nComputing S(lx, ly, lz) using 3D scalar field data..\n";
      }
-     
-    int starPt = 0;
-    int endPt = Nx*Ny/(4*P);
+    
+    int c_per_proc = Nx*Ny/(4*P);
 
     Array<int, 3> index_list;
     compute_index_list(index_list, Nx, Ny);
     Array<double,3> dT;
     
-    for (int ix=starPt; ix<endPt; ix++){
+    for (int ix=0; ix<c_per_proc; ix++){
         int x=index_list(ix, 0, rank_mpi);
         int y=index_list(ix, 1, rank_mpi);
         for(int z=0; z<Nz/2; z++){
@@ -1937,32 +1918,27 @@ void SF_scalar_3D(
  * \param SF_Grid_Node is a 3D array containing the values of the nodal structure functions as function of \f$ (l_x,l_z) \f$ for a range of orders specified by the user.
  ********************************************************************************************************************************************
  */
-void SF_scalar_2D(
-         Array<double,2> T)
+void SF_scalar_2D(Array<double,2> T)
  {
      if (rank_mpi==0) {
          cout<<"\nComputing S(lx, lz) using 2D scalar field data..\n";
      }
-     
-    int starPt = 0;
-    int endPt = Nx*Nz/(4*P);
+
+    int p_per_proc = Nx*Nz/(4*P);
 
     Array<int, 3> index_list;
     compute_index_list(index_list, Nx, Nz);
     Array<double,2> dT;
     
-    for (int ix=starPt; ix<endPt; ix++){
+    for (int ix=0; ix<p_per_proc; ix++){
         int x=index_list(ix, 0, rank_mpi);
         int z=index_list(ix, 1, rank_mpi);
        			
         dT.resize(Nx-x,Nz-z);
-        		
         int count=(Nx-x)*(Nz-z);
-        double r=sqrt(x*x*dx*dx+z*z*dz*dz);
 
         dT(Range::all(),Range::all())=T(Range(x,Nx-1),Range(z,Nz-1))-T(Range(0,Nx-x-1),Range(0,Nz-z-1));
         		
-
         for (int p=0; p<=q2-q1; p++){
             double St = sum(pow(dT(Range::all(),Range::all()),q1+p))/(count);
             Array<int, 1> X, Z, p_arr;
@@ -1990,7 +1966,5 @@ void SF_scalar_2D(
     if (rank_mpi==0) {
         SF_Grid2D_scalar(0,0,Range::all())=0;
     }
-
-
  }
 
