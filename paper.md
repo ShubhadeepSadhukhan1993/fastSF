@@ -74,17 +74,13 @@ Procedure:
 
 * Columns per processor = $\frac{N_xN_y}{4P}$, each column has $N_z$ points.
 
-* $dx=\frac{L_x}{N_x-1}$, $dy=\frac{L_y}{N_y-1}$, $dz=\frac{\L_z}{N_z-1}$
-
 * for $i_x$ = 0 to columns per processor:
 
-    * For every processor and $i_x$, determine the column ($x$ and $y$) such that load is evenly distributed among the processors. Note that $l_x=xdx$ and $l_y=ydy$.
+    * For every processor and $i_x$, determine the column ($l_x,l_y$) such that load is evenly distributed among the processors. 
     
-    * for $z=0$ to $N_z$:
-    
-        * $l_z = zdz$.
+    * for $l_z$:
         
-        * Define $\delta \mathbf{u} = \mathbf{u}[x:N_x, y:N_y, z:N_z]-\mathbf{u}[0:N_x-x, 0:N_y-y, 0:N_z-z]$.
+        * Define $\delta \mathbf{u} = \mathbf{u}[l_x:L_x, l_y:L_y, l_z:L_z]-\mathbf{u}[0:L_x-l_x, 0:L_y-l_y, 0:L_z-l_z]$.
         
         * Compute $\delta u_{\parallel} = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$, $\delta u_{\perp} = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$.
     
