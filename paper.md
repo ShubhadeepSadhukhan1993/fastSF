@@ -68,9 +68,9 @@ We summarize the computation procedure in the pseudo-code below, taking the exam
 
 **Pseudo-code**
 
-Data: Velocity field $\mathbf{u}$ of grid size $N_x \times N_z$, number of processors $P$, dimensions of the domain ($L_x \times L_y \times L_z$)
+*Data*: Velocity field $\mathbf{u}$ of grid size $N_x \times N_z$, number of processors $P$, dimensions of the domain ($L_x \times L_y \times L_z$)
 
-Procedure:
+*Procedure*:
 
 * Columns per processor = $\frac{N_xN_y}{4P}$, each column has $N_z$ points.
 
