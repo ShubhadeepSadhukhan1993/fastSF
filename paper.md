@@ -86,8 +86,7 @@ Procedure:
         
         * for order $q$:
         
-            * $S_q^{u_{\parallel}} =$ Average of $\delta u_{\parallel}^q$ array; $S_q^{u_{\perp}} = Average of $\delta u_{\perp}^q$ array.   
-    
+            * $S_q^{u_{\parallel}} =$ Average of $\delta u_{\parallel}^q$ 
   
 
 ```
