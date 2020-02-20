@@ -1,5 +1,5 @@
 ---
-title: 'Kolmogorov41: A hybrid parallel code for computing velocity and scalar structure functions'
+title: 'fastSF: A hybrid parallel code for computing velocity and scalar structure functions'
 
 tags:
   - C++
@@ -56,7 +56,7 @@ In the next section, we provide a brief description of the code.
 # Design of the Code
 ``fastSF``  is written in C++. The code uses the Blitz++ library for vectorized array operations. The velocity structure functions ($S_q^{u_\parallel}(\mathbf{l})$ and $S_q^{u_\perp}(\mathbf{l})$) and the scalar structure functions ($S_q^{\theta}(\mathbf{l})$) are computed and stored in a Blitz array. ``fastSF`` contains separate functions for computing the scalar and the velocity structure functions. Also, separate functions are called for two-dimensional or three-dimensional input fields. However, the basic design of all the functions is the same, as described below.
 
-Fig. 1 exhibits a brief schematic diagram for the methodology to compute the structure functions. The code navigates through different points in the domain, with each point corresponding to the position vector $\mathbf{l}$. For every $\mathbf{l}$, two subdomains of equal dimensions are considered. The origin of the first subdomain (pink) coincides with that of the main domain. The origin of the second subdomain (green) lies on the position $\mathbf{l}$. The velocity (or scalar) differential field array is then computed by subtracting the velocity (or scalar) field in all the points in the first subdomain from the corresponding points in the second subdomain. The code computes $\delta U_{\parallel}^q$ and $\delta U_{\perp}^q$ arrays for every velocity differential, and then calculates the mean of these arrays to obtain the velocity structure functions. Similarly, the code computes the mean of the scalar differential array to obtain the scalar structure functions. Note that we employ vectorisation in computing the aforementioned arrays as this makes the code efficient and fast. 
+Fig. 1 exhibits a brief schematic diagram for the methodology to compute the structure functions. The code navigates through different points in the domain, with each point corresponding to the position vector $\mathbf{l}$. $l_x$, $l_y$, and $l_z$ are varied from 0 to $L_x/2$, $L_y/2$, and $L_z/2$ respectively, where $L_x$, $L_y$, and $L_z$ are the dimensions of the domain. Note that structure functions are important for intermediate scales (inertial range) only; thus computation of these quantites for large values of $l$ is not required. For every $\mathbf{l}$, two subdomains of equal dimensions are considered. The origin of the first subdomain (pink) coincides with that of the main domain. The origin of the second subdomain (green) lies on the position $\mathbf{l}$. The velocity (or scalar) differential field array is then computed by subtracting the velocity (or scalar) field in all the points in the first subdomain from the corresponding points in the second subdomain. The code computes $\delta U_{\parallel}^q$ and $\delta U_{\perp}^q$ arrays for every velocity differential, and then calculates the mean of these arrays to obtain the velocity structure functions. Similarly, the code computes the mean of the scalar differential array to obtain the scalar structure functions. Note that we employ vectorisation in computing the aforementioned arrays as this makes the code efficient and fast. 
 
 ![A schematic diagram showing the procedure of computing the structure functions using vectorization.\label{Schematic}](Schematic.png)
 
@@ -101,8 +101,8 @@ In the next section, we discuss the scaling of our code.
  
 # Results
 
-We validate `Kolmogorov41` by using it to compute the structure functions for specific cases, and then comparing our results with those obtained analytically.
-We validate `Kolmogorov41` by comparing the numerical results with analytical results for idealized $\mathbf{u}$ and $\theta$ fields as well as with the predictions of K41 [@Kolmogorov:Dissipation; @Kolmogorov:Structure].
+We validate `fastSF` by using it to compute the structure functions for specific cases, and then comparing our results with those obtained analytically.
+We validate `fastSF` by comparing the numerical results with analytical results for idealized $\mathbf{u}$ and $\theta$ fields as well as with the predictions of K41 [@Kolmogorov:Dissipation; @Kolmogorov:Structure].
 
 ### Problem 1
 
@@ -116,11 +116,11 @@ For the above fields, it can be analytically shown that the longitudinal and the
 $$S_q^{u_\parallel} = (l_x^2 + l_z^2)^{q/2} = l^q,$$
 $$S_q^{u_\perp} = 0,$$
 $$S_q^\theta = (l_x+l_z)^q.$$
-We run ``Kolmogorov41`` to compute the velocity and scalar structure functions for the above fields. The resolution of the fields and the domain size are $32^2$ and $1 \times 1$ respectively. We plot the second and the third-order longitudinal velocity structure functions versus $l$ in Fig. \ref{SFTest}. Clearly, $S_2^{u_\parallel}(l)$ and $S_3^{u_\parallel}(l)$ equal $l^2$ and $l^3$ respectively, consistent with the analytical results. Figure \ref{SFScalar} exhibits the density plots of the computed second-order scalar structure function $S_2^{\theta}(\mathbf{l})$ along with $(l_x + l_z)^2$. The two plots are very similar, thus showing the ``Kolmogorov41`` computes the scalar structure function correctly.
+We run ``fastSF`` to compute the velocity and scalar structure functions for the above fields. The resolution of the fields and the domain size are $32^2$ and $1 \times 1$ respectively. We plot the second and the third-order longitudinal velocity structure functions versus $l$ in Fig. \ref{SFTest}. Clearly, $S_2^{u_\parallel}(l)$ and $S_3^{u_\parallel}(l)$ equal $l^2$ and $l^3$ respectively, consistent with the analytical results. Figure \ref{SFScalar} exhibits the density plots of the computed second-order scalar structure function $S_2^{\theta}(\mathbf{l})$ along with $(l_x + l_z)^2$. The two plots are very similar, thus showing the ``fastSF`` computes the scalar structure function correctly.
 
 ![For the velocity field defined in Problem 1: plots of the second and third-order longitudinal structure functions vs. $l$. The second and third-order structure functions equal $l^2$ and $l^3$ respectively.\label{SFTest}](SF_test.png)
 
-The above problem is used as a test case for the the code. The user is required to execute the shell script `Kolmogorov41-master/runTest.sh` to run the test case. On doing so, the code generates the velocity and the scalar fields as per the above relation. After computing the structure functions, the code computes the percentage difference between the theoretical and the computed values of the structure functions. If the error does not exceed $1\times 10^{-10}$, the code is deemed to have passed.
+The above problem is used as a test case for the the code. The user is required to execute the shell script `fastSF/runTest.sh` to run the test case. On doing so, the code generates the velocity and the scalar fields as per the above relation. After computing the structure functions, the code computes the percentage difference between the theoretical and the computed values of the structure functions. If the error does not exceed $1\times 10^{-10}$, the code is deemed to have passed.
 
 ![For the scalar field defined in Problem 1: (a) Density plot of the second-order scalar structure function as function of the displacement vector. (b) Density plot of $(l_x+l_z)^2$, which is the analytical value of the second-order scalar structure function. The two density plots match identically.\label{SFScalar}](SF_scalar.png)
 
@@ -133,14 +133,14 @@ where $\epsilon$ is the viscous dissipation rate [@Kolmogorov:Dissipation; @Kolm
 $$ \zeta_q = \frac{q}{9} + 2 \left ( 1 - \left ( \frac{2}{3} \right )^{q/3} \right ).$$ 
 
 
-We compute the longitudinal velocity structure functions of $q=3,5,7$ using the simulation data of three-dimensional homogeneous isotropic turbulence with Reynolds number (Re) of 5700. The simulation was performed using TARANG [@Verma:Pramana2013tarang; @Chatterjee:JPDC2018] on a $512^3$ grid with the domain size of ($2\pi \times 2\pi \times 2\pi$). For more details on the simulation, refer to @Sadhukhan:PRF2019. We run ``Kolmogorov41`` on a Cray XC40 system (Shaheen II of KAUST) to compute the structure functions, employing 512 MPI and 32 OpenMP processes. The code took $5 \times 10^4$ seconds to complete the computations under the aforementioned parallelization configuration.
+We compute the longitudinal velocity structure functions of $q=3,5,7$ using the simulation data of three-dimensional homogeneous isotropic turbulence with Reynolds number (Re) of 5700. The simulation was performed using TARANG [@Verma:Pramana2013tarang; @Chatterjee:JPDC2018] on a $512^3$ grid with the domain size of ($2\pi \times 2\pi \times 2\pi$). For more details on the simulation, refer to @Sadhukhan:PRF2019. We run ``fastSF`` on a Cray XC40 system (Shaheen II of KAUST) to compute the structure functions, employing 512 MPI and 32 OpenMP processes. The code took $5 \times 10^4$ seconds to complete the computations under the aforementioned parallelization configuration.
 
 ![For 3D homogeneous isotropic turbulence (Problem 2): plots of the negative of normalized third, fifth and seventh-order structure functions vs. $l$. The negative of the normalized third-order structure function is close to $4/5$ (dashed line) in the inertial range. \label{Hydro}](SF_hydro.png)
 
 We normalize the third, fifth, and seventh-order longitudinal velocity structure functions with $(\epsilon l)^{\zeta_q}$, where $\zeta_q$ is given by She-Leveque's relation. We plot the negative of these quantities versus $l$ in Fig. \ref{Hydro}. 
 The figure clearly shows that in the inertial range ($0.2<l<0.8$), the normalized third-order longitudinal velocity structure function is fairly close to $4/5$ (represented by dashed line), consistent with Kolmogorov's theory. Moreover, the normalized fifth and seventh-order structure functions show a plateau for the same range of $l$, thus exhibiting consistency with She-Leveque's model. Note that we expect more accurate results for higher resolution simulations [@Verma:Pramana2013tarang].
 
-The results obtained from Problems 1 and 2 thus validate ``Kolmogorov41``. 
+The results obtained from Problems 1 and 2 thus validate ``fastSF``. 
 
 # Scaling of `fastSF`
 
@@ -155,12 +155,12 @@ We perform four runs on Shaheen II for this problem using 16, 64, 256, and 1024 
 
 # Conclusions
 
-This paper describes the design and the validations of ``Kolmogorov41``, a hybrid parallel C++ code that computes structure functions for given velocity and scalar fields. We validate ``Kolmogorov41`` using two test cases. In the first case, we compute the structure functions using hypothetical velocity and scalar fields, and find them to be consistent with analytical results. In the second case, we compute the velocity structure functions using the fields obtained from the simulations of three-dimensional homogeneous and isotropic turbulence, and show consistency with Kolmogorov's K41 result. We believe that ``Kolmogorov41`` will be useful to turbulence community.  
+This paper describes the design and the validations of ``fastSF``, a hybrid parallel C++ code that computes structure functions for given velocity and scalar fields. We validate ``fastSF`` using two test cases. In the first case, we compute the structure functions using hypothetical velocity and scalar fields, and find them to be consistent with analytical results. In the second case, we compute the velocity structure functions using the fields obtained from the simulations of three-dimensional homogeneous and isotropic turbulence, and show consistency with Kolmogorov's K41 result. We believe that ``fastSF`` will be useful to turbulence community.  
 
 
 # Acknowledgements
 
-We thank R. Samuel, A. Chatterjee, S. Chatterjee, and M. Sharma for useful discussions during the development of ``Kolmogorov41``. Our computations were performed on Shaheen II at KAUST supercomputing laboratory, Saudi Arabia, under the project k1416. 
+We thank R. Samuel, A. Chatterjee, S. Chatterjee, and M. Sharma for useful discussions during the development of ``fastSF``. Our computations were performed on Shaheen II at KAUST supercomputing laboratory, Saudi Arabia, under the project k1416. 
 
 ---
 
