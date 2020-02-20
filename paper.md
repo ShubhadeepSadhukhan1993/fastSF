@@ -82,7 +82,11 @@ Procedure:
         
         * Define $\delta \mathbf{u} = \mathbf{u}[l_x:L_x, l_y:L_y, l_z:L_z]-\mathbf{u}[0:L_x-l_x, 0:L_y-l_y, 0:L_z-l_z]$.
         
-        * Compute $\delta u_{\parallel} = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$, $\delta u_{\perp} = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$.
+        * Compute the arrays: $\delta u_{\parallel} = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$, and $\delta u_{\perp} = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$|.
+        
+        * for order $q$:
+        
+            * $S_q^{u_{\parallel}} =$ Average of $\delta u_{\parallel}^q$ array; $S_q^{u_{\perp}} = Average of $\delta u_{\perp}^q$ array.   
     
   
 
