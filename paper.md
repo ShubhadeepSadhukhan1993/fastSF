@@ -64,9 +64,21 @@ We employ Message Passing Interface (MPI) to parallelise the code.  The points (
 
 The current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. To save time and memory, ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation.
 
-We summarize the computation procedure in the pseudo-code below, taking the example of structure functions for two-dimensional scalar field.
+We summarize the computation procedure in the pseudo-code below, taking the example of structure functions for three-dimensional velocity field.
 
-* af
+**Pseudo-code**
+Data: Velocity field $\mathbf{u}$ of grid size $N_x \times N_z$, number of processors $P$, dimensions of the domain ($L_x \times L_y \times L_z$)
+Procedure:
+* Columns per processor = $\frac{N_xN_y}{4P}$, each column has $N_z$ points.
+* $dx=\frac{L_x}{N_x-1}$, $dy=\frac{L_y}{N_y-1}$, $dz=\frac{\L_z}{N_z-1}$
+* for $i_x$ = 0 to columns per processor:
+    * For every processor and $i_x$, determine the column ($x$ and $y$) such that load is evenly distributed among the processors. Note that $l_x=xdx$ and $l_y=ydy$.
+    * for $z=0$ to $N_z$:
+        * l_z = zdz
+        * Define $\delta \mathbf{u} = \mathbf{u}[x:N_x, y:N_y, z:N_z]-\mathbf{u}[0:N_x-x, 0:N_y-y, 0:N_z-z]
+        * Compute $\delta u_{\parallel} = \frac{\delta \mathbf{u} \cdot \mathbf{l}}{|\mathbf{l}|}
+    
+  
 
 ```
     
