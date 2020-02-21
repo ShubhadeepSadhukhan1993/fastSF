@@ -33,7 +33,7 @@ bibliography: paper.bib
 
 # Summary
 
-Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properites of turbulent flows [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]. Some of the earlier works comprising of such analysis are those of @Gotoh:PF2002, @Kaneda:PF2003, and @Ishihara:ARFM2009 for three-dimensional homogeneous isotropic turbulence; @Yeung:PF2005 and @Ray:NJP2008 for passive scalar turbulence; @Biferale:NJP2004 for two-dimensional turbulence; and @Kunnen:PRE2008, @Kaczorowski:JFM2013, and @Bhattacharya:PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of ``fastSF``, a hybrid parallel code to compute velocity and scalar structure functions. 
+Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properites of turbulent flows [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]. Some of the earlier works comprising of such analysis are those of @Gotoh:PF2002, @Kaneda:PF2003, and @Ishihara:ARFM2009 for three-dimensional homogeneous isotropic turbulence; @Yeung:PF2005 and @Ray:NJP2008 for passive scalar turbulence; @Biferale:NJP2004 for two-dimensional turbulence; and @Kunnen:PRE2008, @Kaczorowski:JFM2013, and @Bhattacharya:PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of ``fastSF``, a parallel code to compute velocity and scalar structure functions. 
 
  ``fastSF``, written in C++, employs a combination of distributed (MPI) memory parallelization [@Pacheco:book:PP] to compute the structure functions for a given velocity or scalar field. In this code, we minimize the communication between the processors by sharing the input field data in all the MPI processes. Thus, we save considerable time that would otherwise be spent on communication. The user has a choice on the type (scalar or vector) and the dimensions of the fields to be read by the code, and the range of the orders of the structure functions to be computed. The code writes the computed structure functions to hdf5 files that can be further processed by the user. We remark that our code has been used by  for analysing the longitudinal velocity structure functions of turbulent thermal convection.
 
@@ -56,21 +56,17 @@ In the next section, we provide a brief description of the code.
 # Design of the Code
 ``fastSF``  is written in C++. The code uses the Blitz++ library for vectorized array operations. The velocity structure functions ($S_q^{u_\parallel}(\mathbf{l})$ and $S_q^{u_\perp}(\mathbf{l})$) and the scalar structure functions ($S_q^{\theta}(\mathbf{l})$) are computed and stored in a Blitz array. ``fastSF`` contains separate functions for computing the scalar and the velocity structure functions. Also, separate functions are called for two-dimensional or three-dimensional input fields. However, the basic design of all the functions is the same, as described below.
 
-Figure \ref{Schematic} exhibits a schematic diagram for the methodology to compute the structure functions. The code navigates through different points in the domain, with each point corresponding to the position vector $\mathbf{l}=(l_x,l_y,l_z)$.  As shown in Fig. \ref{Schematic}, there are two subdomains of equal dimensions (represented in green and pink colors) for every $\mathbf{l}$. Let us represent the green subdomain $G$ and the pink subdomain by $P$. These subdomains are described as:
-$$G = \{(x,y,z): l_x \leq x \leq L_x, l_y \leq y \leq L_y, l_z \leq z \leq L_z \} $$
-$$P = \{(x,y,z): 0 \leq x \leq L_x-l_x, 0 \leq y \leq L_y-l_y, 0 \leq z \leq L_z-l_z \} $$
-
-The origin of the second subdomain (green) lies on the position $\mathbf{l}$. The velocity (or scalar) differential field array is then computed by subtracting the velocity (or scalar) field in all the points in the first subdomain from the corresponding points in the second subdomain. The code computes $\delta U_{\parallel}^q$ and $\delta U_{\perp}^q$ arrays for every velocity differential, and then calculates the mean of these arrays to obtain the velocity structure functions. Similarly, the code computes the mean of the scalar differential array to obtain the scalar structure functions. Note that we employ vectorisation in computing the aforementioned arrays as this makes the code efficient and fast. 
+Figure \ref{Schematic} exhibits a schematic diagram for the methodology to compute the structure functions. The code navigates through different points in the domain, with each point corresponding to the position vector $\mathbf{l}=(l_x,l_y,l_z)$.  As shown in Fig. \ref{Schematic}, there are two subdomains of equal dimensions (represented in green and pink colors) for every $\mathbf{l}$. Let us represent the green subdomain by $D_{\mathrm{green}}$ and the pink subdomain by $D_{\mathrm{pink}}$. These subdomains are described as:
+$$D_{\mathrm{green}} = \{(x,y,z): l_x \leq x \leq L_x, l_y \leq y \leq L_y, l_z \leq z \leq L_z \} $$
+$$D_{\mathrm{pink}} = \{(x,y,z): 0 \leq x \leq L_x-l_x, 0 \leq y \leq L_y-l_y, 0 \leq z \leq L_z-l_z \} $$
+The velocity (or scalar) differential field array is then computed by subtracting the velocity (or scalar) field in all the points in the subdomain $D_{\mathrm{pink}}$ from the corresponding points in the subdomain $D_{\mathrm{green}}$. The code computes $\delta U_{\parallel}^q$ and $\delta U_{\perp}^q$ arrays for every velocity differential, and then calculates the mean of these arrays to obtain the velocity structure functions. Similarly, the code computes the mean of the scalar differential array to obtain the scalar structure functions. Note that we employ vectorisation in computing the aforementioned arrays. Vectorization makes the code approximately twenty times faster than what it would have been if nested `for` loops were used instead.  
 
 ![A schematic diagram showing the procedure of computing the structure functions using vectorization.\label{Schematic}](Schematic.png)
 
-$\mathbf{l}$ are varied from 0 to $L_x/2$, $L_y/2$, and $L_z/2$ respectively, where $L_x$, $L_y$, and $L_z$ are the dimensions of the domain. Note that structure functions are important for intermediate scales (inertial range) only; thus computation of these quantites for large values of $l$ is not required.
+The current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. To save time and memory, ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation. Further, the structure functions are important for intermediate scales (inertial range) only; thus computation of these quantites for large values of $l$ is not required.
+Therefore, $\mathbf{l}$ is varied up to half the domain size, ($L_x/2, L_y/2, L_z/2$), further saving computational resources.
 
-Note that an alternative straighter method is to navigate a pair of points through the entire domain and compute the structure functions for every distance between the two points. However, this requires six nested loops for three-dimensional domains (four nested loops for two dimensional domains) because it is not possible to employ vectorisation using this technique. We remark that the strategy used in our code makes it approximately twenty times faster than what it would have been if six nested `for` loops were used for computing the structure functions.
-
-We employ Message Passing Interface (MPI) to parallelise the code.  The points ($\mathbf{l}$) of the domain are distributed among the processors along $x$ and $y$ directions for three dimensions, and along $x$ and $z$ directions for two dimensions. Each processor computes the structure functions for the points assigned to it. The input fields are accessible to all the processors to minimize the need of communication. The function `compute_index_list` distributes the load equally among the processors. The master processor stores the structure function array; it receives the structure functions computed for different $\mathbf{l}$ from all the processors and assigns them to the appropriate index of the structure function array.  
-
-The current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. To save time and memory, ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation.
+We employ Message Passing Interface (MPI) to parallelise the code.  The points ($\mathbf{l}$) of the domain are distributed among the processors along $x$ and $y$ directions for three dimensions, and along $x$ and $z$ directions for two dimensions. The distribution of points is done in such a way that every processor gets equal load. Each processor computes the structure functions for the points assigned to it. The input fields are accessible to all the processors to minimize the need of communication. The master processor stores the structure function array; it receives the structure functions computed for different $\mathbf{l}$ from all the processors and assigns them to the appropriate index of the structure function array.  
 
 We summarize the computation procedure in the pseudo-code below, taking the example of structure functions for three-dimensional velocity field.
 
@@ -104,8 +100,18 @@ We summarize the computation procedure in the pseudo-code below, taking the exam
 
 In the next section, we discuss the scaling of our code.
 
+# Scaling of `fastSF`
+
+We test the scaling of `fastSF` by running it to compute the third-order longitudinal structure function for an idealized velocity field of $128^3$ grid resolution, employing a maximum of 1024 processors. The velocity field is given by $$\mathbf{u} = 
+\begin{bmatrix} 
+x \\ y \\z
+\end{bmatrix}.$$
+We perform four runs on Shaheen II for this problem using 16, 64, 256, and 1024 processors. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of processors. The data-points follow $T^{-1} \sim p$ curve to a good approximation. Thus, we conclude that our code exhibits strong scaling. 
+
+![Scaling of `fastSF` for the computation of longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid. \label{Scaling}](SF_scaling.png)
+
  
-# Results
+# Validation
 
 We validate `fastSF` by using it to compute the structure functions for specific cases, and then comparing our results with those obtained analytically.
 We validate `fastSF` by comparing the numerical results with analytical results for idealized $\mathbf{u}$ and $\theta$ fields as well as with the predictions of K41 [@Kolmogorov:Dissipation; @Kolmogorov:Structure].
@@ -148,20 +154,9 @@ The figure clearly shows that in the inertial range ($0.2<l<0.8$), the normalize
 
 The results obtained from Problems 1 and 2 thus validate ``fastSF``. 
 
-# Scaling of `fastSF`
-
-We test the scaling of `fastSF` by running it to compute the third-order longitudinal structure function for an idealized velocity field of $128^3$ grid resolution, employing a maximum of 1024 processors. The velocity field is given by $$\mathbf{u} = 
-\begin{bmatrix} 
-x \\ y \\z
-\end{bmatrix}.$$
-We perform four runs on Shaheen II for this problem using 16, 64, 256, and 1024 processors. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of processors. The data-points follow $T^{-1} \sim p$ curve to a good approximation. Thus, we conclude that our code exhibits strong scaling. 
-
-![Scaling of `fastSF` for the computation of longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid. \label{Scaling}](SF_scaling.png)
-
-
 # Conclusions
 
-This paper describes the design and the validations of ``fastSF``, a hybrid parallel C++ code that computes structure functions for given velocity and scalar fields. We validate ``fastSF`` using two test cases. In the first case, we compute the structure functions using hypothetical velocity and scalar fields, and find them to be consistent with analytical results. In the second case, we compute the velocity structure functions using the fields obtained from the simulations of three-dimensional homogeneous and isotropic turbulence, and show consistency with Kolmogorov's K41 result. We believe that ``fastSF`` will be useful to turbulence community.  
+This paper describes the design and the validations of ``fastSF``, a parallel C++ code that computes structure functions for given velocity and scalar fields. We validate ``fastSF`` using two test cases. In the first case, we compute the structure functions using hypothetical velocity and scalar fields, and find them to be consistent with analytical results. In the second case, we compute the velocity structure functions using the fields obtained from the simulations of three-dimensional homogeneous and isotropic turbulence, and show consistency with Kolmogorov's K41 result. We believe that ``fastSF`` will be useful to turbulence community.  
 
 
 # Acknowledgements
