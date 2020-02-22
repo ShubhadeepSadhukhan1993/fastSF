@@ -92,9 +92,7 @@ We summarize the computation procedure in the pseudo-code below, taking the exam
             
             * Send the values of $S_q^{u_{\parallel}}$, $S_q^{u_{\perp}}$, $q$, $l_x$, $l_y$, and $l_z$ to the master processor.
             
-            * If the processor is the master processor:
-            
-                * Store $S_q^{u_{\parallel}}(l_x, l_y, l_z)$, $S_q^{u_{\perp}}(l_x, l_y, l_z)$.
+            * If the processor is the master processor, store $S_q^{u_{\parallel}}(l_x, l_y, l_z)$, $S_q^{u_{\perp}}(l_x, l_y, l_z)$.
              
 * Stop
 
