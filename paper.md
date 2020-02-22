@@ -72,7 +72,7 @@ We summarize the computation procedure in the pseudo-code below, taking the exam
 
 **Pseudo-code**
 
-*Data*: Velocity field $\mathbf{u}$ of grid size $N_x \times N_z$, number of processors $P$, dimensions of the domain ($L_x \times L_y \times L_z$)
+*Data*: Velocity field $\mathbf{u}$ of grid size $N_x \times N_y \times N_z$, number of processors $P$, dimensions of the domain ($L_x \times L_y \times L_z$)
 
 *Procedure*:
 
@@ -94,28 +94,6 @@ We summarize the computation procedure in the pseudo-code below, taking the exam
             
             * If the processor is the master processor, store $S_q^{u_{\parallel}}(l_x, l_y, l_z)$, $S_q^{u_{\perp}}(l_x, l_y, l_z)$.
              
-* Stop
-
-* Columns per processor = $\frac{N_xN_y}{4P}$, each column has $N_z$ points.
-
-* for $i_x$ = 0 to columns per processor:
-
-    * For every processor and $i_x$, determine the column ($l_x,l_y$) such that load is evenly distributed among the processors. 
-    
-    * for $l_z$:
-        
-        * Define $\delta \mathbf{u} = \mathbf{u}[l_x:L_x, l_y:L_y, l_z:L_z]-\mathbf{u}[0:L_x-l_x, 0:L_y-l_y, 0:L_z-l_z]$.
-        
-        * Compute the arrays: $\delta u_{\parallel} = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$, and $\delta u_{\perp} = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$|.
-        
-        * for order $q$:
-        
-            * $S_q^{u_{\parallel}} =$ Average of $\delta u_{\parallel}^q$; $S_q^{u_{\perp}} =$ Average of $\delta u_{\perp}^q$.
-            
-            * Send the values of $S_q^{u_{\parallel}}$, $S_q^{u_{\perp}}$, $q$, $l_x$, $l_y$, and $l_z$ to the master processor.
-            
-            * If the processor is the master processor, depending on $l_x$, $l_y$, $l_z$, and $q$, store $S_q^{u_{\parallel}}$ and $S_q^{u_{\perp}}$ in the appropriate position in $S_q^{u_{\parallel}}$ and $S_q^{u_{\parallel}}$ arrays respectively.
-            
 * Stop
 
 In the next section, we discuss the scaling of our code.
