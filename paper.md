@@ -92,8 +92,10 @@ We summarize the computation procedure in the pseudo-code below, taking the exam
             
             * Send the values of $S_q^{u_{\parallel}}$, $S_q^{u_{\perp}}$, $q$, $l_x$, $l_y$, and $l_z$ to the master processor.
             
-            * If the processor is the master processor, depending on $l_x$, $l_y$, $l_z$, and $q$, store $S_q^{u_{\parallel}}$ and $S_q^{u_{\perp}}$ in the appropriate position in $S_q^{u_{\parallel}}$ and $S_q^{u_{\parallel}}$ arrays respectively.
+            * If the processor is the master processor:
             
+                * Store $S_q^{u_{\parallel}}(l_x, l_y, l_z)$, $S_q^{u_{\perp}}(l_x, l_y, l_z)$.
+             
 * Stop
 
 * Columns per processor = $\frac{N_xN_y}{4P}$, each column has $N_z$ points.
