@@ -21,9 +21,13 @@ The following libraries are required for installing and running fastSF:
 5. `HDF5`
 6. `H5SI`
 
-The instructions to download and install these libraries are provided in the following website:
+The instructions to download and install these libraries (except H5SI) are provided in the following website:
 
 (http://turbulencehub.org/index.php/codes/tarang/installing-tarang/).
+
+The instructions to download and install H5SI are provided in the following website:
+
+(https://bitbucket.org/anandogc/h5si/src/master/).
 
 ###  Compiling instruction
 
