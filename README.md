@@ -1,18 +1,18 @@
-# `Kolmogorov41`
+# `fastSF`
 
-`Kolmogorov41` is an open source hybrid parallel C++ code to compute structure functions for a given velocity or scalar field.
+`fastSF` is an open source hybrid parallel C++ code to compute structure functions for a given velocity or scalar field.
 
 ## Getting the Source Code
 
-`Kolmogorov41` is hosted on GitHub. You can download the source code from the following link:
+`fastSF` is hosted on GitHub. You can download the source code from the following link:
 
-https://github.com/ShubhadeepSadhukhan1993/Kolmogorov41
+https://github.com/ShubhadeepSadhukhan1993/fastSF
 
-## Installing `Kolmogorov41`
+## Installing `fastSF`
 
 ### Required Libraries
 
-The following libraries are required for installing and running Kolmogorov41:
+The following libraries are required for installing and running fastSF:
 
 1. `CMake`
 2. `Blitz++`
@@ -27,10 +27,10 @@ The instructions to download and install these libraries are provided in the fol
 
 ###  Compiling instruction
 
-After downloading `Kolmogorov41`, change into `Kolmogorov41/src` directory and run the command `make` in the terminal. An executable named `Kolmogorov41.out` will be created inside the `Kolmogorov41/src` folder.
+After downloading `fastSF`, change into `fastSF/src` directory and run the command `make` in the terminal. An executable named `fastSF.out` will be created inside the `fastSF/src` folder.
 
-## Testing `Kolmogorov41`
-`Kolmogorov41` offers an automated testing process to validate the code. The relevant test scripts can be found in the `tests/` folder of the code. To execute the tesing process, change into `\Kolmogorov41` and run the command 
+## Testing `fastSF`
+`fastSF` offers an automated testing process to validate the code. The relevant test scripts can be found in the `tests/` folder of the code. To execute the tesing process, change into `\fastSF` and run the command 
 
 `bash runTest.sh`. 
 
@@ -40,7 +40,7 @@ The code then runs two test cases; these are as follows.
 
 * In the second case, the code will generate a 2D scalar field given by *T = x + y + z*, and compute the structure functions for the given field. For this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.
 
-For both the cases, `Kolmogorov41` will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed. 
+For both the cases, `fastSF` will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed. 
 
 Finally, for visualization purpose, the python script `test/test.py` is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus *l*, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:
 
@@ -49,22 +49,15 @@ Finally, for visualization purpose, the python script `test/test.py` is invoked.
 3. `matplotlib`
 
 
-## Detailed instruction for running `Kolmogorov41`
+## Detailed instruction for running `fastSF`
 
-This section provides a detailed procedure to execute `Kolmogorov41` for a given velocity or scalar field.
+This section provides a detailed procedure to execute `fastSF` for a given velocity or scalar field.
 
-`Kolmogorov41` has a folder named `in`. This folder contains the input field files in `hdf5` format, and a parameters file named `para.yaml`. You need to provide the required input parameters in this file. The details of the entries are as follows:
+`fastSF` has a folder named `in`. This folder contains the input field files in `hdf5` format, and a parameters file named `para.yaml`. You need to provide the required input parameters in this file. The details of the entries are as follows:
 
 
 ### i) `para.yaml` details
 
-#### `program: grid_switch`
-
-You can enter `true` or `false` 
-
-`true`: Save the structure function output as a function of the difference vector (**l**) in addition to the magnitude of the difference vector (*l*).
- 
-`false`: Save structure functions as a function of the magnitude of the difference vector (*l*) only.
 
 #### `program: scalar_switch`
 
@@ -90,9 +83,6 @@ This entry is for structure functions for velocity  fields only. You can enter `
 
 `false`: Compute both longitudinal and transverse structure functions.
 
-#### `program: Number_of_OpenMP_processors`
-
-Enter the number of OpenMP processors. Only integer values will be accepted. 
 
 #### `grid: Nx, Ny, Nz`
 
@@ -145,30 +135,18 @@ Size of the array stored in these files should be (`Nx, Ny, Nz`).
 
 
 ### iii) Running Instructions
-Open the terminal change into `Kolmogorov41/in` folder. Open `para.yaml` to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the `in` folder run the command
+Open the terminal change into `fastSF/in` folder. Open `para.yaml` to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the `in` folder run the command
 
-`mpirun -np [number of MPI processors] src/Kolmogorov41.out`
+`mpirun -np [number of MPI processors] src/fastSF.out [number of processors in x direction]`
 
+If the number of processors in x direction is not provided, the code will take it to be 1.
 
 ### iii) Output Information
-
-#### a) If `grid_switch` is set to `false`:
-
-**Velocity structure functions**:
-
-The logitudinal  structure functions of order `q1` to `q2` are stored in the files `SF.h5` and `SF_perp.h5` respectively as two dimensional arrays. Here, the first index is for different *n*, which ranges from 0 to *N<sub>l</sub>*, where *N<sub>l</sub>* is the number of gridpoints along the diagonal of the domain. The second index is for the order.
-
-**Scalar structure functions**:
-
-The structure functions of order `q1` to `q2` are stored in the files `SF.h5` as two dimensional array. Here, the first index is for different *n*, which ranges from 0 to *N<sub>l</sub>*, where *N<sub>l</sub>* is the number of gridpoints along the diagonal of the domain. The second index is for the order.
-
-#### b) If `grid_switch` is set to `true`
 
 **Velocity structure functions**:
 
 The logitudinal and transverse structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`.h5` and `SF_Grid_perp`+`q`+`.h5` respectively as two/three dimensional arrays for two/three dimensional input fields. 
 
-Note: If you only want the logitudinal structure function then it will store the data for positive `lz` only as it saves computation time and computer memory
 
 **Scalar structure functions**:
 
@@ -176,9 +154,9 @@ The structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`
 
 ## Documentation
 
-The documentation can be found in `Kolmogorov41/docs/index.html`
+The documentation can be found in `fastSF/docs/index.html`
 
 ## License
 
-`Kolmogorov41` is released under the terms of BSD New License.
+`fastSF` is released under the terms of BSD New License.
 
