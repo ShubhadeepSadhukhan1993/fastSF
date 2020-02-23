@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['dx',['dx',['../Kolmogorov41_8cc.html#a229d11aff11a7482259d1296b9b70b8a',1,'Kolmogorov41.cc']]],
-  ['dy',['dy',['../Kolmogorov41_8cc.html#a9deb6f886b19d50e714d890c3c268efc',1,'Kolmogorov41.cc']]],
-  ['dz',['dz',['../Kolmogorov41_8cc.html#a5a198de8c3f38514f4e55231aa69cd10',1,'Kolmogorov41.cc']]]
+  ['longitudinal',['longitudinal',['../fastSF_8cc.html#a6f513fa8d2e2fe662c220f6dd41a1e15',1,'fastSF.cc']]],
+  ['lx',['Lx',['../fastSF_8cc.html#ad538aa77abb694f8faf437a41e3e8037',1,'fastSF.cc']]],
+  ['ly',['Ly',['../fastSF_8cc.html#a9b3d111ccf7f82fb80aeb6f8b229c21b',1,'fastSF.cc']]],
+  ['lz',['Lz',['../fastSF_8cc.html#aca5546164a9496b15d9ec38f2086d0e5',1,'fastSF.cc']]]
 ];

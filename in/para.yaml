@@ -2,10 +2,10 @@
 
 program:
     #Please select "true" for computing scalar structure function, "false" for computing velocity structure function:
-    scalar_switch: true
+    scalar_switch: false
   
     #Please select "true" for 2D operations, "false" for 3D operations:
-    2D_switch : true
+    2D_switch : false
 
     #Please select "true" for computing only the longitudinal structure functions, "false" for computing both the transverse and longitudinal structure functions:
     Only_longitudinal: false
@@ -17,7 +17,7 @@ program:
 grid :
     Nx : 32
     Ny : 32
-    Nz : 32
+    Nz : 16
 
         
 #Please specify the domain dimensions. 
@@ -26,7 +26,7 @@ grid :
 domain_dimension :
     Lx : 1.0
     Ly : 1.0
-    Lz : 1.0
+    Lz : 0.5
 
 
 #Please provide the starting order (q1) and the ending order (q2)

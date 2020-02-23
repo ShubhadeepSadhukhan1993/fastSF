@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['counter',['counter',['../Kolmogorov41_8cc.html#acb2c9adf66eddc3b8da9adaca24ba056',1,'Kolmogorov41.cc']]],
-  ['counter_5fgrid',['counter_Grid',['../Kolmogorov41_8cc.html#a76cdfe984b21aaa9c0b85f21a1cf006a',1,'Kolmogorov41.cc']]],
-  ['counter_5fgrid2d',['counter_Grid2D',['../Kolmogorov41_8cc.html#adc892d1cf95116c2c9967977c8034d48',1,'Kolmogorov41.cc']]]
+  ['dx',['dx',['../fastSF_8cc.html#a229d11aff11a7482259d1296b9b70b8a',1,'fastSF.cc']]],
+  ['dy',['dy',['../fastSF_8cc.html#a9deb6f886b19d50e714d890c3c268efc',1,'fastSF.cc']]],
+  ['dz',['dz',['../fastSF_8cc.html#a5a198de8c3f38514f4e55231aa69cd10',1,'fastSF.cc']]]
 ];

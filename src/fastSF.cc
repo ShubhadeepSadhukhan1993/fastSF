@@ -1,5 +1,5 @@
 /********************************************************************************************************************************************
- * Kolmogorov41
+ * fastSF
  *
  * Copyright (C) 2020, Mahendra K. Verma
  *
@@ -30,12 +30,12 @@
  ********************************************************************************************************************************************
  */
 
-/*! \file Kolmogorov41.cc
+/*! \file fastSF.cc
  *
  *  \brief Code to compute structure functions using velocity or scalar field data.
  *
- *  \author Shubhadeep Sadhukhan, Shashwat Bhattacharya
- *  \date Jan 2020
+ *  \author Shubhadeep Sadhukhan, Shashwat Bhattacharya, Mahendra K. Verma
+ *  \date Feb 2020
  *  \copyright New BSD License
  *
  ********************************************************************************************************************************************
@@ -57,7 +57,7 @@ using namespace std;
 using namespace blitz;
 
 //Function declarations
-void Read_para(); 
+void get_Inputs(); 
 void write_3D(Array<double,3>, string, int);
 void write_4D(Array<double,4>, string, int);
 void read_2D(Array<double,2>, string, string);
@@ -87,14 +87,12 @@ void Read_Init(Array<double,3>&, Array<double,3>&, Array<double,3>&);
 void Read_Init(Array<double,2>&);
 void Read_Init(Array<double,3>&);
 
-double powInt(double, int);
 
 
 void SF_scalar_3D(Array<double,3>);
 
 
 void SF_scalar_2D(Array<double,2>);
-void compute_index_list(Array<int, 2>&);
 
 void Read_fields();
 void resize_SFs();
@@ -284,10 +282,10 @@ int q2;
 /**
  ********************************************************************************************************************************************
  * \brief   This variable decides whether to calculate both transverse and longitudinal structure functions or only the longitudinal structure
- * functions using a less computationally expensive technique.
+ * functions.
  *
  * If the value is false, the code calculates both transverse and longitudinal structure functions. Else, it calculates only the longitudinal
- * structure functions using less number of iterations.
+ * structure functions.
  ********************************************************************************************************************************************
  */
 bool longitudinal;
@@ -363,17 +361,13 @@ int P;
  ********************************************************************************************************************************************
  */
 int px;
-//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$//
+
 
 
 /**
  ********************************************************************************************************************************************
- * \brief   The main function of the "Kolmogorov41".
- *
- *          This function is the main function of the "Kolmogorov41" for computing the velocity and scalar structure functions. The MPI
- *          decomposition and integration are also carried out in this function.
- *
- *
+ * \brief   The main function of the "fastSF".
+ 
  ********************************************************************************************************************************************
  */
 int main(int argc, char *argv[]) {
@@ -401,7 +395,7 @@ int main(int argc, char *argv[]) {
     double elapsedt=0.0;
     double elapsepdt=0.0;
 
-    Read_para();
+    get_Inputs();
 
     //Resizing the input fields
     Read_fields();
@@ -451,12 +445,8 @@ int main(int argc, char *argv[]) {
 
 /**
 *************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
+*\brief     Function to generate or read the input fields.
 *           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
-*
-* \param    index_list stores the aforementioned matrix
 *************************************************************************************************************************************
 */
 void Read_fields() {
@@ -531,12 +521,8 @@ void Read_fields() {
 
 /**
 *************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
-*           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
-*
-* \param    index_list stores the aforementioned matrix
+*\brief     Function resize the structure function arrays according to the inputs.
+*  
 *************************************************************************************************************************************
 */
 void resize_SFs(){
@@ -575,12 +561,7 @@ void resize_SFs(){
 
 /**
 *************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
-*           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
-*
-* \param    index_list stores the aforementioned matrix
+*\brief     Function to compute the structure functions based on the inputs provided by the user.
 *************************************************************************************************************************************
 */
 void calc_SFs() {
@@ -616,12 +597,7 @@ void calc_SFs() {
 
 /**
 *************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
-*           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
-*
-* \param    index_list stores the aforementioned matrix
+*\brief     Function to write the structure function arrays to the disk.
 *************************************************************************************************************************************
 */
 void write_SFs() {
@@ -663,12 +639,7 @@ void write_SFs() {
 
 /**
 *************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
-*           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
-*
-* \param    index_list stores the aforementioned matrix
+*\brief     Function to test the correctness of the code.
 *************************************************************************************************************************************
 */
 void test_cases() {
@@ -696,12 +667,14 @@ void test_cases() {
 
 /**
 *************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
-*           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
+*\brief     Function to obtain the \$ x \$ and \$ y \$ ranks of the processor.
 *
-* \param    index_list stores the aforementioned matrix
+*
+*\param     rank is the rank of the processor.
+*\param     py is the number of processors in \$ y \$ direction.
+*\param     rankx is the \$ x \$ rank of the processor.
+*\param     ranky is the \$ y \$ rank of the processor.
+* 
 *************************************************************************************************************************************
 */
 void get_rank(int rank, int py, int& rankx, int& ranky){
@@ -711,12 +684,14 @@ void get_rank(int rank, int py, int& rankx, int& ranky){
 
 /**
 *************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
+*\brief     Function to allocate the index list along a given direction for a particular rank.
 *           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
+*     
 *
-* \param    index_list stores the aforementioned matrix
+* \param    index_list stores the list of indices.
+* \param    Nx is half of the number of points along the given direction.
+* \param    px is the number of processors along the given direction.
+* \param    rank is the \$ x \$ or \$ y \$ rank of the processor.
 *************************************************************************************************************************************
 */
 void compute_index_list(Array<int,1>& index_list, int Nx, int px, int rank){
@@ -730,32 +705,16 @@ void compute_index_list(Array<int,1>& index_list, int Nx, int px, int rank){
     }
 }
 
-/**
-*************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
-*           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
-*
-* \param    index_list stores the aforementioned matrix
-*************************************************************************************************************************************
-*/
-void compute_load(Array<int,3> index_list, int rank_id){
-    Array<int,1> load(index_list(Range::all(),0,0).size());
-    load=(Nx-index_list(Range::all(),0,rank_id))*(Ny-index_list(Range::all(),1,rank_id));
-    cout<< sum(load)<<endl;
-}
-
 
 
 /**
 *************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
+*\brief     Function to distribute load equally among all the MPI processors.
 *           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
-*
-* \param    index_list stores the aforementioned matrix
+*           
+* \param    index_list stores the matrix of the indices for different ranks.
+* \param    Nx is the number of points along \$ x \$ direction.
+* \param    Ny is the number of points along \$ y \$ (or \$ z \$) direction. 
 *************************************************************************************************************************************
 */
 void compute_index_list(Array<int,3>& index_list, int Nx, int Ny){
@@ -778,36 +737,10 @@ void compute_index_list(Array<int,3>& index_list, int Nx, int Ny){
             index_list(Range(ny*i,(i+1)*ny-1),0,rank_id)=x(i);
             index_list(Range(ny*i,(i+1)*ny-1),1,rank_id)=y(Range::all());
         }
-        //compute_load(index_list,rank_id);
     }
 
 
 }
-
-/**
-*************************************************************************************************************************************
-*\brief     Function to ensure that the load is equally distributed among all the MPI processors.
-*           
-*           This function generates a matrix of different processors with the list of indices to be covered by each processor. The rows of the
-*           matrix denotes the rank of a processor while the columns denote the indices of each processor.
-*
-* \param    index_list stores the aforementioned matrix
-*************************************************************************************************************************************
-*/
-void compute_index_list(Array<int,2>& index_list){
-	int list_size=Nx/(2*P);
-	index_list.resize(list_size,P);
-	for (int i=0; i<list_size; i+=2){
-		index_list(i, rank_mpi)=rank_mpi+i*P;
-        if (P!=Nx/2) {
-		  index_list(i+1, rank_mpi)=(Nx/2)-1-rank_mpi-i*P;
-        }
-	}
-}
-
-
-
-
 
 
 
@@ -1013,7 +946,7 @@ void VECTOR_TEST_CASE_2D()
  ********************************************************************************************************************************************
  * \brief   Test function to validate the calculation of structure functions of 2D scalar field data.
  *
- *          This function validates the calculation of the structure functions computed using 3D scalar field data. The scalar field is
+ *          This function validates the calculation of the structure functions computed using 2D scalar field data. The scalar field is
  *          generated as \f$ \theta = x + z \f$. For such field, the structure functions of order
  *          \f$ q \f$ is given as \f$ S_q^u(l_x, l_z) = (l_x^2 + l_z^2)^q \f$. In this function, the theoretical values
  *          obtained from the aforementioned equation are compared with the computed values. If the percentage difference between the two values is less
@@ -1262,7 +1195,7 @@ void read_3D(Array<double,3> A, string fold, string file) {
  *          accessible.
  ********************************************************************************************************************************************
  */
-void Read_para() {
+void get_Inputs() {
     YAML::Node para;
     ifstream para_yaml,input_field;
     string para_path="in/para.yaml";
@@ -1284,6 +1217,8 @@ void Read_para() {
     else
     {
       cerr << "Global::Parse: Unable to open '" + para_path + "'." << endl;
+      h5::finalize();
+      MPI_Finalize();
       exit(1);
     }
     para["program"]["scalar_switch"]>>scalar_switch;
@@ -1311,23 +1246,34 @@ void Read_para() {
       dz=Lz/double(Nz-1);
   }
 
+  if (rank_mpi==0) {
+    cout<<"\nNumber of processors in x direction: "<<px<<endl;
+    cout<<"Number of processors in y direction: "<<P/px<<endl;
+  }  
+
   if (px > P) {
         if (rank_mpi==0) {
             cout<<"ERROR! Number of processors in x direction has to be less than or equal to the total number of processors! Aborting.."<<endl;
         }
+        h5::finalize();
+        MPI_Finalize();
         exit(1);
     }
     if (Nx/2%px != 0) {
         if (rank_mpi==0){
             cout<<"ERROR! Number of processors in x direction should be less or equal to Nx/2 and some power of 2\n Aborting...\n";
-            exit(1);
         }
+        h5::finalize();
+        MPI_Finalize();
+        exit(1);
     }
     if (Ny/2%(P/px) != 0) {
         if (rank_mpi==0){
             cout<<"ERROR! Number of processors in y direction should be less or equal to Ny/2 and some power of 2\n Aborting...\n";
-            exit(1);
         }
+        h5::finalize();
+        MPI_Finalize();
+        exit(1);
     }  
   
 }
@@ -1335,9 +1281,9 @@ void Read_para() {
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to assign an exponential function to the 3D velocity field.
+ * \brief   Function to generate an idealized 3D velocity field.
  *
- *          This function assigns the following exponential function to the 3D velocity field.
+ *          This function generates the following 3D velocity field.
  *          \f$u_x = x, \quad u_y = y, \quad u_z = z\f$.
  *
  * \param Ux is a 3D array representing the x-component of 3D velocity field.
@@ -1365,9 +1311,9 @@ void Read_Init(Array<double,3>& Ux, Array<double,3>& Uy, Array<double,3>& Uz){
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to assign an exponential function to the 2D velocity field.
+ * \brief   Function to generate an idealized 2D velocity field.
  *
- *          This function assigns the following exponential function to the 2D velocity field.
+ *          This function generates the following 2D velocity field.
  *          \f$u_x = x, \quad u_z = z\f$.
  *
  * \param Ux is a 2D array representing the x-component of 2D velocity field.
@@ -1391,9 +1337,9 @@ void Read_Init(Array<double,2>& Ux, Array<double,2>& Uz){
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to assign an exponential function to a 2D scalar field.
+ * \brief   Function to generate an idealized 2D scalar field.
  *
- *          This function assigns the following exponential function to the scalar field.
+ *          This function generates the following 2D scalar field.
  *          \f$\theta = x + z \f$
  *
  * \param T is a 2D array representing the x-component of 2D velocity field.
@@ -1415,9 +1361,9 @@ void Read_Init(Array<double,2>& T) {
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to assign an exponential function to a 3D scalar field.
+ * \brief   Function to generate an idealized 3D scalar field.
  *
- *          This function assigns the following exponential function to the scalar field.
+ *          This function generates the following 2D scalar field.
  *          \f$\theta = x + y + z \f$
  *
  * \param T is a 3D array representing the x-component of 2D velocity field.
@@ -1439,47 +1385,16 @@ void Read_Init(Array<double,3>& T) {
     }
 }
 
-/**
- ********************************************************************************************************************************************
- * \brief   Function to compute the magnitude of a 3D vector.
- *
- * \param A is a tiny vector representing the 3D velocity field.
- * \param mag is the variable that stores the magnitude calculated in this function.
- ********************************************************************************************************************************************
- */
-void magnitude(TinyVector<double,3> A,double& mag){
-    mag=sqrt(A(0)*A(0)+A(1)*A(1)+A(2)*A(2));
-}
-
-/**
- ********************************************************************************************************************************************
- * \brief   Function to compute the magnitude of a 2D vector.
- *
- * \param A is a tiny vector representing the 2D velocity field.
- * \param mag is the variable that stores the magnitude calculated in this function.
- ********************************************************************************************************************************************
- */
-void magnitude(TinyVector<double,2> A, double& mag){
-    mag = sqrt(A(0)*A(0)+A(1)*A(1));
-}
 
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to calculate structure functions using 3D velocity field as function of \f$ (l_x, l_y, l_z) \f$ in addition to the structure functions
- *          as function of \f$ l \f$.
+ * \brief   Function to calculate the longitudinal and transverse structure functions for a 3D velocity field.
  *
- *          The following function computes the nodal longitudinal and transverse structure functions for a given 3D velocity field using three nested for-loops corresponding to 
- *          \f$ l_x \f$, \f$ l_x \f$, and \f$ l_z \f$. 
  *
  * \param Ux is a 3D array representing the x-component of velocity field
  * \param Uy is a 3D array representing the y-component of velocity field
  * \param Uz is a 3D array representing the z-component of velocity field
- * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
- * \param SF_p_Node is a 2D array containing the values of the nodal transverse structure functions for as function of \f$ l \f$ for a range of orders specified by the user.
- * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node and SF_Node_p so as to get the average.
- * \param SF_Grid_pll_Node is a 4D array containing the values of the nodal longitudinal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
- * \param SF_Grid_perp_Node is a 4D array containing the values of the nodal transverse structure functions for as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
  ********************************************************************************************************************************************
  */
 void SFunc3D(
@@ -1570,18 +1485,11 @@ void SFunc3D(
 
 /**
  ********************************************************************************************************************************************
- * \brief   A less computationally intensive function to calculate only the longitudinal structure functions as functions of \f$ (l_x,l_y,l_z) \f$ in
- *          addition to function of \f$ l \f$ using 3D velocity field.
- *
- *          The following function computes the nodal longitudinal structure functions for a given 3D velocity field using three nested for-loops corresponding to 
- *          \f$ l_x \f$, \f$ l_x \f$, and \f$ l_z \f$. 
+ * \brief   Function to calculate only the longitudinal structure functions for a 3D velocity field.
  *
  * \param Ux is a 3D array representing the x-component of velocity field
  * \param Uy is a 3D array representing the y-component of velocity field
  * \param Uz is a 3D array representing the z-component of velocity field
- * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
- * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average.
- * \param SF_Grid_pll_Node is a 4D array containing the values of the nodal longitudinal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
  ********************************************************************************************************************************************
  */
 void SFunc_long_3D(
@@ -1662,19 +1570,11 @@ if (rank_mpi==0) {
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to calculate structure functions using 2D velocity field as function of \f$(l_x, l_z) \f$ in addition to the structure functions
- *          as function of \f$ l \f$.
+ * \brief   Function to calculate the longitudinal and transverse structure functions for a 2D velocity field.
  *
- *         The following function computes the nodal longitudinal and transverse structure functions for a given 2D velocity field using two nested for-loops corresponding to 
- *          \f$ l_x \f$ and \f$ l_z \f$. 
- *
+ *        
  * \param Ux is a 2D array representing the x-component of velocity field
  * \param Uz is a 2D array representing the z-component of velocity field
- * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
- * \param SF_p_Node is a 2D array containing the values of the nodal transverse structure functions for as function of \f$ l \f$ for a range of orders specified by the user.
- * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node and SF_Node_p so as to get the average.
- * \param SF_Grid2D_pll_Node is a 3D array containing the values of the nodal longitudinal structure functions as function of \f$(l_x,l_z)\f$ for a range of orders specified by the user.
- * \param SF_Grid2D_perp_Node is a 3D array containing the values of the nodal transverse structure functions for as function of \f$(l_x,l_z)\f$ for a range of orders specified by the user.
  ********************************************************************************************************************************************
  */
  void SFunc2D(
@@ -1749,17 +1649,11 @@ if (rank_mpi==0) {
 
 /**
  ********************************************************************************************************************************************
- * \brief   A less computationally intensive function to calculate only the longitudinal structure functions as functions of \f$(l_x,l_z) \f$ in
- *          addition to function of \f$ l \f$ using 2D velocity field.
+ * \brief   Function to calculate only the longitudinal structure functions for a 2D velocity field.
  *
- *          The following function computes the nodal longitudinal structure functions for a given 2D velocity field using two nested for-loops corresponding to 
- *          \f$ l_x \f$ and \f$ l_z \f$.
- *
+ *         
  * \param Ux is a 2D array representing the x-component of velocity field
  * \param Uz is a 2D array representing the z-component of velocity field
- * \param SF_Node is a 2D array containing the values of the nodal longitudinal structure functions for a range of orders specified by the user.
- * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average.
- * \param SF_Grid2D_pll_Node is a 3D array containing the values of the nodal longitudinal structure functions as function of \f$(l_x,l_z)\f$ for a range of orders specified by the user.
  ********************************************************************************************************************************************
  */
 void SFunc_long_2D(
@@ -1828,16 +1722,9 @@ void SFunc_long_2D(
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to calculate structure functions using 3D scalar field as function of \f$ (l_x, l_y, l_z) \f$ in addition to the structure functions
- *          as function of \f$ l \f$.
- *
- *          The following function computes the nodal structure functions for a given 3D scalar field using three nested for-loops corresponding to 
- *          \f$ l_x \f$, \f$ l_y \f$ and \f$ l_z \f$. 
+ * \brief   Function to calculate structure functions for a 3D scalar field.
  *
  * \param T is a 3D array representing the scalar field
- * \param SF_Node is a 2D array containing the values of the nodal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
- * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average.
- * \param SF_Grid_Node is a 4D array containing the values of the nodal structure functions as function of \f$ (l_x,l_y,l_z) \f$ for a range of orders specified by the user.
  ********************************************************************************************************************************************
  */
 
@@ -1905,17 +1792,10 @@ void SF_scalar_3D(
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to calculate structure functions using 2D scalar field as function of \f$ (l_x, l_z) \f$ in addition to the structure functions
- *          as function of \f$ l \f$.
+ * \brief   Function to calculate structure functions for a 2D scalar field.
  *
- *          The following function computes the nodal structure functions for a given 2D scalar field using two nested for-loops corresponding to 
- *          \f$ l_x \f$ and \f$ l_z \f$ .
- *          
  *
  * \param T is a 2D array representing the scalar field
- * \param SF_Node is a 2D array containing the values of the nodal structure functions as function of \f$ l \f$ for a range of orders specified by the user.
- * \param counter_Node is a 2D array containing the numbers for dividing the values of SF_Node so as to get the average.
- * \param SF_Grid_Node is a 3D array containing the values of the nodal structure functions as function of \f$ (l_x,l_z) \f$ for a range of orders specified by the user.
  ********************************************************************************************************************************************
  */
 void SF_scalar_2D(Array<double,2> T)
