@@ -1,5 +1,5 @@
 #############################################################################################################################################
- # Kolmogorov41
+ # fastSF
  # 
  # Copyright (C) 2020, Mahendra K. Verma
  #
@@ -31,7 +31,7 @@
  ##
  ##! \file Makefile
  #
- #   \brief Script to compile Kolmogorov41
+ #   \brief Script to compile fastSF
  #
  #   \author Shubhadeep Sadhukhan, Shashwat Bhattacharya
  #   \date Feb 2020

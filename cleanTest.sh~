@@ -31,9 +31,9 @@
  #
  ############################################################################################################################################
  ##
- ##! \file Makefile
+ ##! \file cleanTest.sh
  #
- #   \brief Script to run the test case for validating Kolmogorov41
+ #   \brief Script to the delete the output files and the .png files generated after running runTest.sh
  #
  #   \author Shashwat Bhattacharya
  #   \date Feb 2020

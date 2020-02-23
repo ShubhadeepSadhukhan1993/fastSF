@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #############################################################################################################################################
- # Kolmogorov41
+ # fastSF
  # 
  # Copyright (C) 2020, Mahendra K. Verma
  #
@@ -33,7 +33,7 @@
  ##
  ##! \file runTest.sh
  #
- #   \brief Script to run the test case for validating Kolmogorov41
+ #   \brief Script to run the test case for validating fastSF
  #
  #   \author Shashwat Bhattacharya
  #   \date Feb 2020
@@ -44,10 +44,10 @@
 
 
 cd test/test_scalar_2D
-mpirun -np 1 ../../src/Kolmogorov41.out
+mpirun -np 1 ../../src/fastSF.out
 cd ..
 cd test_velocity_2D
-mpirun -np 1 ../../src/Kolmogorov41.out
+mpirun -np 1 ../../src/fastSF.out
 cd ..
 python test.py
 
