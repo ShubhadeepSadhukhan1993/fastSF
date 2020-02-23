@@ -1248,7 +1248,12 @@ void get_Inputs() {
 
   if (rank_mpi==0) {
     cout<<"\nNumber of processors in x direction: "<<px<<endl;
-    cout<<"Number of processors in y direction: "<<P/px<<endl;
+    if (two_dimension_switch) {
+        cout<<"Number of processors in z direction: "<<P/px<<endl;
+    }
+    else {
+        cout<<"Number of processors in y direction: "<<P/px<<endl;
+    }
   }  
 
   if (px > P) {
@@ -1267,9 +1272,19 @@ void get_Inputs() {
         MPI_Finalize();
         exit(1);
     }
-    if (Ny/2%(P/px) != 0) {
+
+    int N2;
+
+    if (two_dimension_switch) {
+        N2 = Nz;
+    }
+    else {
+        N2 = Ny;
+    }
+
+    if (N2/2%(P/px) != 0) {
         if (rank_mpi==0){
-            cout<<"ERROR! Number of processors in y direction should be less or equal to Ny/2 and some power of 2\n Aborting...\n";
+            cout<<"ERROR! Number of processors in y (or z) direction should be less or equal to Ny/2 (or Nz/2) and some power of 2\n Aborting...\n";
         }
         h5::finalize();
         MPI_Finalize();
