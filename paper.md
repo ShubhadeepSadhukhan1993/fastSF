@@ -54,7 +54,7 @@ If the turbulence is isotropic in addition to being homogeneous, the structure f
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
-Typical structure function computations in literature involve calculation of $\langle \delta u_\parallel^q \rangle$, $\langle \delta u_\perp^q \rangle$, or $\langle \delta \theta^q \rangle$ using loops over $\mathbf{r}$ and $\mathbf{l}$, which amounts to six nested `for` loops for three dimensions. This makes the computations very expensive for large grids. In our code, we employ vectorization and a single loop over $l$. The new algorithm enhances the performance by a factor of 20 or so over the earlier schemes. Our algorithm for computing the structure functions for three-dimensional velocity field using MPI parallelization is as follows:
+Typical structure function computations in literature involve calculation of $\langle \delta u_\parallel^q \rangle$, $\langle \delta u_\perp^q \rangle$, or $\langle \delta \theta^q \rangle$ using loops over $\mathbf{r}$ and $\mathbf{l}$, which amounts to six nested `for` loops for three dimensions. This makes the computations very expensive for large grids. In our code, we employ vectorization and a single loop over $\mathbf{l}$. The new algorithm enhances the performance by a factor of 20 or so over the earlier schemes. The $\mathbf{l}$'s are divided among MPI processors along $x$ and $y$ directions for three dimensions and along $z$ and $z$ directions for two dimensions. Our algorithm for computing the structure functions for three-dimensional velocity field is as follows:
 
 **Pseudo-code**
 
@@ -62,9 +62,9 @@ Typical structure function computations in literature involve calculation of $\l
 
 *Procedure*:
 
-* For every processor, determine the columns ($l_x, l_y$) assigned to it such that load is evenly distributed among the processors. 
+* For every processor, determine $l_x$ and $l_y$ assigned to it such that load is evenly distributed among the processors. 
 
-* for every column ($l_x, l_y$) assigned to the processor:
+* for every $l_x$ and $l_y$:
      
     * for $l_z from 0 to $L_z$:
         
@@ -85,27 +85,13 @@ Typical structure function computations in literature involve calculation of $\l
              
 * Stop
 
+The calculation procedure is further illustrated in Fig. \ref{Schematic}. The velocity differential $\delta \mathbf{u}(\mathbf{l})$ or the scalar differential $\delta \theta (\mathbf{l})$ is computed by taking a difference between two points with the same index in pink and green subdomains. This feature enables vectorization for computing the velocity or scalar differential. Further, to save computational cost, $\mathbf{l}$ is varied up to half the domain size, ($L_x/2, L_y/2, L_z/2$). Note that the structure functions are important for intermediate scales (inertial range) only; thus, computation of these quantites for large values of $l$ is not required.
 
-``fastSF``  is written in C++. The code uses the Blitz++ library for vectorized array operations. The velocity structure functions ($S_q^{u_\parallel}(\mathbf{l})$ and $S_q^{u_\perp}(\mathbf{l})$) and the scalar structure functions ($S_q^{\theta}(\mathbf{l})$) are computed and stored in a Blitz array. ``fastSF`` contains separate functions for computing the scalar and the velocity structure functions. Also, separate functions are called for two-dimensional or three-dimensional input fields. However, the basic design of all the functions is the same, as described below.
+It should be noted that the size of the pink or green subdomain is not the same for different $\mathbf{l}$, rather, it decreases with increasing $\mathbf{l}$. Thus, there will be more load in computing the structure functions for small $\mathbf{l}$. Because of this, a straightforward division of the domain among the processors along $x$ and $y$ directions will lead to load imbalance. To counter this, we divide $\mathbf{l}$'s in such a way that each processor gets both large and small $\mathbf{l}$'s. We illustrate the idea of dividing the load in the following example.
 
-Figure \ref{Schematic} exhibits a schematic diagram for the methodology to compute the structure functions. The code navigates through different points in the domain, with each point corresponding to the position vector $\mathbf{l}=(l_x,l_y,l_z)$.  As shown in Fig. \ref{Schematic}, there are two subdomains of equal dimensions (represented in green and pink colors) for every $\mathbf{l}$. The green subdomain is given by
-$$D_{\mathrm{green}} = \{(x,y,z): l_x \leq x \leq L_x, l_y \leq y \leq L_y, l_z \leq z \leq L_z \}, $$
-and the pink subdomain is given by
-$$D_{\mathrm{pink}} = \{(x,y,z): 0 \leq x \leq L_x-l_x, 0 \leq y \leq L_y-l_y, 0 \leq z \leq L_z-l_z \}. $$
-The velocity (or scalar) differential field array is computed by vectorized subtraction of the velocity (or scalar) field of the subdomain $D_{\mathrm{pink}}$ from that of the subdomain $D_{\mathrm{green}}$. The code computes $\delta U_{\parallel}^q$ and $\delta U_{\perp}^q$ arrays for every velocity differential, and then calculates the mean of these arrays to obtain the velocity structure functions. Similarly, the code computes the mean of the scalar differential array to obtain the scalar structure functions. We remark that vectorization makes the code approximately twenty times faster than what it would have been if nested `for` loops were used instead.  
+Consider a one dimensional domain with $l$ varying from 0 to 15 with increments of 1. We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among two processors, with each processor getting 2 points. To divide the load equally among the processors, we need to ensure that $\sum l$ for each processor is the same. This is accomplished if the first processor gets $l=0$ and $7$, the second gets $l=1$ and $6$, the third gets $l=2$ and $5$, and the fourth gets $l=3$ and $4$. With this, we have $\sum l=7$ every processor. If two processors are used, the first processor gets $l=0$, $7$, $1$, and $6$, and the second processor gets $l=2$, $5$, $3$, and $4$. With this, we have $\sum l=14$ for every processor. Thus, each processor gets alternately small and large $l$'s assigned to it, and therefore gets equal load. The same idea has been extended for two and three dimensions. However, the algorithm is complex and the reader can refer to the code for details.
 
-![A schematic diagram showing the procedure of computing the structure functions using vectorization.\label{Schematic}](Schematic.png)
-
-The current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. This is because ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation. Further, the structure functions are important for intermediate scales (inertial range) only; thus computation of these quantites for large values of $l$ is not required.
-Therefore, $\mathbf{l}$ is varied up to half the domain size, ($L_x/2, L_y/2, L_z/2$), saving computational cost.
-
-We employ Message Passing Interface (MPI) to parallelize the code.  The points ($\mathbf{l}$) of the domain are distributed among the processors along $x$ and $y$ directions for three dimensions, and along $x$ and $z$ directions for two dimensions. Each processor computes the structure functions for the points assigned to it. The input fields are accessible to all the processors to minimize the need of communication. The master processor receives the structure functions computed for different $\mathbf{l}$ from all the processors and assigns them to the appropriate index of the structure function array.
-
-It must be noted that the size of the subdomains $D_{\mathrm{green}}$ and  $D_{\mathrm{pink}}$ varies with $\mathbf{l}$. In our code, $\mathbf{l}$'s are distributed among the processors in such a way that for every processor, the combined size of the subdomain $D_{\mathrm{green}}$  or $D_{\mathrm{pink}}$ for all the $\mathbf{l}$'s assigned to the processor is the same. This ensures that every processor gets equal load and thus enhances the scalability of the code.  
-
-We summarize the computation procedure in the pseudo-code below, taking the example of structure functions for three-dimensional velocity field.
-
-
+Finally, we remark that the current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. This is because ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation.
 
 In the next section, we discuss the scaling of our code.
 
