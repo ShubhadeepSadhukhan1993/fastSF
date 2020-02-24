@@ -1,5 +1,5 @@
 ---
-title: 'fastSF: A parallel code for computing the structure functions of homogeneous isotropic turbulence'
+title: 'fastSF: A parallel code for computing the structure functions of turbulence'
 
 tags:
   - C++
