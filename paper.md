@@ -54,6 +54,38 @@ If the turbulence is isotropic in addition to being homogeneous, the structure f
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
+Typical structure function computations in literature involve calculation of $\langle \delta u_\parallel^q \rangle$, $\langle \delta u_\perp^q \rangle$, or $\langle \delta \theta^q \rangle$ using loops over $\mathbf{r}$ and $\mathbf{l}$, which amounts to six nested `for` loops for three dimensions. This makes the computations very expensive for large grids. In our code, we employ vectorization and a single loop over $l$. The new algorithm enhances the performance by a factor of 20 or so over the earlier schemes. Our algorithm for computing the structure functions for three-dimensional velocity field using MPI parallelization is as follows:
+
+**Pseudo-code**
+
+*Data*: Velocity field $\mathbf{u}$ of grid size $N_x \times N_y \times N_z$, number of processors $P$, dimensions of the domain ($L_x \times L_y \times L_z$)
+
+*Procedure*:
+
+* For every processor, determine the columns ($l_x, l_y$) assigned to it such that load is evenly distributed among the processors. 
+
+* for every column ($l_x, l_y$) assigned to the processor:
+     
+    * for $l_z from 0 to $L_z$:
+        
+        * $\delta \mathbf{u} = \mathbf{u}[l_x:L_x, l_y:L_y, l_z:L_z]-\mathbf{u}[0:L_x-l_x, 0:L_y-l_y, 0:L_z-l_z]$. This operation is vectorized.
+        
+        * $\delta u_{\parallel} = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$ (Vectorized). 
+        
+        * $\delta u_{\perp} = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$| (Vectorized). 
+        
+        * for order $q$:
+        
+            * $S_q^{u_{\parallel}} =$ Average of $\delta u_{\parallel}^q$ (Vectorized).
+            
+            * $S_q^{u_{\perp}} =$ Average of $\delta u_{\perp}^q$ (Vectorized).
+            
+            * Send the values of $S_q^{u_{\parallel}}$, $S_q^{u_{\perp}}$, $q$, $l_x$, $l_y$, and $l_z$ to the master processor. The master processor stores $S_q^{u_{\parallel}} (l_x, l_y, l_z)$ and $S_q^{u_{\perp}} (l_x, l_y, l_z)$.
+           
+             
+* Stop
+
+
 ``fastSF``  is written in C++. The code uses the Blitz++ library for vectorized array operations. The velocity structure functions ($S_q^{u_\parallel}(\mathbf{l})$ and $S_q^{u_\perp}(\mathbf{l})$) and the scalar structure functions ($S_q^{\theta}(\mathbf{l})$) are computed and stored in a Blitz array. ``fastSF`` contains separate functions for computing the scalar and the velocity structure functions. Also, separate functions are called for two-dimensional or three-dimensional input fields. However, the basic design of all the functions is the same, as described below.
 
 Figure \ref{Schematic} exhibits a schematic diagram for the methodology to compute the structure functions. The code navigates through different points in the domain, with each point corresponding to the position vector $\mathbf{l}=(l_x,l_y,l_z)$.  As shown in Fig. \ref{Schematic}, there are two subdomains of equal dimensions (represented in green and pink colors) for every $\mathbf{l}$. The green subdomain is given by
@@ -73,31 +105,7 @@ It must be noted that the size of the subdomains $D_{\mathrm{green}}$ and  $D_{\
 
 We summarize the computation procedure in the pseudo-code below, taking the example of structure functions for three-dimensional velocity field.
 
-**Pseudo-code**
 
-*Data*: Velocity field $\mathbf{u}$ of grid size $N_x \times N_y \times N_z$, number of processors $P$, dimensions of the domain ($L_x \times L_y \times L_z$)
-
-*Procedure*:
-
-* Determine the columns ($l_x, l_y$) assigned to the processor such that load is evenly distributed among the processors. 
-
-* for every column ($l_x, l_y$) assigned to the processor:
-     
-    * for $l_z$:
-        
-        * Define $\delta \mathbf{u} = \mathbf{u}[l_x:L_x, l_y:L_y, l_z:L_z]-\mathbf{u}[0:L_x-l_x, 0:L_y-l_y, 0:L_z-l_z]$.
-        
-        * Compute the arrays: $\delta u_{\parallel} = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$, and $\delta u_{\perp} = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$|.
-        
-        * for order $q$:
-        
-            * $S_q^{u_{\parallel}} =$ Average of $\delta u_{\parallel}^q$; $S_q^{u_{\perp}} =$ Average of $\delta u_{\perp}^q$.
-            
-            * Send the values of $S_q^{u_{\parallel}}$, $S_q^{u_{\perp}}$, $q$, $l_x$, $l_y$, and $l_z$ to the master processor.
-            
-            * If the processor is the master processor, store $S_q^{u_{\parallel}}(l_x, l_y, l_z)$, $S_q^{u_{\perp}}(l_x, l_y, l_z)$.
-             
-* Stop
 
 In the next section, we discuss the scaling of our code.
 
