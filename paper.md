@@ -92,8 +92,8 @@ It should be noted that the size of the pink or green subdomain is not the same 
 Consider the following one-dimensional domain $l$: 
 $$l=\{0, 1, 2, 3 ... 15\}.$$ 
 We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among two processors, with each processor getting 2 points. To divide the load equally among the processors, we need to ensure that $\sum l$ for each processor is the same. This is accomplished with the following distribution of points:
-$$\mbox{Processor 1: } l={0,7}, \quad \mbox{Processor 2: } l={1, 6}, $$
-$$\mbox{Processor 3: } l={2,5}, \quad \mbox{Processor 4: } l={3, 4}. $$
+$$\mbox{Processor 1: } l=\{0,7\}, \quad \mbox{Processor 2: } l=\{1, 6\}, $$
+$$\mbox{Processor 3: } l=\{2,5\}, \quad \mbox{Processor 4: } l=\{3, 4\}. $$
 if the first processor gets $l=0$ and $7$, the second gets $l=1$ and $6$, the third gets $l=2$ and $5$, and the fourth gets $l=3$ and $4$. With this, we have $\sum l=7$ every processor. If two processors are used, the first processor gets $l=0$, $7$, $1$, and $6$, and the second processor gets $l=2$, $5$, $3$, and $4$. With this, we have $\sum l=14$ for every processor. Thus, each processor gets alternately small and large $l$'s assigned to it, and therefore gets equal load. The same idea has been extended for two and three dimensions. However, the algorithm is complex and the reader can refer to the code for details.
 
 Finally, we remark that the current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. This is because ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation.
