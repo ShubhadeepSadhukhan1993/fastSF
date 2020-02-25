@@ -41,14 +41,14 @@ In the next section, we will briefly define the velocity and the scalar structur
 
 # Velocity and scalar structure functions
 
-Let $\mathbf{u}$ and $\theta$ be velocity and scalar fields respectively. The velocity difference between any two points $\mathbf{r}$ and $\mathbf{r+l}$ is $\delta \mathbf{u} = \mathbf{u(r+l)}-\mathbf{u(r)}$. Further, we denote $\delta u_\parallel=\delta \mathbf{u}\cdot \hat{\mathbf{l}}$ as the component of the velocity difference along the vector $\mathbf{l}$, and $\delta u_\perp= |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|$ as the component of the velocity difference perpendicular to $\mathbf{l}$. Assuming statistical homogeneity, we define the longitudinal velocity structure functions of order $q$ as
-$$ S_q^{u_\parallel}(\mathbf{l}) = \langle \delta u_\parallel^q \rangle = \langle [\{\mathbf{u(r+l)}-\mathbf{u(r)}\}\cdot \hat{\mathbf{l}}]^q \rangle$$ 
+Let $\mathbf{u}$ and $\theta$ be velocity and scalar fields respectively. The velocity difference between any two points $\mathbf{r}$ and $\mathbf{r+l}$ is $\delta \mathbf{u} = \mathbf{u(r+l)}-\mathbf{u(r)}$. We denote $\delta u_\parallel=\delta \mathbf{u}\cdot \hat{\mathbf{l}}$ as the component of the velocity difference along the vector $\mathbf{l}$, and $\delta u_\perp= |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|$ as the component of the velocity difference perpendicular to $\mathbf{l}$. Assuming statistical homogeneity, we define the longitudinal velocity structure functions of order $q$ as
+$$ S_q^{u_\parallel}(\mathbf{l}) = \langle \delta u_\parallel^q \rangle = \langle [\{\mathbf{u(r+l)}-\mathbf{u(r)}\}\cdot \hat{\mathbf{l}}]^q \rangle,$$ 
 and the transverse velocity structure functions of order 
 $q$ as 
-$$ S_q^{u_\perp}(\mathbf{l}) = \langle \delta u_\perp^q \rangle. $$ 
+$$ S_q^{u_\perp}(\mathbf{l}) = \langle \delta u_\perp^q \rangle = \langle |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|^q \rangle. $$ 
+Here, $\langle \cdot \rangle$ denotes ensemble averaging. Similarly, we can define the scalar structure functions (assuming statistical homogeneity) as 
+$$ S_q^\theta(\mathbf{l}) = \langle \delta \theta^q\rangle = \langle [\theta (\mathbf{r+l}) - \theta(\mathbf{r})]^q \rangle. $$
 
-Here, $\langle \cdot \rangle$ denotes ensemble averaging. We can also define the scalar differential to be $\delta \theta = \theta (\mathbf{r+l}) - \theta(\mathbf{r})$, and the scalar structure functions (assuming statistical homogeneity) as 
-$$ S_q^\theta(\mathbf{l}) = \langle \delta \theta^q\rangle. $$
 If the turbulence is isotropic in addition to being homogeneous, the structure functions become functions of $l$, where $l=|\mathbf{l}|$. The second-order velocity structure function provides an estimate of energy in the eddies of size $l$ or less [@Davidson:book:Turbulence]. 
 
 In the next section, we provide a brief description of the code.
