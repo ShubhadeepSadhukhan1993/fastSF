@@ -87,7 +87,7 @@ Typical structure function computations in literature involve calculation of $\l
 
 The calculation procedure is further illustrated in Fig. \ref{Schematic}. The velocity differential $\delta \mathbf{u}(\mathbf{l})$ or the scalar differential $\delta \theta (\mathbf{l})$ is computed by taking a difference between two points with the same index in pink and green subdomains. This feature enables vectorization for computing the velocity or scalar differential. Further, to save computational cost, $\mathbf{l}$ is varied up to half the domain size, ($L_x/2, L_y/2, L_z/2$). Note that the structure functions are important for intermediate scales (inertial range) only; thus, computation of these quantites for large values of $l$ is not required.
 
-![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ or the scalar difference $\delta \theta(\mathbf{l})$ is computed by taking the difference between two points with the same index in the pink and the green subdomains. For example, $\theta(\mathbf{l}) - \theta(0,0,0) = \theta_B - \theta_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization for computing $\delta \mathbf{u} (\mathbf{l})$ and $\delta \theta (\mathbf{l})$. $\label{Scaling}](Schematic.png)
+![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ or the scalar difference $\delta \theta(\mathbf{l})$ is computed by taking the difference between two points with the same index in the pink and the green subdomains. For example, $\theta(\mathbf{l}) - \theta(0,0,0) = \theta_B - \theta_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization for computing $\delta \mathbf{u} (\mathbf{l})$ and $\delta \theta (\mathbf{l})$. \label{Schematic}](Schematic.png)
 
 It should be noted that the size of the pink or green subdomain is not the same for different $\mathbf{l}$, rather, it decreases with increasing $\mathbf{l}$. Thus, there will be more load in computing the structure functions for small $\mathbf{l}$. Because of this, a straightforward division of the domain among the processors along $x$ and $y$ directions will lead to load imbalance. To counter this, we divide $\mathbf{l}$'s in such a way that each processor gets both large and small $\mathbf{l}$'s. We illustrate the idea of dividing the load in the following example.
 
@@ -99,7 +99,8 @@ In the next section, we discuss the scaling of our code.
 
 # Scaling of `fastSF`
 
-We test the scaling of `fastSF` by running it to compute the third-order longitudinal structure function for an idealized velocity field of $128^3$ grid resolution, employing a maximum of 1024 processors. The velocity field is given by $$\mathbf{u} = 
+We test the scaling of `fastSF` by running it to compute the third-order longitudinal structure function for an idealized velocity field of $128^3$ grid resolution, employing a maximum of 1024 processors. The velocity field is given by 
+$$\mathbf{u} = 
 \begin{bmatrix} 
 x \\ y \\z
 \end{bmatrix}.$$
