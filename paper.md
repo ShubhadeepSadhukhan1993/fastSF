@@ -87,14 +87,14 @@ The calculation procedure is further illustrated in Fig. \ref{Schematic}. The ve
 
 ![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ or the scalar difference $\delta \theta(\mathbf{l})$ is computed by taking the difference between two points with the same index in the pink and the green subdomains. For example, $\theta(\mathbf{l}) - \theta(0,0,0) = \theta_B - \theta_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization for computing $\delta \mathbf{u} (\mathbf{l})$ and $\delta \theta (\mathbf{l})$. \label{Schematic}](Schematic.png)
 
-It should be noted that the size of the pink or green subdomain is not the same for different $\mathbf{l}$, rather, it decreases with increasing $\mathbf{l}$. Thus, to compute the structure functions, there will be more load for small $\mathbf{l}$ and less load for large $\mathbf{l}$. Because of this, a straightforward division of the domain among the processors along $x$ and $y$ directions will lead to load imbalance. To counter this, we divide $\mathbf{l}$'s in such a way that each processor gets both large and small $\mathbf{l}$'s. We illustrate the idea of dividing the load in the following example.
+It should be noted that the size of the pink or green subdomain is not the same for different $\mathbf{l}$'s, rather, it decreases with increasing $\mathbf{l}$. Thus, to compute the structure functions, there will be more load for small $\mathbf{l}$'s and less load for large $\mathbf{l}$'s. Because of this, a straightforward division of the domain among the processors along $x$ and $y$ directions will lead to load imbalance. To counter this, we divide $\mathbf{l}$'s in such a way that each processor gets both large and small $\mathbf{l}$'s. We illustrate the idea of dividing the load in the following example.
 
 Consider the following one-dimensional domain: 
 $$l=\{0, 1, 2, 3 ... 15\}.$$ 
 We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among four processors, with each processor getting 2 points. To divide the load equally among the processors, we need to ensure that $\sum l$ for each processor is the same. This is accomplished with the following distribution of points:
 $$\mbox{Processor 1: } l=\{0,7\}, \quad \mbox{Processor 2: } l=\{1, 6\}, $$
 $$\mbox{Processor 3: } l=\{2,5\}, \quad \mbox{Processor 4: } l=\{3, 4\}. $$
-With this distribution, we have the same $\sum l=7$ for every processor. If two processors are used, then the following distribution results in same $\sum l$ ($=14$) for all the processors.
+With this distribution, we have the same $\sum l$ ($=7$) for every processor. If two processors are used, then the following distribution results in same $\sum l$ ($=14$) for all the processors.
 $$\mbox{Processor 1: } l=\{0, 7, 1, 6\}, $$
 $$\mbox{Processor 2: } l=\{2, 5, 3, 4\}. $$
 Thus, each processor is assigned small and large $l$'s (and therefore, large and small loads) to ensure that all the processors get the same total load. The same idea has been extended for higher dimensions in our code. However, the algorithm for distribution of load for higher dimensions is complex and the reader can refer to the code for details.
