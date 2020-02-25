@@ -61,12 +61,10 @@ Typical structure function computations in literature involve calculation of $\l
 *Data*: Velocity field $\mathbf{u}$ of grid size $N_x \times N_y \times N_z$, number of processors $P$, dimensions of the domain ($L_x \times L_y \times L_z$)
 
 *Procedure*:
-
-* For every processor, determine $l_x$ and $l_y$ assigned to it such that load is evenly distributed among the processors. 
-
-* for every $l_x$ and $l_y$:
+ 
+* For every processor:
      
-    * for $l_z$:
+    * for $\mathbf{l}$:
         
         * $\delta \mathbf{u} = \mathbf{u}[l_x:L_x, l_y:L_y, l_z:L_z]-\mathbf{u}[0:L_x-l_x, 0:L_y-l_y, 0:L_z-l_z]$. This operation is vectorized.
         
