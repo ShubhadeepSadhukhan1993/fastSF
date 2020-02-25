@@ -66,7 +66,7 @@ Typical structure function computations in literature involve calculation of $\l
 
 * for every $l_x$ and $l_y$:
      
-    * for $l_z from 0 to $L_z$:
+    * for $l_z$ from 0 to $L_z$:
         
         * $\delta \mathbf{u} = \mathbf{u}[l_x:L_x, l_y:L_y, l_z:L_z]-\mathbf{u}[0:L_x-l_x, 0:L_y-l_y, 0:L_z-l_z]$. This operation is vectorized.
         
