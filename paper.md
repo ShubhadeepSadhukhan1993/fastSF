@@ -96,8 +96,8 @@ $$\mbox{Processor 1: } l=\{0,7\}, \quad \mbox{Processor 2: } l=\{1, 6\}, $$
 $$\mbox{Processor 3: } l=\{2,5\}, \quad \mbox{Processor 4: } l=\{3, 4\}. $$
 With this distribution, we have the same $\sum l=7$ for every processor. If two processors are used, then the following distribution results in same $\sum l$ ($=14$) for all the processors.
 $$\mbox{Processor 1: } l=\{0, 7, 1, 6\}, $$
-$$\mbox{Processor 2: } l=\{2, 5, 3, 4\}, $$
-The same idea has been extended for two and three dimensions in our code. However, the algorithm is complex and the reader can refer to the code for details.
+$$\mbox{Processor 2: } l=\{2, 5, 3, 4\}. $$
+Thus, each processor is assigned small and large $l$'s (and therefore, large and small loads) to ensure that all the processors get the same total load. The same idea has been extended for higher dimensions in our code. However, the algorithm for distribution of load for higher dimensions is complex and the reader can refer to the code for details.
 
 Finally, we remark that the current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. This is because ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation.
 
