@@ -35,7 +35,7 @@ bibliography: paper.bib
 
 Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properites of turbulent flows [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]. Some of the earlier works comprising of such analysis are those of @Gotoh:PF2002, @Kaneda:PF2003, and @Ishihara:ARFM2009 for three-dimensional hydrodynamic turbulence; @Yeung:PF2005 and @Ray:NJP2008 for passive scalar turbulence; @Biferale:NJP2004 for two-dimensional hydrodynamic turbulence; and @Kunnen:PRE2008, @Kaczorowski:JFM2013, and @Bhattacharya:PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of ``fastSF``, a parallel code to compute the structure functions for a given velocity or scalar field. 
 
- ``fastSF``, written in C++, employs vectorization and MPI (Message Passing Interface) parallelization [@Pacheco:book:PP] to compute the structure functions for a given velocity or scalar field. In this code, we minimize the communication between the processors by sharing the input data in all the MPI processes. This, along with vectorization, makes the code fast and efficient. The user has a choice on the type (scalar or vector) and the dimensions of the fields to be read by the code, and the range of the orders of the structure functions to be computed. The code writes the computed structure functions to `hdf5` files that can be further processed by the user.
+ ``fastSF``, written in C++, employs vectorization and minimizes the usage of nested loops for computing the structure functions, thus making the code fast and efficient. The code employs MPI (Message Passing Interface) parallelization with equal load distributed among the MPI processes. The user has a choice on the type (scalar or vector) and the dimensions of the fields to be read by the code, and the range of the orders of the structure functions to be computed. The code writes the computed structure functions to `hdf5` files that can be further processed by the user.
 
 In the next section, we will briefly define the velocity and the scalar structure functions in turbulence.
 
@@ -54,7 +54,7 @@ If the turbulence is isotropic in addition to being homogeneous, the structure f
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
-Typical structure function computations in literature involve calculation of the velocity or scalar difference using loops over $\mathbf{r}$ and $\mathbf{l}$, which amounts to six nested `for` loops for three dimensions. This makes the computations very expensive for large grids. In our code, we employ vectorization and a single loop over $\mathbf{l}$. The new algorithm enhances the performance by a factor of 20 or so over the earlier schemes. The $\mathbf{l}$'s are divided among MPI processors along $x$ and $y$ directions for three dimensions and along $x$ and $z$ directions for two dimensions. Our algorithm for computing the structure functions for three-dimensional velocity field is as follows:
+Typical structure function computations in literature involve calculation of the velocity or scalar difference using loops over $\mathbf{r}$ and $\mathbf{l}$, which amounts to six nested `for` loops for three dimensions. This makes the computations very expensive for large grids. In our code, we employ vectorization and a single loop over $\mathbf{l}$. The new algorithm enhances the performance by a factor of 20 or so over the earlier schemes.  Our algorithm for computing the structure functions for three-dimensional velocity field is as follows:
 
 **Pseudo-code**
 
@@ -64,7 +64,7 @@ Typical structure function computations in literature involve calculation of the
  
 * For every processor:
      
-    * for $\mathbf{l}$:
+    * for $\mathbf{l}$ assigned to the processor:
         
         * $\delta \mathbf{u} = \mathbf{u}[l_x:L_x, l_y:L_y, l_z:L_z]-\mathbf{u}[0:L_x-l_x, 0:L_y-l_y, 0:L_z-l_z]$. This operation is vectorized.
         
@@ -87,7 +87,7 @@ The calculation procedure is further illustrated in Fig. \ref{Schematic}. In our
 
 ![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ or the scalar difference $\delta \theta(\mathbf{l})$ is computed by taking the difference between two points with the same index in the pink and the green subdomains. For example, $\theta(\mathbf{l}) - \theta(0,0,0) = \theta_B - \theta_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization for computing $\delta \mathbf{u} (\mathbf{l})$ and $\delta \theta (\mathbf{l})$. \label{Schematic}](Schematic.png)
 
-Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity or the scalar difference. After computing the structure function for a given $\mathbf{l}$, each processor communicates the result to the master processor, which stores the $S_q^{u_\parallel}(\mathbf{l})$, $S_q^{u_\perp}(\mathbf{l})$ and $S_q^{\theta}(\mathbf{l})$ arrays.
+The $\mathbf{l}$'s are divided among MPI processors along $x$ and $y$ directions for three dimensions and along $x$ and $z$ directions for two dimensions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity or the scalar difference. After computing the structure function for a given $\mathbf{l}$, each processor communicates the result to the master processor, which stores the $S_q^{u_\parallel}(\mathbf{l})$, $S_q^{u_\perp}(\mathbf{l})$ and $S_q^{\theta}(\mathbf{l})$ arrays.
 
 It should be noted that the size of the pink or green subdomain is not the same for different $\mathbf{l}$'s, rather, it decreases with increasing $\mathbf{l}$. Thus, to compute the structure functions, there will be more load for small $\mathbf{l}$'s and less load for large $\mathbf{l}$'s. Because of this, a straightforward division of the domain among the processors along $x$ and $y$ directions will lead to load imbalance. To counter this, we divide $\mathbf{l}$'s in such a way that each processor gets both large and small $\mathbf{l}$'s. We illustrate the idea of dividing the load in the following.
 
