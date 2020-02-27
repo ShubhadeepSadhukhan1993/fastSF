@@ -1477,9 +1477,9 @@ void SFunc3D(
                 MPI_Gather(&x, 1, MPI_INT, X.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
                 MPI_Gather(&y, 1, MPI_INT, Y.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
                 MPI_Gather(&z, 1, MPI_INT, Z.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-                MPI_Gather(&Spll, 1, MPI_DOUBLE_PRECISION, Spll_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+                MPI_Gather(&Spll, 1, MPI_DOUBLE, Spll_arr.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
                 MPI_Gather(&p, 1, MPI_INT, p_arr.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-                MPI_Gather(&Sperp, 1, MPI_DOUBLE_PRECISION, Sperp_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+                MPI_Gather(&Sperp, 1, MPI_DOUBLE, Sperp_arr.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
                 if (rank_mpi==0) {
                     for (int i=0; i<P; i++) {
@@ -1563,7 +1563,7 @@ if (rank_mpi==0) {
                 MPI_Gather(&x, 1, MPI_INT, X.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
                 MPI_Gather(&y, 1, MPI_INT, Y.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
                 MPI_Gather(&z, 1, MPI_INT, Z.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-                MPI_Gather(&Spll, 1, MPI_DOUBLE_PRECISION, Spll_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+                MPI_Gather(&Spll, 1, MPI_DOUBLE, Spll_arr.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
                 MPI_Gather(&p, 1, MPI_INT, p_arr.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
 
                 if (rank_mpi==0) {
@@ -1643,9 +1643,9 @@ if (rank_mpi==0) {
         
             MPI_Gather(&x, 1, MPI_INT, X.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
             MPI_Gather(&z, 1, MPI_INT, Z.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-            MPI_Gather(&Spll, 1, MPI_DOUBLE_PRECISION, Spll_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+            MPI_Gather(&Spll, 1, MPI_DOUBLE, Spll_arr.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
             MPI_Gather(&p, 1, MPI_INT, p_arr.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-            MPI_Gather(&Sperp, 1, MPI_DOUBLE_PRECISION, Sperp_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+            MPI_Gather(&Sperp, 1, MPI_DOUBLE, Sperp_arr.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
             if (rank_mpi==0) {
                 for (int i=0; i<P; i++) {
@@ -1717,7 +1717,7 @@ void SFunc_long_2D(
         
             MPI_Gather(&x, 1, MPI_INT, X.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
             MPI_Gather(&z, 1, MPI_INT, Z.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-            MPI_Gather(&Spll, 1, MPI_DOUBLE_PRECISION, Spll_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+            MPI_Gather(&Spll, 1, MPI_DOUBLE, Spll_arr.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
             MPI_Gather(&p, 1, MPI_INT, p_arr.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
 
             if (rank_mpi==0) {
@@ -1785,7 +1785,7 @@ void SF_scalar_3D(
                 MPI_Gather(&x, 1, MPI_INT, X.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
                 MPI_Gather(&y, 1, MPI_INT, Y.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
                 MPI_Gather(&z, 1, MPI_INT, Z.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-                MPI_Gather(&St, 1, MPI_DOUBLE_PRECISION, St_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+                MPI_Gather(&St, 1, MPI_DOUBLE, St_arr.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
                 MPI_Gather(&p, 1, MPI_INT, p_arr.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
 
                 if (rank_mpi==0) {
@@ -1848,7 +1848,7 @@ void SF_scalar_2D(Array<double,2> T)
         
             MPI_Gather(&x, 1, MPI_INT, X.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
             MPI_Gather(&z, 1, MPI_INT, Z.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
-            MPI_Gather(&St, 1, MPI_DOUBLE_PRECISION, St_arr.data(), 1, MPI_DOUBLE_PRECISION, 0, MPI_COMM_WORLD);
+            MPI_Gather(&St, 1, MPI_DOUBLE, St_arr.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
             MPI_Gather(&p, 1, MPI_INT, p_arr.data(), 1, MPI_INT, 0, MPI_COMM_WORLD);
 
             if (rank_mpi==0) {
