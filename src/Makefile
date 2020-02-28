@@ -41,4 +41,4 @@
 ##
 
 Structure: fastSF.cc
-	mpic++ fastSF.cc -O3 -lh5si -lhdf5 -lyaml-cpp -o fastSF.out
+	mpic++ fastSF.cc -fstack-protector -O3 -lh5si -lhdf5 -lyaml-cpp -o fastSF.out

@@ -371,8 +371,6 @@ int px;
  ********************************************************************************************************************************************
  */
 int main(int argc, char *argv[]) {
-    char hostname[HOST_NAME_MAX];
-    gethostname(hostname, HOST_NAME_MAX);
     MPI_Init(NULL, NULL);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank_mpi);
     MPI_Comm_size(MPI_COMM_WORLD, &P);
@@ -1652,8 +1650,8 @@ if (rank_mpi==0) {
                     SF_Grid2D_pll(X(i), Z(i), p_arr(i)) = Spll_arr(i);
                     SF_Grid2D_perp(X(i), Z(i), p_arr(i)) = Sperp_arr(i);
                 } 
-            }
-        }
+            } 
+        } 
     }
     if (rank_mpi==0) {
         SF_Grid2D_pll(0,0,Range::all())=0;
