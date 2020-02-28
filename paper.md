@@ -83,23 +83,23 @@ Typical structure function computations in literature involve calculation of the
              
 * Stop
 
-The calculation procedure is further illustrated in Fig. \ref{Schematic}. In our code, $\delta \mathbf{u}(\mathbf{l})$ or $\delta \theta (\mathbf{l})$ is computed by taking the difference between two points with the same index in pink and green subdomains. This feature enables vectorization for computing the velocity or scalar difference. To save computational cost, $\mathbf{l}$ is varied up to half the domain size, ($L_x/2, L_y/2, L_z/2$). Note that the structure functions are important for intermediate scales (inertial range) only; thus, computation of these quantites for large values of $l$ is not required.
+The calculation procedure is further illustrated in Fig. \ref{Schematic}. In our code, $\delta \mathbf{u}(\mathbf{l})$ or $\delta \theta (\mathbf{l})$ is computed by taking the difference between two points with the same index in pink and green subdomains. This feature enables vectorization for computing the velocity or scalar difference. To save computational cost, $\mathbf{l}$ is varied up to half the domain size, that is, upto ($L_x/2, L_y/2, L_z/2$). Note that the structure functions are important for intermediate scales (inertial range) only; thus, computation of these quantites for large values of $l$ is not required.
 
 ![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ or the scalar difference $\delta \theta(\mathbf{l})$ is computed by taking the difference between two points with the same index in the pink and the green subdomains. For example, $\theta(\mathbf{l}) - \theta(0,0,0) = \theta_B - \theta_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization for computing $\delta \mathbf{u} (\mathbf{l})$ and $\delta \theta (\mathbf{l})$. \label{Schematic}](Schematic.png)
 
 The $\mathbf{l}$'s are divided among MPI processors along $x$ and $y$ directions for three dimensions and along $x$ and $z$ directions for two dimensions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity or the scalar difference. After computing the structure function for a given $\mathbf{l}$, each processor communicates the result to the master processor, which stores the $S_q^{u_\parallel}(\mathbf{l})$, $S_q^{u_\perp}(\mathbf{l})$ and $S_q^{\theta}(\mathbf{l})$ arrays.
 
-It should be noted that the size of the pink or green subdomain is not the same for different $\mathbf{l}$'s, rather, it decreases with increasing $\mathbf{l}$. Thus, to compute the structure functions, there will be more load for small $\mathbf{l}$'s and less load for large $\mathbf{l}$'s. Because of this, a straightforward division of the domain among the processors along $x$ and $y$ directions will lead to load imbalance. To counter this, we divide $\mathbf{l}$'s in such a way that each processor gets both large and small $\mathbf{l}$'s. We illustrate the idea of dividing the load in the following.
+It should be noted that the size of the pink or the green subdomain, which is given by $(L_x-l_x) \times (L_y-l_y) \times (L_z-l_z)$, is not the same for different $\mathbf{l}$'s, rather, it decreases with increasing $\mathbf{l}$. Thus, to compute the structure functions, there will be more load for small $\mathbf{l}$'s and less load for large $\mathbf{l}$'s. Because of this, a straightforward division of the domain among the processors along $x$ and $y$ directions will lead to load imbalance. In order to divide the load equally among the processors, $\mathbf{l}'s$ must be distributed in such a way that $\sum \{(L_x-l_x) \times (L_y-l_y) \times (L_z-l_z)\}$ is the same for every processor. Therefore, we assign both large and small $\mathbf{l}$'s to each processor to achieve equal load distribution. We illustrate the idea of dividing the load in the following.
 
 Consider a one-dimensional domain given by
 $$l=\{0, 1, 2, 3 ... 15\}.$$ 
-We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among four processors, with 2 points assigned to each processor. To divide the load equally among the processors, we need to ensure that $\sum l$ for each processor is the same. This is accomplished with the following distribution of points:
+We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among four processors, with 2 points assigned to each processor. The following distribution of points ensures equal load distribution:
 $$\mbox{Processor 1: } l=\{0,7\}, \quad \mbox{Processor 2: } l=\{1, 6\}, $$
 $$\mbox{Processor 3: } l=\{2,5\}, \quad \mbox{Processor 4: } l=\{3, 4\}. $$
-With this distribution, we have the same $\sum l$ ($=7$) for every processor. If two processors are used, then the following distribution results in same $\sum l$ ($=14$) for all the processors.
+With this distribution, we have the same $\sum (L-l)$ ($=23$) for every processor. If two processors are used, then the following distribution results in perfect load balance, with $\sum (L-l) = 46$ for every processor.
 $$\mbox{Processor 1: } l=\{0, 7, 2, 5\}, $$
 $$\mbox{Processor 2: } l=\{1, 6, 3, 4\}. $$
-Thus, each processor is assigned small and large $l$'s (and therefore, large and small loads) to ensure that all the processors get the same total load. This idea has been extended for higher dimensions in our code. However, the algorithm for distribution of load for higher dimensions is complex and the reader can refer to the code for details.
+Thus, each processor is assigned alternately small and large $l$'s (and therefore, large and small loads) to ensure that all the processors get the same total load. This idea has been extended for higher dimensions in our code. However, the algorithm for distribution of load for higher dimensions is complex and the reader can refer to the code for details.
 
 Finally, we remark that the current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. This is because ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation.
 
@@ -171,4 +171,5 @@ We thank R. Samuel, A. Chatterjee, S. Chatterjee, and M. Sharma for useful discu
 ---
 
 # References
+
 
