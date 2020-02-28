@@ -96,7 +96,7 @@ $$l=\{0, 1, 2, 3 ... 15\}.$$
 We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among four processors, with 2 points assigned to each processor. The following distribution of points ensures equal load distribution:
 $$\mbox{Processor 1: } l=\{0,7\}, \quad \mbox{Processor 2: } l=\{1, 6\}, $$
 $$\mbox{Processor 3: } l=\{2,5\}, \quad \mbox{Processor 4: } l=\{3, 4\}. $$
-With this distribution, we have the same $\sum (L-l)$ ($=23$) for every processor. If two processors are used, then the following distribution results in perfect load balance, with $\sum (L-l) = 46$ for every processor.
+With this distribution, we have the same $\sum (L-l) =23$ for every processor. If two processors are used, then the following distribution results in perfect load balance, with $\sum (L-l) = 46$ for every processor.
 $$\mbox{Processor 1: } l=\{0, 7, 2, 5\}, $$
 $$\mbox{Processor 2: } l=\{1, 6, 3, 4\}. $$
 Thus, each processor is assigned alternately small and large $l$'s (and therefore, large and small loads) to ensure that all the processors get the same total load. This idea has been extended for higher dimensions in our code. However, the algorithm for distribution of load for higher dimensions is complex and the reader can refer to the code for details.
