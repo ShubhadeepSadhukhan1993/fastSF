@@ -54,19 +54,21 @@ If the turbulence is isotropic in addition to being homogeneous, the structure f
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
-Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity or scalar difference using loops over $\mathbf{r}$ and $\mathbf{l}$. This amounts to six nested `for` loops for three dimensions that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over only $\mathbf{l}$ for computing the structure functions. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  Our algorithm for computing the structure functions for three-dimensional velocity field is as follows:
+Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity or scalar difference using loops over $\mathbf{r}$ and $\mathbf{l}$. This amounts to six nested `for` loops for three dimensions that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over only $\mathbf{l}$ for computing the structure functions. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  In the following, we provide the algorithm for structure function computation for two-dimensional velocity field.
 
 **Pseudo-code**
 
-*Data*: Velocity field $\mathbf{u}$ of grid size $N_x \times N_y \times N_z$, number of processors $P$, dimensions of the domain ($L_x \times L_y \times L_z$)
+*Data*: Velocity field $\mathbf{u}$ in domain $(L_x, L_z)$, number of processors $P$.
 
 *Procedure*:
+ 
+* Divide $\mathbf{l}$'s among various processors. The division method has been described later in this section. 
  
 * For every processor:
      
     * for $\mathbf{l}$ assigned to the processor:
         
-        * $\delta \mathbf{u} = \mathbf{u}[l_x:L_x, l_y:L_y, l_z:L_z]-\mathbf{u}[0:L_x-l_x, 0:L_y-l_y, 0:L_z-l_z]$. This operation is vectorized.
+        * Compute $\delta \mathbf{u}$ by taking the difference between two points with the same index in pink and green subdomains as shown in Fig. \ref{Schematic}. This feature enables vectorized subtraction operation.
         
         * $\delta u_{\parallel} = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$ (Vectorized). 
         
@@ -78,9 +80,10 @@ Typical structure function computations [Eqs (1-3)] in literature involve calcul
             
             * $S_q^{u_{\perp}} =$ Average of $\delta u_{\perp}^q$ (Vectorized).
             
-            * Send the values of $S_q^{u_{\parallel}}$, $S_q^{u_{\perp}}$, $q$, $l_x$, $l_y$, and $l_z$ to the master processor. The master processor stores $S_q^{u_{\parallel}} (l_x, l_y, l_z)$ and $S_q^{u_{\perp}} (l_x, l_y, l_z)$.
-           
-             
+            * Send the values of $S_q^{u_{\parallel}}$, $S_q^{u_{\perp}}$, $q$, $l_x$ and $l_z$ to the master processor. 
+            
+* The master processor stores $S_q^{u_{\parallel}} (l_x, l_z)$ and $S_q^{u_{\perp}} (l_x, l_z)$.
+            
 * Stop
 
 The calculation procedure is further illustrated in Fig. \ref{Schematic}. In our code, $\delta \mathbf{u}(\mathbf{l})$ or $\delta \theta (\mathbf{l})$ is computed by taking the difference between two points with the same index in pink and green subdomains. This feature enables vectorization for computing the velocity or scalar difference. To save computational cost, $\mathbf{l}$ is varied up to half the domain size, that is, upto ($L_x/2, L_y/2, L_z/2$). Note that the structure functions are important for intermediate scales (inertial range) only; thus, computation of these quantites for large values of $l$ is not required.
