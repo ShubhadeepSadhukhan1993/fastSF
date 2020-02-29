@@ -104,22 +104,24 @@ $$\mbox{Processor 1: } l=\{0, 7, 2, 5\}, $$
 $$\mbox{Processor 2: } l=\{1, 6, 3, 4\}. $$
 This idea has been implemented in our program. 
 
-Note that for computation of structure functions for two-dimensions, $l_x>0$, but $l_z$ can take both positive and negative values. However, for 
+Note that for computation of structure functions for two-dimensions, $l_x>0$, but $l_z$ can take both positive and negative values. However, for isotropic turbulence, the structure functions for $+l_z$ and $-l_z$ are statistically equal. Therefore, in our computations, we keep both $l_x>0$, $l_z>0$. For anisotropic turbulence, not discussed here, the structure functions will depend on $(l_x,l_z)$ rather than $l$. This computation will be done in future for anisotropic turbulence.  
 
-Finally, we remark that the current version of ‘fastSF’ computes the structure functions correctly only for homogeneous and isotropic turbulence. This is because ‘fastSF’ computes and stores the structure functions for only the positive values of $l_x$, $l_y$, and $l_z$. Note that this still gives the correct values for isotropic turbulence because in such case, the structure functions depend only on the magnitude of $\mathbf{l}$ and not its orientation.
-
+For three dimensions, the structure functions will depend on $(l_x,l_y,l_z)$. We divide the tasks among processors over $l_x$ and $l_y$ as done for 2D above. The same algorithm that was discussed earlier in this section has been extended for 3D. We employ a similar method for the computation of scalar structure functions as well.
+ 
 In the next section, we discuss the scaling of our code.
 
 # Scaling of `fastSF`
 
-We test the scaling of `fastSF` by running it to compute the third-order longitudinal structure function for an idealized velocity field of $128^3$ grid resolution, employing a maximum of 1024 processors. The velocity field is given by 
+`fastSF` is scalable over many processors due to vectorization and equal load distribution. We demonstrate the scaling of `fastSF` by running it to compute the third-order longitudinal structure function for an idealized velocity field of $128^3$ grid resolution, employing a maximum of 1024 processors. The velocity field is given by 
 $$\mathbf{u} = 
 \begin{bmatrix} 
 x \\ y \\z
 \end{bmatrix}.$$
-We perform four runs on a Cray XC40 system (Shaheen II of KAUST) for this problem using 16, 64, 256, and 1024 processors. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of processors. The data-points follow $T^{-1} \sim p$ curve to a good approximation. Thus, we conclude that our code exhibits strong scaling. 
+We perform four runs on a Cray XC40 system (Shaheen II of KAUST) for this problem using 16, 64, 256, and 1024 processors. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of processors. Best fit curve for these data points yield
+$$t^{-1} \sim p^{0.998 \pm 0.001},$$
+Thus, the data-points follow $T^{-1} \sim p$ curve to a good approximation. Thus, we conclude that our code exhibits strong scaling. 
 
-![Scaling of `fastSF` for the computation of third-order longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid. \label{Scaling}](SF_scaling.png)
+![Scaling of `fastSF` for the computation of third-order longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid. The data points follow $T^{-1} \sim p^{0.998}$ curve.\label{Scaling}](SF_scaling.png)
 
  
 # Validation
