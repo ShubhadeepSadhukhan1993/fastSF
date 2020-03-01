@@ -104,7 +104,7 @@ $$\mbox{Processor 1: } l=\{0, 7, 2, 5\}, $$
 $$\mbox{Processor 2: } l=\{1, 6, 3, 4\}. $$
 This idea has been implemented in our program. 
 
-Note that for computation of structure functions for two-dimensions, $l_x>0$, but $l_z$ can take both positive and negative values. However, for isotropic turbulence, the structure functions for $+l_z$ and $-l_z$ are statistically equal. Therefore, in our computations, we keep both $l_x>0$, $l_z>0$. For anisotropic turbulence, not discussed here, the structure functions will depend on $(l_x,l_z)$ rather than $l$. This computation will be done in future for anisotropic turbulence.  
+Note that for 2D, $l_x>0$, but $l_z$ can take both positive and negative values. However, for isotropic turbulence, the structure functions for $+l_z$ and $-l_z$ are statistically equal. Therefore, in our computations, we keep both $l_x>0$, $l_z>0$. For anisotropic turbulence, not discussed here, the structure functions will depend on $(l_x,l_z)$ rather than $l$. This computation will be done in future for anisotropic turbulence.  
 
 For three dimensions, the structure functions will depend on $(l_x,l_y,l_z)$. We divide the tasks among processors over $l_x$ and $l_y$ as done for 2D above. The same algorithm that was discussed earlier in this section has been extended for 3D. We employ a similar method for the computation of scalar structure functions as well.
  
