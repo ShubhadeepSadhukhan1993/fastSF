@@ -100,9 +100,9 @@ $$\mbox{Processor 1: } \quad l=\{1, 6\}, \quad \sum(L-l)=(15-1)+(15-6) = 23,$$
 $$\mbox{Processor 2: } \quad l=\{2,5\}, \quad \sum(L-l)=(15-2)+(15-5) = 23,$$
 $$\mbox{Processor 3: } \quad l=\{3, 4\}, \quad \sum(L-l)=(15-3)+(15-4) = 23.$$
 Similarly, if two processors are used, then the following distribution results in perfect load balance. 
-$$\mbox{Processor 1: } \quad l=\{0, 7, 2, 5\},$$
-$$\mbox{Processor 2: } \quad l=\{1, 6, 3, 4\}.$$
-For this configuration, $\sum(L-l)=46$ for every processor. This idea of load distribution has been implemented in our program. 
+$$\mbox{Processor 0: } \quad l=\{0, 7, 2, 5\},$$
+$$\mbox{Processor 1: } \quad l=\{1, 6, 3, 4\}.$$
+For the aforementioned configuration, $\sum(L-l)=46$ for every processor. This idea of load distribution has been implemented in our program and has been extended for higher dimensions. 
 
 Note that for 2D, $l_x>0$, but $l_z$ can take both positive and negative values. However, for isotropic turbulence, the structure functions for $+l_z$ and $-l_z$ are statistically equal. Therefore, in our computations, we keep both $l_x>0$, $l_z>0$. For anisotropic turbulence, not discussed here, the structure functions will depend on $(l_x,l_z)$ rather than $l$. This computation will be done in future for anisotropic turbulence.  
 
