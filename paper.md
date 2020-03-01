@@ -118,10 +118,10 @@ $$\mathbf{u} =
 x \\ y \\z
 \end{bmatrix}.$$
 We perform four runs on a Cray XC40 system (Shaheen II of KAUST) for this problem using 16, 64, 256, and 1024 processors. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of processors. Best fit curve for these data points yield
-$$t^{-1} \sim p^{0.998 \pm 0.001},$$
+$$T^{-1} \sim p^{0.986 \pm 0.002},$$
 Thus, the data-points follow $T^{-1} \sim p$ curve to a good approximation. Thus, we conclude that our code exhibits strong scaling. 
 
-![Scaling of `fastSF` for the computation of third-order longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid. The data points follow $T^{-1} \sim p^{0.998}$ curve.\label{Scaling}](SF_scaling.png)
+![Scaling of `fastSF` for the computation of third-order longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid. The data points follow $T^{-1} \sim p^{0.986}$ curve.\label{Scaling}](SF_scaling.png)
 
  
 # Validation
