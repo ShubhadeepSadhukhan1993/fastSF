@@ -117,7 +117,7 @@ $$\mathbf{u} =
 \begin{bmatrix} 
 x \\ y \\z
 \end{bmatrix}.$$
-We perform four runs on a Cray XC40 system (Shaheen II of KAUST) for this problem using 16, 64, 256, and 1024 processors. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of processors. Best fit curve for these data points yield
+We perform four runs on a Cray XC40 system (Shaheen II of KAUST) for this problem using 16, 64, 256, and 1024 processors. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of processors. Best fit curve for these data points yields
 $$T^{-1} \sim p^{0.986 \pm 0.002},$$
 Thus, the data-points follow $T^{-1} \sim p$ curve to a good approximation. Thus, we conclude that our code exhibits strong scaling. 
 
