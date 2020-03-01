@@ -98,7 +98,7 @@ We need to compute the structure functions for $l$ ranging from 0 to 7. We divid
 $$\mbox{Processor 0: } \quad l=\{0,7\}, \quad \sum(L-l)=(15-0)+(15-7) = 23,$$
 $$\mbox{Processor 1: } \quad l=\{1, 6\}, \quad \sum(L-l)=(15-1)+(15-6) = 23,$$
 $$\mbox{Processor 2: } \quad l=\{2,5\}, \quad \sum(L-l)=(15-2)+(15-5) = 23,$$
-$$\mbox{Processor 3: } \quad l=\{3, 4\}, \quad \sum(L-3)=(15-1)+(15-4) = 23.$$
+$$\mbox{Processor 3: } \quad l=\{3, 4\}, \quad \sum(L-l)=(15-1)+(15-4) = 23.$$
 Similarly, if two processors are used, then the following distribution results in perfect load balance. 
 $$\mbox{Processor 1: } \quad l=\{0, 7, 2, 5\},$$
 $$\mbox{Processor 2: } \quad l=\{1, 6, 3, 4\}.$$
