@@ -99,7 +99,7 @@ $$\mbox{Processor 0: } l=\{0,7\}, \quad \mbox{Processor 1: } l=\{1, 6\}, $$
 $$\mbox{Processor 2: } l=\{2,5\}, \quad \mbox{Processor 3: } l=\{3, 4\}. $$
 With this distribution, the computational load on processor 0 is
 $$\sum(L-l)=(15-0)+(15-7) = 23.$$
-Similarly, it can be shown that for every other processor, $\sum (L-l) =23$. If two processors are used, then the following distribution results in perfect load balance, with $\sum (L-l) = 46$ for every processor.
+Similarly, it can be shown that for every other processor, $\sum (L-l) =23$. If two processors are used, then the following distribution results in perfect load balance. 
 $$\mbox{Processor 1: } l=\{0, 7, 2, 5\}, $$
 $$\mbox{Processor 2: } l=\{1, 6, 3, 4\}. $$
 This idea has been implemented in our program. 
