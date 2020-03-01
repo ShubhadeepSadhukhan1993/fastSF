@@ -33,7 +33,7 @@ bibliography: paper.bib
 
 # Summary
 
-Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properites of turbulent flows [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]. Some of the earlier works comprising of such analysis are those of @Gotoh:PF2002, @Kaneda:PF2003, and @Ishihara:ARFM2009 for three-dimensional (3D) hydrodynamic turbulence; @Yeung:PF2005 and @Ray:NJP2008 for passive scalar turbulence; @Biferale:NJP2004 for two-dimensional (2D) hydrodynamic turbulence; and @Kunnen:PRE2008, @Kaczorowski:JFM2013, and @Bhattacharya:PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of ``fastSF``, a parallel code to compute the structure functions for a given velocity or scalar field. 
+Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properties of turbulent flows [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]. Some of the earlier works comprising of such analysis are those of @Gotoh:PF2002, @Kaneda:PF2003, and @Ishihara:ARFM2009 for three-dimensional (3D) hydrodynamic turbulence; @Yeung:PF2005 and @Ray:NJP2008 for passive scalar turbulence; @Biferale:NJP2004 for two-dimensional (2D) hydrodynamic turbulence; and @Kunnen:PRE2008, @Kaczorowski:JFM2013, and @Bhattacharya:PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of ``fastSF``, a parallel code to compute the structure functions for a given velocity or scalar field. 
 
  ``fastSF``, written in C++, is a fast and efficient code that uses vectorization for computing the structure functions. The code employs MPI (Message Passing Interface) parallelization with equal load distribution. The user has a choice on the type (scalar or vector) and the dimensions of the fields to be read by the code, and the range of the orders of the structure functions to be computed. The code writes the computed structure functions to `hdf5` files that can be further processed by the user.
 
@@ -68,19 +68,19 @@ Typical structure function computations [Eqs (1-3)] in literature involve calcul
      
     * for $\mathbf{l}$ assigned to the processor:
         
-        * Compute $\delta \mathbf{u}$ by taking the difference between two points with the same index in pink and green subdomains as shown in Fig. \ref{Schematic}. This feature enables vectorized subtraction operation.
+        * Compute $\delta \mathbf{u}(\mathbf{l})$ by taking the difference between two points with the same index in pink and green subdomains as shown in Fig. \ref{Schematic}. This feature enables vectorized subtraction operation.
         
-        * $\delta u_{\parallel} = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$ (Vectorized). 
+        * $\delta u_{\parallel}(\mathbf{l}) = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$ (Vectorized). 
         
-        * $\delta u_{\perp} = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$| (Vectorized). 
+        * $\delta u_{\perp}(\mathbf{l}) = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$| (Vectorized). 
         
         * for order $q$:
         
-            * $S_q^{u_{\parallel}} =$ Average of $\delta u_{\parallel}^q$ (Vectorized).
+            * $S_q^{u_{\parallel}}(\mathbf{l}) =$ Average of $\delta u_{\parallel}^q$ (Vectorized).
             
-            * $S_q^{u_{\perp}} =$ Average of $\delta u_{\perp}^q$ (Vectorized).
+            * $S_q^{u_{\perp}}(\mathbf{l}) =$ Average of $\delta u_{\perp}^q$ (Vectorized).
             
-            * Send the values of $S_q^{u_{\parallel}}$, $S_q^{u_{\perp}}$, $q$, $l_x$ and $l_z$ to the master processor. 
+            * Send the values of $S_q^{u_{\parallel}}(\mathbf{l})$, $S_q^{u_{\perp}}(\mathbf{l})$, $q$, $l_x$, and $l_z$ to the master processor. 
             
 * The master processor stores $S_q^{u_{\parallel}} (l_x, l_z)$ and $S_q^{u_{\perp}} (l_x, l_z)$.
             
