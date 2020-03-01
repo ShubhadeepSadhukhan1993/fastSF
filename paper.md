@@ -59,7 +59,7 @@ $$ S_q^{u_\perp}(\mathbf{l}) = \langle \delta u_\perp^q \rangle = \langle |\delt
 Here, $\langle \cdot \rangle$ denotes ensemble averaging. Similarly, we can define the scalar structure functions for the scalar field as 
 $$ S_q^\theta(\mathbf{l}) = \langle \delta \theta^q\rangle = \langle [\theta (\mathbf{r+l}) - \theta(\mathbf{r})]^q \rangle. \quad \quad(3)$$
 
-For sotropic turbulence (in addition to being homogeneous), the structure functions become functions of $l$, where $l=|\mathbf{l}|$. The second-order velocity structure function $ S_q^{u_\parallel}({l})$ provides an estimate for the energy in the eddies of size $l$ or less [@Davidson:book:Turbulence]. 
+For sotropic turbulence (in addition to being homogeneous), the structure functions become functions of $l$, where $l=|\mathbf{l}|$. The second-order velocity structure function provides an estimate for the energy in the eddies of size $l$ or less [@Davidson:book:Turbulence]. 
 
 In the next section, we provide a brief description of the code.
 
