@@ -66,21 +66,21 @@ Typical structure function computations [Eqs (1-3)] in literature involve calcul
  
 * For every processor:
      
-    * for $\mathbf{l}$ assigned to the processor:
+    * for $l_x,l_z$ assigned to the processor:
         
-        * Compute $\delta \mathbf{u}(\mathbf{l})$ by taking the difference between two points with the same index in pink and green subdomains as shown in Fig. \ref{Schematic}. This feature enables vectorized subtraction operation.
+        * Compute $\delta \mathbf{u}(l_x,l_z)$ by taking the difference between two points with the same index in pink and green subdomains as shown in Fig. \ref{Schematic}. This feature enables vectorized subtraction operation.
         
-        * $\delta u_{\parallel}(\mathbf{l}) = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$ (Vectorized). 
+        * $\delta u_{\parallel}(l_x,l_z) = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$ (Vectorized). 
         
-        * $\delta u_{\perp}(\mathbf{l}) = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$| (Vectorized). 
+        * $\delta u_{\perp}(l_x,l_z) = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$| (Vectorized). 
         
         * for order $q$:
         
-            * $S_q^{u_{\parallel}}(\mathbf{l}) =$ Average of $\delta u_{\parallel}^q$ (Vectorized).
+            * $S_q^{u_{\parallel}}(l_x,l_z) =$ Average of $\delta u_{\parallel}^q$ (Vectorized).
             
-            * $S_q^{u_{\perp}}(\mathbf{l}) =$ Average of $\delta u_{\perp}^q$ (Vectorized).
+            * $S_q^{u_{\perp}}(l_x,l_z) =$ Average of $\delta u_{\perp}^q$ (Vectorized).
             
-            * Send the values of $S_q^{u_{\parallel}}(\mathbf{l})$, $S_q^{u_{\perp}}(\mathbf{l})$, $q$, $l_x$, and $l_z$ to the master processor. 
+            * Send the values of $S_q^{u_{\parallel}}(l_x,l_z)$, $S_q^{u_{\perp}}(l_x,l_z)$, $q$, $l_x$, and $l_z$ to the master processor. 
             
 * The master processor stores $S_q^{u_{\parallel}} (l_x, l_z)$ and $S_q^{u_{\perp}} (l_x, l_z)$.
             
