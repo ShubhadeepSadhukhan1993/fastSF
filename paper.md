@@ -33,7 +33,7 @@ bibliography: paper.bib
 
 # Summary
 
-Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properites of turbulent flows [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]. Some of the earlier works comprising of such analysis are those of @Gotoh:PF2002, @Kaneda:PF2003, and @Ishihara:ARFM2009 for three-dimensional hydrodynamic turbulence; @Yeung:PF2005 and @Ray:NJP2008 for passive scalar turbulence; @Biferale:NJP2004 for two-dimensional hydrodynamic turbulence; and @Kunnen:PRE2008, @Kaczorowski:JFM2013, and @Bhattacharya:PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of ``fastSF``, a parallel code to compute the structure functions for a given velocity or scalar field. 
+Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properites of turbulent flows [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]. Some of the earlier works comprising of such analysis are those of @Gotoh:PF2002, @Kaneda:PF2003, and @Ishihara:ARFM2009 for three-dimensional (3D) hydrodynamic turbulence; @Yeung:PF2005 and @Ray:NJP2008 for passive scalar turbulence; @Biferale:NJP2004 for two-dimensional (2D) hydrodynamic turbulence; and @Kunnen:PRE2008, @Kaczorowski:JFM2013, and @Bhattacharya:PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of ``fastSF``, a parallel code to compute the structure functions for a given velocity or scalar field. 
 
  ``fastSF``, written in C++, is a fast and efficient code that uses vectorization for computing the structure functions. The code employs MPI (Message Passing Interface) parallelization with equal load distribution. The user has a choice on the type (scalar or vector) and the dimensions of the fields to be read by the code, and the range of the orders of the structure functions to be computed. The code writes the computed structure functions to `hdf5` files that can be further processed by the user.
 
@@ -54,7 +54,7 @@ If the turbulence is isotropic in addition to being homogeneous, the structure f
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
-Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity or scalar difference using loops over $\mathbf{r}$ and $\mathbf{l}$. This amounts to six nested `for` loops for three dimensions that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over only $\mathbf{l}$ for computing the structure functions. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  In the following, we provide the algorithm for structure function computation for two-dimensional velocity field.
+Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity or scalar difference using loops over $\mathbf{r}$ and $\mathbf{l}$. This amounts to six nested `for` loops for 3D fields that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over only $\mathbf{l}$ for computing the structure functions. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  In the following, we provide the algorithm for structure function computation for 2D velocity field.
 
 **Pseudo-code**
 
@@ -106,7 +106,7 @@ This idea has been implemented in our program.
 
 Note that for 2D, $l_x>0$, but $l_z$ can take both positive and negative values. However, for isotropic turbulence, the structure functions for $+l_z$ and $-l_z$ are statistically equal. Therefore, in our computations, we keep both $l_x>0$, $l_z>0$. For anisotropic turbulence, not discussed here, the structure functions will depend on $(l_x,l_z)$ rather than $l$. This computation will be done in future for anisotropic turbulence.  
 
-For three dimensions, the structure functions will depend on $(l_x,l_y,l_z)$. We divide the tasks among processors over $l_x$ and $l_y$ as done for 2D above. The same algorithm that was discussed earlier in this section has been extended for 3D. We employ a similar method for the computation of scalar structure functions as well.
+For 3D, the structure functions will depend on $(l_x,l_y,l_z)$. We divide the tasks among processors over $l_x$ and $l_y$ as done for 2D above. The same algorithm that was discussed earlier in this section has been extended for 3D. We employ a similar method for the computation of scalar structure functions as well.
  
 In the next section, we discuss the scaling of our code.
 
@@ -130,7 +130,7 @@ We validate `fastSF` by comparing the numerical results with analytical results 
 
 ### Problem 1
 
-We consider the following two-dimensional velocity and scalar fields:
+We consider the following 2D velocity and scalar fields:
 $$\mathbf{u} = 
 \begin{bmatrix} 
 x \\ z
@@ -151,13 +151,13 @@ The above problem is used as a test case for the the code. The user is required 
 
 ### Problem 2
 
-Here, we consider the classical results of Kolmogorov [@Kolmogorov:Dissipation; @Kolmogorov:Structure] for three-dimensional incompressible homogeneous isotropic turbulence. In such flows, for the inertial range, which comprises of scales lying between the large-scale forcing regime and the small-scale dissipation regime, the third-order longitudinal velocity structure function is given by
+Here, we consider the classical results of Kolmogorov [@Kolmogorov:Dissipation; @Kolmogorov:Structure] for 3D incompressible hydrodynamic turbulence with homegeneity and isotropy. In such flows, for the inertial range, which comprises of scales lying between the large-scale forcing regime and the small-scale dissipation regime, the third-order longitudinal velocity structure function is given by
 $$S_3^{u_\parallel}(l) = -\frac{4}{5} \epsilon l,$$
 where $\epsilon$ is the viscous dissipation rate [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book; @Verma:book:ET]. For an arbitrary order $q$, @She:PRL1994 proposed that the longitudinal structure functions scale as $S_3^{u_\parallel}(l) \sim l^{\zeta_q}$, where the exponent $\zeta_q$ is given by 
 $$ \zeta_q = \frac{q}{9} + 2 \left ( 1 - \left ( \frac{2}{3} \right )^{q/3} \right ).$$ 
 
 
-We compute the longitudinal velocity structure functions of $q=3,5,7$ using the simulation data of three-dimensional homogeneous isotropic turbulence with Reynolds number (Re) of 5700. The simulation was performed using TARANG [@Verma:Pramana2013tarang; @Chatterjee:JPDC2018] on a $512^3$ grid with the domain size of ($2\pi \times 2\pi \times 2\pi$). For more details on the simulation, refer to @Sadhukhan:PRF2019. We run ``fastSF`` on Shaheen II to compute the structure functions, employing 4096 MPI processes. 
+We compute the longitudinal velocity structure functions of $q=3,5,7$ using the simulation data of 3D hydrodynamic turbulence with Reynolds number (Re) of 5700. The simulation was performed using TARANG [@Verma:Pramana2013tarang; @Chatterjee:JPDC2018] on a $512^3$ grid with the domain size of ($2\pi \times 2\pi \times 2\pi$). For more details on the simulation, refer to @Sadhukhan:PRF2019. We run ``fastSF`` on Shaheen II to compute the structure functions, employing 4096 MPI processes. 
 
 ![For 3D homogeneous isotropic turbulence (Problem 2): plots of the negative of normalized third, fifth and seventh-order structure functions vs. $l$. The negative of the normalized third-order structure function is close to $4/5$ (dashed line) in the inertial range. \label{Hydro}](SF_hydro.png)
 
@@ -168,7 +168,7 @@ The results obtained from Problems 1 and 2 thus validate ``fastSF``.
 
 # Conclusions
 
-This paper describes the design and the validations of ``fastSF``, an efficient parallel C++ code that computes structure functions for given velocity and scalar fields. We validate ``fastSF`` using two test cases. In the first case, we compute the structure functions using hypothetical velocity and scalar fields, and find them to be consistent with analytical results. In the second case, we compute the velocity structure functions using the fields obtained from the simulations of three-dimensional homogeneous and isotropic turbulence, and show consistency with Kolmogorov's K41 result. We believe that ``fastSF`` will be useful to turbulence community.  
+This paper describes the design and the validations of ``fastSF``, an efficient parallel C++ code that computes structure functions for given velocity and scalar fields. We validate ``fastSF`` using two test cases. In the first case, we compute the structure functions using hypothetical velocity and scalar fields, and find them to be consistent with analytical results. In the second case, we compute the velocity structure functions using the fields obtained from the simulations of 3D hydrodynamic turbulence, and show consistency with Kolmogorov's K41 result. We believe that ``fastSF`` will be useful to turbulence community.  
 
 
 # Acknowledgements
