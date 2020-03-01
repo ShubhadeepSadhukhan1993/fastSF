@@ -95,13 +95,13 @@ It is clear from Fig. \ref{Schematic} that the size of the pink or the green sub
 Consider a one-dimensional domain of size $L=15$; possible $l$'s are
 $$l=\{0, 1, 2, 3 ... 15\}.$$ 
 We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among four processors, with 2 points assigned to each processor. The following distribution of points ensures equal load distribution:
-$$\mbox{Processor 0: } l=\{0,7\}, \quad \mbox{Processor 1: } l=\{1, 6\}, $$
-$$\mbox{Processor 2: } l=\{2,5\}, \quad \mbox{Processor 3: } l=\{3, 4\}. $$
-With this distribution, the computational load on processor 0 is
-$$\sum(L-l)=(15-0)+(15-7) = 23.$$
-Similarly, it can be shown that for every other processor, $\sum (L-l) =23$. If two processors are used, then the following distribution results in perfect load balance. 
-$$\mbox{Processor 1: } l=\{0, 7, 2, 5\}, $$
-$$\mbox{Processor 2: } l=\{1, 6, 3, 4\}. $$
+$$\mbox{Processor 0: } \quad l=\{0,7\}, \quad \sum(L-l)=(15-0)+(15-7) = 23,$$
+$$\mbox{Processor 1: } \quad l=\{1, 6\}, \quad \sum(L-l)=(15-1)+(15-6) = 23,$$
+$$\mbox{Processor 2: } \quad l=\{2,5\}, \quad \sum(L-l)=(15-2)+(15-5) = 23,$$
+\mbox{Processor 3: } \quad l=\{3, 4\}, \quad \sum(L-3)=(15-1)+(15-4) = 23.$$
+Similarly, tf two processors are used, then the following distribution results in perfect load balance. 
+$$\mbox{Processor 1: } \quad l=\{0, 7, 2, 5\}, \quad \sum(L-l) = 46,$$
+$$\mbox{Processor 2: } \quad l=\{1, 6, 3, 4\}, \quad \sum(L-l) = 46.$$
 This idea has been implemented in our program. 
 
 Note that for 2D, $l_x>0$, but $l_z$ can take both positive and negative values. However, for isotropic turbulence, the structure functions for $+l_z$ and $-l_z$ are statistically equal. Therefore, in our computations, we keep both $l_x>0$, $l_z>0$. For anisotropic turbulence, not discussed here, the structure functions will depend on $(l_x,l_z)$ rather than $l$. This computation will be done in future for anisotropic turbulence.  
