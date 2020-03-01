@@ -92,14 +92,14 @@ Since $S_q^u(\mathbf{l})$ is important for intermediate scales (inertial range) 
 
 It should be noted that the size of the pink or the green subdomain, which is given by $(L_x-l_x)(L_z-l_z)$, is not the same for different $\mathbf{l}$'s, rather, it decreases with increasing $\mathbf{l}$. Thus, to compute the structure functions, there will be more computational load for small $\mathbf{l}$'s and less load for large $\mathbf{l}$'s. Because of this, a straightforward division of the domain among the processors along $x$ and $y$ directions will lead to load imbalance. In order to divide the load equally among the processors, $\mathbf{l}$'s must be distributed in such a way that $\sum (L_x-l_x)(L_z-l_z)$ is the same for every processor. Therefore, we assign both large and small $\mathbf{l}$'s to each processor to achieve equal load distribution. We illustrate the idea of dividing the load in the following.
 
-Consider a one-dimensional domain of size $L=15$, possible $l$'s are
+Consider a one-dimensional domain of size $L=15$; possible $l$'s are
 $$l=\{0, 1, 2, 3 ... 15\}.$$ 
 We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among four processors, with 2 points assigned to each processor. The following distribution of points ensures equal load distribution:
 $$\mbox{Processor 0: } l=\{0,7\}, \quad \mbox{Processor 1: } l=\{1, 6\}, $$
 $$\mbox{Processor 2: } l=\{2,5\}, \quad \mbox{Processor 3: } l=\{3, 4\}. $$
 With this distribution, the computational load on processor 0 is
 $$\sum(L-l)=(15-0)+(15-7) = 23.$$
-Similar calculations for the other processors show that $\sum (L-l) =23$ for every processor. If two processors are used, then the following distribution results in perfect load balance, with $\sum (L-l) = 46$ for every processor.
+Similarly, it can be shown that for every other processor, $\sum (L-l) =23$. If two processors are used, then the following distribution results in perfect load balance, with $\sum (L-l) = 46$ for every processor.
 $$\mbox{Processor 1: } l=\{0, 7, 2, 5\}, $$
 $$\mbox{Processor 2: } l=\{1, 6, 3, 4\}. $$
 This idea has been implemented in our program. 
