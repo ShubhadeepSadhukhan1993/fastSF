@@ -54,7 +54,7 @@ If the turbulence is isotropic in addition to being homogeneous, the structure f
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
-Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity or scalar difference using loops over $\mathbf{r}$ and $\mathbf{l}$. This amounts to six nested `for` loops for 3D fields that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over $\mathbf{l}$, thus requiring three loops instead of six for 3D fields. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  In the following, we provide the algorithm for structure function computation for 2D velocity field.
+Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity or scalar difference using loops over $\mathbf{r}$ and $\mathbf{l}$. This amounts to six nested `for` loops for 3D fields that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over only $\mathbf{l}$, thus requiring three loops instead of six for 3D fields. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  In the following, we provide the algorithm for structure function computation for 2D velocity field.
 
 **Pseudo-code**
 
