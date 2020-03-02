@@ -39,12 +39,12 @@ Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interac
  
  The code uses the following libraries:
  
-1.   blitz++ (version xx)
-2.  hdf5
-3. hfsi
-4. yaml
-5. mpich
-6. cmake
+1.   blitz++ (version 1.0.2)
+2.   hdf5 (version1.8.20)
+3.   h5si 
+4.   yaml-cpp (version 0.3.0)
+5.   mpich (version 3.3.2)
+6.   cmake (version 3.16.4) 
 
 
 In the next section, we will briefly define the velocity and the scalar structure functions in turbulence.
