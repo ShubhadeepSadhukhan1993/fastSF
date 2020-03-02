@@ -19,7 +19,7 @@ The following libraries are required for installing and running fastSF:
 3. [`YAML-cpp`](http://turbulencehub.org/index.php/codes/tarang/installing-tarang/)(Version 0.3.0) 
 4. [`MPICH`](https://www.mpich.org/downloads/)(Version 3.3.2)
 5. [`HDF5`](http://turbulencehub.org/index.php/codes/tarang/installing-tarang/)(Version 1.8.20)
-6. [`H5SI`](https://github.com/anandogc/h5si)
+6. [`H5SI`](https://github.com/anandogc/h5si)(Version 1.1.1)
 
 Clicking on one of the above libraries will redirect you to the webpage that provides instructions for downloading and installation of that library.
 
