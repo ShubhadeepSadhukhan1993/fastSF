@@ -15,19 +15,20 @@ https://github.com/ShubhadeepSadhukhan1993/fastSF
 The following libraries are required for installing and running fastSF:
 
 1. [`CMake`](https://cmake.org/download/) (Version 3.16.4)
-2. `Blitz++`
-3. `YAML-cpp`
-4. `MPICH`
-5. `HDF5`
-6. `H5SI`
+2. [`Blitz++`](https://github.com/blitzpp/blitz) (Version 1.0.2)
+3. [`YAML-cpp`](http://turbulencehub.org/index.php/codes/tarang/installing-tarang/)(Version 0.3.0) 
+4. [`MPICH`](https://www.mpich.org/downloads/)(Version 3.3.2)
+5. [`HDF5`](http://turbulencehub.org/index.php/codes/tarang/installing-tarang/)(Version 1.8.20)
+6. [`H5SI`](https://github.com/anandogc/h5si)
 
-The instructions to download and install these libraries (except H5SI) are provided in the following website:
+Clicking on one of the above libraries will redirect you to the webpage that provides instructions for downloading and installation of that library.
 
-(http://turbulencehub.org/index.php/codes/tarang/installing-tarang/).
+IMPORTANT: 
 
-The instructions to download and install H5SI are provided in the following website:
+* Note that `fastSF` is not compatible with higher versions `YAML-cpp`(> 0.3.0). 
 
-(https://bitbucket.org/anandogc/h5si/src/master/).
+* The library `H5SI`has been successfully tested with `HDF5` version 1.8.20. However, `H5SI` may not be compatible with higher versions of `HDF5`. Thus, the users are strongly recommended to install `HDF5` 1.8.20.  
+
 
 ###  Compiling instruction
 
