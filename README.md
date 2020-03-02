@@ -35,7 +35,7 @@ IMPORTANT:
 After downloading `fastSF`, change into `fastSF/src` directory and run the command `make` in the terminal. An executable named `fastSF.out` will be created inside the `fastSF/src` folder.
 
 ## Testing `fastSF`
-`fastSF` offers an automated testing process to validate the code. The relevant test scripts can be found in the `tests/` folder of the code. To execute the tesing process, change into `\fastSF` and run the command 
+`fastSF` offers an automated testing process to validate the code. The relevant test scripts can be found in the `tests/` folder of the code. To execute the tesing process, change into `fastSF` and run the command 
 
 `bash runTest.sh`. 
 
