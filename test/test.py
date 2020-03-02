@@ -41,9 +41,12 @@
 ##
 
 import h5py
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import ticker, colors
+
+mpl.style.use('classic')
 
 plt.rcParams['xtick.major.size'] = 4.2
 plt.rcParams['xtick.major.width'] = 0.5
@@ -99,9 +102,9 @@ def plotSF_r_2D():
 	SF3 = (hdf5_reader_plane("test_velocity_2D/out/SF_Grid_pll3.h5", "SF_Grid_pll3"))
 	
 	Nx, Nz = SF2.shape
-	print Nx, Nz
+	
 	Nr = int(np.ceil(np.sqrt(Nx**2 + Nz**2)))
-	print Nr
+	
 
 	r = np.zeros([Nr]) #
 	for i in range(len(r)): #
@@ -157,9 +160,9 @@ def plotSF_r_3D():
 	SF3 = (hdf5_reader("out/SF_Grid_pll3.h5", "SF_Grid_pll3"))
 	
 	Nx, Ny, Nz = SF2.shape
-	print Nx, Ny, Nz
+	
 	Nr = int(np.ceil(np.sqrt(Nx**2 + Ny**2 + Nz**2)))
-	print Nr
+	
 
 	r = np.zeros([Nr]) #
 	for i in range(len(r)): #
