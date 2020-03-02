@@ -64,7 +64,7 @@ For sotropic turbulence (in addition to being homogeneous), the structure functi
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
-First we present a sketch of the structure function computaion for the velocity structure functions.  Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity difference using loops over $\mathbf{r}$ and $\mathbf{l}$. These computations require six nested `for` loops for 3D fields that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over only $\mathbf{l}$, thus requiring three loops instead of six for 3D fields. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  In the following, we provide the algorithm for structure function computation for a 2D velocity field.
+First we present a sketch of the structure function computation for the velocity structure functions.  Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity difference using loops over $\mathbf{r}$ and $\mathbf{l}$. These computations require six nested `for` loops for 3D fields that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over only $\mathbf{l}$, thus requiring three loops instead of six for 3D fields. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  In the following, we provide the algorithm for structure function computation for a 2D velocity field.
 
 **Pseudo-code**
 
