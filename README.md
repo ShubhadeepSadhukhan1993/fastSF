@@ -14,7 +14,7 @@ https://github.com/ShubhadeepSadhukhan1993/fastSF
 
 The following libraries are required for installing and running fastSF:
 
-1. `CMake`
+1. [`CMake`](https://cmake.org/download/) (Version 3.16.4)
 2. `Blitz++`
 3. `YAML-cpp`
 4. `MPICH`
