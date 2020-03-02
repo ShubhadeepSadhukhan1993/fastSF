@@ -52,12 +52,12 @@ In the next section, we will briefly define the velocity and the scalar structur
 # Velocity and scalar structure functions
 
 We denote the velocity and scalar fields using $\mathbf{u}$ and $\theta$  respectively. The velocity difference between any two points $\mathbf{r}$ and $\mathbf{r+l}$ is $\delta \mathbf{u} = \mathbf{u(r+l)}-\mathbf{u(r)}$. The difference in the parallel components of the velocity field along $\mathbf{l}$ is $\delta u_\parallel=\delta \mathbf{u}\cdot \hat{\mathbf{l}}$.  The corresponding difference in the perpendicular component is $\delta u_\perp= |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|$. Assuming statistical homogeneity, we define the longitudinal velocity structure functions of order $q$ as
-$$ S_q^{u_\parallel}(\mathbf{l}) = \langle \delta u_\parallel^q \rangle = \langle [\{\mathbf{u(r+l)}-\mathbf{u(r)}\}\cdot \hat{\mathbf{l}}]^q \rangle, \quad \quad (1)$$ 
+$$ S_q^{u_\parallel}(\mathbf{l}) = \langle (\delta u_\parallel)^q \rangle = \langle [\{\mathbf{u(r+l)}-\mathbf{u(r)}\}\cdot \hat{\mathbf{l}}]^q \rangle, \quad \quad (1)$$ 
 and the transverse velocity structure functions of order 
 $q$ as 
-$$ S_q^{u_\perp}(\mathbf{l}) = \langle \delta u_\perp^q \rangle = \langle |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|^q \rangle. \quad \quad (2)$$ 
+$$ S_q^{u_\perp}(\mathbf{l}) = \langle (\delta u_\perp)^q \rangle = \langle |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|^q \rangle. \quad \quad (2)$$ 
 Here, $\langle \cdot \rangle$ denotes ensemble averaging. Similarly, we can define the scalar structure functions for the scalar field as 
-$$ S_q^\theta(\mathbf{l}) = \langle \delta \theta^q\rangle = \langle [\theta (\mathbf{r+l}) - \theta(\mathbf{r})]^q \rangle. \quad \quad(3)$$
+$$ S_q^\theta(\mathbf{l}) = \langle (\delta \theta)^q\rangle = \langle [\theta (\mathbf{r+l}) - \theta(\mathbf{r})]^q \rangle. \quad \quad(3)$$
 
 For sotropic turbulence (in addition to being homogeneous), the structure functions become functions of $l$, where $l=|\mathbf{l}|$. The second-order velocity structure function $S_q^{u_{\parallel}}(l)$ provides an estimate for the energy in the eddies of size $l$ or less [@Davidson:book:Turbulence]. 
 
@@ -98,7 +98,7 @@ First we present a sketch of the structure function computation for the velocity
 
 ![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ is computed by taking the difference between two points with the same indices in the pink and the green subdomains. For example, $\mathbf{u}(\mathbf{l}) - \mathbf{u}(0,0) = \mathbf{u}_B - \mathbf{u}_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization of the computation. \label{Schematic}](Schematic.png)
 
-Since $S_q^u(\mathbf{l})$ is important for intermediate scales (inertial range) only, we vary $\mathbf{l}$ upto half the domain size, that is, upto ($L_x/2, L_z/2$), to save computational cost. The $\mathbf{l}$'s are divided among MPI processors along $x$ and $z$ directions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity or the scalar difference. After computing the structure function for a given $\mathbf{l}$, each processor communicates the result to the master processor, which stores the $S_q^{u_\parallel}(\mathbf{l})$, $S_q^{u_\perp}(\mathbf{l})$ and $S_q^{\theta}(\mathbf{l})$ arrays.
+Since $S_q^u(\mathbf{l})$ is important for intermediate scales (inertial range) only, we vary $\mathbf{l}$ upto half the domain size, that is, upto ($L_x/2, L_z/2$), to save computational cost. The $\mathbf{l}$'s are divided among MPI processors along $x$ and $z$ directions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity difference. After computing the structure function for a given $\mathbf{l}$, each processor communicates the result to the master processor, which stores the $S_q^{u_\parallel}(\mathbf{l})$ and $S_q^{u_\perp}(\mathbf{l})$ arrays.
 
 It is clear from Fig. \ref{Schematic} that the sizes of the pink or green subdomains are $(L_x-l_x)(L_z-l_z)$, which is function of $\mathbf{l}$'s.  This function decreases with increasing $\mathbf{l}$ leading to larger computational costs for small $l$ and less cost of larger $l$.   Hence, a straightforward division of the domain among the processors along $x$ and $z$ directions will lead to a load imbalance.   Therefore, we assign both large and small $\mathbf{l}$'s to each processor to achieve equal load distribution. We illustrate the above idea  using the following example.
 
