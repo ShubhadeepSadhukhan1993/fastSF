@@ -104,7 +104,7 @@ It is clear from Fig. \ref{Schematic} that the sizes of the pink or green subdom
 
 Consider a one-dimensional domain of size $L=15$, for which the possible $l$'s are
 $$l=\{0, 1, 2, 3 ... 15\}.$$ 
-We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among four processors, with 2 $l$'s assigned to each processor. The following distribution of $l$'s ensures equal load distribution:
+We need to compute the structure functions for $l$ ranging from 0 to 7. We divide the task among four processors, with two $l$'s assigned to each processor. The following distribution of $l$'s ensures equal load distribution:
 $$\mbox{Processor 0: } \quad l=\{0,7\}, \quad \sum(L-l)=(15-0)+(15-7) = 23,$$
 $$\mbox{Processor 1: } \quad l=\{1, 6\}, \quad \sum(L-l)=(15-1)+(15-6) = 23,$$
 $$\mbox{Processor 2: } \quad l=\{2,5\}, \quad \sum(L-l)=(15-2)+(15-5) = 23,$$
