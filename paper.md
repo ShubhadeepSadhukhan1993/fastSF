@@ -47,11 +47,11 @@ Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interac
 6.   cmake (version 3.16.4) 
 
 
-In the next section, we will briefly discuss the usefulness of the code to the turbulence community.
+In the next section, we will briefly discuss the performance and scaling of ``fastSF`` in a Cray XC40 system.
 
 
 
-# Performance and Scaling of `fastSF`
+# Performance and scaling of `fastSF`
 
 Typical structure function computations in literature involve calculation of the velocity or scalar difference using loops over two points. These computations require six nested `for` loops for 3D fields that makes the computations very expensive for large grids. `fastSF` is scalable over many processors due to vectorization and equal load distribution. In our code, we employ vectorization and loops over only one point, thus requiring three loops instead of six for 3D fields. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization. We further ensure equal load distribution among processors to enhance scalabality of the code over many processors. Please refer to the code and the documentation for details.
 
