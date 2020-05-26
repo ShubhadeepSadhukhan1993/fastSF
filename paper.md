@@ -53,7 +53,7 @@ In the next section, we will briefly discuss the performance and scaling of ``fa
 
 # Performance and scaling of `fastSF`
 
-Typical structure function computations in literature involve calculation of the velocity or scalar difference using loops over two points. These computations require six nested `for` loops for 3D fields that makes the computations very expensive for large grids. `fastSF` is scalable over many processors due to vectorization and equal load distribution. In our code, we employ vectorization and loops over only one point, thus requiring three loops instead of six for 3D fields. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization. Further, we ensure equal load distribution among processors to enhance scalabality of the code over many processors. Please refer to the code and the documentation for details.
+Since structure functions are two-point statistical quantities, typical structure function computations in literature involve calculation of the velocity or scalar difference using loops over the two points. These computations require six nested `for` loops for 3D fields that makes the computations very expensive for large grids. In ``fastSF``, we employ vectorization and loops over only one point, thus requiring three loops instead of six for 3D fields. This enhances the performance approximately 20 times over the earlier schemes due to vectorization. Further, we ensure equal load distribution among processors to enhance scalabality of the code. Please refer to the code and the documentation for details.
 
 We demonstrate the scaling of `fastSF` for the third-order longitudinal structure function for an idealized velocity field on a $128^3$ grid.  For our computation we employ a maximum of 1024 processors. We take the velocity field as
 $$\mathbf{u} = 
@@ -71,7 +71,7 @@ Thus, the data-points follow $T^{-1} \sim p$ curve to a good approximation. Thus
 
 # Conclusions
 
-This paper provides a brief description ``fastSF``, an efficient parallel C++ code that computes structure functions for given velocity and scalar fields. This code is scalable over many processors. An earlier version of the code was used by @Bhattacharya:PF2019 for analyzing the structure functions of turbulent convection. We are currently using this code to investigate the structure functions of two-dimensional turbulence with large-scale forcing. We believe that ``fastSF`` will be useful to turbulence community.  
+This paper provides a brief description of ``fastSF``, an efficient parallel C++ code that computes structure functions for given velocity and scalar fields. This code is shown to be scalable over many processors. We are currently using this code to investigate the structure functions of two-dimensional turbulence with large-scale forcing. An earlier version of the code was used by @Bhattacharya:PF2019 for analyzing the structure functions of turbulent convection.  We believe that ``fastSF`` will be useful to turbulence community because of its efficiency and scalability.  
 
 
 # Acknowledgements
