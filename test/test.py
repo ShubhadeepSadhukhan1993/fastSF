@@ -79,7 +79,11 @@ def hdf5_reader_plane(filename,dataset):
 	return V1
 
 
-
+def hdf5_reader_slice(filename,dataset, Ny):
+	file_V1_read = h5py.File(filename)
+	dataset_V1_read = file_V1_read["/"+dataset]
+	V1=dataset_V1_read[:,Ny,:]
+	return V1
 A=9.3
 font = {'family' : 'serif', 'weight' : 'normal', 'size' : A}
 plt.rc('font', **font)
@@ -92,8 +96,6 @@ y=np.linspace(0,1,N)
 X,Y=np.meshgrid(x,y)
 
 
-#print T[90,100,500]
-#print T[:,255,255]
 
 
 	
@@ -103,8 +105,8 @@ def plotSF_r_2D():
 	
 	Nx, Nz = SF2.shape
 	
-	Nr = int(np.ceil(np.sqrt(Nx**2 + Nz**2)))
-	
+	#Nr = int(np.ceil(np.sqrt(Nx**2 + Nz**2)))
+	Nr = int(np.ceil(np.sqrt((Nx-1)**2 + (Nz-1)**2)))+1
 
 	r = np.zeros([Nr]) #
 	for i in range(len(r)): #
@@ -151,17 +153,18 @@ def plotSF_r_2D():
 	axes.set_xticklabels([0.1, 0.4, 0.7])
 	axes.legend(scatterpoints=1, loc='lower right', prop={'size':0.95*A}, ncol = 1, frameon=False)
 	fig.tight_layout()
-	plt.savefig("SF_test.png", dpi=600)
+	plt.savefig("SF_velocity_r2D.png", dpi=600)
 	plt.show()
 
 
 def plotSF_r_3D():
-	SF2 = (hdf5_reader("out/SF_Grid_pll2.h5", "SF_Grid_pll2"))
-	SF3 = (hdf5_reader("out/SF_Grid_pll3.h5", "SF_Grid_pll3"))
+	SF2 = (hdf5_reader("test_velocity_3D/out/SF_Grid_pll2.h5", "SF_Grid_pll2"))
+	SF3 = (hdf5_reader("test_velocity_3D/out/SF_Grid_pll3.h5", "SF_Grid_pll3"))
 	
 	Nx, Ny, Nz = SF2.shape
 	
-	Nr = int(np.ceil(np.sqrt(Nx**2 + Ny**2 + Nz**2)))
+	#Nr = int(np.ceil(np.sqrt(Nx**2 + Ny**2 + Nz**2)))
+	Nr = int(np.ceil(np.sqrt((Nx-1)**2 + (Ny-1)**2 + (Nz-1)**2)))+1
 	
 
 	r = np.zeros([Nr]) #
@@ -179,7 +182,7 @@ def plotSF_r_3D():
 	           SF2_r[l] = SF2_r[l] + SF2[x, y, z]
 	           SF3_r[l] = SF3_r[l] + SF3[x, y, z]
 	           counter[l] = counter[l] + 1	  
-	  
+	
 	SF2_r = SF2_r/counter
 	SF3_r = SF3_r/counter
 	
@@ -210,20 +213,15 @@ def plotSF_r_3D():
 	axes.set_xticklabels([0.2, 0.4, 0.8])
 	axes.legend(scatterpoints=1, loc='lower right', prop={'size':0.95*A}, ncol = 1, frameon=False)
 	fig.tight_layout()
-	plt.savefig("SF_test.png", dpi=600)
+	plt.savefig("SF_velocity_r3D.png", dpi=600)
 	plt.show()	
 
 	
-def plot_SF_density():
-    SF = (hdf5_reader_plane("test_scalar_2D/out/SF_Grid_scalar2.h5", "SF_Grid_scalar2"))
-    SF3 = (hdf5_reader_plane("test_scalar_2D/out/SF_Grid_scalar3.h5", "SF_Grid_scalar3"))
+def plot_SF2D_scalar():
+    SF2 = (hdf5_reader_plane("test_scalar_2D/out/SF_Grid_scalar2.h5", "SF_Grid_scalar2"))
+    #SF3 = (hdf5_reader_plane("test_scalar_2D/out/SF_Grid_scalar3.h5", "SF_Grid_scalar3"))
     
-    Nlx, Nlz = SF.shape
-    
-    #for i in range(Nlx):
-    #    for j in range(Nlz):
-    #        if (SF[i,j]<1e-3):
-    #            SF[i,j]=1e-3
+    Nlx, Nlz = SF2.shape
     
     lx = np.linspace(0,0.5,Nlx)
     lz = np.linspace(0,0.5,Nlz)
@@ -235,7 +233,7 @@ def plot_SF_density():
     
     axes[1].contourf(Lx, Lz, Z, levels= np.linspace(0,1,50), cmap='jet')
     
-    density = axes[0].contourf(lx, lz, np.transpose(SF), levels=np.linspace(0,1,50), cmap='jet')
+    density = axes[0].contourf(lx, lz, np.transpose(SF2), levels=np.linspace(0,1,50), cmap='jet')
     #density = axes.pcolor(lx, lz, np.transpose(SF), cmap='jet', norm=colors.SymLogNorm(linthresh=1e-4, linscale=0.1, vmin=0, vmax=4.0))
 
     
@@ -265,10 +263,167 @@ def plot_SF_density():
     cb2 = fig.colorbar(density, fraction=0.05, ax=axes[1],ticks=[0, 0.5, 1])#, ticks=[1e-4, 1e-2, 1e0]) ###### TICKS FOR THE COLORBARS ARE DEFINED HERE
     cb2.ax.tick_params(labelsize=A)
     fig.tight_layout()
-    plt.savefig("SF_scalar.png", dpi=600)
+    plt.savefig("SF_scalar2D.png", dpi=600)
+    
+    plt.show()
+
+	
+def plot_SF2D_velocity():
+    SF2 = (hdf5_reader_plane("test_velocity_2D/out/SF_Grid_pll2.h5", "SF_Grid_pll2"))
+    #SF3 = (hdf5_reader_plane("test_scalar_2D/out/SF_Grid_scalar3.h5", "SF_Grid_scalar3"))
+    
+    Nlx, Nlz = SF2.shape
+    
+    lx = np.linspace(0,0.5,Nlx)
+    lz = np.linspace(0,0.5,Nlz)
+    
+    fig, axes = plt.subplots(1,2,figsize=(5,2.5),sharey=True)
+    levels = []
+    Lz,Lx=np.meshgrid(lz,lx)
+    Z=(Lx**2+Lz**2)
+    
+    axes[1].contourf(Lx, Lz, Z, levels= np.linspace(0,0.5,50), cmap='jet')
+    
+    density = axes[0].contourf(lx, lz, np.transpose(SF2), levels=np.linspace(0,0.5,50), cmap='jet')
+   
+    axes[0].set_xticks([0, 0.25, 0.5])
+    axes[0].set_yticks([0, 0.25, 0.5])
+    axes[0].set_xlabel('$l_x$')
+    axes[0].set_ylabel('$l_z$')
+    axes[0].tick_params(axis='x', which='major', pad=10)
+    axes[0].tick_params(axis='y', which='major', pad=10)
+    axes[0].set_title(r"$(\mathrm{a})$ $S_2^{u}(l_x,l_z)$")#, pad=10)
+
+    axes[1].set_title(r"$(\mathrm{b})$ $(l_x^2 + l_z^2)$")
+    
+    #axes[1].set_aspect(1)
+    axes[1].set_xticks([0, 0.25, 0.5])
+    axes[1].set_yticks([0, 0.25, 0.5])
+    axes[1].set_xlabel('$l_x$')
+    #axes[1].set_ylabel('$l_z$')
+    axes[1].tick_params(axis='x', which='major', pad=10)
+    axes[1].tick_params(axis='y', which='major', pad=10)
+    axes[0].title.set_position([.5, 1.05])
+    axes[1].title.set_position([.5, 1.05])
+    cb1 = fig.colorbar(density, fraction=0.05, ax=axes[0],ticks=[0, 0.25, 0.5])#, ticks=[1e-4, 1e-2, 1e0]) ###### TICKS FOR THE COLORBARS ARE DEFINED HERE
+    cb1.ax.tick_params(labelsize=A)
+    
+    cb2 = fig.colorbar(density, fraction=0.05, ax=axes[1],ticks=[0, 0.25, 0.5])#, ticks=[1e-4, 1e-2, 1e0]) ###### TICKS FOR THE COLORBARS ARE DEFINED HERE
+    cb2.ax.tick_params(labelsize=A)
+    fig.tight_layout()
+    plt.savefig("SF_velocity2D.png", dpi=600)
+    
+    plt.show()
+
+def plot_SF3D_scalar():
+    SF2 = (hdf5_reader_slice("test_scalar_3D/out/SF_Grid_scalar2.h5", "SF_Grid_scalar2",-1))
+    #SF3 = (hdf5_reader_slice("out/SF_Grid_scalar3.h5", "SF_Grid_scalar3",31))
+    
+    Nlx, Nlz= SF2.shape
+
+    lx = np.linspace(0, 0.5, Nlx)
+    lz = np.linspace(0, 0.5, Nlz)
+    #lz = np.linspace(0,1,Nlz)
+    
+    fig, axes = plt.subplots(1,2,figsize=(5,2.5),sharey=True)
+    
+    Lz,Lx=np.meshgrid(lz,lx)
+    Z=(Lx+Lz+0.5)**2
+
+   
+    axes[1].contourf(Lx, Lz, Z, levels= np.linspace(0,2.25,50), cmap='jet')
+    
+    density = axes[0].contourf(lx, lz, np.transpose(SF2), levels=np.linspace(0,2.25,50), cmap='jet')
+    #density = axes.pcolor(lx, lz, np.transpose(SF), cmap='jet', norm=colors.SymLogNorm(linthresh=1e-4, linscale=0.1, vmin=0, vmax=4.0))
+
+    
+    #axes[0].set_aspect(1)
+    axes[0].set_xticks([0, 0.25, 0.5])
+    axes[0].set_yticks([0, 0.25, 0.5])
+    axes[0].set_xlabel('$l_x$')
+    axes[0].set_ylabel('$l_z$')
+    axes[0].tick_params(axis='x', which='major', pad=10)
+    axes[0].tick_params(axis='y', which='major', pad=10)
+    axes[0].set_title(r"$(\mathrm{a})$ $S_2^{\theta}(l_x, l_y=0.5,l_z)$")#, pad=10)
+
+    axes[1].set_title(r"$(\mathrm{b})$ $(l_x +0.5+ l_z)^2$")
+    
+    #axes[1].set_aspect(1)
+    axes[1].set_xticks([0, 0.25, 0.5])
+    axes[1].set_yticks([0, 0.25, 0.5])
+    axes[1].set_xlabel('$l_x$')
+    #axes[1].set_ylabel('$l_z$')
+    axes[1].tick_params(axis='x', which='major', pad=10)
+    axes[1].tick_params(axis='y', which='major', pad=10)
+    axes[0].title.set_position([.5, 1.05])
+    axes[1].title.set_position([.5, 1.05])
+    cb1 = fig.colorbar(density, fraction=0.05, ax=axes[0],ticks=[0, 0.75, 1.5, 2.25])#, ticks=[1e-4, 1e-2, 1e0]) ###### TICKS FOR THE COLORBARS ARE DEFINED HERE
+    cb1.ax.tick_params(labelsize=A)
+    
+    cb2 = fig.colorbar(density, fraction=0.05, ax=axes[1],ticks=[0, 0.75, 1.5, 2.25])#, ticks=[1e-4, 1e-2, 1e0]) ###### TICKS FOR THE COLORBARS ARE DEFINED HERE
+    cb2.ax.tick_params(labelsize=A)
+    fig.tight_layout()
+    plt.savefig("SF_scalar3D.png", dpi=600)
+    
+    plt.show()
+    
+def plot_SF3D_velocity():
+    SF2 = (hdf5_reader_slice("test_velocity_3D/out/SF_Grid_pll2.h5", "SF_Grid_pll2",-1))
+    #SF3 = (hdf5_reader_slice("out/SF_Grid_scalar3.h5", "SF_Grid_scalar3",31))
+    
+    Nlx, Nlz= SF2.shape
+
+    lx = np.linspace(0, 0.5, Nlx)
+    lz = np.linspace(0, 0.5, Nlz)
+    #lz = np.linspace(0,1,Nlz)
+    
+    fig, axes = plt.subplots(1,2,figsize=(5,2.5),sharey=True)
+    
+    Lz,Lx=np.meshgrid(lz,lx)
+    Z=(Lx**2+Lz**2+0.5**2)
+
+   
+    axes[1].contourf(Lx, Lz, Z, levels= np.linspace(0,0.75,50), cmap='jet')
+    
+    density = axes[0].contourf(lx, lz, np.transpose(SF2), levels=np.linspace(0,0.75,50), cmap='jet')
+    #density = axes.pcolor(lx, lz, np.transpose(SF), cmap='jet', norm=colors.SymLogNorm(linthresh=1e-4, linscale=0.1, vmin=0, vmax=4.0))
+
+    
+    #axes[0].set_aspect(1)
+    axes[0].set_xticks([0, 0.25, 0.5])
+    axes[0].set_yticks([0, 0.25, 0.5])
+    axes[0].set_xlabel('$l_x$')
+    axes[0].set_ylabel('$l_z$')
+    axes[0].tick_params(axis='x', which='major', pad=10)
+    axes[0].tick_params(axis='y', which='major', pad=10)
+    axes[0].set_title(r"$(\mathrm{a})$ $S_2^{u}(l_x, l_y=0.5,l_z)$")#, pad=10)
+
+    axes[1].set_title(r"$(\mathrm{b})$ $(l_x^2 +0.5^2+ l_z^2)$")
+    
+    #axes[1].set_aspect(1)
+    axes[1].set_xticks([0, 0.25, 0.5])
+    axes[1].set_yticks([0, 0.25, 0.5])
+    axes[1].set_xlabel('$l_x$')
+    #axes[1].set_ylabel('$l_z$')
+    axes[1].tick_params(axis='x', which='major', pad=10)
+    axes[1].tick_params(axis='y', which='major', pad=10)
+    axes[0].title.set_position([.5, 1.05])
+    axes[1].title.set_position([.5, 1.05])
+    cb1 = fig.colorbar(density, fraction=0.05, ax=axes[0],ticks=[0, 0.25,0.5,0.75])#, ticks=[1e-4, 1e-2, 1e0]) ###### TICKS FOR THE COLORBARS ARE DEFINED HERE
+    cb1.ax.tick_params(labelsize=A)
+    
+    cb2 = fig.colorbar(density, fraction=0.05, ax=axes[1],ticks=[0, 0.25, 0.5, 0.75])#, ticks=[1e-4, 1e-2, 1e0]) ###### TICKS FOR THE COLORBARS ARE DEFINED HERE
+    cb2.ax.tick_params(labelsize=A)
+    fig.tight_layout()
+    plt.savefig("SF_velocity3D.png", dpi=600)
     
     plt.show()
 
 
 plotSF_r_2D()
-plot_SF_density()
+plot_SF2D_scalar()
+plot_SF2D_velocity()
+
+plotSF_r_3D()
+plot_SF3D_scalar()
+plot_SF3D_velocity()

@@ -48,6 +48,12 @@ cd ..
 cd test_velocity_2D
 rm -rf out
 cd ..
+cd test_scalar_3D
+rm -rf out
+cd ..
+cd test_velocity_3D
+rm -rf out
+cd ..
 rm *.png
 
 

@@ -49,6 +49,13 @@ cd ..
 cd test_velocity_2D
 mpirun -np 1 ../../src/fastSF.out
 cd ..
+
+cd test_scalar_3D
+mpirun -np 1 ../../src/fastSF.out
+cd ..
+cd test_velocity_3D
+mpirun -np 1 ../../src/fastSF.out
+cd ../
 python test.py
 
 
