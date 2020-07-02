@@ -161,6 +161,12 @@ The structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`
 
 The documentation can be found in `fastSF/docs/index.html`
 
+## Contributions and Bug Reports
+
+We welcome contributions to this project. If you wish to contribute, please create a branch with a [pull request](https://github.com/ShubhadeepSadhukhan1993/fastSF/pulls) and the changes can be discussed there.
+
+If you find a bug in the or errors in the documentation, please open a [new issue](https://github.com/ShubhadeepSadhukhan1993/fastSF/issues/new) in the Github repository and report the bug or the error. Please provide sufficient information for the bug to be reproduced.  
+
 ## License
 
 `fastSF` is released under the terms of BSD New License.
