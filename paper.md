@@ -126,14 +126,14 @@ In the next section, we discuss the scaling of our code.
 
 # Scaling of `fastSF`
 
-`fastSF` is scalable over many processors due to vectorization and equal load distribution. We demonstrate the scaling of `fastSF` for the third-order longitudinal structure function for an idealized velocity field on a $128^3$ grid.  For our computation we employ a maximum of 1024 processors. We take the velocity field as
+`fastSF` is scalable over many processors due to vectorization and equal load distribution. We demonstrate the scaling of `fastSF` for the third-order longitudinal structure function for an idealized velocity field on a $128^3$ grid.  For our computation we employ a maximum of 1024 cores. We take the velocity field as
 $$\mathbf{u} = 
 \begin{bmatrix} 
 x \\ y \\z
 \end{bmatrix}.$$
-We perform four runs on a Cray XC40 system (Shaheen II of KAUST) for this problem using 16, 64, 256, and 1024 processors. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of processors. The best fit curve for these data points yields
+We perform four runs on a Cray XC40 system (Shaheen II of KAUST) for this problem using a total of 16, 64, 256, and 1024 cores. We used 16 cores per node for each run. In Fig. \ref{Scaling}, we plot the inverse of time taken in seconds versus the number of cores. The best fit curve for these data points yields
 $$T^{-1} \sim p^{0.986 \pm 0.002},$$
-Thus, the data-points follow $T^{-1} \sim p$ curve to a good approximation. Hence, we conclude that our code exhibits strong scaling. 
+Thus, the data-points follow $T^{-1} \sim p$ curve to a good approximation. Hence, we conclude that our code exhibits good scaling. 
 
 ![Scaling of `fastSF` for the computation of third-order longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid.  We observe a linear scaling. \label{Scaling}](SF_scaling.png)
 
