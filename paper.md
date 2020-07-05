@@ -37,7 +37,7 @@ Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interac
 
  ``fastSF``, written in C++, is a fast and efficient code that uses vectorization for computing the structure functions. The code employs MPI (Message Passing Interface) parallelization with equal load distribution. The user has a choice on the type (scalar or vector) and the dimensions of the fields to be read by the code, and the range of the orders of the structure functions to be computed. The code writes the computed structure functions to `hdf5` files that can be further processed by the user.
 
-To the best of our knowledge and belief, there are no other commercial or open-source packages that compute the structure functions. Currently, such codes are developed in-house and are not open to the general public. On the other hand, ``fastSF`` is open to all and thus will be a useful tool for computing and analysing the structure functions.
+To the best of our knowledge and belief, there are no other commercial or open-source packages for computing  structure functions. Currently, such codes are developed in-house and are not open to the general public. On the other hand, ``fastSF`` is open to all and thus will be a useful tool for computing and analysing structure functions.
 
  The code uses the following libraries:
  
@@ -100,7 +100,7 @@ First we present a sketch of the structure function computation for the velocity
             
 * Stop
 
-![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ is computed by taking the difference between two points with the same indices in the pink and the green subdomains. For example, $\mathbf{u}(\mathbf{l}) - \mathbf{u}(0,0) = \mathbf{u}_B - \mathbf{u}_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization of the computation. \label{Schematic}](Schematic.png)
+![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ is computed by taking the difference between two points with the same indices in the pink and the green subdomains. For example, $\mathbf{u}(\mathbf{l}) - \mathbf{u}(0,0) = \mathbf{u}_B - \mathbf{u}_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization of the computation. \label{Schematic}](docs/Schematic.png)
 
 Since $S_q^u(\mathbf{l})$ is important for intermediate scales (inertial range) only, we vary $\mathbf{l}$ upto half the domain size, that is, upto ($L_x/2, L_z/2$), to save computational cost. The $\mathbf{l}$'s are divided among MPI processors along $x$ and $z$ directions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity difference. After computing the structure function for a given $\mathbf{l}$, each processor communicates the result to the master processor, which stores the $S_q^{u_\parallel}(\mathbf{l})$ and $S_q^{u_\perp}(\mathbf{l})$ arrays.
 
@@ -135,7 +135,7 @@ We perform four runs on a Cray XC40 system (Shaheen II of KAUST) for this proble
 $$T^{-1} \sim p^{0.986 \pm 0.002},$$
 Thus, the data-points follow $T^{-1} \sim p$ curve to a good approximation. Hence, we conclude that our code exhibits good scaling. 
 
-![Scaling of `fastSF` for the computation of third-order longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid.  We observe a linear scaling. \label{Scaling}](SF_scaling.png)
+![Scaling of `fastSF` for the computation of third-order longitudinal velocity structure function using 16, 64, 256, and 1024 processors of Shaheen II. All the runs were conducted on a $128^3$ grid.  We observe a linear scaling. \label{Scaling}](docs/SF_scaling.png)
 
 
 # Conclusions
