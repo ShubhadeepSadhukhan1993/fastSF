@@ -834,13 +834,13 @@ void VECTOR_TEST_CASE_3D()
 
 
 	if (max > epsilon){
-		cout<<"VECTOR_3D: TEST_FAILED\n";
+		cout<<"\n\nVECTOR_3D: TEST_FAILED. The structure functions computed numerically using the code do NOT match with the analytically obtained values. \n\n";
 	}
 	else{
-		cout<<"VECTOR_3D: TEST_PASSED\n";
+		cout<<"\n\nVECTOR_3D: TEST_PASSED. The structure functions computed numerically using the code match with the analytically obtained values. \n\n";
 	}
 
-    cout<<"MAXIMUM PERCENTAGE ERROR: "<<max<<endl;
+    cout<<"MAXIMUM PERCENTAGE ERROR: "<<max<<endl<<endl;
 
 }
 
@@ -929,13 +929,13 @@ void VECTOR_TEST_CASE_2D()
 
 
 	if (max > epsilon){
-		cout<<"VECTOR_2D: TEST_FAILED\n";
+		cout<<"\n\nVECTOR_2D: TEST_FAILED. The structure functions computed numerically using the code do NOT match with the analytically obtained values. \n\n";
 	}
 	else{
-		cout<<"VECTOR_2D: TEST_PASSED\n";
+		cout<<"\n\nVECTOR_2D: TEST_PASSED. The structure functions computed numerically using the code match with the analytically obtained values. \n\n";
 	}
 
-    cout<<"MAXIMUM ERROR: "<<max<<endl;
+    cout<<"MAXIMUM ERROR: "<<max<<endl<<endl;
 
 }
 
@@ -990,13 +990,13 @@ void SCALAR_TEST_CASE_2D()
 		}
 	}
 	if (max > epsilon){
-		cout<<"SCALAR_2D: TEST_FAILED\n";
+		cout<<"\n\nSCALAR_2D: TEST_FAILED. The structure functions computed numerically using the code do NOT match with the analytically obtained values. \n\n";
 	}
 	else{
-		cout<<"SCALAR_2D: TEST_PASSED\n";
+		cout<<"\n\nSCALAR_2D: TEST_PASSED. The structure functions computed numerically using the code match with the analytically obtained values. \n\n";
 	}
 
-	cout<<"MAXIMUM ERROR: "<<max<<endl;
+	cout<<"MAXIMUM ERROR: "<<max<<endl<<endl;
 }
 
 /**
@@ -1045,14 +1045,14 @@ void SCALAR_TEST_CASE_3D(){
 		}
 	}
 	if (max > epsilon){
-		cout<<"SCALAR_3D: TEST_FAILED\n";
+		cout<<"\n\nSCALAR_3D: TEST_FAILED. The structure functions computed numerically using the code do NOT match with the analytically obtained values. \n\n";
 	}
 	else{
-		cout<<"SCALAR_3D: TEST_PASSED\n";
+		cout<<"\n\nSCALAR_3D: TEST_PASSED. The structure functions computed numerically using the code match with the analytically obtained values. \n\n";
 
 	}
 
-    cout<<"MAXIMUM ERROR: "<<max<<endl;
+    cout<<"MAXIMUM ERROR: "<<max<<endl<<endl;
 
 }
 
