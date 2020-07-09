@@ -19,10 +19,11 @@ For the above fields, it can be analytically shown that the longitudinal velocit
 We run ``fastSF`` to compute the velocity and scalar structure functions for the above fields. The resolution of the fields and the domain size are 32<sup>2</sup> and 1 x 1 respectively. We plot the second and the third-order longitudinal velocity structure functions versus *l* in Fig.1. Clearly, *S<sub>2</sub><sup>u<sub>ll</sub></sup> (l)* and *S<sub>3</sub><sup>u<sub>ll</sub></sup> (l)* equal *l<sup>2</sup>* and *l<sup>3</sup>* respectively, consistent with the analytical results. Figure 2 exhibits the density plots of the computed second-order scalar structure function *S<sub>2</sub><sup>&theta;</sup>* (**l**) along with (*l<sub>x</sub> + l<sub>z</sub>*)<sup>2</sup>. The two plots are very similar, thus showing the ``fastSF`` computes the scalar structure function correctly.
 
 
-  
-
-Fig.1: For the velocity field defined in Problem 1: plots of the second and third-order longitudinal structure functions vs. l. The second and third-order structure functions equal l<sup>2</sup> and l<sup>3</sup> respectively.
-
+ <figure>
+  <img src="docs/SF_test.png" alt="Trulli" style="width:100%">
+  <figcaption>Fig.1: For the velocity field defined in Problem 1: plots of the second and third-order longitudinal structure functions vs. l. The second and third-order structure functions equal l<sup>2</sup> and l<sup>3</sup> respectively.</figcaption>
+</figure>
+ 
 <figure>
   <img src="docs/SF_scalar.png" alt="Trulli" style="width:100%">
   <figcaption>Fig.2: For the scalar field defined in Problem 1: (a) Density plot of the second-order scalar structure function as function of the displacement vector. (b) Density plot of (l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>, which is the analytical value of the second-order scalar structure function. The two density plots are very similar.</figcaption>
