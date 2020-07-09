@@ -20,7 +20,7 @@ We run ``fastSF`` to compute the velocity and scalar structure functions for the
 
 
  <figure>
-  <img src="docs/SF_test.png" alt="Trulli" style="width:100%">
+  <img src="docs/SF_test.png" alt="Trulli" style="width:70%">
   <figcaption>Fig.1: For the velocity field defined in Problem 1: plots of the second and third-order longitudinal structure functions vs. l. The second and third-order structure functions equal l<sup>2</sup> and l<sup>3</sup> respectively.</figcaption>
 </figure>
  
