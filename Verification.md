@@ -65,7 +65,7 @@ Here, we consider the classical results of Kolmogorov (Kolmogorov 1941a, 1941b) 
 *S<sub>3</sub><sup>u<sub>ll</sub></sup> (l)* = -(4/5)*&epsilon;l*, 
 
 
-where *&epsilon;* is the viscous dissipation rate (Kolmogorov1941a, 1941b; Frisch 1997; Verma 2019). For an arbitrary order *q*, She and Leveque (1994) proposed that the longitudinal structure functions scale as *S<sub>3</sub><sup>u<sub>ll</sub></sup> (l)* ~ *l<sup>&zeta;<sub>q</sub></sup>*, where the exponent *&zeta;<sub>q</sub>* is given by 
+where *&epsilon;* is the viscous dissipation rate (Kolmogorov1941a, 1941b; Frisch 1995; Verma 2019). For an arbitrary order *q*, She and Leveque (1994) proposed that the longitudinal structure functions scale as *S<sub>3</sub><sup>u<sub>ll</sub></sup> (l)* ~ *l<sup>&zeta;<sub>q</sub></sup>*, where the exponent *&zeta;<sub>q</sub>* is given by 
 
 
 *&zeta;<sub>q</sub>* = (*q*/9) + 2 {1 - (2/3)<sup>*q*/3</sup> }.
@@ -85,3 +85,25 @@ The results obtained from Problems 1, 2, and 3 thus validate ``fastSF``.
   <img src="docs/SF_hydro.png" alt="Trulli" style="width:70%">
   <figcaption>Fig.5: For 3D homogeneous isotropic turbulence (Problem 3): plots of the negative of normalized third, fifth and seventh-order structure functions vs. l. The negative of the normalized third-order structure function is close to 4/5 (dashed line) in the inertial range..</figcaption>
 </figure>
+
+### Bibliography
+
+Chatterjee, A. G., Verma, M. K., Kumar, A., Samtaney, R., Hadri, B., and Khurram, R. (2018). Scaling of a Fast Fourier Transform and a pseudo-spectral fluid solver up to 196608 cores. *J. Parallel Distrib. Comput.*, 113(3), 77-91, doi:10.1016/j.jpdc.2017.10.014
+
+Frisch, U. (1995). *Turbulence: The Legacy of A. N. Kolmogorov*. Cambridge: Cambridge University Press. doi:10.1017/CBO9781139170666
+
+Kolmogorov, A. N. (1941a). Dissipation of Energy in Locally Isotropic Turbulence. *Dokl Acad Nauk SSSR*, 32(1), 16–18. doi:10.1098/rspa.1991.0076
+
+Kolmogorov, A. N. (1941b). The local structure of turbulence in incompressible viscous fluid for very large Reynolds numbers. *Dokl Acad Nauk SSSR*, 30(4), 301–305. doi:10.1098/rspa.1991.0075
+
+Sadhukhan, S., Samuel, R., Verma, M. K., Stepanov, R., Plunian, F., and Samtaney, R. (2019). Enstrophy transfers in helical turbulence. *Phys. Rev. Fluids*, 4, 84607, doi:10.1103/PhysRevFluids.4.084607
+
+She, Z., and Leveque, E. (1994). Universal scaling laws in fully developed turbulence. *Phys. Rev. Lett.*, 72(3), 336-339, doi:10.1103/PhysRevLett.72.336
+
+Verma, M. K. (2019). *Energy transers in Fluid Flows: Multiscale and Spectral Perspectives*. Cambridge: Cambridge University Press. doi:10.1017/9781316810019
+
+Verma, M. K., Chatterjee, A. G., Reddy, S., Yadav, R. K., Paul, S., Chandra, M., and Samtaney, R. (2013). Benchmarking and scaling studies of pseudospectral code Tarang for turbulence simulations. *Pramana-J. Phys*, 81(4), 617-629, doi:10.1007/s12043-013-0594-4
+
+
+
+
