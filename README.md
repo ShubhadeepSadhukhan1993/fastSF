@@ -10,18 +10,76 @@ https://github.com/ShubhadeepSadhukhan1993/fastSF
 
 ## Installing `fastSF`
 
+### Environment Variables
+The following environment variables need to be set before compiling `fastSF`. (You may append these lines to `$HOME/.bashrc`):
+
+
+`export PATH=$HOME/local/bin:$PATH`
+
+`export PKG_CONFIG_DISABLE_UNINSTALLED=true`
+
+`export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig:$PKG_CONFIG_PATH`
+
+`export HDF5_ROOT=$HOME/local`
+
+`export CPATH=$HOME/local/include/:$CPATH`
+
+`export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH`
+
+`export LIBRARY_PATH=$HOME/local/lib:$LIBRARY_PATH`
+
+`export MANPATH=$HOME/local/share/man/:$MANPATH`
+`
+
 ### Required Libraries
 
 The following libraries are required for installing and running fastSF:
 
-1. [`CMake`](https://cmake.org/download/) (Version 3.16.4)
-2. [`Blitz++`](https://github.com/blitzpp/blitz) (Version 1.0.2)
-3. [`YAML-cpp`](http://turbulencehub.org/index.php/codes/tarang/installing-tarang/)(Version 0.3.0) 
-4. [`MPICH`](https://www.mpich.org/downloads/)(Version 3.3.2)
-5. [`HDF5`](http://turbulencehub.org/index.php/codes/tarang/installing-tarang/)(Version 1.8.20)
-6. [`H5SI`](https://github.com/anandogc/h5si)(Version 1.1.1)
+* [`CMake`](http://turbulencehub.org/wp-content/uploads/Download_Files/cmake-2.8.12.tar.gz) (Version 2.8.12 or later) - `CMake` is a standard library to make executables from the source files. 
+Download `CMake` from [here](http://turbulencehub.org/wp-content/uploads/Download_Files/cmake-2.8.12.tar.gz). After downloading the archive, extract it and change to `CMake-2.8.12` folder. Once there, enter the following commands:
 
-Clicking on one of the above libraries will redirect you to the webpage that provides instructions for downloading and installation of that library.
+	`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
+
+	`make install`
+ 
+* [`Blitz++`](https://github.com/blitzpp/blitz) (Version 1.0.2)-
+All array manipulations are performed using the `Blitz++` library. Download `Blitz++` from [here](https://github.com/blitzpp/blitz). After downloading, change to the `blitz-master` directory and enter the following commands
+
+	`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
+	
+	`make install`
+
+* [`YAML-cpp`](https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0)(Version 0.3.0) - 
+	The input parameters are stored in the `para.yaml` file which needs the `YAML-cpp` library to parse. Download `YAML-cpp` from [here](https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0). Extract the zip/tar file and change the `yaml-cpp-release-0.3.0` directory. Once there, enter the following commands:
+	
+	`CC=gcc CXX=g++ cmake -DCMAKE_INSTALL_PREFIX=$HOME/local`
+	
+	`make install`
+
+	
+* [`MPICH`](https://www.mpich.org/downloads/)(Version 3.3.2) - 
+Library for parallel programming with MPI. Download `MPICH` from [here](https://www.mpich.org/downloads/). After extraction, change to `mpich-3.3.2` folder and enter the following:
+
+	`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
+	
+	`make install`
+
+* [`HDF5`](http://turbulencehub.org/wp-content/uploads/Download_Files/hdf5-1.8.20.tar.bz2)(Version 1.8.20) -
+The output files are written in HDF5 format. Download `HDF5` from [here](http://turbulencehub.org/wp-content/uploads/Download_Files/hdf5-1.8.20.tar.bz2). After extracting the tar file, change to `hdf5-1.8.20` and enter the following:
+
+	`CC=mpicc CXX=mpicxx ./configure --prefix=$HOME/local --enable-parallel --without-zlib`
+
+	`make install`
+
+* [`H5SI`](https://github.com/anandogc/h5si)(Version 1.1.1) - 
+This library is used for simplifying the input-output operations of `HDF5`. Download `H5SI` from [here](https://github.com/anandogc/h5si). After downloading the zip file, extract it and change to `h5si-master/trunk`. Once there, enter the following:
+
+	`CXX=mpicxx cmake . -DCMAKE_INSTALL_PREFIX=$HOME/local`
+	
+	`make`
+	
+	`make install`
+
 
 IMPORTANT: 
 
@@ -161,9 +219,11 @@ The logitudinal and transverse structure functions of order `q` are stored in th
 
 The structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`.h5` as two/three dimensional arrays for two/three dimensional input fields. 
 
-## Documentation
+## Documentation and Validation
 
-The documentation can be found in `fastSF/docs/index.html`
+The documentation can be found in `fastSF/docs/index.html`. 
+
+The validation of `fastSF` is reported [here](https://github.com/ShubhadeepSadhukhan1993/fastSF/blob/master/Verification.md).
 
 ## Contributions and Bug Reports
 
