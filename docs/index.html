@@ -105,13 +105,15 @@ Compiling instruction</h2>
 Testing &lt;tt&gt;fastSF&lt;/tt&gt;</h1>
 <p><code>fastSF</code> offers an automated testing process to validate the code. The relevant test scripts can be found in the <code>tests/</code> folder of the code. To execute the tesing process, change into <code>fastSF</code> and run the command</p>
 <p><code>bash runTest.sh</code>.</p>
-<p>The code then runs two test cases; these are as follows.</p>
+<p>The code then runs four test cases; these are as follows.</p>
 <ul>
-<li>In one case, the code will generate a 2D velocity field given by <b>u</b> = [<em>x, y, z</em>], and compute the structure functions for the given field. For this case, the longitudinal structure functions should equal <em>l<sup>q</sup></em>.</li>
-<li>In the second case, the code will generate a 2D scalar field given by <em>T = x + y + z</em>, and compute the structure functions for the given field. For this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.</li>
+<li>In the first case, the code will generate a 2D velocity field given by <b>u</b> = [<em>x, z</em>], and compute the structure functions for the given field. For this case, the longitudinal structure functions should equal <em>l<sup>q</sup></em>.</li>
+<li>In the second case, the code will generate a 2D scalar field given by <em>T = x + z</em>, and compute the structure functions for the given field. For this case, the structure functions should equal *(l<sub>x</sub> + l<sub>z</sub>)<sup>q</sup>*.</li>
+<li>In the third case, the code will generate a 3D velocity field given by <b>u</b> = [<em>x, y, z</em>], and compute the structure functions for the given field. For this case, the longitudinal structure functions should equal <em>l<sup>q</sup></em>.</li>
+<li>In the fourth case, the code will generate a 3D scalar field given by <em>T = x + y + z</em>, and compute the structure functions for the given field. For this case, the structure functions should equal *(l<sub>x</sub> + l<sub>y</sub> + l<sub>z</sub>)<sup>q</sup>*.</li>
 </ul>
-<p>For both the cases, <code>fastSF</code> will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed.</p>
-<p>Finally, for visualization purpose, the python script <code><a class="el" href="test_8py.html" title="fastSF">test/test.py</a></code> is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus <em>l</em>, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:</p>
+<p>For the above cases, <code>fastSF</code> will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed.</p>
+<p>Finally, for visualization purpose, the python script <code><a class="el" href="test_8py.html" title="fastSF">test/test.py</a></code> is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus <em>l</em>, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. For the 3D scalar field, the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>y</sub> + l<sub>z</sub>)<sup>2</sup>* are generated. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:</p>
 <ol type="1">
 <li><code>h5py</code></li>
 <li><code>numpy</code></li>
@@ -183,13 +185,18 @@ iii) Output Information</h2>
 Documentation</h1>
 <p>The documentation can be found in <code>fastSF/docs/index.html</code></p>
 <h1><a class="anchor" id="autotoc_md31"></a>
+Contributions and Bug Reports</h1>
+<p>We welcome contributions to this project. If you wish to contribute, please create a branch with a <a href="https://github.com/ShubhadeepSadhukhan1993/fastSF/pulls">pull request</a> and the changes can be discussed there.</p>
+<p>If you find a bug in the or errors in the documentation, please open a <a href="https://github.com/ShubhadeepSadhukhan1993/fastSF/issues/new">new issue</a> in the Github repository and report the bug or the error. Please provide sufficient information for the bug to be reproduced. <br  />
+</p>
+<h1><a class="anchor" id="autotoc_md32"></a>
 License</h1>
 <p><code>fastSF</code> is released under the terms of BSD New License. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 10 2020 11:02:18 for fastSF by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 9 2020 11:01:39 for fastSF by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

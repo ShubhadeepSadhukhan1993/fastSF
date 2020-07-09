@@ -641,6 +641,7 @@ void write_SFs() {
 *************************************************************************************************************************************
 */
 void test_cases() {
+    cout<<"\nCOMMENCING TESTING OF THE CODE.\n";
     if(rank_mpi==0){
         if (scalar_switch){
             if (two_dimension_switch){
