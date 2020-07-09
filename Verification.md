@@ -43,6 +43,10 @@ For the above fields, it can be analytically shown that the longitudinal velocit
 *S<sub>q</sub><sup>&theta;</sup> = (l<sub>x</sub> + l<sub>y</sub> + l<sub>z</sub>)<sup>q</sup>*.
 
 We run ``fastSF`` to compute the velocity and scalar structure functions for the above fields. The resolution of the fields and the domain size are 32<sup>3</sup> and 1 x 1 x 1 respectively. We plot the second and the third-order longitudinal velocity structure functions versus *l* in Fig.3. Clearly, *S<sub>2</sub><sup>u<sub>ll</sub></sup> (l)* and *S<sub>3</sub><sup>u<sub>ll</sub></sup> (l)* equal *l<sup>2</sup>* and *l<sup>3</sup>* respectively, consistent with the analytical results. Figure 4 exhibits the density plots of the computed second-order scalar structure function *S<sub>2</sub><sup>&theta;</sup>* (*l<sub>x</sub>, l<sub>z</sub>*) along with *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>* on *l<sub>y</sub>* = 0.87 plane. The two plots are very similar, thus showing the ``fastSF`` computes the scalar structure function correctly.
+
+
+Problems 1 and 2 are used as test cases for the the code. The user is required to execute the shell script `fastSF/runTest.sh` to run the test case. On doing so, the code generates the velocity and the scalar fields as per the above relation. After computing the structure functions, the code computes the percentage difference between the theoretical and the computed values of the structure functions. If the error does not exceed 1 x 10<sup>-10</sup>, the code is deemed to have passed.
+
 <figure>
   <img src="docs/SF_test3D.png" alt="Trulli" style="width:70%">
   <figcaption>Fig.3: For the velocity field defined in Problem 2: plots of the second and third-order longitudinal structure functions vs. l. The second and third-order structure functions equal l<sup>2</sup> and l<sup>3</sup> respectively.</figcaption>
@@ -52,8 +56,6 @@ We run ``fastSF`` to compute the velocity and scalar structure functions for the
   <img src="docs/SF_scalar.png" alt="Trulli" style="width:100%">
   <figcaption>Fig.4: For the scalar field defined in Problem 2: (a) Density plot of the second-order scalar structure function as function of the displacement vector. (b) Density plot of (l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>, which is the analytical value of the second-order scalar structure function. The two density plots are very similar.</figcaption>
 </figure>
-
-Problems 1 and 2 are used as test cases for the the code. The user is required to execute the shell script `fastSF/runTest.sh` to run the test case. On doing so, the code generates the velocity and the scalar fields as per the above relation. After computing the structure functions, the code computes the percentage difference between the theoretical and the computed values of the structure functions. If the error does not exceed 1 x 10<sup>-10</sup>, the code is deemed to have passed.
 
 ### Problem 3
 
@@ -70,13 +72,15 @@ where *&epsilon;* is the viscous dissipation rate (Kolmogorov1941a, 1941b; Frisc
 
 We compute the longitudinal velocity structure functions of *q* = 3, 5, 7 using the simulation data of 3D hydrodynamic turbulence with Reynolds number (Re) of 5700. The simulation was performed using TARANG (Verma et al 2013; Chatterjee et al 2018) on a 512<sup>3</sup> grid with the domain size of (2&pi; x 2&pi; x 2&pi;). For more details on the simulation, refer to (Sadhukhan et al 2019). We run ``fastSF`` on Shaheen II to compute the structure functions, employing 4096 MPI processes. 
 
-<figure>
-  <img src="docs/SF_hydro.png" alt="Trulli" style="width:70%">
-  <figcaption>Fig.5: For 3D homogeneous isotropic turbulence (Problem 3): plots of the negative of normalized third, fifth and seventh-order structure functions vs. l. The negative of the normalized third-order structure function is close to 4/5 (dashed line) in the inertial range..</figcaption>
-</figure>
+
 
 
 We normalize the third, fifth, and seventh-order longitudinal velocity structure functions with (*&epsilon;l*)<sup>*&zeta;<sub>q</sub></sup>*, where *&zeta;<sub>q</sub>* is given by She-Leveque's relation. We plot the negative of these quantities versus *l* in Fig. 5. 
 The figure clearly shows that in the inertial range (0.2 < *l* < 0.8), the normalized third-order longitudinal velocity structure function is fairly close to 4/5 (represented by dashed line), consistent with Kolmogorov's theory. Moreover, the normalized fifth and seventh-order structure functions show a plateau for the same range of *l*, thus exhibiting consistency with She-Leveque's model. Note that we expect more accurate results for higher resolution simulations (Verma et al 2013).
 
 The results obtained from Problems 1, 2, and 3 thus validate ``fastSF``. 
+
+<figure>
+  <img src="docs/SF_hydro.png" alt="Trulli" style="width:70%">
+  <figcaption>Fig.5: For 3D homogeneous isotropic turbulence (Problem 3): plots of the negative of normalized third, fifth and seventh-order structure functions vs. l. The negative of the normalized third-order structure function is close to 4/5 (dashed line) in the inertial range..</figcaption>
+</figure>
