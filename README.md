@@ -223,7 +223,7 @@ The structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`
 
 The documentation can be found in `fastSF/docs/index.html`. 
 
-The validation of `fastSF` is reported [here](https://github.com/ShubhadeepSadhukhan1993/fastSF/blob/master/Verification.md).
+The validation of `fastSF` is reported [here](https://github.com/ShubhadeepSadhukhan1993/fastSF/blob/master/docs/Verification.md).
 
 ## Contributions and Bug Reports
 
