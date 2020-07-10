@@ -20,12 +20,12 @@ We run ``fastSF`` to compute the velocity and scalar structure functions for the
 
 
  <figure>
-  <img src="docs/figs/SF_velocity_r2D.png" alt="Trulli" style="width:70%">
+  <img src="figs/SF_velocity_r2D.png" alt="Trulli" style="width:70%">
   <figcaption>Fig.1: For the velocity field defined in Problem 1: plots of the second and third-order longitudinal structure functions vs. l. The second and third-order structure functions equal l<sup>2</sup> and l<sup>3</sup> respectively.</figcaption>
 </figure>
  
 <figure>
-  <img src="docs/figs/SF_scalar2D.png" alt="Trulli" style="width:100%">
+  <img src="figs/SF_scalar2D.png" alt="Trulli" style="width:100%">
   <figcaption>Fig.2: For the scalar field defined in Problem 1: (a) Density plot of the second-order scalar structure function as function of the displacement vector. (b) Density plot of (l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>, which is the analytical value of the second-order scalar structure function. The two density plots are very similar.</figcaption>
 </figure>
 
@@ -49,12 +49,12 @@ We run ``fastSF`` to compute the velocity and scalar structure functions for the
 Problems 1 and 2 are used as test cases for the the code. The user is required to execute the shell script `fastSF/runTest.sh` to run the test case. On doing so, the code generates the velocity and the scalar fields as per the above relation. After computing the structure functions, the code computes the percentage difference between the theoretical and the computed values of the structure functions. If the error does not exceed 1 x 10<sup>-10</sup>, the code is deemed to have passed.
 
 <figure>
-  <img src="docs/figs/SF_velocity_r3D.png" alt="Trulli" style="width:70%">
+  <img src="figs/SF_velocity_r3D.png" alt="Trulli" style="width:70%">
   <figcaption>Fig.3: For the velocity field defined in Problem 2: plots of the second and third-order longitudinal structure functions vs. l. The second and third-order structure functions equal l<sup>2</sup> and l<sup>3</sup> respectively.</figcaption>
 </figure>
 
 <figure>
-  <img src="docs/figs/SF_scalar3D.png" alt="Trulli" style="width:100%">
+  <img src="figs/SF_scalar3D.png" alt="Trulli" style="width:100%">
   <figcaption>Fig.4: For the scalar field defined in Problem 2: (a) Density plot of the second-order scalar structure function as function of the displacement vector on *l<sub>y</sub>* = 0.5 plane. (b) Density plot of (l<sub>x</sub> + 0.5 + l<sub>z</sub>)<sup>2</sup>, which is the analytical value of the second-order scalar structure function for *l<sub>y</sub>* = 0.5. The two density plots are very similar.</figcaption>
 </figure>
 
@@ -82,7 +82,7 @@ The figure clearly shows that in the inertial range (0.2 < *l* < 0.8), the norma
 The results obtained from Problems 1, 2, and 3 thus validate ``fastSF``. 
 
 <figure>
-  <img src="docs/SF_hydro.png" alt="Trulli" style="width:70%">
+  <img src="SF_hydro.png" alt="Trulli" style="width:70%">
   <figcaption>Fig.5: For 3D homogeneous isotropic turbulence (Problem 3): plots of the negative of normalized third, fifth and seventh-order structure functions vs. l. The negative of the normalized third-order structure function is close to 4/5 (dashed line) in the inertial range..</figcaption>
 </figure>
 
