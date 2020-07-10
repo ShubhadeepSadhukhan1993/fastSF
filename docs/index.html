@@ -81,27 +81,57 @@ Getting the Source Code</h1>
 <h1><a class="anchor" id="autotoc_md12"></a>
 Installing &lt;tt&gt;fastSF&lt;/tt&gt;</h1>
 <h2><a class="anchor" id="autotoc_md13"></a>
+Environment Variables</h2>
+<p>The following environment variables need to be set before compiling <code>fastSF</code>. (You may append these lines to <code>$HOME/.bashrc</code>):</p>
+<p><code>export PATH=$HOME/local/bin:$PATH</code></p>
+<p><code>export PKG_CONFIG_DISABLE_UNINSTALLED=true</code></p>
+<p><code>export PKG_CONFIG_PATH=$HOME/local/lib/pkgconfig:$PKG_CONFIG_PATH</code></p>
+<p><code>export HDF5_ROOT=$HOME/local</code></p>
+<p><code>export CPATH=$HOME/local/include/:$CPATH</code></p>
+<p><code>export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH</code></p>
+<p><code>export LIBRARY_PATH=$HOME/local/lib:$LIBRARY_PATH</code></p>
+<p><code>export MANPATH=$HOME/local/share/man/:$MANPATH</code> `</p>
+<h2><a class="anchor" id="autotoc_md14"></a>
 Required Libraries</h2>
 <p>The following libraries are required for installing and running fastSF:</p>
-<ol type="1">
-<li><a href="https://cmake.org/download/"><code>CMake</code></a> (Version 3.16.4)</li>
-<li><a href="https://github.com/blitzpp/blitz"><code>Blitz++</code></a> (Version 1.0.2)</li>
-<li><a href="http://turbulencehub.org/index.php/codes/tarang/installing-tarang/"><code>YAML-cpp</code></a>(Version 0.3.0)</li>
-<li><a href="https://www.mpich.org/downloads/"><code>MPICH</code></a>(Version 3.3.2)</li>
-<li><a href="http://turbulencehub.org/index.php/codes/tarang/installing-tarang/"><code>HDF5</code></a>(Version 1.8.20)</li>
-<li><a href="https://github.com/anandogc/h5si"><code>H5SI</code></a>(Version 1.1.1)</li>
-</ol>
-<p>Clicking on one of the above libraries will redirect you to the webpage that provides instructions for downloading and installation of that library.</p>
+<ul>
+<li><a href="http://turbulencehub.org/wp-content/uploads/Download_Files/cmake-2.8.12.tar.gz"><code>CMake</code></a> (Version 2.8.12 or later) - <code>CMake</code> is a standard library to make executables from the source files. Download <code>CMake</code> from <a href="http://turbulencehub.org/wp-content/uploads/Download_Files/cmake-2.8.12.tar.gz">here</a>. After downloading the archive, extract it and change to <code>CMake-2.8.12</code> folder. Once there, enter the following commands: <pre class="fragment">`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
+
+`make install`
+</pre></li>
+<li><a href="https://github.com/blitzpp/blitz"><code>Blitz++</code></a> (Version 1.0.2)- All array manipulations are performed using the <code>Blitz++</code> library. Download <code>Blitz++</code> from <a href="https://github.com/blitzpp/blitz">here</a>. After downloading, change to the <code>blitz-master</code> directory and enter the following commands <pre class="fragment">`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
+
+`make install`
+</pre></li>
+<li><p class="startli"><a href="https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0"><code>YAML-cpp</code></a>(Version 0.3.0) - The input parameters are stored in the <code>para.yaml</code> file which needs the <code>YAML-cpp</code> library to parse. Download <code>YAML-cpp</code> from <a href="https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0">here</a>. Extract the zip/tar file and change the <code>yaml-cpp-release-0.3.0</code> directory. Once there, enter the following commands:</p>
+<p class="startli"><code>CC=gcc CXX=g++ cmake -DCMAKE_INSTALL_PREFIX=$HOME/local</code></p>
+<p class="startli"><code>make install</code></p>
+</li>
+<li><a href="https://www.mpich.org/downloads/"><code>MPICH</code></a>(Version 3.3.2) - Library for parallel programming with MPI. Download <code>MPICH</code> from <a href="https://www.mpich.org/downloads/">here</a>. After extraction, change to <code>mpich-3.3.2</code> folder and enter the following: <pre class="fragment">`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
+
+`make install`
+</pre></li>
+<li><a href="http://turbulencehub.org/wp-content/uploads/Download_Files/hdf5-1.8.20.tar.bz2"><code>HDF5</code></a>(Version 1.8.20) - The output files are written in HDF5 format. Download <code>HDF5</code> from <a href="http://turbulencehub.org/wp-content/uploads/Download_Files/hdf5-1.8.20.tar.bz2">here</a>. After extracting the tar file, change to <code>hdf5-1.8.20</code> and enter the following: <pre class="fragment">`CC=mpicc CXX=mpicxx ./configure --prefix=$HOME/local --enable-parallel --without-zlib`
+
+`make install`
+</pre></li>
+<li><a href="https://github.com/anandogc/h5si"><code>H5SI</code></a>(Version 1.1.1) - This library is used for simplifying the input-output operations of <code>HDF5</code>. Download <code>H5SI</code> from <a href="https://github.com/anandogc/h5si">here</a>. After downloading the zip file, extract it and change to <code>h5si-master/trunk</code>. Once there, enter the following: <pre class="fragment">`CXX=mpicxx cmake . -DCMAKE_INSTALL_PREFIX=$HOME/local`
+
+`make`
+
+`make install`
+</pre></li>
+</ul>
 <p>IMPORTANT:</p>
 <ul>
 <li>Note that <code>fastSF</code> is not compatible with higher versions <code>YAML-cpp</code>(&gt; 0.3.0).</li>
 <li>The library <code>H5SI</code>has been successfully tested with <code>HDF5</code> version 1.8.20. However, <code>H5SI</code> may not be compatible with higher versions of <code>HDF5</code>. Thus, the users are strongly recommended to install <code>HDF5</code> 1.8.20. <br  />
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Compiling instruction</h2>
 <p>After downloading <code>fastSF</code>, change into <code>fastSF/src</code> directory and run the command <code>make</code> in the terminal. An executable named <code>fastSF.out</code> will be created inside the <code>fastSF/src</code> folder.</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Testing &lt;tt&gt;fastSF&lt;/tt&gt;</h1>
 <p><code>fastSF</code> offers an automated testing process to validate the code. The relevant test scripts can be found in the <code>tests/</code> folder of the code. To execute the tesing process, change into <code>fastSF</code> and run the command</p>
 <p><code>bash runTest.sh</code>.</p>
@@ -119,84 +149,85 @@ Testing &lt;tt&gt;fastSF&lt;/tt&gt;</h1>
 <li><code>numpy</code></li>
 <li><code>matplotlib</code></li>
 </ol>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 Detailed instruction for running &lt;tt&gt;fastSF&lt;/tt&gt;</h1>
 <p>This section provides a detailed procedure to execute <code>fastSF</code> for a given velocity or scalar field.</p>
 <p><code>fastSF</code> has a folder named <code>in</code>. This folder contains the input field files in <code>hdf5</code> format, and a parameters file named <code>para.yaml</code>. You need to provide the required input parameters in this file. The details of the entries are as follows:</p>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 i) &lt;tt&gt;para.yaml&lt;/tt&gt; details</h2>
-<h3><a class="anchor" id="autotoc_md18"></a>
+<h3><a class="anchor" id="autotoc_md19"></a>
 &lt;tt&gt;program: scalar_switch&lt;/tt&gt;</h3>
 <p>You can enter <code>true</code> or <code>false</code></p>
 <p><code>true</code>: Calculate the structure function for a given scalar field.</p>
 <p><code>false</code>: Calculate the structure function for a given velocity field.</p>
-<h3><a class="anchor" id="autotoc_md19"></a>
+<h3><a class="anchor" id="autotoc_md20"></a>
 &lt;tt&gt;program: 2D_switch&lt;/tt&gt;</h3>
 <p>You can enter <code>true</code> or <code>false</code>.</p>
 <p><code>true</code>: Calculate the structure function for two dimensional fields.</p>
 <p><code>false</code>: Calculate the structure function for three dimensional fields.</p>
-<h3><a class="anchor" id="autotoc_md20"></a>
+<h3><a class="anchor" id="autotoc_md21"></a>
 &lt;tt&gt;program: Only_logitudinal&lt;/tt&gt;</h3>
 <p>This entry is for structure functions for velocity fields only. You can enter <code>true</code> or <code>false</code>.</p>
 <p><code>true</code>: Compute only the longitudinal structure function.</p>
 <p><code>false</code>: Compute both longitudinal and transverse structure functions.</p>
-<h3><a class="anchor" id="autotoc_md21"></a>
+<h3><a class="anchor" id="autotoc_md22"></a>
 &lt;tt&gt;grid: Nx, Ny, Nz&lt;/tt&gt;</h3>
 <p>The number of points along <em>x</em>, <em>y</em>, and <em>z</em> direction respectively of the grid. Valid for both the vector and scalar fields. For two dimensional fields you need to provide <code>Nx</code> and <code>Nz</code>.</p>
 <p>Only integer values will be accepted.</p>
-<h3><a class="anchor" id="autotoc_md22"></a>
+<h3><a class="anchor" id="autotoc_md23"></a>
 &lt;tt&gt;domain_dimension: Lx, Ly, Lz&lt;/tt&gt;</h3>
 <p>Length of the cubical box along <em>x</em>, <em>y</em>, and <em>z</em> direction respectively. For two dimensional fields, you need to provide <code>Lx</code> and <code>Lz</code>.</p>
-<h3><a class="anchor" id="autotoc_md23"></a>
+<h3><a class="anchor" id="autotoc_md24"></a>
 &lt;tt&gt;structure_function: q1, q2&lt;/tt&gt;</h3>
 <p>The lower and the upper limit of the order of the structure functions to be computed.</p>
-<h3><a class="anchor" id="autotoc_md24"></a>
+<h3><a class="anchor" id="autotoc_md25"></a>
 &lt;tt&gt;test: test_switch&lt;/tt&gt;</h3>
 <p>You can enter <code>true</code> or <code>false</code></p>
 <p><code>true</code>: For running in test mode. Idealized velocity and scalar fields are generated internally by the code. Computed structure functions are compared with analytical results. The code is PASSED if the percentage difference between the two results is less than <code>1e-10</code>.</p>
 <p><code>false</code>: The "regular" mode, in which the code reads the fields from the hdf5 files in the <code>in</code> folder.</p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 ii) Files Required:</h2>
 <p>All the files storing the input fields should be inside the <code>in</code> folder.</p>
-<h3><a class="anchor" id="autotoc_md26"></a>
+<h3><a class="anchor" id="autotoc_md27"></a>
 For two dimensional fields</h3>
 <p>For vector field, two files named as <code>U.V1r.h5</code> and <code>U.V3r.h5</code> are required. Each file has one dataset.</p>
 <p>For scalar field, one file named as <code>T.Fr.h5</code> is required. Each file has one dataset.</p>
 <p>Size of the array stored in these files should be (<code>Nx,Nz</code>).</p>
 <p><em>Important:</em> Dataset name should be the same as the file name. For example, the dataset inside the file <code>U.V1r.h5</code> should be named <code>U.V1r</code>.</p>
-<h3><a class="anchor" id="autotoc_md27"></a>
+<h3><a class="anchor" id="autotoc_md28"></a>
 For three dimensional fields</h3>
 <p>For vector field, three files named as <code>U.V1r.h5</code>, <code>U.V2r.h5</code>, and <code>U.V3r.h5</code> are required. Each file has one dataset.</p>
 <p>For scalar field, one file named as <code>T.Fr.h5</code> is required. Each file has one dataset.</p>
 <p>Size of the array stored in these files should be (<code>Nx, Ny, Nz</code>).</p>
 <p><em>Important:</em> Dataset name should be the same as the file name. For example, the dataset inside the file <code>U.V1r.h5</code> should be named <code>U.V1r</code>.</p>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 iii) Running Instructions</h2>
 <p>Open the terminal change into <code>fastSF/in</code> folder. Open <code>para.yaml</code> to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the <code>in</code> folder run the command</p>
 <p><code>mpirun -np [number of MPI processors] src/fastSF.out [number of processors in x direction]</code></p>
 <p>If the number of processors in x direction is not provided, the code will take it to be 1.</p>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 iii) Output Information</h2>
 <p><b>Velocity structure functions</b>:</p>
 <p>The logitudinal and transverse structure functions of order <code>q</code> are stored in the files <code>SF_Grid_pll</code>+<code>q</code>+<code>.h5</code> and <code>SF_Grid_perp</code>+<code>q</code>+<code>.h5</code> respectively as two/three dimensional arrays for two/three dimensional input fields.</p>
 <p><b>Scalar structure functions</b>:</p>
 <p>The structure functions of order <code>q</code> are stored in the files <code>SF_Grid_pll</code>+<code>q</code>+<code>.h5</code> as two/three dimensional arrays for two/three dimensional input fields.</p>
-<h1><a class="anchor" id="autotoc_md30"></a>
-Documentation</h1>
-<p>The documentation can be found in <code>fastSF/docs/index.html</code></p>
 <h1><a class="anchor" id="autotoc_md31"></a>
+Documentation and Validation</h1>
+<p>The documentation can be found in <code>fastSF/docs/index.html</code>.</p>
+<p>The validation of <code>fastSF</code> is reported <a href="https://github.com/ShubhadeepSadhukhan1993/fastSF/blob/master/Verification.md">here</a>.</p>
+<h1><a class="anchor" id="autotoc_md32"></a>
 Contributions and Bug Reports</h1>
 <p>We welcome contributions to this project. If you wish to contribute, please create a branch with a <a href="https://github.com/ShubhadeepSadhukhan1993/fastSF/pulls">pull request</a> and the changes can be discussed there.</p>
 <p>If you find a bug in the or errors in the documentation, please open a <a href="https://github.com/ShubhadeepSadhukhan1993/fastSF/issues/new">new issue</a> in the Github repository and report the bug or the error. Please provide sufficient information for the bug to be reproduced. <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md32"></a>
+<h1><a class="anchor" id="autotoc_md33"></a>
 License</h1>
 <p><code>fastSF</code> is released under the terms of BSD New License. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 9 2020 11:01:39 for fastSF by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 10 2020 11:24:16 for fastSF by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

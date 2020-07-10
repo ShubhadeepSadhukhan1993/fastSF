@@ -60,20 +60,20 @@ plt.rcParams['ytick.minor.width'] = 0.5
 
 
 def hdf5_reader(filename,dataset):
-	file_V1_read = h5py.File(filename)
+	file_V1_read = h5py.File(filename, 'r')
 	dataset_V1_read = file_V1_read["/"+dataset]
 	V1=dataset_V1_read[:,:,:]
 	return V1
 
 def hdf5_reader1D(filename,dataset):
-	file_V1_read = h5py.File(filename)
+	file_V1_read = h5py.File(filename, 'r')
 	dataset_V1_read = file_V1_read["/"+dataset]
 	V1=dataset_V1_read[:]
 	return V1
 
 
 def hdf5_reader_plane(filename,dataset):
-	file_V1_read = h5py.File(filename)
+	file_V1_read = h5py.File(filename, 'r')
 	dataset_V1_read = file_V1_read["/"+dataset]
 	V1=dataset_V1_read[:,:]
 	return V1
@@ -422,8 +422,8 @@ def plot_SF3D_velocity():
 
 plotSF_r_2D()
 plot_SF2D_scalar()
-plot_SF2D_velocity()
+#plot_SF2D_velocity()
 
 plotSF_r_3D()
 plot_SF3D_scalar()
-plot_SF3D_velocity()
+#plot_SF3D_velocity()

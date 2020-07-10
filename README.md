@@ -109,7 +109,7 @@ The code then runs four test cases; these are as follows.
 
 For the above cases, `fastSF` will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed. 
 
-Finally, for visualization purpose, the python script `test/test.py` is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus *l*, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. For the 3D scalar field, the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>y</sub> + l<sub>z</sub>)<sup>2</sup>* are generated. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:
+Finally, for visualization purpose, the python script `test/test.py` is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus *l*, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. For the 3D scalar field, the density plots of the computed second-order scalar structure functions for *l<sub>y</sub> = 0.5* and *(l<sub>x</sub> + 0.5 + l<sub>z</sub>)<sup>2</sup>* are generated. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:
 
 1. `h5py`
 2. `numpy`
