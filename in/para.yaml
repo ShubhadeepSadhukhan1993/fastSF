@@ -17,7 +17,7 @@ program:
 grid :
     Nx : 32
     Ny : 32
-    Nz : 16
+    Nz : 32
 
         
 #Please specify the domain dimensions. 
@@ -26,7 +26,7 @@ grid :
 domain_dimension :
     Lx : 1.0
     Ly : 1.0
-    Lz : 0.5
+    Lz : 1.0
 
 
 #Please provide the starting order (q1) and the ending order (q2)
