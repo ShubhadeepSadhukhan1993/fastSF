@@ -35,9 +35,9 @@ bibliography: paper.bib
 
 Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properties of turbulent flows [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]. Some of the earlier works comprising of such analysis are those of @Gotoh:PF2002, @Kaneda:PF2003, and @Ishihara:ARFM2009 for three-dimensional (3D) hydrodynamic turbulence; @Yeung:PF2005 and @Ray:NJP2008 for passive scalar turbulence; @Biferale:NJP2004 for two-dimensional (2D) hydrodynamic turbulence; and @Kunnen:PRE2008, @Kaczorowski:JFM2013, and @Bhattacharya:PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of ``fastSF``, a parallel code to compute the structure functions for a given velocity or scalar field. 
 
- ``fastSF``, written in C++, is a fast and efficient code that uses vectorization for computing the structure functions. The code employs MPI (Message Passing Interface) parallelization with equal load distribution. The user has a choice on the type (scalar or vector) and the dimensions of the fields to be read by the code, and the range of the orders of the structure functions to be computed. The code writes the computed structure functions to `hdf5` files that can be further processed by the user.
+ ``fastSF``, written in C++, is an application for efficiently computing the structure functions of scalar and vector fields on Cartesian grids of a 2D or 3D periodic box, stored as HDF5 files. The code employs MPI (Message Passing Interface) parallelization with equal load distribution and vectorization for efficiency on SIMD architectures. The user can select the range of the orders of the structure functions to be computed and the computed structure functions are written to HDF5 files that can be further processed by the user.
 
-To the best of our knowledge and belief, no other commercial or open-source packages for computing  structure functions exist or are available at the moment. Currently, such codes are developed in-house and are not open to the general public. On the other hand, ``fastSF`` is an open-source package available to all, and thus will be a useful tool for computing and analysing structure functions.
+We are not aware of any other open soure or commercial packages for computing structure functions; prior studies have relied on in-house software that was never publicly released.  As an open source package, `fastSF` provides a standard high-performance implementation and thus facilitates wider use of structure functions.
 
  The code uses the following libraries:
  
@@ -46,7 +46,7 @@ To the best of our knowledge and belief, no other commercial or open-source pack
 3.   h5si (version 1.1.1)
 4.   yaml-cpp (version 0.3.0)
 5.   mpich (version 3.3.2)
-6.   cmake (version 3.16.4) 
+6.   cmake (version 3.16.4)
 
 
 In the next section, we will briefly discuss the performance and scaling of ``fastSF`` in a Cray XC40 system.
@@ -94,15 +94,15 @@ First we present a sketch of the structure function computation for the velocity
             
             * $S_q^{u_{\perp}}(l_x,l_z) =$ Average of $\delta u_{\perp}^q$ (Vectorized).
             
-            * Send the values of $S_q^{u_{\parallel}}(l_x,l_z)$, $S_q^{u_{\perp}}(l_x,l_z)$, $q$, $l_x$, and $l_z$ to the master processor. 
+            * Send the values of $S_q^{u_{\parallel}}(l_x,l_z)$, $S_q^{u_{\perp}}(l_x,l_z)$, $q$, $l_x$, and $l_z$ to the root process.
             
-* The master processor stores $S_q^{u_{\parallel}} (l_x, l_z)$ and $S_q^{u_{\perp}} (l_x, l_z)$.
+* The root process stores $S_q^{u_{\parallel}} (l_x, l_z)$ and $S_q^{u_{\perp}} (l_x, l_z)$.
             
 * Stop
 
 ![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ is computed by taking the difference between two points with the same indices in the pink and the green subdomains. For example, $\mathbf{u}(\mathbf{l}) - \mathbf{u}(0,0) = \mathbf{u}_B - \mathbf{u}_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization of the computation. \label{Schematic}](docs/figs/Schematic.png)
 
-Since $S_q^u(\mathbf{l})$ is important for intermediate scales (inertial range) only, we vary $\mathbf{l}$ upto half the domain size, that is, upto ($L_x/2, L_z/2$), to save computational cost. The $\mathbf{l}$'s are divided among MPI processors along $x$ and $z$ directions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity difference. After computing the structure function for a given $\mathbf{l}$, each processor communicates the result to the master processor, which stores the $S_q^{u_\parallel}(\mathbf{l})$ and $S_q^{u_\perp}(\mathbf{l})$ arrays.
+Since $S_q^u(\mathbf{l})$ is important for intermediate scales (inertial range) only, we vary $\mathbf{l}$ upto half the domain size, that is, upto ($L_x/2, L_z/2$), to save computational cost. The $\mathbf{l}$'s are divided among MPI processors along $x$ and $z$ directions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity difference. After computing the structure function for a given $\mathbf{l}$, each processor communicates the result to the root process, which stores the $S_q^{u_\parallel}(\mathbf{l})$ and $S_q^{u_\perp}(\mathbf{l})$ arrays.
 
 It is clear from Fig. \ref{Schematic} that the sizes of the pink or green subdomains are $(L_x-l_x)(L_z-l_z)$, which are function of $\mathbf{l}$'s.  This function decreases with increasing $\mathbf{l}$ leading to larger computational costs for small $l$ and less cost of larger $l$.   Hence, a straightforward division of the domain among the processors along $x$ and $z$ directions will lead to a load imbalance.   Therefore, we assign both large and small $\mathbf{l}$'s to each processor to achieve equal load distribution. We illustrate the above idea  using the following example.
 
