@@ -448,6 +448,7 @@ int main(int argc, char *argv[]) {
 *************************************************************************************************************************************
 */
 void Read_fields() {
+	
     if(two_dimension_switch){
         if (scalar_switch) {
             T_2D.resize(Nx, Nz);
@@ -469,6 +470,7 @@ void Read_fields() {
         }
         
     }
+
     //Defining the input fields
     if (test_switch){
         if (rank_mpi==0){
@@ -1162,8 +1164,19 @@ void write_3D(Array<double,3> A, string file,int q) {
  ********************************************************************************************************************************************
  */
 void read_2D(Array<double,2> A, string fold, string file) {
-  h5::File f(fold+file+".h5", "r");
-  f[file] >> A.data();
+  ifstream file_name(fold+file+".h5");
+  if (file_name.is_open()){
+  	file_name.close();
+  	h5::File f(fold+file+".h5", "r");
+  	f[file] >> A.data();
+
+  }
+  else{
+  	file_name.close();
+  	cerr<<"Desired file does not exist."<<endl;
+  	exit(1);
+  }
+  
 }
 
 /**
@@ -1182,8 +1195,20 @@ void read_2D(Array<double,2> A, string fold, string file) {
  ********************************************************************************************************************************************
  */
 void read_3D(Array<double,3> A, string fold, string file) {
-  h5::File f(fold+file+".h5", "r");
-  f[file] >> A.data();
+	ifstream file_name(fold+file+".h5");
+  	if (file_name.is_open()){
+  		file_name.close();
+  		h5::File f(fold+file+".h5", "r");
+  		f[file] >> A.data();
+
+  	}
+  	else{
+  		file_name.close();
+  		cerr<<"Desired file does not exist."<<endl;
+  		exit(1);
+  	}
+  //h5::File f(fold+file+".h5", "r");
+  //f[file] >> A.data();
 }
 
 /**
