@@ -34,13 +34,6 @@ The following environment variables need to be set before compiling `fastSF`. (Y
 ### Required Libraries
 
 The following libraries are required for installing and running fastSF:
-
-* [`CMake`](http://turbulencehub.org/wp-content/uploads/Download_Files/cmake-2.8.12.tar.gz) (Version 2.8.12 or later) - `CMake` is a standard library to make executables from the source files. 
-Download `CMake` from [here](http://turbulencehub.org/wp-content/uploads/Download_Files/cmake-2.8.12.tar.gz). After downloading the archive, extract it and change to `CMake-2.8.12` folder. Once there, enter the following commands:
-
-	`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
-
-	`make install`
  
 * [`Blitz++`](https://github.com/blitzpp/blitz) (Version 1.0.2)-
 All array manipulations are performed using the `Blitz++` library. Download `Blitz++` from [here](https://github.com/blitzpp/blitz). After downloading, change to the `blitz-master` directory and enter the following commands
@@ -50,7 +43,7 @@ All array manipulations are performed using the `Blitz++` library. Download `Bli
 	`make install`
 
 * [`YAML-cpp`](https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0)(Version 0.3.0) - 
-	The input parameters are stored in the `para.yaml` file which needs the `YAML-cpp` library to parse. Download `YAML-cpp` from [here](https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0). Extract the zip/tar file and change the `yaml-cpp-release-0.3.0` directory. Once there, enter the following commands:
+	The input parameters are stored in the `para.yaml` file which needs the `YAML-cpp` library to parse. Download `YAML-cpp` from [here](https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0). Extract the zip/tar file and change the `yaml-cpp-release-0.3.0` directory. Once there, enter the following commands (note that [CMake](https://cmake.org) needs to be installed):
 	
 	`CC=gcc CXX=g++ cmake -DCMAKE_INSTALL_PREFIX=$HOME/local`
 	
@@ -72,7 +65,7 @@ The output files are written in HDF5 format. Download `HDF5` from [here](http://
 	`make install`
 
 * [`H5SI`](https://github.com/anandogc/h5si)(Version 1.1.1) - 
-This library is used for simplifying the input-output operations of `HDF5`. Download `H5SI` from [here](https://github.com/anandogc/h5si). After downloading the zip file, extract it and change to `h5si-master/trunk`. Once there, enter the following:
+This library is used for simplifying the input-output operations of `HDF5`. Download `H5SI` from [here](https://github.com/anandogc/h5si). After downloading the zip file, extract it and change to `h5si-master/trunk`. Once there, enter the following (note that [CMake](https://cmake.org) needs to be installed):
 
 	`CXX=mpicxx cmake . -DCMAKE_INSTALL_PREFIX=$HOME/local`
 	
