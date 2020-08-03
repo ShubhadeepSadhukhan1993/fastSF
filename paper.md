@@ -39,17 +39,8 @@ Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interac
 
 We are not aware of any other open soure or commercial packages for computing structure functions; prior studies have relied on in-house software that was never publicly released.  As an open source package, `fastSF` provides a standard high-performance implementation and thus facilitates wider use of structure functions.
 
- The code uses the following libraries:
- 
-1.   blitz++ (version 1.0.2)
-2.   hdf5 (version 1.8.20)
-3.   h5si (version 1.1.1)
-4.   yaml-cpp (version 0.3.0)
-5.   mpich (version 3.3.2)
-6.   cmake (version 3.16.4)
-
-
-In the next section, we will briefly discuss the performance and scaling of ``fastSF`` in a Cray XC40 system.
+``fastSF`` uses MPI [@Pacheco:book:PP] for parallelism, HDF5 [@HDF5_web] via H5SI [@H5SI_web] for reading gridded field data and writing structure functions, as well as blitz++ [@Blitz_web] for vectorized computation and yaml-cpp [@YAML_web] for reading control parameters.
+ In the next section, we will briefly discuss the performance and scaling of ``fastSF`` in a Cray XC40 system.
 
 
 
