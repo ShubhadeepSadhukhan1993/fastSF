@@ -169,13 +169,15 @@ You can enter `true` or `false`
 
 `false`: The "regular" mode, in which the code reads the fields from the hdf5 files in the `in` folder.
 
-### ii) Files Required:
+### ii) Files Required and HDF5 Schema:
 
-All the files storing the input fields should be inside the `in` folder.
+All the files storing the input fields should be inside the `in` folder. All the input fields and datasets are required to be precisely as per the following schema.
 
 #### For two dimensional fields
 
-For vector field, two files named as `U.V1r.h5` and `U.V3r.h5` are required. Each file has one dataset.
+For vector field, two `hdf5` files are required:
+1. `U.V1r.h5`, with 2D dataset `U.V1r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the field *u<sub>x</sub>*.
+2. `U.V3r.h5`, with 2D dataset `U.V3r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the field *u<sub>z</sub>*.
 
 For scalar field, one file named as `T.Fr.h5` is required. Each file has one dataset.
 
