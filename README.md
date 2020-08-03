@@ -176,24 +176,24 @@ All the files storing the input fields should be inside the `in` folder. All the
 #### For two dimensional fields
 
 For vector field, two `hdf5` files are required:
-1. `U.V1r.h5`, with 2D dataset `U.V1r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the field *u<sub>x</sub>*, that is, the *x* component of the vector field.
-2. `U.V3r.h5`, with 2D dataset `U.V3r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the field *u<sub>z</sub>*, that is, the *z* component of the vector field.
+1. `U.V1r.h5`, with a 2D dataset `U.V1r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the field *u<sub>x</sub>*, that is, the *x* component of the vector field.
+2. `U.V3r.h5`, with a 2D dataset `U.V3r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the field *u<sub>z</sub>*, that is, the *z* component of the vector field.
 
 For scalar field, For vector field, one `hdf5` file is required:
-1. `T.Fr.h5`, with 2D dataset `T.Fr` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the scalar field *&omega;*.
+1. `T.Fr.h5`, with a 2D dataset `T.Fr` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the scalar field *&theta;*.
 
 
 #### For three dimensional fields
 
 For vector field, three `hdf5` files are required:
-1. `U.V1r.h5`, with 3D dataset `U.V1r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the field *u<sub>x</sub>*, that is, the *x* component of the vector field.
-2. `U.V2r.h5`, with 3D dataset `U.V2r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the field *u<sub>y</sub>*, that is, the *y* component of the vector field.
-2. `U.V3r.h5`, with 3D dataset `U.V3r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the field *u<sub>z</sub>*, that is, the *z* component of the vector field.
+1. `U.V1r.h5`, with a 3D dataset `U.V1r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the field *u<sub>x</sub>*, that is, the *x* component of the vector field.
+2. `U.V2r.h5`, with a 3D dataset `U.V2r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the field *u<sub>y</sub>*, that is, the *y* component of the vector field.
+2. `U.V3r.h5`, with a 3D dataset `U.V3r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the field *u<sub>z</sub>*, that is, the *z* component of the vector field.
 
 For scalar field, For vector field, one `hdf5` file is required:
-1. `T.Fr.h5`, with 3D dataset `T.Fr` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the scalar field *&omega;*.
+1. `T.Fr.h5`, with a 3D dataset `T.Fr` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the scalar field *&theta;*.
 
-**IMPORTANT:** Please ensure that the size of the input field datasets match with the size specified in the `para.yaml`, otherwise the code will throw a segmentation error. Even if the code does not throw a segmentation error, the calculations will be erroneous. 
+**IMPORTANT:** Please ensure that the size of the input field datasets match with the size specified in the `para.yaml`, otherwise the code will likely throw a segmentation error. Even if the code does not throw a segmentation error, the calculations will be erroneous. 
 
 ### iii) Running Instructions
 Open the terminal change into `fastSF/in` folder. Open `para.yaml` to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the `in` folder run the command
