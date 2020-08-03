@@ -43,7 +43,7 @@ All array manipulations are performed using the `Blitz++` library. Download `Bli
 	`make install`
 
 * [`YAML-cpp`](https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0)(Version 0.3.0) - 
-	The input parameters are stored in the `para.yaml` file which needs the `YAML-cpp` library to parse. Download `YAML-cpp` from [here](https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0). Extract the zip/tar file and change the `yaml-cpp-release-0.3.0` directory. Once there, enter the following commands (note that [CMake](https://cmake.org) needs to be installed):
+	The input parameters are stored in the `para.yaml` file which needs the `YAML-cpp` library to parse. Download `YAML-cpp` from [here](https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0). Extract the zip/tar file and change the `yaml-cpp-release-0.3.0` directory. Important: Please ensure that [CMake](https://cmake.org) is installed in your system. Enter the following commands:
 	
 	`CC=gcc CXX=g++ cmake -DCMAKE_INSTALL_PREFIX=$HOME/local`
 	
@@ -65,7 +65,7 @@ The output files are written in HDF5 format. Download `HDF5` from [here](http://
 	`make install`
 
 * [`H5SI`](https://github.com/anandogc/h5si)(Version 1.1.1) - 
-This library is used for simplifying the input-output operations of `HDF5`. Download `H5SI` from [here](https://github.com/anandogc/h5si). After downloading the zip file, extract it and change to `h5si-master/trunk`. Once there, enter the following (note that [CMake](https://cmake.org) needs to be installed):
+This library is used for simplifying the input-output operations of `HDF5`. Download `H5SI` from [here](https://github.com/anandogc/h5si). After downloading the zip file, extract it and change to `h5si-master/trunk`. Important: Please ensure that [CMake](https://cmake.org) is installed in your system. Enter the following:
 
 	`CXX=mpicxx cmake . -DCMAKE_INSTALL_PREFIX=$HOME/local`
 	
