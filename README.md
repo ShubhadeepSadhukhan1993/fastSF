@@ -50,8 +50,8 @@ All array manipulations are performed using the `Blitz++` library. Download `Bli
 	`make install`
 
 	
-* [`MPICH`](https://www.mpich.org/downloads/)(Version 3.3.2) - 
-Library for parallel programming with MPI. Download `MPICH` from [here](https://www.mpich.org/downloads/). After extraction, change to `mpich-3.3.2` folder and enter the following:
+* `MPI` - 
+`fastSF` uses `MPI` for parallelism. The software was tested using `MPICH`, however, any standard `MPI-1` implementation should be sufficient.  Here, we will provide instructions for installing `MPICH`. Download `MPICH` from [here](https://www.mpich.org/downloads/). After extraction, change to `mpich-3.3.2` folder and enter the following:
 
 	`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
 	
