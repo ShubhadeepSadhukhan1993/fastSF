@@ -62,6 +62,7 @@ void write_3D(Array<double,3>, string, int);
 void write_4D(Array<double,4>, string, int);
 void read_2D(Array<double,2>, string, string);
 string int_to_str(int);
+bool str_to_bool(string);
 void VECTOR_TEST_CASE_3D();
 void VECTOR_TEST_CASE_2D();
 void SCALAR_TEST_CASE_2D();
@@ -376,13 +377,15 @@ int main(int argc, char *argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &P);
 
     //set the number of processors in x direction
-    if (argc>1) {
+    /*if (argc>1) {
         px = std::atoi(argv[1]);
     }
     else {
         px = 1;
     }
-
+    */
+    
+    
     //Initiallizing h5si
     h5::init();
     timeval start_pt, end_pt, start_t, end_t;
@@ -392,9 +395,125 @@ int main(int argc, char *argv[]) {
 
     double elapsedt=0.0;
     double elapsepdt=0.0;
-
+    
+    px=1;
     get_Inputs();
+    //Overwrite from command line
+    int option;
+    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:"))!=-1){
+    	switch(option){
+    		case 'X':
+    			Nx=std::stoi(optarg);
+    			break;
+    		case 'Y':
+    			Ny=std::stoi(optarg);
+    			break;
+    		case 'Z':
+    			Nz=std::stoi(optarg);
+    			break;
+    		case 'x':
+    			Lx=std::stod(optarg);
+    			break;
+    		case 'y':
+    			Ly=std::stod(optarg);
+    			break;
+    		case 'z':
+    			Lz=std::stod(optarg);
+    			break;
+    		case 'p':
+    			px=std::stod(optarg);
+    			break;
+    		case '1':
+    			q1=std::stod(optarg);
+    			break;
+    		case '2':
+    			q2=std::stod(optarg);
+    			break;
+    		case 't':
+    			test_switch=str_to_bool(optarg);
+    			break;
+    		case 's':
+    			scalar_switch=str_to_bool(optarg);
+    			break;
+    		case 'd':
+    			two_dimension_switch=str_to_bool(optarg);
+    			break;
+    		case 'l':
+    			longitudinal=str_to_bool(optarg);
+    			break;
+    	}
+    }
+    /*
+    if (rank_mpi==0){
+    	cout<<"Nx: "<<Nx<<endl;
+    	cout<<"Ny: "<<Ny<<endl;
+    	cout<<"Nz: "<<Nz<<endl;
+    	cout<<"Lx: "<<Lx<<endl;
+    	cout<<"Ly: "<<Ly<<endl;
+    	cout<<"Lz: "<<Lz<<endl;
+    	cout<<"q1: "<<q1<<endl;
+    	cout<<"q2: "<<q2<<endl;
+    	cout<<"2D switch:"<<two_dimension_switch<<endl;
+    	cout<<"Test: "<<test_switch<<endl;
+    	cout<<"scalar_switch: "<<scalar_switch<<endl;
+    	cout<<"longitudinal: "<<longitudinal<<endl;
+    }
+    */
+    if (Nx==1){dx=0;}
+    else{
+      dx=Lx/double(Nx-1);}
+    if (Ny==1){dy=0;}
+    else{
+      dy=Ly/double(Ny-1);}
+    if (Nz==1){dz=0;}
+    else{
+      dz=Lz/double(Nz-1);
+  	}
 
+  	if (rank_mpi==0) {
+    	cout<<"\nNumber of processors in x direction: "<<px<<endl;
+    	if (two_dimension_switch) {
+        	cout<<"Number of processors in z direction: "<<P/px<<endl;
+    	}
+    	else {
+        	cout<<"Number of processors in y direction: "<<P/px<<endl;
+    	}
+  	}  
+
+ 	if (px > P) {
+        if (rank_mpi==0) {
+            cout<<"ERROR! Number of processors in x direction has to be less than or equal to the total number of processors! Aborting.."<<endl;
+        }
+        h5::finalize();
+        MPI_Finalize();
+        exit(1);
+    }
+    if (Nx/2%px != 0) {
+        if (rank_mpi==0){
+            cout<<"ERROR! Number of processors in x direction should be less or equal to Nx/2 and some power of 2\n Aborting...\n";
+        }
+        h5::finalize();
+        MPI_Finalize();
+        exit(1);
+    }
+
+    int N2;
+
+    if (two_dimension_switch) {
+        N2 = Nz;
+    }
+    else {
+        N2 = Ny;
+    }
+
+    if (N2/2%(P/px) != 0) {
+        if (rank_mpi==0){
+            cout<<"ERROR! Number of processors in y (or z) direction should be less or equal to Ny/2 (or Nz/2) and some power of 2\n Aborting...\n";
+        }
+        h5::finalize();
+        MPI_Finalize();
+        exit(1);
+    } 
     //Resizing the input fields
     Read_fields();
 
@@ -438,8 +557,24 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-
-
+/**
+*************************************************************************************************************************************
+*\brief     Function to covert string to bool
+*           
+*************************************************************************************************************************************
+*/
+bool str_to_bool(string s){
+	if (s=="true" || s=="1"){
+		return true;
+	}
+	else if (s=="false" || s=="0"){
+		return false;
+	}
+	else{
+		cout<<"Invalid input\n";
+		exit(1);
+	}
+}
 
 /**
 *************************************************************************************************************************************
@@ -1259,61 +1394,7 @@ void get_Inputs() {
     para["structure_function"]["q2"]>>q2;
     para["test"]["test_switch"]>>test_switch;
   
-    if (Nx==1){dx=0;}
-    else{
-      dx=Lx/double(Nx-1);}
-    if (Ny==1){dy=0;}
-    else{
-      dy=Ly/double(Ny-1);}
-    if (Nz==1){dz=0;}
-    else{
-      dz=Lz/double(Nz-1);
-  }
-
-  if (rank_mpi==0) {
-    cout<<"\nNumber of processors in x direction: "<<px<<endl;
-    if (two_dimension_switch) {
-        cout<<"Number of processors in z direction: "<<P/px<<endl;
-    }
-    else {
-        cout<<"Number of processors in y direction: "<<P/px<<endl;
-    }
-  }  
-
-  if (px > P) {
-        if (rank_mpi==0) {
-            cout<<"ERROR! Number of processors in x direction has to be less than or equal to the total number of processors! Aborting.."<<endl;
-        }
-        h5::finalize();
-        MPI_Finalize();
-        exit(1);
-    }
-    if (Nx/2%px != 0) {
-        if (rank_mpi==0){
-            cout<<"ERROR! Number of processors in x direction should be less or equal to Nx/2 and some power of 2\n Aborting...\n";
-        }
-        h5::finalize();
-        MPI_Finalize();
-        exit(1);
-    }
-
-    int N2;
-
-    if (two_dimension_switch) {
-        N2 = Nz;
-    }
-    else {
-        N2 = Ny;
-    }
-
-    if (N2/2%(P/px) != 0) {
-        if (rank_mpi==0){
-            cout<<"ERROR! Number of processors in y (or z) direction should be less or equal to Ny/2 (or Nz/2) and some power of 2\n Aborting...\n";
-        }
-        h5::finalize();
-        MPI_Finalize();
-        exit(1);
-    }  
+     
   
 }
 
