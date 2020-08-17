@@ -1308,7 +1308,21 @@ void read_2D(Array<double,2> A, string fold, string file) {
   }
   else{
   	file_name.close();
-  	cerr<<"Desired file does not exist."<<endl;
+  
+	cerr<<"\nDesired file does not exist\n\n";
+  	cerr<<"Error: Please check the following\n\n";
+  	cerr<<"a. 'in' folder contains the input files\n\n";
+  	cerr<<"b. Input files should be of the names:\n";
+  	cerr<<"\tCase Vector:\n";
+ 	cerr<<"\t\tCase 2D: U.V1r.h5, U.V3r.h5\n";
+ 	cerr<<"\t\tCase 3D: U.V1r.h5, U.V2r.h5, U.V3r.h5\n";
+ 	cerr<<"\tCase Scalar: \n\t\tT.Fr.h5\n\n";
+	cerr<<"c. Grid size of the data sould be compatible with specified Nx, Ny, Nz\n";
+	cerr<<"\tCase 2D: Nx, Nz\n";
+	cerr<<"\tCase 3D: Nx, Ny, Nz\n\n";
+	cerr<<"d. Dataset name should be same as the file name without the extension\n\n";
+	cerr<<"Please refer to Readme for details\n\n";
+  	
   	exit(1);
   }
   
@@ -1339,11 +1353,24 @@ void read_3D(Array<double,3> A, string fold, string file) {
   	}
   	else{
   		file_name.close();
-  		cerr<<"Desired file does not exist."<<endl;
+  		
+  		cerr<<"\nDesired file does not exist\n\n";
+  		cerr<<"Error: Please check the following\n\n";
+  		cerr<<"a. 'in' folder contains the input files\n\n";
+  		cerr<<"b. Input files should be of the names:\n";
+  		cerr<<"\tCase Vector:\n";
+ 		cerr<<"\t\tCase 2D: U.V1r.h5, U.V3r.h5\n";
+ 		cerr<<"\t\tCase 3D: U.V1r.h5, U.V2r.h5, U.V3r.h5\n";
+ 		cerr<<"\tCase Scalar: \n\t\tT.Fr.h5\n\n";
+		cerr<<"c. Grid size of the data sould be compatible with specified Nx, Ny, Nz\n";
+		cerr<<"\tCase 2D: Nx, Nz\n";
+		cerr<<"\tCase 3D: Nx, Ny, Nz\n\n";
+		cerr<<"d. Dataset name should be same as the file name without the extension\n\n";
+		cerr<<"Please refer to Readme for details\n\n";
+		
+  	
   		exit(1);
   	}
-  //h5::File f(fold+file+".h5", "r");
-  //f[file] >> A.data();
 }
 
 /**
