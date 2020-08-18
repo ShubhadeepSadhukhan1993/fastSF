@@ -8,13 +8,6 @@
 
 https://github.com/ShubhadeepSadhukhan1993/fastSF
 
-## Memory Requirements
-
-The memory requirement per processor for running `fastSF` depends primarily on the resolution of the grid. The memory requirement also depends on the number of orders of the structure functions to be computed, number of processors, and the distribution of processors in *x* and *y* (or *z*) directions. The memory requirement (in bytes) can be estimated as follows:
-
-### Two dimensional scalar field:
-
-*M* = (20 + 2*n*)*N<sub>x</sub>N<sub>z</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) 
 
 ## Installing `fastSF`
 
@@ -220,6 +213,36 @@ The logitudinal and transverse structure functions of order `q` are stored in th
 **Scalar structure functions**:
 
 The structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`.h5` as two/three dimensional arrays for two/three dimensional input fields. 
+
+## Memory Requirements
+
+The memory requirement per processor for running `fastSF` depends primarily on the resolution of the grid. The memory requirement also depends on the number of orders of the structure functions to be computed, number of processors *P*, and the distribution of processors in *x* and *y* (or *z*) directions. The memory requirement *M* (in bytes) can be estimated as follows:
+
+### Two dimensional scalar field:
+
+*M* = (20 + 2*n*)*N<sub>x</sub>N<sub>z</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 32*P*.
+
+### Three dimensional scalar field:
+
+*M* = (16 + *n*)*N<sub>x</sub>N<sub>y</sub>N<sub>z</sub>* + 4*N<sub>x</sub>N<sub>y</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 40*P*.
+
+### Two dimensional vector field:
+
+#### If only longitudinal structure functions are to be computed:
+*M* = (44 + 2*n*)*N<sub>x</sub>N<sub>z</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 32*P*.
+
+#### If both longitudinal and transverse structure functions are to be computed:
+*M* = (44 + 4*n*)*N<sub>x</sub>N<sub>z</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 40*P*.
+
+### Three dimensional vector field:
+
+#### If only longitudinal structure functions are to be computed:
+*M* = (56 + *n*)*N<sub>x</sub>N<sub>y</sub>N<sub>z</sub>* + 4*N<sub>x</sub>N<sub>y</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 40*P*.
+
+#### If both longitudinal and transverse structure functions are to be computed:
+*M* = (56 + 2*n*)*N<sub>x</sub>N<sub>y</sub>N<sub>z</sub>* + 4*N<sub>x</sub>N<sub>y</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 48*P*.
+
+In the above expressions, *p<sub>x</sub>* refers to the number of processes in *x* direction and *P* refers to the total number of processors. Note that for large *N<sub>z</sub>, the first term dominates the remaining terms; thus the memory requirement can be quickly estimated using the first term only. 
 
 ## Documentation and Validation
 
