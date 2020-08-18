@@ -41,5 +41,5 @@
 ##
 
 Structure: fastSF.cc
-	mpic++ fastSF.cc -fstack-protector -O3 `pkg-config --cflags --libs yaml-cpp blitz` -lh5si -lhdf5 -o fastSF.out
+	mpic++ -std=c++11 fastSF.cc -O3 `pkg-config --cflags --libs yaml-cpp blitz` -lh5si -lhdf5 -o fastSF.out
 	#mpic++ fastSF.cc -fstack-protector -O3 -lh5si -lhdf5 -lyaml-cpp -o fastSF.out
