@@ -82,7 +82,7 @@ void SFunc3D(Array<double,3>, Array<double,3>, Array<double,3>);
 
 
 void SFunc_long_3D(Array<double,3>, Array<double,3>, Array<double,3>);
-
+bool compatibility_check(h5::Dataset, int, int, int);
 void Read_Init(Array<double,2>&, Array<double,2>&);
 void Read_Init(Array<double,3>&, Array<double,3>&, Array<double,3>&);
 void Read_Init(Array<double,2>&);
@@ -100,6 +100,7 @@ void resize_SFs();
 void calc_SFs();
 void write_SFs();
 void test_cases();
+void show_checklist();
 
 
 
@@ -375,15 +376,6 @@ int main(int argc, char *argv[]) {
     MPI_Init(NULL, NULL);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank_mpi);
     MPI_Comm_size(MPI_COMM_WORLD, &P);
-
-    //set the number of processors in x direction
-    /*if (argc>1) {
-        px = std::atoi(argv[1]);
-    }
-    else {
-        px = 1;
-    }
-    */
     
     
     //Initiallizing h5si
@@ -1281,7 +1273,77 @@ void write_3D(Array<double,3> A, string file,int q) {
   ds << temp.data();
 }
 
+/**
+ ********************************************************************************************************************************************
+ * \brief   Function to show the checklist for proper input files
+ ********************************************************************************************************************************************
+ */
+void show_checklist(){
+	
+  	cerr<<"Error: Please check the following\n\n";
+  	cerr<<"a. 'in' folder contains the input files\n\n";
+  	cerr<<"b. Input files should be of the names:\n";
+  	cerr<<"\tCase Vector:\n";
+ 	cerr<<"\t\tCase 2D: U.V1r.h5, U.V3r.h5\n";
+ 	cerr<<"\t\tCase 3D: U.V1r.h5, U.V2r.h5, U.V3r.h5\n";
+ 	cerr<<"\tCase Scalar: \n\t\tT.Fr.h5\n\n";
+	cerr<<"c. Grid size of the data sould be compatible with specified Nx, Ny, Nz\n";
+	cerr<<"\tCase 2D: Nx, Nz\n";
+	cerr<<"\tCase 3D: Nx, Ny, Nz\n\n";
+	cerr<<"d. Dataset name should be same as the file name without the extension\n\n";
+	cerr<<"Please refer to Readme for details\n\n";
+}
 
+
+/**
+ ********************************************************************************************************************************************
+ * \brief   Function to check compatibility of the input field files with the given parameters.
+ ********************************************************************************************************************************************
+ **/
+bool compatibility_check(h5::Dataset dset, int N1, int N2, int N3){
+	int dim;
+	if (two_dimension_switch){
+		dim=2;
+	}
+	else{
+		dim=3;
+	}
+	if (dim!=dset.shape().size()){
+		cerr<<"\nIncompatible dimension data\n\n";
+		show_checklist();
+		exit(1);
+	}
+	if (dim==3){
+		if (N1!=dset.shape()[0]){
+			cerr<<"\nIncompatible grid size\n\n";
+			show_checklist();
+			exit(1);
+		}
+		if (N2!=dset.shape()[1]){
+			cerr<<"\nIncompatible grid size\n\n";
+			show_checklist();
+			exit(1);
+		}
+		if (N3!=dset.shape()[2]){
+			cerr<<"\nIncompatible grid size\n\n";
+			show_checklist();
+			exit(1);
+		}
+	}
+	if (dim==2){
+		if (N1!=dset.shape()[0]){
+			cerr<<"\nIncompatible grid size\n\n";
+			show_checklist();
+			exit(1);
+		}
+		if (N3!=dset.shape()[1]){
+			cerr<<"\nIncompatible grid size\n\n";
+			show_checklist();
+			exit(1);
+		}
+	}
+	return true;
+}
 
 /**
  ********************************************************************************************************************************************
@@ -1303,30 +1365,22 @@ void read_2D(Array<double,2> A, string fold, string file) {
   if (file_name.is_open()){
   	file_name.close();
   	h5::File f(fold+file+".h5", "r");
-  	f[file] >> A.data();
+  	if (compatibility_check(f[file], A.extent(0),0,A.extent(1))){
+  		f[file] >> A.data();
+  	}
 
   }
   else{
   	file_name.close();
-  
-	cerr<<"\nDesired file does not exist\n\n";
-  	cerr<<"Error: Please check the following\n\n";
-  	cerr<<"a. 'in' folder contains the input files\n\n";
-  	cerr<<"b. Input files should be of the names:\n";
-  	cerr<<"\tCase Vector:\n";
- 	cerr<<"\t\tCase 2D: U.V1r.h5, U.V3r.h5\n";
- 	cerr<<"\t\tCase 3D: U.V1r.h5, U.V2r.h5, U.V3r.h5\n";
- 	cerr<<"\tCase Scalar: \n\t\tT.Fr.h5\n\n";
-	cerr<<"c. Grid size of the data sould be compatible with specified Nx, Ny, Nz\n";
-	cerr<<"\tCase 2D: Nx, Nz\n";
-	cerr<<"\tCase 3D: Nx, Ny, Nz\n\n";
-	cerr<<"d. Dataset name should be same as the file name without the extension\n\n";
-	cerr<<"Please refer to Readme for details\n\n";
-  	
+  	cerr<<"\nDesired file does not exist\n\n";
+	show_checklist();
   	exit(1);
   }
   
 }
+
+
+
 
 /**
  ********************************************************************************************************************************************
@@ -1344,31 +1398,19 @@ void read_2D(Array<double,2> A, string fold, string file) {
  ********************************************************************************************************************************************
  */
 void read_3D(Array<double,3> A, string fold, string file) {
-	ifstream file_name(fold+file+".h5");
-  	if (file_name.is_open()){
-  		file_name.close();
+	ifstream checkfile(fold+file+".h5");
+  	if (checkfile.is_open()){
+  		checkfile.close();
   		h5::File f(fold+file+".h5", "r");
-  		f[file] >> A.data();
+  		if (compatibility_check(f[file], A.extent(0),A.extent(1),A.extent(2))){
+  			f[file] >> A.data();
+  		}
 
   	}
   	else{
-  		file_name.close();
-  		
+  		checkfile.close();
   		cerr<<"\nDesired file does not exist\n\n";
-  		cerr<<"Error: Please check the following\n\n";
-  		cerr<<"a. 'in' folder contains the input files\n\n";
-  		cerr<<"b. Input files should be of the names:\n";
-  		cerr<<"\tCase Vector:\n";
- 		cerr<<"\t\tCase 2D: U.V1r.h5, U.V3r.h5\n";
- 		cerr<<"\t\tCase 3D: U.V1r.h5, U.V2r.h5, U.V3r.h5\n";
- 		cerr<<"\tCase Scalar: \n\t\tT.Fr.h5\n\n";
-		cerr<<"c. Grid size of the data sould be compatible with specified Nx, Ny, Nz\n";
-		cerr<<"\tCase 2D: Nx, Nz\n";
-		cerr<<"\tCase 3D: Nx, Ny, Nz\n\n";
-		cerr<<"d. Dataset name should be same as the file name without the extension\n\n";
-		cerr<<"Please refer to Readme for details\n\n";
-		
-  	
+  		show_checklist();
   		exit(1);
   	}
 }
