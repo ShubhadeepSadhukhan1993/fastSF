@@ -388,7 +388,7 @@ int main(int argc, char *argv[]) {
     double elapsedt=0.0;
     double elapsepdt=0.0;
     
-    px=1;
+    
     get_Inputs();
     //Overwrite from command line
     int option;
@@ -1452,6 +1452,7 @@ void get_Inputs() {
     para["program"]["scalar_switch"]>>scalar_switch;
     para["program"]["Only_longitudinal"]>>longitudinal;
     para["program"]["2D_switch"]>>two_dimension_switch;
+    para["program"]["Processors_X"]>>px;
     para["grid"]["Nx"]>>Nx;
     para["grid"]["Ny"]>>Ny;
     para["grid"]["Nz"]>>Nz;

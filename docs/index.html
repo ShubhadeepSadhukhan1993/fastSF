@@ -95,19 +95,15 @@ Environment Variables</h2>
 Required Libraries</h2>
 <p>The following libraries are required for installing and running fastSF:</p>
 <ul>
-<li><a href="http://turbulencehub.org/wp-content/uploads/Download_Files/cmake-2.8.12.tar.gz"><code>CMake</code></a> (Version 2.8.12 or later) - <code>CMake</code> is a standard library to make executables from the source files. Download <code>CMake</code> from <a href="http://turbulencehub.org/wp-content/uploads/Download_Files/cmake-2.8.12.tar.gz">here</a>. After downloading the archive, extract it and change to <code>CMake-2.8.12</code> folder. Once there, enter the following commands: <pre class="fragment">`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
-
-`make install`
-</pre></li>
 <li><a href="https://github.com/blitzpp/blitz"><code>Blitz++</code></a> (Version 1.0.2)- All array manipulations are performed using the <code>Blitz++</code> library. Download <code>Blitz++</code> from <a href="https://github.com/blitzpp/blitz">here</a>. After downloading, change to the <code>blitz-master</code> directory and enter the following commands <pre class="fragment">`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
 
 `make install`
 </pre></li>
-<li><p class="startli"><a href="https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0"><code>YAML-cpp</code></a>(Version 0.3.0) - The input parameters are stored in the <code>para.yaml</code> file which needs the <code>YAML-cpp</code> library to parse. Download <code>YAML-cpp</code> from <a href="https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0">here</a>. Extract the zip/tar file and change the <code>yaml-cpp-release-0.3.0</code> directory. Once there, enter the following commands:</p>
+<li><p class="startli"><a href="https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0"><code>YAML-cpp</code></a>(Version 0.3.0) - The input parameters are stored in the <code>para.yaml</code> file which needs the <code>YAML-cpp</code> library to parse. Download <code>YAML-cpp</code> from <a href="https://github.com/jbeder/yaml-cpp/releases/tag/release-0.3.0">here</a>. Extract the zip/tar file and change the <code>yaml-cpp-release-0.3.0</code> directory. Important: Please ensure that <a href="https://cmake.org">CMake</a> is installed in your system. Enter the following commands:</p>
 <p class="startli"><code>CC=gcc CXX=g++ cmake -DCMAKE_INSTALL_PREFIX=$HOME/local</code></p>
 <p class="startli"><code>make install</code></p>
 </li>
-<li><a href="https://www.mpich.org/downloads/"><code>MPICH</code></a>(Version 3.3.2) - Library for parallel programming with MPI. Download <code>MPICH</code> from <a href="https://www.mpich.org/downloads/">here</a>. After extraction, change to <code>mpich-3.3.2</code> folder and enter the following: <pre class="fragment">`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
+<li>An <code>MPI</code> (Message Passing Interface) Library - <code>fastSF</code> uses <code>MPI</code> for parallelism. The software was tested using <a href="https://www.mpich.org"><code>MPICH</code></a>(Version 3.3.2), however, any standard <code>MPI-1</code> implementation should be sufficient. Here, we will provide instructions for installing <code>MPICH</code>. Download <code>MPICH</code> from <a href="https://www.mpich.org/downloads/">here</a>. After extraction, change to <code>mpich-3.3.2</code> folder and enter the following: <pre class="fragment">`CC=gcc CXX=g++ ./configure --prefix=$HOME/local`
 
 `make install`
 </pre></li>
@@ -115,7 +111,7 @@ Required Libraries</h2>
 
 `make install`
 </pre></li>
-<li><a href="https://github.com/anandogc/h5si"><code>H5SI</code></a>(Version 1.1.1) - This library is used for simplifying the input-output operations of <code>HDF5</code>. Download <code>H5SI</code> from <a href="https://github.com/anandogc/h5si">here</a>. After downloading the zip file, extract it and change to <code>h5si-master/trunk</code>. Once there, enter the following: <pre class="fragment">`CXX=mpicxx cmake . -DCMAKE_INSTALL_PREFIX=$HOME/local`
+<li><a href="https://github.com/anandogc/h5si"><code>H5SI</code></a>(Version 1.1.1) - This library is used for simplifying the input-output operations of <code>HDF5</code>. Download <code>H5SI</code> from <a href="https://github.com/anandogc/h5si">here</a>. After downloading the zip file, extract it and change to <code>h5si-master/trunk</code>. Important: Please ensure that <a href="https://cmake.org">CMake</a> is installed in your system. Enter the following: <pre class="fragment">`CXX=mpicxx cmake . -DCMAKE_INSTALL_PREFIX=$HOME/local`
 
 `make`
 
@@ -143,7 +139,7 @@ Testing &lt;tt&gt;fastSF&lt;/tt&gt;</h1>
 <li>In the fourth case, the code will generate a 3D scalar field given by <em>T = x + y + z</em>, and compute the structure functions for the given field. For this case, the structure functions should equal *(l<sub>x</sub> + l<sub>y</sub> + l<sub>z</sub>)<sup>q</sup>*.</li>
 </ul>
 <p>For the above cases, <code>fastSF</code> will compare the computed structure functions with the analytical results. If the percentage difference between the two values is less than 10<sup>-10</sup>, the code is deemed to have passed.</p>
-<p>Finally, for visualization purpose, the python script <code><a class="el" href="test_8py.html" title="fastSF">test/test.py</a></code> is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus <em>l</em>, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. For the 3D scalar field, the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>y</sub> + l<sub>z</sub>)<sup>2</sup>* are generated. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:</p>
+<p>Finally, for visualization purpose, the python script <code><a class="el" href="test_8py.html" title="fastSF">test/test.py</a></code> is invoked. This script generates the plots of the second and third-order longitudinal structure functions versus <em>l</em>, and the density plots of the computed second-order scalar structure functions and *(l<sub>x</sub> + l<sub>z</sub>)<sup>2</sup>*. For the 3D scalar field, the density plots of the computed second-order scalar structure functions for <em>l<sub>y</sub> = 0.5</em> and *(l<sub>x</sub> + 0.5 + l<sub>z</sub>)<sup>2</sup>* are generated. These plots demonstrate that the structure functions are computed accurately. Note that the following python modules are needed to run the test script successfully:</p>
 <ol type="1">
 <li><code>h5py</code></li>
 <li><code>numpy</code></li>
@@ -186,20 +182,30 @@ i) &lt;tt&gt;para.yaml&lt;/tt&gt; details</h2>
 <p><code>true</code>: For running in test mode. Idealized velocity and scalar fields are generated internally by the code. Computed structure functions are compared with analytical results. The code is PASSED if the percentage difference between the two results is less than <code>1e-10</code>.</p>
 <p><code>false</code>: The "regular" mode, in which the code reads the fields from the hdf5 files in the <code>in</code> folder.</p>
 <h2><a class="anchor" id="autotoc_md26"></a>
-ii) Files Required:</h2>
-<p>All the files storing the input fields should be inside the <code>in</code> folder.</p>
+ii) Files Required and HDF5 Schema:</h2>
+<p>All the files storing the input fields should be inside the <code>in</code> folder. All the input fields and datasets are required to be precisely as per the following schema.</p>
 <h3><a class="anchor" id="autotoc_md27"></a>
 For two dimensional fields</h3>
-<p>For vector field, two files named as <code>U.V1r.h5</code> and <code>U.V3r.h5</code> are required. Each file has one dataset.</p>
-<p>For scalar field, one file named as <code>T.Fr.h5</code> is required. Each file has one dataset.</p>
-<p>Size of the array stored in these files should be (<code>Nx,Nz</code>).</p>
-<p><em>Important:</em> Dataset name should be the same as the file name. For example, the dataset inside the file <code>U.V1r.h5</code> should be named <code>U.V1r</code>.</p>
+<p>For vector field, two <code>hdf5</code> files are required:</p><ol type="1">
+<li><code>U.V1r.h5</code>, with a 2D dataset <code>U.V1r</code> of dimensions (<code>Nx,Nz</code>) storing real double-precision floating point values. This stores the field <em>u<sub>x</sub></em>, that is, the <em>x</em> component of the vector field.</li>
+<li><code>U.V3r.h5</code>, with a 2D dataset <code>U.V3r</code> of dimensions (<code>Nx,Nz</code>) storing real double-precision floating point values. This stores the field <em>u<sub>z</sub></em>, that is, the <em>z</em> component of the vector field.</li>
+</ol>
+<p>For scalar field, For vector field, one <code>hdf5</code> file is required:</p><ol type="1">
+<li><code>T.Fr.h5</code>, with a 2D dataset <code>T.Fr</code> of dimensions (<code>Nx,Nz</code>) storing real double-precision floating point values. This stores the scalar field <em>&theta;</em>.</li>
+</ol>
 <h3><a class="anchor" id="autotoc_md28"></a>
 For three dimensional fields</h3>
-<p>For vector field, three files named as <code>U.V1r.h5</code>, <code>U.V2r.h5</code>, and <code>U.V3r.h5</code> are required. Each file has one dataset.</p>
-<p>For scalar field, one file named as <code>T.Fr.h5</code> is required. Each file has one dataset.</p>
-<p>Size of the array stored in these files should be (<code>Nx, Ny, Nz</code>).</p>
-<p><em>Important:</em> Dataset name should be the same as the file name. For example, the dataset inside the file <code>U.V1r.h5</code> should be named <code>U.V1r</code>.</p>
+<p>For vector field, three <code>hdf5</code> files are required:</p><ol type="1">
+<li><code>U.V1r.h5</code>, with a 3D dataset <code>U.V1r</code> of dimensions (<code>Nx,Ny,Nz</code>) storing real double-precision floating point values. This stores the field <em>u<sub>x</sub></em>, that is, the <em>x</em> component of the vector field.</li>
+<li><code>U.V2r.h5</code>, with a 3D dataset <code>U.V2r</code> of dimensions (<code>Nx,Ny,Nz</code>) storing real double-precision floating point values. This stores the field <em>u<sub>y</sub></em>, that is, the <em>y</em> component of the vector field.</li>
+</ol>
+<ol type="1">
+<li><code>U.V3r.h5</code>, with a 3D dataset <code>U.V3r</code> of dimensions (<code>Nx,Ny,Nz</code>) storing real double-precision floating point values. This stores the field <em>u<sub>z</sub></em>, that is, the <em>z</em> component of the vector field.</li>
+</ol>
+<p>For scalar field, For vector field, one <code>hdf5</code> file is required:</p><ol type="1">
+<li><code>T.Fr.h5</code>, with a 3D dataset <code>T.Fr</code> of dimensions (<code>Nx,Ny,Nz</code>) storing real double-precision floating point values. This stores the scalar field <em>&theta;</em>.</li>
+</ol>
+<p><b>IMPORTANT:</b> Please ensure that the size of the input field datasets match with the size specified in the <code>para.yaml</code>, otherwise the code will likely throw a segmentation error. Even if the code does not throw a segmentation error, the calculations will be erroneous.</p>
 <h2><a class="anchor" id="autotoc_md29"></a>
 iii) Running Instructions</h2>
 <p>Open the terminal change into <code>fastSF/in</code> folder. Open <code>para.yaml</code> to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the <code>in</code> folder run the command</p>
@@ -214,7 +220,7 @@ iii) Output Information</h2>
 <h1><a class="anchor" id="autotoc_md31"></a>
 Documentation and Validation</h1>
 <p>The documentation can be found in <code>fastSF/docs/index.html</code>.</p>
-<p>The validation of <code>fastSF</code> is reported <a href="https://github.com/ShubhadeepSadhukhan1993/fastSF/blob/master/Verification.md">here</a>.</p>
+<p>The validation of <code>fastSF</code> is reported <a href="https://github.com/ShubhadeepSadhukhan1993/fastSF/blob/master/docs/Verification.md">here</a>.</p>
 <h1><a class="anchor" id="autotoc_md32"></a>
 Contributions and Bug Reports</h1>
 <p>We welcome contributions to this project. If you wish to contribute, please create a branch with a <a href="https://github.com/ShubhadeepSadhukhan1993/fastSF/pulls">pull request</a> and the changes can be discussed there.</p>
@@ -227,7 +233,7 @@ License</h1>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 10 2020 11:24:16 for fastSF by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 18 2020 17:56:57 for fastSF by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>
