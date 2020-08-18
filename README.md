@@ -14,7 +14,7 @@ The memory requirement per processor for running `fastSF` depends primarily on t
 
 ### Two dimensional scalar field:
 
-*M* = (20 + 2*n*)*N<sub>x<\sub>N<sub>z<\sub>* + 8(*N<sub>x<\sub>/p<sub>x<\sub> + N<sub>z<\sub>p<sub>x<\sub>/P*) 
+*M* = (20 + 2*n*)*N<sub>x</sub>N<sub>z</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) 
 
 ## Installing `fastSF`
 
