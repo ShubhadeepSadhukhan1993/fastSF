@@ -231,16 +231,13 @@ The memory requirement per processor for running `fastSF` depends primarily on t
 
 *M* = (44 + 2*n*)*N<sub>x</sub>N<sub>z</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 32*P*, if only longitudinal structure functions are to be computed:
 
-#### If both longitudinal and transverse structure functions are to be computed:
-*M* = (44 + 4*n*)*N<sub>x</sub>N<sub>z</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 40*P*.
+*M* = (44 + 4*n*)*N<sub>x</sub>N<sub>z</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 40*P*, if both longitudinal and transverse structure functions are to be computed.
 
 ### Three dimensional vector field:
 
-#### If only longitudinal structure functions are to be computed:
-*M* = (56 + *n*)*N<sub>x</sub>N<sub>y</sub>N<sub>z</sub>* + 4*N<sub>x</sub>N<sub>y</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 40*P*.
+*M* = (56 + *n*)*N<sub>x</sub>N<sub>y</sub>N<sub>z</sub>* + 4*N<sub>x</sub>N<sub>y</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 40*P*, if only longitudinal structure functions are to be computed.
 
-#### If both longitudinal and transverse structure functions are to be computed:
-*M* = (56 + 2*n*)*N<sub>x</sub>N<sub>y</sub>N<sub>z</sub>* + 4*N<sub>x</sub>N<sub>y</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 48*P*.
+*M* = (56 + 2*n*)*N<sub>x</sub>N<sub>y</sub>N<sub>z</sub>* + 4*N<sub>x</sub>N<sub>y</sub>* + 8(*N<sub>x</sub>/p<sub>x</sub> + N<sub>z</sub>p<sub>x</sub>/P*) + 48*P*, if both longitudinal and transverse structure functions are to be computed.
 
 In the above expressions, *p<sub>x</sub>* refers to the number of processes in *x* direction and *P* refers to the total number of processors. Note that for large *N<sub>z</sub>*, the first term dominates the remaining terms; thus the memory requirement can be quickly estimated using the first term only. 
 
