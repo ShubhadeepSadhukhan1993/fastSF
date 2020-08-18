@@ -8,6 +8,14 @@
 
 https://github.com/ShubhadeepSadhukhan1993/fastSF
 
+## Memory Requirements
+
+The memory requirement per processor for running `fastSF` depends primarily on the resolution of the grid. The memory requirement also depends on the number of orders of the structure functions to be computed, number of processors, and the distribution of processors in *x* and *y* (or *z*) directions. The memory requirement (in bytes) can be estimated as follows:
+
+### Two dimensional scalar field:
+
+*M* = (20 + 2*n*)*N<sub>x<\sub>N<sub>z<\sub>* + 8(*N<sub>x<\sub>/p<sub>x<\sub> + N<sub>z<\sub>p<sub>x<\sub>/P*) 
+
 ## Installing `fastSF`
 
 ### Environment Variables
