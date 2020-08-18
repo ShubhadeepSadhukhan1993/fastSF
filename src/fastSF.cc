@@ -95,10 +95,10 @@ void SF_scalar_3D(Array<double,3>);
 
 void SF_scalar_2D(Array<double,2>);
 
-void Read_fields();
+void Read_fields(string, string, string, string);
 void resize_SFs();
 void calc_SFs();
-void write_SFs();
+void write_SFs(string, string, string);
 void test_cases();
 void show_checklist();
 
@@ -392,7 +392,10 @@ int main(int argc, char *argv[]) {
     get_Inputs();
     //Overwrite from command line
     int option;
-    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:"))!=-1){
+    string UName="U.V1r", VName="U.V2r", WName="U.V3r", TName="T.Fr";
+    string SF_Grid_pll_name = "SF_Grid_pll", SF_Grid_perp_name = "SF_Grid_perp", SF_Grid_scalar_name = "SF_Grid_scalar";
+
+    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:S:P:L:M:"))!=-1){
     	switch(option){
     		case 'X':
     			Nx=std::stoi(optarg);
@@ -433,6 +436,28 @@ int main(int argc, char *argv[]) {
     		case 'l':
     			longitudinal=str_to_bool(optarg);
     			break;
+            case 'U':
+                UName = optarg;
+                break;
+            case 'V':
+                VName = optarg;
+                break;
+            case 'W':
+                WName = optarg;
+                break;
+            case 'P':
+                SF_Grid_perp_name = optarg;
+                break;
+            case 'L':
+                SF_Grid_pll_name = optarg;
+                break;
+            case 'M':
+                SF_Grid_scalar_name = optarg;
+                break;
+            default:
+                if (rank_mpi==0){
+                    cout<<"\nNo command line options given; reading all the inputs from para.yaml.\n";
+                }
     	}
     }
     /*
@@ -507,7 +532,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     } 
     //Resizing the input fields
-    Read_fields();
+    Read_fields(UName, VName, WName, TName);
 
     //Resize the structure function array according to the type of inputs
     resize_SFs();
@@ -525,7 +550,7 @@ int main(int argc, char *argv[]) {
     
  
     //Write the SF array to disk
-    write_SFs();
+    write_SFs(SF_Grid_pll_name, SF_Grid_perp_name, SF_Grid_scalar_name);
 
     if (test_switch){
         test_cases();
@@ -563,7 +588,8 @@ bool str_to_bool(string s){
 		return false;
 	}
 	else{
-		cout<<"Invalid input\n";
+        if (rank_mpi==0)
+            cout<<"Invalid input\n";
 		exit(1);
 	}
 }
@@ -574,7 +600,7 @@ bool str_to_bool(string s){
 *           
 *************************************************************************************************************************************
 */
-void Read_fields() {
+void Read_fields(string UName, string VName, string WName, string TName) {
 	
     if(two_dimension_switch){
         if (scalar_switch) {
@@ -626,21 +652,21 @@ void Read_fields() {
         }
         if (two_dimension_switch){
             if (scalar_switch) {
-                read_2D(T_2D,"in/", "T.Fr");
+                read_2D(T_2D,"in/", TName);
             }
             else {
-                read_2D(V1_2D,"in/","U.V1r");
-                read_2D(V3_2D,"in/","U.V3r");
+                read_2D(V1_2D,"in/", UName);
+                read_2D(V3_2D,"in/", WName);
             }
         }
         else{
             if (scalar_switch) {
-                read_3D(T, "in/","T.Fr");
+                read_3D(T, "in/", TName);
             }
             else {
-                read_3D(V1, "in/", "U.V1r");
-                read_3D(V2, "in/", "U.V2r");
-                read_3D(V3, "in/", "U.V3r");
+                read_3D(V1, "in/", UName);
+                read_3D(V2, "in/", VName);
+                read_3D(V3, "in/", WName);
             }
         }
     }
@@ -727,7 +753,7 @@ void calc_SFs() {
 *\brief     Function to write the structure function arrays to the disk.
 *************************************************************************************************************************************
 */
-void write_SFs() {
+void write_SFs(string SF_Grid_pll_name, string SF_Grid_perp_name, string SF_Grid_scalar_name) {
     if (rank_mpi==0){
         mkdir("out",0777);
         int p1 = q1;
@@ -736,12 +762,12 @@ void write_SFs() {
             if (two_dimension_switch) {
                 cout<<"\nWriting "<<p1<<" order SF as function of lx and lz\n";
                 if (scalar_switch){
-                    write_3D(SF_Grid2D_scalar,"SF_Grid_scalar"+name, p1);
+                    write_3D(SF_Grid2D_scalar, SF_Grid_scalar_name+name, p1);
                 }
                 else {
-                    write_3D(SF_Grid2D_pll,"SF_Grid_pll"+name, p1);    
+                    write_3D(SF_Grid2D_pll, SF_Grid_pll_name+name, p1);    
                     if (not longitudinal) {
-                        write_3D(SF_Grid2D_perp, "SF_Grid_perp"+name, p1);
+                        write_3D(SF_Grid2D_perp, SF_Grid_perp_name+name, p1);
                     }
                 }
                 cout<<"\nWriting completed\n";
@@ -749,12 +775,12 @@ void write_SFs() {
             else {
                 cout<<"\nWriting "<<p1<<" order SF as function of lx, ly, and ly\n";
                 if (scalar_switch){
-                    write_4D(SF_Grid_scalar,"SF_Grid_scalar"+name, p1);
+                    write_4D(SF_Grid_scalar, SF_Grid_scalar_name+name, p1);
                 }
                 else {
-                    write_4D(SF_Grid_pll,"SF_Grid_pll"+name, p1);    
+                    write_4D(SF_Grid_pll, SF_Grid_pll_name+name, p1);    
                     if (not longitudinal) {
-                        write_4D(SF_Grid_perp, "SF_Grid_perp"+name, p1);
+                        write_4D(SF_Grid_perp, SF_Grid_perp_name+name, p1);
                     }
                 }
                 cout<<"\nWriting completed\n";
@@ -1292,6 +1318,10 @@ void show_checklist(){
 	cerr<<"\tCase 3D: Nx, Ny, Nz\n\n";
 	cerr<<"d. Dataset name should be same as the file name without the extension\n\n";
 	cerr<<"Please refer to Readme for details\n\n";
+    h5::finalize();
+    MPI_Finalize();
+    exit(1);
+
 }
 
 
