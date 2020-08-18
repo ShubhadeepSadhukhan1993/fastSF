@@ -364,6 +364,60 @@ int P;
  */
 int px;
 
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the input file for velocity field along x axis.
+ *
+ ********************************************************************************************************************************************
+ */
+string UName="U.V1r";
+
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the input file for velocity field along y axis.
+ *
+ ********************************************************************************************************************************************
+ */
+string VName="U.V2r";
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the input file for velocity field along z axis.
+ *
+ ********************************************************************************************************************************************
+ */
+string WName="U.V3r";
+
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the input file for scalar field.
+ *
+ ********************************************************************************************************************************************
+ */
+ string TName="T.Fr";
+
+ /**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the output file for parallel structure function of velocity field.
+ *
+ ********************************************************************************************************************************************
+ */
+string SF_Grid_pll_name = "SF_Grid_pll";
+
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the output file for perpendicular structure function of velocity field.
+ *
+ ********************************************************************************************************************************************
+ */
+string SF_Grid_perp_name = "SF_Grid_perp";
+
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the output file for structure function of scalar field.
+ *
+ ********************************************************************************************************************************************
+ */
+ string SF_Grid_scalar_name = "SF_Grid_scalar";
 
 
 /**
@@ -392,9 +446,7 @@ int main(int argc, char *argv[]) {
     get_Inputs();
     //Overwrite from command line
     int option;
-    string UName="U.V1r", VName="U.V2r", WName="U.V3r", TName="T.Fr";
-    string SF_Grid_pll_name = "SF_Grid_pll", SF_Grid_perp_name = "SF_Grid_perp", SF_Grid_scalar_name = "SF_Grid_scalar";
-
+    
     while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:S:P:L:M:"))!=-1){
     	switch(option){
     		case 'X':
@@ -922,7 +974,7 @@ void VECTOR_TEST_CASE_3D()
 
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
-			read_3D(test1,"out/","SF_Grid_pll"+name);
+			read_3D(test1,"out/",SF_Grid_pll_name+name);
 			for (int i=0; i<test1.extent(0); i++){
 				double lx=dx*i;
 				for (int j=0; j<test1.extent(1); j++){
@@ -954,8 +1006,8 @@ void VECTOR_TEST_CASE_3D()
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
 
-			read_3D(test1,"out/","SF_Grid_pll"+name);
-			read_3D(test2,"out/","SF_Grid_perp"+name);
+			read_3D(test1,"out/",SF_Grid_pll_name+name);
+			read_3D(test2,"out/",SF_Grid_perp_name+name);
 
 
 			for (int i=0; i<test1.extent(0); i++){
@@ -1026,7 +1078,7 @@ void VECTOR_TEST_CASE_2D()
 
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
-			read_2D(test1,"out/","SF_Grid_pll"+name);
+			read_2D(test1,"out/",SF_Grid_pll_name+name);
 			for (int i=0; i<test1.extent(0); i++){
 				double lx=dx*i;
 				for (int k=0; k<test1.extent(1); k++){
@@ -1053,8 +1105,8 @@ void VECTOR_TEST_CASE_2D()
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
 
-			read_2D(test1,"out/","SF_Grid_pll"+name);
-			read_2D(test2,"out/","SF_Grid_perp"+name);
+			read_2D(test1,"out/",SF_Grid_pll_name+name);
+			read_2D(test2,"out/",SF_Grid_perp_name+name);
 
 
 			for (int i=0; i<test1.extent(0); i++){
@@ -1118,7 +1170,7 @@ void SCALAR_TEST_CASE_2D()
 	for (int order=0 ; order<=q2-q1; order++){
 		string name=int_to_str(order+q1);
 
-		read_2D(test1,"out/","SF_Grid_scalar"+name);
+		read_2D(test1,"out/",SF_Grid_scalar_name+name);
 
 
 
@@ -1177,7 +1229,7 @@ void SCALAR_TEST_CASE_3D(){
 	test1.resize(Nx/2,Ny/2,Nz/2);
 	for (int order=0 ; order<=q2-q1; order++){
 		string name=int_to_str(order+q1);
-		read_3D(test1,"out/","SF_Grid_scalar"+name);
+		read_3D(test1,"out/",SF_Grid_scalar_name+name);
 		for (int i=0; i<test1.extent(0); i++){
 			double lx=dx*i;
 			for (int j=0; j<test1.extent(1); j++){
@@ -1318,9 +1370,9 @@ void show_checklist(){
 	cerr<<"\tCase 3D: Nx, Ny, Nz\n\n";
 	cerr<<"d. Dataset name should be same as the file name without the extension\n\n";
 	cerr<<"Please refer to Readme for details\n\n";
-    h5::finalize();
-    MPI_Finalize();
-    exit(1);
+    
+    
+
 
 }
 
@@ -1339,37 +1391,61 @@ bool compatibility_check(h5::Dataset dset, int N1, int N2, int N3){
 		dim=3;
 	}
 	if (dim!=dset.shape().size()){
-		cerr<<"\nIncompatible dimension data\n\n";
-		show_checklist();
-		exit(1);
+		if (rank_mpi==0){
+			cerr<<"\nIncompatible dimension data\n\n";
+			show_checklist();
+		}
+		h5::finalize();
+    	MPI_Finalize();
+    	exit(1);
 	}
 	if (dim==3){
 		if (N1!=dset.shape()[0]){
-			cerr<<"\nIncompatible grid size\n\n";
-			show_checklist();
-			exit(1);
+			if (rank_mpi==0){
+				cerr<<"\nIncompatible grid size\n\n";
+				show_checklist();
+			}
+			h5::finalize();
+    		MPI_Finalize();
+    		exit(1);
 		}
 		if (N2!=dset.shape()[1]){
-			cerr<<"\nIncompatible grid size\n\n";
-			show_checklist();
-			exit(1);
+			if (rank_mpi==0){
+				cerr<<"\nIncompatible grid size\n\n";
+				show_checklist();
+			}
+			h5::finalize();
+    		MPI_Finalize();
+    		exit(1);
 		}
 		if (N3!=dset.shape()[2]){
-			cerr<<"\nIncompatible grid size\n\n";
-			show_checklist();
-			exit(1);
+			if (rank_mpi==0){
+				cerr<<"\nIncompatible grid size\n\n";
+				show_checklist();
+			}
+			h5::finalize();
+    		MPI_Finalize();
+    		exit(1);
 		}
 	}
 	if (dim==2){
 		if (N1!=dset.shape()[0]){
-			cerr<<"\nIncompatible grid size\n\n";
-			show_checklist();
-			exit(1);
+			if (rank_mpi==0){
+				cerr<<"\nIncompatible grid size\n\n";
+				show_checklist();
+			}
+			h5::finalize();
+    		MPI_Finalize();
+    		exit(1);
 		}
 		if (N3!=dset.shape()[1]){
-			cerr<<"\nIncompatible grid size\n\n";
-			show_checklist();
-			exit(1);
+			if (rank_mpi==0){
+				cerr<<"\nIncompatible grid size\n\n";
+				show_checklist();
+			}
+			h5::finalize();
+    		MPI_Finalize();
+    		exit(1);
 		}
 	}
 	return true;
@@ -1402,9 +1478,14 @@ void read_2D(Array<double,2> A, string fold, string file) {
   }
   else{
   	file_name.close();
-  	cerr<<"\nDesired file does not exist\n\n";
-	show_checklist();
-  	exit(1);
+  	if (rank_mpi==0){
+	  	cerr<<"\nDesired file does not exist\n\n";
+		show_checklist();
+	}
+
+  	h5::finalize();
+    MPI_Finalize();
+    exit(1);
   }
   
 }
@@ -1428,9 +1509,9 @@ void read_2D(Array<double,2> A, string fold, string file) {
  ********************************************************************************************************************************************
  */
 void read_3D(Array<double,3> A, string fold, string file) {
-	ifstream checkfile(fold+file+".h5");
-  	if (checkfile.is_open()){
-  		checkfile.close();
+	ifstream file_name(fold+file+".h5");
+  	if (file_name.is_open()){
+  		file_name.close();
   		h5::File f(fold+file+".h5", "r");
   		if (compatibility_check(f[file], A.extent(0),A.extent(1),A.extent(2))){
   			f[file] >> A.data();
@@ -1438,10 +1519,15 @@ void read_3D(Array<double,3> A, string fold, string file) {
 
   	}
   	else{
-  		checkfile.close();
-  		cerr<<"\nDesired file does not exist\n\n";
-  		show_checklist();
-  		exit(1);
+  		file_name.close();
+  		if (rank_mpi==0){
+  			cerr<<"\nDesired file does not exist\n\n";
+  			show_checklist();
+  		}
+
+  		h5::finalize();
+    	MPI_Finalize();
+    	exit(1);
   	}
 }
 
