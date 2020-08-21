@@ -100,8 +100,8 @@ X,Y=np.meshgrid(x,y)
 
 	
 def plotSF_r_2D():
-	SF2 = (hdf5_reader_plane("test_velocity_2D/out/SF_Grid_pll2.h5", "SF_Grid_pll2"))
-	SF3 = (hdf5_reader_plane("test_velocity_2D/out/SF_Grid_pll3.h5", "SF_Grid_pll3"))
+	SF2 = (hdf5_reader_plane("test_velocity_2D/out/SF_Grid_pll.h5", "SF_Grid_pll2"))
+	SF3 = (hdf5_reader_plane("test_velocity_2D/out/SF_Grid_pll.h5", "SF_Grid_pll3"))
 	
 	Nx, Nz = SF2.shape
 	
@@ -158,8 +158,8 @@ def plotSF_r_2D():
 
 
 def plotSF_r_3D():
-	SF2 = (hdf5_reader("test_velocity_3D/out/SF_Grid_pll2.h5", "SF_Grid_pll2"))
-	SF3 = (hdf5_reader("test_velocity_3D/out/SF_Grid_pll3.h5", "SF_Grid_pll3"))
+	SF2 = (hdf5_reader("test_velocity_3D/out/SF_Grid_pll.h5", "SF_Grid_pll2"))
+	SF3 = (hdf5_reader("test_velocity_3D/out/SF_Grid_pll.h5", "SF_Grid_pll3"))
 	
 	Nx, Ny, Nz = SF2.shape
 	
@@ -218,7 +218,7 @@ def plotSF_r_3D():
 
 	
 def plot_SF2D_scalar():
-    SF2 = (hdf5_reader_plane("test_scalar_2D/out/SF_Grid_scalar2.h5", "SF_Grid_scalar2"))
+    SF2 = (hdf5_reader_plane("test_scalar_2D/out/SF_Grid_scalar.h5", "SF_Grid_scalar2"))
     #SF3 = (hdf5_reader_plane("test_scalar_2D/out/SF_Grid_scalar3.h5", "SF_Grid_scalar3"))
     
     Nlx, Nlz = SF2.shape
@@ -269,7 +269,7 @@ def plot_SF2D_scalar():
 
 	
 def plot_SF2D_velocity():
-    SF2 = (hdf5_reader_plane("test_velocity_2D/out/SF_Grid_pll2.h5", "SF_Grid_pll2"))
+    SF2 = (hdf5_reader_plane("test_velocity_2D/out/SF_Grid_pll.h5", "SF_Grid_pll2"))
     #SF3 = (hdf5_reader_plane("test_scalar_2D/out/SF_Grid_scalar3.h5", "SF_Grid_scalar3"))
     
     Nlx, Nlz = SF2.shape
@@ -316,7 +316,7 @@ def plot_SF2D_velocity():
     plt.show()
 
 def plot_SF3D_scalar():
-    SF2 = (hdf5_reader_slice("test_scalar_3D/out/SF_Grid_scalar2.h5", "SF_Grid_scalar2",-1))
+    SF2 = (hdf5_reader_slice("test_scalar_3D/out/SF_Grid_scalar.h5", "SF_Grid_scalar2",-1))
     #SF3 = (hdf5_reader_slice("out/SF_Grid_scalar3.h5", "SF_Grid_scalar3",31))
     
     Nlx, Nlz= SF2.shape
@@ -368,7 +368,7 @@ def plot_SF3D_scalar():
     plt.show()
     
 def plot_SF3D_velocity():
-    SF2 = (hdf5_reader_slice("test_velocity_3D/out/SF_Grid_pll2.h5", "SF_Grid_pll2",-1))
+    SF2 = (hdf5_reader_slice("test_velocity_3D/out/SF_Grid_pll.h5", "SF_Grid_pll2",-1))
     #SF3 = (hdf5_reader_slice("out/SF_Grid_scalar3.h5", "SF_Grid_scalar3",31))
     
     Nlx, Nlz= SF2.shape

@@ -58,9 +58,9 @@ using namespace blitz;
 
 //Function declarations
 void get_Inputs(); 
-void write_3D(Array<double,3>, string, int);
-void write_4D(Array<double,4>, string, int);
-void read_2D(Array<double,2>, string, string);
+void write_3D(Array<double,3>, string);
+void write_4D(Array<double,4>, string);
+void read_2D(Array<double,2>, string, string, string);
 string int_to_str(int);
 bool str_to_bool(string);
 void VECTOR_TEST_CASE_3D();
@@ -69,7 +69,7 @@ void SCALAR_TEST_CASE_2D();
 void SCALAR_TEST_CASE_3D();
 void compute_time_elapsed(timeval, timeval, double&);
 
-void read_3D(Array<double,3>, string, string);
+void read_3D(Array<double,3>, string, string, string);
 
 
 void SFunc2D(Array<double,2>, Array<double,2>);
@@ -704,21 +704,21 @@ void Read_fields(string UName, string VName, string WName, string TName) {
         }
         if (two_dimension_switch){
             if (scalar_switch) {
-                read_2D(T_2D,"in/", TName);
+                read_2D(T_2D,"in/", TName, TName);
             }
             else {
-                read_2D(V1_2D,"in/", UName);
-                read_2D(V3_2D,"in/", WName);
+                read_2D(V1_2D,"in/", UName, UName);
+                read_2D(V3_2D,"in/", WName, WName);
             }
         }
         else{
             if (scalar_switch) {
-                read_3D(T, "in/", TName);
+                read_3D(T, "in/", TName, TName);
             }
             else {
-                read_3D(V1, "in/", UName);
-                read_3D(V2, "in/", VName);
-                read_3D(V3, "in/", WName);
+                read_3D(V1, "in/", UName, UName);
+                read_3D(V2, "in/", VName, VName);
+                read_3D(V3, "in/", WName, WName);
             }
         }
     }
@@ -808,36 +808,33 @@ void calc_SFs() {
 void write_SFs(string SF_Grid_pll_name, string SF_Grid_perp_name, string SF_Grid_scalar_name) {
     if (rank_mpi==0){
         mkdir("out",0777);
-        int p1 = q1;
-        while (p1 <= q2) {
-            string name = int_to_str(p1);
-            if (two_dimension_switch) {
-                cout<<"\nWriting "<<p1<<" order SF as function of lx and lz\n";
-                if (scalar_switch){
-                    write_3D(SF_Grid2D_scalar, SF_Grid_scalar_name+name, p1);
-                }
-                else {
-                    write_3D(SF_Grid2D_pll, SF_Grid_pll_name+name, p1);    
-                    if (not longitudinal) {
-                        write_3D(SF_Grid2D_perp, SF_Grid_perp_name+name, p1);
-                    }
-                }
-                cout<<"\nWriting completed\n";
+       
+
+        if (two_dimension_switch) {
+            
+            if (scalar_switch){
+                write_3D(SF_Grid2D_scalar, SF_Grid_scalar_name);
             }
             else {
-                cout<<"\nWriting "<<p1<<" order SF as function of lx, ly, and ly\n";
-                if (scalar_switch){
-                    write_4D(SF_Grid_scalar, SF_Grid_scalar_name+name, p1);
+                write_3D(SF_Grid2D_pll, SF_Grid_pll_name);    
+                if (not longitudinal) {
+                    write_3D(SF_Grid2D_perp, SF_Grid_perp_name);
                 }
-                else {
-                    write_4D(SF_Grid_pll, SF_Grid_pll_name+name, p1);    
-                    if (not longitudinal) {
-                        write_4D(SF_Grid_perp, SF_Grid_perp_name+name, p1);
-                    }
-                }
-                cout<<"\nWriting completed\n";
             }
-            p1++;
+            cout<<"\nWriting completed\n";
+        }
+        else {
+            
+            if (scalar_switch){
+                write_4D(SF_Grid_scalar, SF_Grid_scalar_name);
+            }
+            else {
+            	write_4D(SF_Grid_pll, SF_Grid_pll_name);    
+                if (not longitudinal) {
+                    write_4D(SF_Grid_perp, SF_Grid_perp_name);
+                }
+            }
+            cout<<"\nWriting completed\n";
         }
     }
 }
@@ -974,7 +971,7 @@ void VECTOR_TEST_CASE_3D()
 
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
-			read_3D(test1,"out/",SF_Grid_pll_name+name);
+			read_3D(test1,"out/",SF_Grid_pll_name,SF_Grid_pll_name+name);
 			for (int i=0; i<test1.extent(0); i++){
 				double lx=dx*i;
 				for (int j=0; j<test1.extent(1); j++){
@@ -1006,8 +1003,8 @@ void VECTOR_TEST_CASE_3D()
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
 
-			read_3D(test1,"out/",SF_Grid_pll_name+name);
-			read_3D(test2,"out/",SF_Grid_perp_name+name);
+			read_3D(test1,"out/",SF_Grid_pll_name,SF_Grid_pll_name+name);
+			read_3D(test2,"out/",SF_Grid_perp_name,SF_Grid_perp_name+name);
 
 
 			for (int i=0; i<test1.extent(0); i++){
@@ -1078,7 +1075,7 @@ void VECTOR_TEST_CASE_2D()
 
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
-			read_2D(test1,"out/",SF_Grid_pll_name+name);
+			read_2D(test1,"out/",SF_Grid_pll_name, SF_Grid_pll_name+name);
 			for (int i=0; i<test1.extent(0); i++){
 				double lx=dx*i;
 				for (int k=0; k<test1.extent(1); k++){
@@ -1105,8 +1102,8 @@ void VECTOR_TEST_CASE_2D()
 		for (int order=0 ; order<=q2-q1; order++){
 			string name=int_to_str(order+q1);
 
-			read_2D(test1,"out/",SF_Grid_pll_name+name);
-			read_2D(test2,"out/",SF_Grid_perp_name+name);
+			read_2D(test1,"out/",SF_Grid_pll_name,SF_Grid_pll_name+name);
+			read_2D(test2,"out/",SF_Grid_perp_name,SF_Grid_perp_name+name);
 
 
 			for (int i=0; i<test1.extent(0); i++){
@@ -1170,7 +1167,7 @@ void SCALAR_TEST_CASE_2D()
 	for (int order=0 ; order<=q2-q1; order++){
 		string name=int_to_str(order+q1);
 
-		read_2D(test1,"out/",SF_Grid_scalar_name+name);
+		read_2D(test1,"out/",SF_Grid_scalar_name, SF_Grid_scalar_name+name);
 
 
 
@@ -1229,7 +1226,7 @@ void SCALAR_TEST_CASE_3D(){
 	test1.resize(Nx/2,Ny/2,Nz/2);
 	for (int order=0 ; order<=q2-q1; order++){
 		string name=int_to_str(order+q1);
-		read_3D(test1,"out/",SF_Grid_scalar_name+name);
+		read_3D(test1,"out/",SF_Grid_scalar_name, SF_Grid_scalar_name+name);
 		for (int i=0; i<test1.extent(0); i++){
 			double lx=dx*i;
 			for (int j=0; j<test1.extent(1); j++){
@@ -1318,16 +1315,23 @@ void compute_time_elapsed(timeval start_t, timeval end_t, double& elapsed){
  * \param   q is the order of the structure function to be stored.
  ********************************************************************************************************************************************
  */
-void write_4D(Array<double,4> A, string file,int q) {
+void write_4D(Array<double,4> A, string file) {
   int nx=A(Range::all(),0,0,0).size();
   int ny=A(0,Range::all(),0,0).size();
   int nz=A(0,0,Range::all(),0).size();
-  Array<double,3> temp(nx,ny,nz);
-  temp(Range::all(),Range::all(),Range::all())=(A(Range::all(),Range::all(),Range::all(),q-q1));
   h5::File f("out/"+file+".h5", "w");
-  h5::Dataset ds = f.create_dataset(file, h5::shape(nx,ny,nz), "double");
-  ds << temp.data();
+  int q = q1;
+  Array<double,3> temp(nx,ny,nz);
+  while(q<=q2){
+      cout<<"Writing "<<q<<" order to file.\n";
+      string qstr = int_to_str(q);
+      h5::Dataset ds = f.create_dataset(file+qstr, h5::shape(nx,ny,nz), "double");
+      temp(Range::all(),Range::all(),Range::all())=A(Range::all(),Range::all(),Range::all(),q-q1);
+      ds << temp.data();
+      q++;
+  }
 }
+
 
 /**
  ********************************************************************************************************************************************
@@ -1341,16 +1345,21 @@ void write_4D(Array<double,4> A, string file,int q) {
  * \param   q is the order of the structure function to be stored.
  ********************************************************************************************************************************************
  */
-void write_3D(Array<double,3> A, string file,int q) {
+void write_3D(Array<double,3> A, string file) {
   int nx=A(Range::all(),0,0).size();
   int nz=A(0,Range::all(),0).size();
-  Array<double,2> temp(nx,nz);
-  temp(Range::all(),Range::all())=(A(Range::all(),Range::all(),q-q1));
   h5::File f("out/"+file+".h5", "w");
-  h5::Dataset ds = f.create_dataset(file, h5::shape(nx,nz), "double");
-  ds << temp.data();
+  int q = q1;
+  Array<double,2> temp(nx,nz);
+  while(q<=q2) {
+      cout<<"Writing "<<q<<" order to file.\n";
+      string qstr = int_to_str(q);
+      h5::Dataset ds = f.create_dataset(file+qstr, h5::shape(nx,nz), "double");
+      temp(Range::all(),Range::all())=A(Range::all(),Range::all(),q-q1);
+      ds << temp.data();
+      q++;
+  }
 }
-
 /**
  ********************************************************************************************************************************************
  * \brief   Function to show the checklist for proper input files
@@ -1466,13 +1475,13 @@ bool compatibility_check(h5::Dataset dset, int N1, int N2, int N3){
  * \param   file is a string storing the name of the file to be read.
  ********************************************************************************************************************************************
  */
-void read_2D(Array<double,2> A, string fold, string file) {
+void read_2D(Array<double,2> A, string fold, string file, string dset) {
   ifstream file_name(fold+file+".h5");
   if (file_name.is_open()){
   	file_name.close();
   	h5::File f(fold+file+".h5", "r");
-  	if (compatibility_check(f[file], A.extent(0),0,A.extent(1))){
-  		f[file] >> A.data();
+  	if (compatibility_check(f[dset], A.extent(0),0,A.extent(1))){
+  		f[dset] >> A.data();
   	}
 
   }
@@ -1508,13 +1517,13 @@ void read_2D(Array<double,2> A, string fold, string file) {
  * \param file is a string storing the name of the file to be read.
  ********************************************************************************************************************************************
  */
-void read_3D(Array<double,3> A, string fold, string file) {
+void read_3D(Array<double,3> A, string fold, string file, string dset) {
 	ifstream file_name(fold+file+".h5");
   	if (file_name.is_open()){
   		file_name.close();
   		h5::File f(fold+file+".h5", "r");
-  		if (compatibility_check(f[file], A.extent(0),A.extent(1),A.extent(2))){
-  			f[file] >> A.data();
+  		if (compatibility_check(f[dset], A.extent(0),A.extent(1),A.extent(2))){
+  			f[dset] >> A.data();
   		}
 
   	}
