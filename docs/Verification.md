@@ -82,7 +82,7 @@ The figure clearly shows that in the inertial range (0.2 < *l* < 0.8), the norma
 The results obtained from Problems 1, 2, and 3 thus validate ``fastSF``. 
 
 <figure>
-  <img src="SF_hydro.png" alt="Trulli" style="width:70%">
+  <img src="figs/SF_hydro.png" alt="Trulli" style="width:70%">
   <figcaption>Fig.5: For 3D homogeneous isotropic turbulence (Problem 3): plots of the negative of normalized third, fifth and seventh-order structure functions vs. l. The negative of the normalized third-order structure function is close to 4/5 (dashed line) in the inertial range..</figcaption>
 </figure>
 
