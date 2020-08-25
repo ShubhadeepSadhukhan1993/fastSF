@@ -114,10 +114,48 @@ Finally, for visualization purpose, the python script `test/test.py` is invoked.
 
 This section provides a detailed procedure to execute `fastSF` for a given velocity or scalar field.
 
+### i) Files Required and HDF5 Schema:
+
+All the files storing the input fields should be inside the `in` folder. All the input fields and datasets are required to be precisely as per the following schema.
+
+#### For two dimensional fields
+
+For vector field, two `hdf5` files are required:
+
+1. The hdf5 file storing the x-component of the vector / velocity field. Unless specified by the user via command line arguments, the hdf5 file should be named as `U.V1r.h5`, with a 2D dataset `U.V1r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. 
+2. The hdf5 file storing the z-component of the vector / velocity field. Unless specified by the user via command line arguments, the hdf5 file should be named as `U.V3r.h5`, with a 2D dataset `U.V3r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. 
+
+For scalar field, For vector field, one `hdf5` file is required:
+
+1. The hdf5 file storing the scalar field. Unless specified by the user via command line arguments, the hdf5 file should be named as `T.Fr.h5`, with a 2D dataset `T.Fr` of dimensions (`Nx,Nz`) storing real double-precision floating point values.
+
+
+#### For three dimensional fields
+
+For vector field, three `hdf5` files are required:
+
+1. The hdf5 file storing the x-component of the vector / velocity field. Unless specified by the user via command line arguments, the hdf5 file should be named as `U.V1r.h5`, with a 3D dataset `U.V1r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. 
+2. The hdf5 file storing the y-component of the vector / velocity field. Unless specified by the user via command line arguments, the hdf5 file should be named as `U.V2r.h5`, with a 3D dataset `U.V2r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values.
+3. The hdf5 file storing the z-component of the vector / velocity field. Unless specified by the user via command line arguments, the hdf5 file should be named as `U.V3r.h5`, with a 3D dataset `U.V3r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values.
+
+For scalar field, For vector field, one `hdf5` file is required:
+
+1. The hdf5 file storing the scalar field. Unless specified by the user via command line arguments, the hdf5 file should be named as `T.Fr.h5`, with a 3D dataset `T.Fr` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values.
+
+**IMPORTANT:** Please note the following:
+
+* The input files can have different names than the ones specified above, but it needs to be ensured that the hdf5 file name and the dataset name are the same (except that the dataset name does not have `.h5` extension. The input file names need to be specified via command-line arguments (explained later).
+
+* The user must ensure that the size of the input field datasets match with the size specified in the `para.yaml`, otherwise the code will likely throw a segmentation error. Even if the code does not throw a segmentation error, the calculations will be erroneous. 
+
+### ii) `para.yaml` details
+
+The user can specify the relevant parameters via command line or via parameters file. If no command-line options are given, the entries in the parameters file will be taken. First, we will explain how to use the parameters file, and then we will proceed to command-line options.
+
 `fastSF` has a folder named `in`. This folder contains the input field files in `hdf5` format, and a parameters file named `para.yaml`. You need to provide the required input parameters in this file. The details of the entries are as follows:
 
 
-### i) `para.yaml` details
+
 
 
 #### `program: scalar_switch`
@@ -144,6 +182,9 @@ This entry is for structure functions for velocity  fields only. You can enter `
 
 `false`: Compute both longitudinal and transverse structure functions.
 
+#### `program: Processors_X`
+
+The number of processors in x-direction. Only integer values are accepted. Note that this value should be an integer factor of the total number of processors.
 
 #### `grid: Nx, Ny, Nz`
 
@@ -170,40 +211,29 @@ You can enter `true` or `false`
 
 `false`: The "regular" mode, in which the code reads the fields from the hdf5 files in the `in` folder.
 
-### ii) Files Required and HDF5 Schema:
+### iii) Running Instructions and Command-Line Arguments 
+To run `fastSF`, change to `fastSF` directory. Ensure that the input hdf5 files follow the schema described in the previous subsection. If you want all the relevant parameters to be read from "in/para.yaml", you can simply type the following:
 
-All the files storing the input fields should be inside the `in` folder. All the input fields and datasets are required to be precisely as per the following schema.
+`mpirun -np [number of MPI processors] src/fastSF.out`
+ 
+`fastSF` allows the user to pass the input parameters using command line arguments as well. If inputs are provided via the command-line, the corresponding inputs read from the "in/para.yaml" file get overriden. The user can also specify the input and output hdf5 file names via the command-line. The command line arguments are given as follows:
 
-#### For two dimensional fields
+`mpirun -np [number of MPI processors] src/fastSF.out -s [scalar_switch]` 
+`-d [2D_switch] -l [Only_longitudinal] -p [Processors_X] -X [Nx] -Y [Ny]`
+`-Z [Nz] -x [Lx] -y [Ly] -z [Lz] -1 [q1] -2 [q2] -t [test_switch]`
+`-U [Name of the hdf5 file and dataset storing Ux]`
+`-V [Name of the hdf5 file and dataset storing Uy]`
+`-W [Name of the hdf5 file and dataset storing Uz]`
+`-P [Name of the hdf5 file storing the transverse structure functions]`
+`-L [Name of the hdf5 file storing the longitudinal structure functions]`
 
-For vector field, two `hdf5` files are required:
-1. `U.V1r.h5`, with a 2D dataset `U.V1r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the field *u<sub>x</sub>*, that is, the *x* component of the vector field.
-2. `U.V3r.h5`, with a 2D dataset `U.V3r` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the field *u<sub>z</sub>*, that is, the *z* component of the vector field.
+The user need not give all the command line arguments; the arguments that are not provided will be read by the `in/para.yaml` file. For, if the user wants to run `fastSF` with 16 processors with 4 processors in x direction, and wants to compute only the longitudinal structure functions, the following command should be entered:
 
-For scalar field, For vector field, one `hdf5` file is required:
-1. `T.Fr.h5`, with a 2D dataset `T.Fr` of dimensions (`Nx,Nz`) storing real double-precision floating point values. This stores the scalar field *&theta;*.
+`mpirun -np 16 ./src/fastSF.out -p 4 -l true`
 
+In this case, the number of processors in the x-direction and the longitudinal structure function switch will be taken via the command line. The rest of the parameters will be taken from the `in/para.yaml` file.  
 
-#### For three dimensional fields
-
-For vector field, three `hdf5` files are required:
-1. `U.V1r.h5`, with a 3D dataset `U.V1r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the field *u<sub>x</sub>*, that is, the *x* component of the vector field.
-2. `U.V2r.h5`, with a 3D dataset `U.V2r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the field *u<sub>y</sub>*, that is, the *y* component of the vector field.
-2. `U.V3r.h5`, with a 3D dataset `U.V3r` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the field *u<sub>z</sub>*, that is, the *z* component of the vector field.
-
-For scalar field, For vector field, one `hdf5` file is required:
-1. `T.Fr.h5`, with a 3D dataset `T.Fr` of dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. This stores the scalar field *&theta;*.
-
-**IMPORTANT:** Please ensure that the size of the input field datasets match with the size specified in the `para.yaml`, otherwise the code will likely throw a segmentation error. Even if the code does not throw a segmentation error, the calculations will be erroneous. 
-
-### iii) Running Instructions
-Open the terminal change into `fastSF/in` folder. Open `para.yaml` to set all the parameters. Keep all the required files compatible with the parameter file. Now, move out of the `in` folder run the command
-
-`mpirun -np [number of MPI processors] src/fastSF.out [number of processors in x direction]`
-
-If the number of processors in x direction is not provided, the code will take it to be 1.
-
-### iii) Output Information
+### iv) Output Information
 
 **Velocity structure functions**:
 
