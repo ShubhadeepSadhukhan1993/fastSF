@@ -57,7 +57,7 @@ using namespace std;
 using namespace blitz;
 
 //Function declarations
-void get_Inputs(); 
+void get_Inputs(int argc, char* argv[]); 
 void write_3D(Array<double,3>, string);
 void write_4D(Array<double,4>, string);
 void read_2D(Array<double,2>, string, string, string);
@@ -95,10 +95,10 @@ void SF_scalar_3D(Array<double,3>);
 
 void SF_scalar_2D(Array<double,2>);
 
-void Read_fields(string, string, string, string);
+void Read_fields();
 void resize_SFs();
 void calc_SFs();
-void write_SFs(string, string, string);
+void write_SFs();
 void test_cases();
 void show_checklist();
 
@@ -366,7 +366,7 @@ int px;
 
 /**
  ********************************************************************************************************************************************
- * \brief   This variable stores the name for the input file for velocity field along x axis.
+ * \brief   This variable stores the name for the input file for the x-component of the velocity field.
  *
  ********************************************************************************************************************************************
  */
@@ -374,14 +374,14 @@ string UName="U.V1r";
 
 /**
  ********************************************************************************************************************************************
- * \brief   This variable stores the name for the input file for velocity field along y axis.
+ * \brief   This variable stores the name for the input file for the y-component of the velocity field.
  *
  ********************************************************************************************************************************************
  */
 string VName="U.V2r";
 /**
  ********************************************************************************************************************************************
- * \brief   This variable stores the name for the input file for velocity field along z axis.
+ * \brief   This variable stores the name for the input file for the z-component of the velocity field.
  *
  ********************************************************************************************************************************************
  */
@@ -423,7 +423,10 @@ string SF_Grid_perp_name = "SF_Grid_perp";
 /**
  ********************************************************************************************************************************************
  * \brief   The main function of the "fastSF".
- 
+ *
+ * \param   argc is the number of command-line arguments passed by the user including the name of the program.
+ * \param   argv is the array of character pointers listing all the arguments.
+ *
  ********************************************************************************************************************************************
  */
 int main(int argc, char *argv[]) {
@@ -442,92 +445,11 @@ int main(int argc, char *argv[]) {
     double elapsedt=0.0;
     double elapsepdt=0.0;
     
+    //Get the input parameters
+    get_Inputs(argc, argv);
     
-    get_Inputs();
-    //Overwrite from command line
-    int option;
     
-    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:S:P:L:M:"))!=-1){
-    	switch(option){
-    		case 'X':
-    			Nx=std::stoi(optarg);
-    			break;
-    		case 'Y':
-    			Ny=std::stoi(optarg);
-    			break;
-    		case 'Z':
-    			Nz=std::stoi(optarg);
-    			break;
-    		case 'x':
-    			Lx=std::stod(optarg);
-    			break;
-    		case 'y':
-    			Ly=std::stod(optarg);
-    			break;
-    		case 'z':
-    			Lz=std::stod(optarg);
-    			break;
-    		case 'p':
-    			px=std::stod(optarg);
-    			break;
-    		case '1':
-    			q1=std::stod(optarg);
-    			break;
-    		case '2':
-    			q2=std::stod(optarg);
-    			break;
-    		case 't':
-    			test_switch=str_to_bool(optarg);
-    			break;
-    		case 's':
-    			scalar_switch=str_to_bool(optarg);
-    			break;
-    		case 'd':
-    			two_dimension_switch=str_to_bool(optarg);
-    			break;
-    		case 'l':
-    			longitudinal=str_to_bool(optarg);
-    			break;
-            case 'U':
-                UName = optarg;
-                break;
-            case 'V':
-                VName = optarg;
-                break;
-            case 'W':
-                WName = optarg;
-                break;
-            case 'P':
-                SF_Grid_perp_name = optarg;
-                break;
-            case 'L':
-                SF_Grid_pll_name = optarg;
-                break;
-            case 'M':
-                SF_Grid_scalar_name = optarg;
-                break;
-            default:
-                if (rank_mpi==0){
-                    cout<<"\nNo command line options given; reading all the inputs from para.yaml.\n";
-                }
-    	}
-    }
-    /*
-    if (rank_mpi==0){
-    	cout<<"Nx: "<<Nx<<endl;
-    	cout<<"Ny: "<<Ny<<endl;
-    	cout<<"Nz: "<<Nz<<endl;
-    	cout<<"Lx: "<<Lx<<endl;
-    	cout<<"Ly: "<<Ly<<endl;
-    	cout<<"Lz: "<<Lz<<endl;
-    	cout<<"q1: "<<q1<<endl;
-    	cout<<"q2: "<<q2<<endl;
-    	cout<<"2D switch:"<<two_dimension_switch<<endl;
-    	cout<<"Test: "<<test_switch<<endl;
-    	cout<<"scalar_switch: "<<scalar_switch<<endl;
-    	cout<<"longitudinal: "<<longitudinal<<endl;
-    }
-    */
+    //Specify the values of dx, dy, and dz
     if (Nx==1){dx=0;}
     else{
       dx=Lx/double(Nx-1);}
@@ -584,7 +506,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     } 
     //Resizing the input fields
-    Read_fields(UName, VName, WName, TName);
+    Read_fields();
 
     //Resize the structure function array according to the type of inputs
     resize_SFs();
@@ -602,7 +524,7 @@ int main(int argc, char *argv[]) {
     
  
     //Write the SF array to disk
-    write_SFs(SF_Grid_pll_name, SF_Grid_perp_name, SF_Grid_scalar_name);
+    write_SFs();
 
     if (test_switch){
         test_cases();
@@ -649,10 +571,16 @@ bool str_to_bool(string s){
 /**
 *************************************************************************************************************************************
 *\brief     Function to generate or read the input fields.
-*           
+*
+*
+*\param     UName is the name of the hdf5 file and dataset storing the x-component of velocity / vector field. 
+*\param     VName is the name of the hdf5 file and dataset storing the y-component of velocity / vector field.
+*\param     WName is the name of the hdf5 file and dataset storing the z-component of velocity / vector field.
+*\param     TName is the name of the hdf5 file and dataset storing the scalar field.
+* 
 *************************************************************************************************************************************
 */
-void Read_fields(string UName, string VName, string WName, string TName) {
+void Read_fields() {
 	
     if(two_dimension_switch){
         if (scalar_switch) {
@@ -799,13 +727,12 @@ void calc_SFs() {
     }
 }
 
-
 /**
 *************************************************************************************************************************************
 *\brief     Function to write the structure function arrays to the disk.
 *************************************************************************************************************************************
 */
-void write_SFs(string SF_Grid_pll_name, string SF_Grid_perp_name, string SF_Grid_scalar_name) {
+void write_SFs() {
     if (rank_mpi==0){
         mkdir("out",0777);
        
@@ -1369,15 +1296,16 @@ void show_checklist(){
 	
   	cerr<<"Error: Please check the following\n\n";
   	cerr<<"a. 'in' folder contains the input files\n\n";
-  	cerr<<"b. Input files should be of the names:\n";
+  	cerr<<"b. Input file name and the dataset name should be the same (The dataset name will not have .h5 extension). \n\n";
+    cerr<<"c. Unless specified otherwise via command-line arguments, the input files should be as follows:\n";
   	cerr<<"\tCase Vector:\n";
  	cerr<<"\t\tCase 2D: U.V1r.h5, U.V3r.h5\n";
  	cerr<<"\t\tCase 3D: U.V1r.h5, U.V2r.h5, U.V3r.h5\n";
- 	cerr<<"\tCase Scalar: \n\t\tT.Fr.h5\n\n";
-	cerr<<"c. Grid size of the data sould be compatible with specified Nx, Ny, Nz\n";
+ 	cerr<<"\tCase Scalar: \n\t\tT.Fr.h5\n";
+    cerr<<"NOTE: The dataset name should be the same as the file name (without the .h5 extension).\n\n";
+	cerr<<"d. Grid size of the data sould be compatible with specified Nx, Ny, Nz\n";
 	cerr<<"\tCase 2D: Nx, Nz\n";
 	cerr<<"\tCase 3D: Nx, Ny, Nz\n\n";
-	cerr<<"d. Dataset name should be same as the file name without the extension\n\n";
 	cerr<<"Please refer to Readme for details\n\n";
     
     
@@ -1515,6 +1443,7 @@ void read_2D(Array<double,2> A, string fold, string file, string dset) {
  * \param A is the 3D array to store the field that is read from the file.
  * \param fold is the name of the folder in which the input files are kept.
  * \param file is a string storing the name of the file to be read.
+ * \param dset is the name of the dataset storing the input field.
  ********************************************************************************************************************************************
  */
 void read_3D(Array<double,3> A, string fold, string file, string dset) {
@@ -1542,13 +1471,14 @@ void read_3D(Array<double,3> A, string fold, string file, string dset) {
 
 /**
  ********************************************************************************************************************************************
- * \brief   Function to open the yaml file and parse the parameters.
+ * \brief   Function to parse the parameters from the yaml file and from the command-line arguments.
  *
- *          The function opens the parameters.yaml file and parses the simulation parameters into its member variables that are publicly
- *          accessible.
+ * \param   argc is the number of command-line arguments passed by the user including the name of the program.
+ * \param   argv is the array of character pointers listing all the arguments.
+ *
  ********************************************************************************************************************************************
  */
-void get_Inputs() {
+void get_Inputs(int argc, char* argv[]) {
     YAML::Node para;
     ifstream para_yaml,input_field;
     string para_path="in/para.yaml";
@@ -1589,7 +1519,73 @@ void get_Inputs() {
     para["structure_function"]["q2"]>>q2;
     para["test"]["test_switch"]>>test_switch;
   
-     
+    int option;
+    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:S:P:L:M:"))!=-1){
+    	switch(option){
+    		case 'X':
+    			Nx=std::stoi(optarg);
+    			break;
+    		case 'Y':
+    			Ny=std::stoi(optarg);
+    			break;
+    		case 'Z':
+    			Nz=std::stoi(optarg);
+    			break;
+    		case 'x':
+    			Lx=std::stod(optarg);
+    			break;
+    		case 'y':
+    			Ly=std::stod(optarg);
+    			break;
+    		case 'z':
+    			Lz=std::stod(optarg);
+    			break;
+    		case 'p':
+    			px=std::stod(optarg);
+    			break;
+    		case '1':
+    			q1=std::stod(optarg);
+    			break;
+    		case '2':
+    			q2=std::stod(optarg);
+    			break;
+    		case 't':
+    			test_switch=str_to_bool(optarg);
+    			break;
+    		case 's':
+    			scalar_switch=str_to_bool(optarg);
+    			break;
+    		case 'd':
+    			two_dimension_switch=str_to_bool(optarg);
+    			break;
+    		case 'l':
+    			longitudinal=str_to_bool(optarg);
+    			break;
+            case 'U':
+                UName = optarg;
+                break;
+            case 'V':
+                VName = optarg;
+                break;
+            case 'W':
+                WName = optarg;
+                break;
+            case 'P':
+                SF_Grid_perp_name = optarg;
+                break;
+            case 'L':
+                SF_Grid_pll_name = optarg;
+                break;
+            case 'M':
+                SF_Grid_scalar_name = optarg;
+                break;
+            default:
+                if (rank_mpi==0){
+                    cout<<"\nNo command line options given; reading all the inputs from para.yaml.\n";
+                }
+    	}
+    }
+
   
 }
 

@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['v1_119',['V1',['../fastSF_8cc.html#a793e2580f28485ee24c5fa81dc49d6f5',1,'fastSF.cc']]],
-  ['v1_5f2d_120',['V1_2D',['../fastSF_8cc.html#a8aabfce1918e76b1a9bcd9b8f393097c',1,'fastSF.cc']]],
-  ['v2_121',['V2',['../fastSF_8cc.html#ab0e2fd1e10444329e59dc7024a4dca61',1,'fastSF.cc']]],
-  ['v3_122',['V3',['../fastSF_8cc.html#a5a1dcc2241b131dda5545ee918b87d46',1,'fastSF.cc']]],
-  ['v3_5f2d_123',['V3_2D',['../fastSF_8cc.html#a6b5cd2337ce83f1b30584612b88fa54c',1,'fastSF.cc']]]
+  ['uname',['UName',['../fastSF_8cc.html#aee9c5d6c527dc1108f86c2bea9c88fe0',1,'fastSF.cc']]]
 ];

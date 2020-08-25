@@ -106,23 +106,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>bibliography: paper.bib </p><hr/>
 <h1>Summary</h1>
 <p>Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properties of turbulent flows [:Dissipation; :Structure; :book]. Some of the earlier works comprising of such analysis are those of :PF2002, :PF2003, and :ARFM2009 for three-dimensional (3D) hydrodynamic turbulence; :PF2005 and :NJP2008 for passive scalar turbulence; :NJP2004 for two-dimensional (2D) hydrodynamic turbulence; and :PRE2008, :JFM2013, and :PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of <code>fastSF</code>, a parallel code to compute the structure functions for a given velocity or scalar field.</p>
-<p><code>fastSF</code>, written in C++, is a fast and efficient code that uses vectorization for computing the structure functions. The code employs MPI (Message Passing Interface) parallelization with equal load distribution. The user has a choice on the type (scalar or vector) and the dimensions of the fields to be read by the code, and the range of the orders of the structure functions to be computed. The code writes the computed structure functions to <code>hdf5</code> files that can be further processed by the user.</p>
-<p>The code uses the following libraries:</p>
-<ol type="1">
-<li>blitz++ (version 1.0.2)</li>
-<li>hdf5 (version 1.8.20)</li>
-<li>h5si (version 1.1.1)</li>
-<li>yaml-cpp (version 0.3.0)</li>
-<li>mpich (version 3.3.2)</li>
-<li>cmake (version 3.16.4)</li>
-</ol>
-<p>In the next section, we will briefly define the velocity and the scalar structure functions in turbulence.</p>
+<p><code>fastSF</code>, written in C++, is an application for efficiently computing the structure functions of scalar and vector fields on Cartesian grids of a 2D or 3D periodic box, stored as HDF5 files. The code employs MPI (Message Passing Interface) parallelization with equal load distribution and vectorization for efficiency on SIMD architectures. The user can select the range of the orders of the structure functions to be computed and the computed structure functions are written to HDF5 files that can be further processed by the user.</p>
+<p>We are not aware of any other open soure or commercial packages for computing structure functions; prior studies have relied on in-house software that was never publicly released. As an open source package, <code>fastSF</code> provides a standard high-performance implementation and thus facilitates wider use of structure functions.</p>
+<p><code>fastSF</code> uses MPI [:book:PP] for parallelism, HDF5 [] via H5SI [] for reading gridded field data and writing structure functions, as well as blitz++ [] for vectorized computation and yaml-cpp [] for reading control parameters. In the next section, we will briefly discuss the performance and scaling of <code>fastSF</code> in a Cray XC40 system.</p>
 <h1>Velocity and scalar structure functions</h1>
 <p>We denote the velocity and scalar fields using ${u}$ and $$ respectively. The velocity difference between any two points ${r}$ and ${r+l}$ is $ {u} = {u(r+l)}-{u(r)}$. The difference in the parallel components of the velocity field along ${l}$ is $ u_= {u} {{l}}$. The corresponding difference in the perpendicular component is $ u_= | {u} -  u_ {{l}}|$. Assuming statistical homogeneity, we define the longitudinal velocity structure functions of order $q$ as $$ S_q^{u_}({l}) =  ( u_)^q  =  [{u(r+l)}-{u(r)} </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Mar 2 2020 19:53:00 for fastSF by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 25 2020 20:26:36 for fastSF by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>
