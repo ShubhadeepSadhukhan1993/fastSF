@@ -235,14 +235,15 @@ In this case, the number of processors in the x-direction and the longitudinal s
 
 ### iv) Output Information
 
+Unless specified otherwise by the user via command-line arguments, the following output files are written by `fastSF`.
+
 **Velocity structure functions**:
 
-The logitudinal and transverse structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`.h5` and `SF_Grid_perp`+`q`+`.h5` respectively as two/three dimensional arrays for two/three dimensional input fields. 
-
+The logitudinal and transverse structure functions of order `q` are stored in the files `SF_Grid_pll.h5` and `SF_Grid_perp.h5` respectively. `SF_Grid_pll.h5` and  `SF_Grid_perp.h5` have datasets named `SF_Grid_pll`+`q`  and `SF_Grid_perp`+`q` respectively. These datasets store two/three dimensional arrays for two/three dimensional input fields.
 
 **Scalar structure functions**:
 
-The structure functions of order `q` are stored in the files `SF_Grid_pll`+`q`+`.h5` as two/three dimensional arrays for two/three dimensional input fields. 
+The structure functions of order `q` are stored in the file `SF_Grid_scalar.h5` consisting of the datasets named `SF_Grid_scalar`+`q`. 
 
 ## Memory Requirements
 
