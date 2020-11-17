@@ -82,7 +82,6 @@ void SFunc3D(Array<double,3>, Array<double,3>, Array<double,3>);
 
 
 void SFunc_long_3D(Array<double,3>, Array<double,3>, Array<double,3>);
-bool compatibility_check(h5::Dataset, int, int, int);
 void Read_Init(Array<double,2>&, Array<double,2>&);
 void Read_Init(Array<double,3>&, Array<double,3>&, Array<double,3>&);
 void Read_Init(Array<double,2>&);
@@ -102,7 +101,10 @@ void write_SFs();
 void test_cases();
 void show_checklist();
 
-
+bool compare(Array<int,1> , Array<int,1> );
+void calculate_grid_spacing();
+void resize_input();
+void get_input_shape(string , string , string , Array<int,1>&);
 
 /**
  ********************************************************************************************************************************************
@@ -449,18 +451,7 @@ int main(int argc, char *argv[]) {
     get_Inputs(argc, argv);
     
     
-    //Specify the values of dx, dy, and dz
-    if (Nx==1){dx=0;}
-    else{
-      dx=Lx/double(Nx-1);}
-    if (Ny==1){dy=0;}
-    else{
-      dy=Ly/double(Ny-1);}
-    if (Nz==1){dz=0;}
-    else{
-      dz=Lz/double(Nz-1);
-  	}
-
+    
   	if (rank_mpi==0) {
     	cout<<"\nNumber of processors in x direction: "<<px<<endl;
     	if (two_dimension_switch) {
@@ -505,8 +496,14 @@ int main(int argc, char *argv[]) {
         MPI_Finalize();
         exit(1);
     } 
+
+
+
     //Resizing the input fields
     Read_fields();
+
+
+
 
     //Resize the structure function array according to the type of inputs
     resize_SFs();
@@ -549,6 +546,27 @@ int main(int argc, char *argv[]) {
 }
 
 /**
+******************************************************************************************************************************
+*\brief  Function to calculate dx, dy and dz
+*
+******************************************************************************************************************************
+*/
+void calculate_grid_spacing(){
+	//Specify the values of dx, dy, and dz
+    if (Nx==1){dx=0;}
+    else{
+      dx=Lx/double(Nx-1);}
+    if (Ny==1){dy=0;}
+    else{
+      dy=Ly/double(Ny-1);}
+    if (Nz==1){dz=0;}
+    else{
+      dz=Lz/double(Nz-1);
+  	}
+}
+
+
+/**
 *************************************************************************************************************************************
 *\brief     Function to covert string to bool
 *           
@@ -568,21 +586,72 @@ bool str_to_bool(string s){
 	}
 }
 
+
 /**
-*************************************************************************************************************************************
-*\brief     Function to generate or read the input fields.
+********************************************************************************************************************************
+*\brief    Function to check the file does exist or not. Furthermore it saves the shape of the dataset.
 *
+*\param fold is data path
+*\param file is the file name
+*\param dset is the dataset name
+*\param s is array in which shape will be saved
 *
-*\param     UName is the name of the hdf5 file and dataset storing the x-component of velocity / vector field. 
-*\param     VName is the name of the hdf5 file and dataset storing the y-component of velocity / vector field.
-*\param     WName is the name of the hdf5 file and dataset storing the z-component of velocity / vector field.
-*\param     TName is the name of the hdf5 file and dataset storing the scalar field.
-* 
-*************************************************************************************************************************************
+********************************************************************************************************************************
 */
-void Read_fields() {
+void get_input_shape(string fold, string file, string dset, Array<int,1>& s){
+	ifstream file_name(fold+file+".h5");
+	int dim;
+	s.resize(4);
+	if (file_name.is_open()){
+    	file_name.close();
+    	h5::File f(fold+file+".h5", "r");
+    	h5::Dataset data_set;
+    	data_set=(f[dset]);
+    	dim=data_set.shape().size();
+  		if (dim==2){
+  			two_dimension_switch=true;
+  			Nx=data_set.shape()[0];
+  			Ny=1;
+  			Nz=data_set.shape()[1];
+  		}
+  		else{
+  			two_dimension_switch=false;
+			Nx=data_set.shape()[0];
+  			Ny=data_set.shape()[1];
+  			Nz=data_set.shape()[2];  			
+  		}
+  		
+  		s(0)=dim;
+  		s(1)=Nx;
+  		s(2)=Ny;
+  		s(3)=Nz;
+  		
+  		
+  	}
+  	else{
+    	file_name.close();
+    	if (rank_mpi==0){
+        	cerr<<"\nDesired file does not exist\n\n";
+        	show_checklist();
+    	}
+    	h5::finalize();
+        MPI_Finalize();
+    	exit(1);
+    }
 	
-    if(two_dimension_switch){
+}
+
+
+
+/**
+******************************************************************************************************************************
+\brief Resize input arrays
+*
+******************************************************************************************************************************
+*/
+
+void resize_input(){
+	if(two_dimension_switch){
         if (scalar_switch) {
             T_2D.resize(Nx, Nz);
         }
@@ -603,12 +672,133 @@ void Read_fields() {
         }
         
     }
+}
 
+
+/**
+********************************************************************************************************************************
+*\brief compare two integer arrays
+*
+*
+*\param A is the first array
+*\param B is the second array
+*
+********************************************************************************************************************************
+*/
+bool compare(Array<int,1> A, Array<int,1> B){
+	int N=A.size();
+	for (int i=0; i<N; i++){
+		if (A(i)!=B(i)){
+			return false;
+		}
+	}
+	return true;
+}
+
+
+
+/**
+*************************************************************************************************************************************
+*\brief     Function to generate or read the input fields.
+*
+*
+*\param     UName is the name of the hdf5 file and dataset storing the x-component of velocity / vector field. 
+*\param     VName is the name of the hdf5 file and dataset storing the y-component of velocity / vector field.
+*\param     WName is the name of the hdf5 file and dataset storing the z-component of velocity / vector field.
+*\param     TName is the name of the hdf5 file and dataset storing the scalar field.
+* 
+*************************************************************************************************************************************
+*/
+void Read_fields() {
     //Defining the input fields
-    if (test_switch){
+    if (!test_switch){
+    	if (rank_mpi==0){
+            cout<<"Reading from the hdf5 files\n";
+        }
+        Array<int,1> s1,s2, s3;
+        
+        if (two_dimension_switch){
+            if (scalar_switch) {
+            	get_input_shape("in/", TName, TName, s1);
+                resize_input();
+                calculate_grid_spacing();
+                read_2D(T_2D,"in/", TName, TName);
+            }
+            else {
+            	get_input_shape("in/", UName, UName, s1);
+                get_input_shape("in/", WName, WName, s2);
+                
+                if (!compare(s1,s2)){
+                	if (rank_mpi==0){
+            			cerr<<"\nIncompatible dimension data\n\n";
+            			show_checklist();
+        			}
+                	h5::finalize();
+        			MPI_Finalize();
+        			exit(1);
+                }
+                
+                resize_input();
+                calculate_grid_spacing();
+                read_2D(V1_2D,"in/", UName, UName);
+                read_2D(V3_2D,"in/", WName, WName);
+            }
+        }
+        else{
+        	
+            if (scalar_switch) {
+            	get_input_shape("in/", TName, TName, s1);
+            	resize_input();
+            	calculate_grid_spacing();
+                read_3D(T, "in/", TName, TName);
+            }
+            else {
+            	
+            	get_input_shape("in/", UName, UName, s1);
+            	get_input_shape("in/", VName, VName, s2);
+            	get_input_shape("in/", WName, WName, s3);
+            	
+            	if (!compare(s1,s2)){
+            		if (rank_mpi==0){
+            			cerr<<"\nIncompatible dimension data\n\n";
+            			show_checklist();
+        			}
+        			h5::finalize();
+        			MPI_Finalize();
+        			exit(1);
+                }
+                if (!compare(s2,s3)){
+                	if (rank_mpi==0){
+            			cerr<<"\nIncompatible dimension data\n\n";
+            			show_checklist();
+        			}
+                	h5::finalize();
+        			MPI_Finalize();
+        			exit(1);
+                }
+                if (!compare(s3,s1)){
+                	if (rank_mpi==0){
+            			cerr<<"\nIncompatible dimension data\n\n";
+            			show_checklist();
+        			}
+                	h5::finalize();
+        			MPI_Finalize();
+        			exit(1);
+                }
+            	resize_input();
+            	calculate_grid_spacing();
+                read_3D(V1, "in/", UName, UName);
+                read_3D(V2, "in/", VName, VName);
+                read_3D(V3, "in/", WName, WName);
+            }
+        }
+    } 
+    else {
         if (rank_mpi==0){
             cout<<"\nWARNING: The code is running in TEST mode. It will generate velocity / scalar fields and will take them as inputs.\n";
         }
+        resize_input();
+        calculate_grid_spacing();
         if (two_dimension_switch) {
             if (scalar_switch) {
                 Read_Init(T_2D);
@@ -623,30 +813,6 @@ void Read_fields() {
             }
             else {
                 Read_Init(V1, V2, V3);
-            }
-        }
-    } 
-    else {
-        if (rank_mpi==0){
-            cout<<"Reading from the hdf5 files\n";
-        }
-        if (two_dimension_switch){
-            if (scalar_switch) {
-                read_2D(T_2D,"in/", TName, TName);
-            }
-            else {
-                read_2D(V1_2D,"in/", UName, UName);
-                read_2D(V3_2D,"in/", WName, WName);
-            }
-        }
-        else{
-            if (scalar_switch) {
-                read_3D(T, "in/", TName, TName);
-            }
-            else {
-                read_3D(V1, "in/", UName, UName);
-                read_3D(V2, "in/", VName, VName);
-                read_3D(V3, "in/", WName, WName);
             }
         }
     }
@@ -1313,81 +1479,6 @@ void show_checklist(){
 
 }
 
-
-/**
- ********************************************************************************************************************************************
- * \brief   Function to check compatibility of the input field files with the given parameters.
- ********************************************************************************************************************************************
- **/
-bool compatibility_check(h5::Dataset dset, int N1, int N2, int N3){
-	int dim;
-	if (two_dimension_switch){
-		dim=2;
-	}
-	else{
-		dim=3;
-	}
-	if (dim!=dset.shape().size()){
-		if (rank_mpi==0){
-			cerr<<"\nIncompatible dimension data\n\n";
-			show_checklist();
-		}
-		h5::finalize();
-    	MPI_Finalize();
-    	exit(1);
-	}
-	if (dim==3){
-		if (N1!=dset.shape()[0]){
-			if (rank_mpi==0){
-				cerr<<"\nIncompatible grid size\n\n";
-				show_checklist();
-			}
-			h5::finalize();
-    		MPI_Finalize();
-    		exit(1);
-		}
-		if (N2!=dset.shape()[1]){
-			if (rank_mpi==0){
-				cerr<<"\nIncompatible grid size\n\n";
-				show_checklist();
-			}
-			h5::finalize();
-    		MPI_Finalize();
-    		exit(1);
-		}
-		if (N3!=dset.shape()[2]){
-			if (rank_mpi==0){
-				cerr<<"\nIncompatible grid size\n\n";
-				show_checklist();
-			}
-			h5::finalize();
-    		MPI_Finalize();
-    		exit(1);
-		}
-	}
-	if (dim==2){
-		if (N1!=dset.shape()[0]){
-			if (rank_mpi==0){
-				cerr<<"\nIncompatible grid size\n\n";
-				show_checklist();
-			}
-			h5::finalize();
-    		MPI_Finalize();
-    		exit(1);
-		}
-		if (N3!=dset.shape()[1]){
-			if (rank_mpi==0){
-				cerr<<"\nIncompatible grid size\n\n";
-				show_checklist();
-			}
-			h5::finalize();
-    		MPI_Finalize();
-    		exit(1);
-		}
-	}
-	return true;
-}
-
 /**
  ********************************************************************************************************************************************
  * \brief   Function to read a 2D field from an hdf5 file.
@@ -1405,26 +1496,8 @@ bool compatibility_check(h5::Dataset dset, int N1, int N2, int N3){
  */
 void read_2D(Array<double,2> A, string fold, string file, string dset) {
   ifstream file_name(fold+file+".h5");
-  if (file_name.is_open()){
-  	file_name.close();
-  	h5::File f(fold+file+".h5", "r");
-  	if (compatibility_check(f[dset], A.extent(0),0,A.extent(1))){
-  		f[dset] >> A.data();
-  	}
-
-  }
-  else{
-  	file_name.close();
-  	if (rank_mpi==0){
-	  	cerr<<"\nDesired file does not exist\n\n";
-		show_checklist();
-	}
-
-  	h5::finalize();
-    MPI_Finalize();
-    exit(1);
-  }
-  
+  h5::File f(fold+file+".h5", "r");
+  f[dset] >> A.data();
 }
 
 
@@ -1448,25 +1521,8 @@ void read_2D(Array<double,2> A, string fold, string file, string dset) {
  */
 void read_3D(Array<double,3> A, string fold, string file, string dset) {
 	ifstream file_name(fold+file+".h5");
-  	if (file_name.is_open()){
-  		file_name.close();
-  		h5::File f(fold+file+".h5", "r");
-  		if (compatibility_check(f[dset], A.extent(0),A.extent(1),A.extent(2))){
-  			f[dset] >> A.data();
-  		}
-
-  	}
-  	else{
-  		file_name.close();
-  		if (rank_mpi==0){
-  			cerr<<"\nDesired file does not exist\n\n";
-  			show_checklist();
-  		}
-
-  		h5::finalize();
-    	MPI_Finalize();
-    	exit(1);
-  	}
+	h5::File f(fold+file+".h5", "r");
+	f[dset] >> A.data();
 }
 
 /**
