@@ -105,6 +105,7 @@ bool compare(Array<int,1> , Array<int,1> );
 void calculate_grid_spacing();
 void resize_input();
 void get_input_shape(string , string , string , Array<int,1>&);
+void help_command();
 
 /**
  ********************************************************************************************************************************************
@@ -1525,6 +1526,45 @@ void read_3D(Array<double,3> A, string fold, string file, string dset) {
 	f[dset] >> A.data();
 }
 
+
+/**
+***********************************************************************************************************************************
+* \brief Prints the help for command
+*
+***********************************************************************************************************************************
+*/
+
+
+void help_command(){
+	if(rank_mpi==0){
+		cout<<"### iii) Running Instructions and Command-Line Arguments \n \
+		To run `fastSF`, change to `fastSF` directory. Ensure that the input\n\
+		hdf5 files follow the schema described in the previous subsection. \n\
+		If you want all the relevant parameters to be read from 'in/para.yaml', \n\
+		you can simply type the following: `mpirun -np [number of MPI processors] src/fastSF.out`\n\
+		`fastSF` allows the user to pass the input parameters using command line arguments as well.\n \
+		If inputs are provided via the command-line, the corresponding inputs read from the 'in/para.yaml'\n\
+		file get overriden. The user can also specify the input and output hdf5 file names via the \n\
+		command-line. The command line arguments are given as follows:\n\n\n\
+		`mpirun -np [number of MPI processors] src/fastSF.out -s [scalar_switch]` \n\
+		`-d [2D_switch] -l [Only_longitudinal] -p [Processors_X] -X [Nx] -Y [Ny]`\n\
+		`-Z [Nz] -x [Lx] -y [Ly] -z [Lz] -1 [q1] -2 [q2] -t [test_switch]`\n\
+		`-U [Name of the hdf5 file and dataset storing Ux]`\n\
+		`-V [Name of the hdf5 file and dataset storing Uy]`\n\
+		`-W [Name of the hdf5 file and dataset storing Uz]`\n\
+		`-P [Name of the hdf5 file storing the transverse structure functions]`\n\
+		`-L [Name of the hdf5 file storing the longitudinal structure functions]`\n\n\n\
+		The user need not give all the command line arguments; the arguments that \n\
+		are not provided will be read by the `in/para.yaml` file. For, if the user wants \n\
+		to run `fastSF` with 16 processors with 4 processors in x direction, and wants to compute\n\
+		only the longitudinal structure functions, the following command should be entered:\n\
+		`mpirun -np 16 ./src/fastSF.out -p 4 -l true`\n\
+		In this case, the number of processors in the x-direction and the longitudinal\n\
+		structure function switch will be taken via the command line. The rest of the parameters \n\
+		will be taken from the `in/para.yaml` file.";
+	}
+}
+
 /**
  ********************************************************************************************************************************************
  * \brief   Function to parse the parameters from the yaml file and from the command-line arguments.
@@ -1576,8 +1616,12 @@ void get_Inputs(int argc, char* argv[]) {
     para["test"]["test_switch"]>>test_switch;
   
     int option;
-    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:S:P:L:M:"))!=-1){
+    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:S:P:L:M:h:"))!=-1){
     	switch(option){
+    		case 'h':
+    			help_command();
+    			exit(1);
+    			break;
     		case 'X':
     			Nx=std::stoi(optarg);
     			break;
