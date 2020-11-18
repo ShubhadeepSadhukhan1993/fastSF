@@ -226,6 +226,7 @@ To run `fastSF`, change to `fastSF` directory. Ensure that the input hdf5 files 
 `-W [Name of the hdf5 file and dataset storing Uz]`
 `-P [Name of the hdf5 file storing the transverse structure functions]`
 `-L [Name of the hdf5 file storing the longitudinal structure functions]`
+`-h [Help]`
 
 The user need not give all the command line arguments; the arguments that are not provided will be read by the `in/para.yaml` file. For, if the user wants to run `fastSF` with 16 processors with 4 processors in x direction, and wants to compute only the longitudinal structure functions, the following command should be entered:
 
