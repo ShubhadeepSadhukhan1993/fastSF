@@ -590,7 +590,7 @@ bool str_to_bool(string s){
 
 /**
 ********************************************************************************************************************************
-*\brief    Function to check the file does exist or not. Furthermore it saves the shape of the dataset.
+*\brief    Function to check whether the file exists or not. Furthermore it saves the shape of the dataset.
 *
 *\param fold is data path
 *\param file is the file name
@@ -1529,7 +1529,7 @@ void read_3D(Array<double,3> A, string fold, string file, string dset) {
 
 /**
 ***********************************************************************************************************************************
-* \brief Prints the help for command
+* \brief Function to outputs the run-time instructions for the user
 *
 ***********************************************************************************************************************************
 */
