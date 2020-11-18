@@ -1553,7 +1553,8 @@ void help_command(){
 		`-V [Name of the hdf5 file and dataset storing Uy]`\n\
 		`-W [Name of the hdf5 file and dataset storing Uz]`\n\
 		`-P [Name of the hdf5 file storing the transverse structure functions]`\n\
-		`-L [Name of the hdf5 file storing the longitudinal structure functions]`\n\n\n\
+		`-L [Name of the hdf5 file storing the longitudinal structure functions]
+        `-h [Help] `\n\n\n\
 		The user need not give all the command line arguments; the arguments that \n\
 		are not provided will be read by the `in/para.yaml` file. For, if the user wants \n\
 		to run `fastSF` with 16 processors with 4 processors in x direction, and wants to compute\n\
