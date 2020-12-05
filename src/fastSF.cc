@@ -1587,11 +1587,11 @@ void help_command(){
 		`-U [Name of the hdf5 file storing Ux]`\n\
 		`-V [Name of the hdf5 file storing Uy]`\n\
 		`-W [Name of the hdf5 file storing Uz]`\n\
-		`-T [Name of the hdf5 file storing T]`\n\
+		`-Q [Name of the hdf5 file storing T]`\n\
 		`-u [Name of the dataset storing Ux]`\n\
 		`-v [Name of the dataset storing Uy]`\n\
 		`-w [Name of the dataset storing Uz]`\n\
-		`- [Name of the dataset storing T]`\n\
+		`-q [Name of the dataset storing T]`\n\
 		`-P [Name of the hdf5 file storing the transverse structure functions]`\n\
 		`-L [Name of the hdf5 file storing the longitudinal structure functions]\
         `-h [Help]`\n\n\n\
@@ -1657,7 +1657,7 @@ void get_Inputs(int argc, char* argv[]) {
     para["test"]["test_switch"]>>test_switch;
   
     int option;
-    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:T:S:P:L:M:h:u:v:w:"))!=-1){
+    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:Q:P:L:M:h:u:v:w:q:"))!=-1){
     	switch(option){
     		case 'h':
     			help_command();
@@ -1711,7 +1711,7 @@ void get_Inputs(int argc, char* argv[]) {
             case 'W':
                 WName = optarg;
                 break;
-            case 'T':
+            case 'Q':
                 TName = optarg;
                 break;
             case 'u':
@@ -1722,6 +1722,9 @@ void get_Inputs(int argc, char* argv[]) {
                 break;
             case 'w':
                 WdName = optarg;
+                break;
+            case 'q':
+                TdName = optarg;
                 break;
             case 'P':
                 SF_Grid_perp_name = optarg;
