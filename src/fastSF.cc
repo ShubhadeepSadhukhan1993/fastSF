@@ -398,6 +398,41 @@ string WName="U.V3r";
  */
  string TName="T.Fr";
 
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the dataset for the x-component of the velocity field.
+ *
+ ********************************************************************************************************************************************
+ */
+string UdName="U.V1r";
+
+
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the dataset for the y-component of the velocity field.
+ *
+ ********************************************************************************************************************************************
+ */
+string VdName="U.V2r";
+
+
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the dataset for the z-component of the velocity field.
+ *
+ ********************************************************************************************************************************************
+ */
+string WdName="U.V3r";
+
+
+/**
+ ********************************************************************************************************************************************
+ * \brief   This variable stores the name for the dataset of the scalar field.
+ *
+ ********************************************************************************************************************************************
+ */
+string TdName="T.Fr";
+
  /**
  ********************************************************************************************************************************************
  * \brief   This variable stores the name for the output file for parallel structure function of velocity field.
@@ -720,14 +755,14 @@ void Read_fields() {
         
         if (two_dimension_switch){
             if (scalar_switch) {
-            	get_input_shape("in/", TName, TName, s1);
+            	get_input_shape("in/", TName, TdName, s1);
                 resize_input();
                 calculate_grid_spacing();
-                read_2D(T_2D,"in/", TName, TName);
+                read_2D(T_2D,"in/", TName, TdName);
             }
             else {
-            	get_input_shape("in/", UName, UName, s1);
-                get_input_shape("in/", WName, WName, s2);
+            	get_input_shape("in/", UName, UdName, s1);
+                get_input_shape("in/", WName, WdName, s2);
                 
                 if (!compare(s1,s2)){
                 	if (rank_mpi==0){
@@ -741,23 +776,23 @@ void Read_fields() {
                 
                 resize_input();
                 calculate_grid_spacing();
-                read_2D(V1_2D,"in/", UName, UName);
-                read_2D(V3_2D,"in/", WName, WName);
+                read_2D(V1_2D,"in/", UName, UdName);
+                read_2D(V3_2D,"in/", WName, WdName);
             }
         }
         else{
         	
             if (scalar_switch) {
-            	get_input_shape("in/", TName, TName, s1);
+            	get_input_shape("in/", TName, TdName, s1);
             	resize_input();
             	calculate_grid_spacing();
-                read_3D(T, "in/", TName, TName);
+                read_3D(T, "in/", TName, TdName);
             }
             else {
             	
-            	get_input_shape("in/", UName, UName, s1);
-            	get_input_shape("in/", VName, VName, s2);
-            	get_input_shape("in/", WName, WName, s3);
+            	get_input_shape("in/", UName, UdName, s1);
+            	get_input_shape("in/", VName, VdName, s2);
+            	get_input_shape("in/", WName, WdName, s3);
             	
             	if (!compare(s1,s2)){
             		if (rank_mpi==0){
@@ -788,9 +823,9 @@ void Read_fields() {
                 }
             	resize_input();
             	calculate_grid_spacing();
-                read_3D(V1, "in/", UName, UName);
-                read_3D(V2, "in/", VName, VName);
-                read_3D(V3, "in/", WName, WName);
+                read_3D(V1, "in/", UName, UdName);
+                read_3D(V2, "in/", VName, VdName);
+                read_3D(V3, "in/", WName, WdName);
             }
         }
     } 
@@ -1549,12 +1584,17 @@ void help_command(){
 		`mpirun -np [number of MPI processors] src/fastSF.out -s [scalar_switch]` \n\
 		`-d [2D_switch] -l [Only_longitudinal] -p [Processors_X] -X [Nx] -Y [Ny]`\n\
 		`-Z [Nz] -x [Lx] -y [Ly] -z [Lz] -1 [q1] -2 [q2] -t [test_switch]`\n\
-		`-U [Name of the hdf5 file and dataset storing Ux]`\n\
-		`-V [Name of the hdf5 file and dataset storing Uy]`\n\
-		`-W [Name of the hdf5 file and dataset storing Uz]`\n\
+		`-U [Name of the hdf5 file storing Ux]`\n\
+		`-V [Name of the hdf5 file storing Uy]`\n\
+		`-W [Name of the hdf5 file storing Uz]`\n\
+		`-T [Name of the hdf5 file storing T]`\n\
+		`-u [Name of the dataset storing Ux]`\n\
+		`-v [Name of the dataset storing Uy]`\n\
+		`-w [Name of the dataset storing Uz]`\n\
+		`- [Name of the dataset storing T]`\n\
 		`-P [Name of the hdf5 file storing the transverse structure functions]`\n\
-		`-L [Name of the hdf5 file storing the longitudinal structure functions]
-        `-h [Help] `\n\n\n\
+		`-L [Name of the hdf5 file storing the longitudinal structure functions]\
+        `-h [Help]`\n\n\n\
 		The user need not give all the command line arguments; the arguments that \n\
 		are not provided will be read by the `in/para.yaml` file. For, if the user wants \n\
 		to run `fastSF` with 16 processors with 4 processors in x direction, and wants to compute\n\
@@ -1617,7 +1657,7 @@ void get_Inputs(int argc, char* argv[]) {
     para["test"]["test_switch"]>>test_switch;
   
     int option;
-    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:S:P:L:M:h:"))!=-1){
+    while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:T:S:P:L:M:h:u:v:w:"))!=-1){
     	switch(option){
     		case 'h':
     			help_command();
@@ -1670,6 +1710,18 @@ void get_Inputs(int argc, char* argv[]) {
                 break;
             case 'W':
                 WName = optarg;
+                break;
+            case 'T':
+                TName = optarg;
+                break;
+            case 'u':
+                UdName = optarg;
+                break;
+            case 'v':
+                VdName = optarg;
+                break;
+            case 'w':
+                WdName = optarg;
                 break;
             case 'P':
                 SF_Grid_perp_name = optarg;
