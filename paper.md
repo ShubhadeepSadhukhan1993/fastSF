@@ -46,7 +46,7 @@ We are not aware of any other open soure or commercial packages for computing st
 
 # Velocity and scalar structure functions
 
-We denote the velocity and scalar fields using $\mathbf{u}$ and $\theta$  respectively. The velocity difference between any two points $\mathbf{r}$ and $\mathbf{r}+\boldsymbol{l}$ is $\delta \mathbf{u} = \mathbf{u(r+l)}-\mathbf{u(r)}$. The difference in the parallel components of the velocity field along $\mathbf{l}$ is $\delta u_\parallel=\delta \mathbf{u}\cdot \hat{\mathbf{l}}$.  The corresponding difference in the perpendicular component is $\delta u_\perp= |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|$. Assuming statistical homogeneity, we define the longitudinal velocity structure functions of order $q$ as
+We denote the velocity and scalar fields using $\mathbf{u}$ and $\theta$  respectively. The velocity difference between any two points $\mathbf{r}$ and $\mathbf{r}+\boldsymbol{l}$ is $\delta \mathbf{u} = \mathbf{u(r}+ \boldsymbol{l)}-\mathbf{u(r)}$. The difference in the parallel components of the velocity field along $\boldsymbol{l}$ is $\delta u_\parallel=\delta \mathbf{u}\cdot \hat{\boldsymbol{l}}$.  The corresponding difference in the perpendicular component is $\delta u_\perp= |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|$. Assuming statistical homogeneity, we define the longitudinal velocity structure functions of order $q$ as
 $$ S_q^{u_\parallel}(\mathbf{l}) = \langle (\delta u_\parallel)^q \rangle = \langle [\{\mathbf{u(r+l)}-\mathbf{u(r)}\}\cdot \hat{\mathbf{l}}]^q \rangle, \quad \quad (1)$$ 
 and the transverse velocity structure functions of order 
 $q$ as 
