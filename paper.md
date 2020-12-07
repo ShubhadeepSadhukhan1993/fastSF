@@ -59,7 +59,7 @@ For isotropic turbulence (in addition to being homogeneous), the structure funct
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
-First we present a sketch of the structure function computation for the velocity structure functions.  We employ vectorization and loops over $\boldsymbol{l}$, thus requiring three loops for 3D fields and two loops for 2D fields. In the following, we provide the algorithm for structure function computation for a 2D velocity field.
+In this section, we present a sketch of the structure function computation for the velocity structure functions.  We employ vectorization and loops over $\boldsymbol{l}$, thus requiring three loops for 3D fields and two loops for 2D fields. In the following, we provide the algorithm for structure function computation for a 2D velocity field.
 
 **Pseudo-code**
 
