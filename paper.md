@@ -137,7 +137,7 @@ This paper provides a brief description of ``fastSF``, an efficient parallel C++
 
 # Acknowledgements
 
-We thank R. Samuel, A. Chatterjee, S. Chatterjee, and M. Sharma for helpful discussions during the development of ``fastSF``. We are grateful to Jed Brown, Ilja Honkonen, and Chris Green for a careful review of our work and their useful suggestions. Our computations were performed on Shaheen II at KAUST supercomputing laboratory, Saudi Arabia, under the project k1416. 
+We thank Roshan Samuel, Anando Chatterjee, Soumyadeep Chatterjee, and Manohar Sharma for helpful discussions during the development of ``fastSF``. We are grateful to Jed Brown, Ilja Honkonen, and Chris Green for a careful review of our work and their useful suggestions. Our computations were performed on Shaheen II at KAUST supercomputing laboratory, Saudi Arabia, under the project k1416. 
 
 ---
 
