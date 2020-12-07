@@ -488,7 +488,14 @@ int main(int argc, char *argv[]) {
     
     
     
-  	if (rank_mpi==0) {
+  	
+
+
+
+    //Resizing the input fields
+    Read_fields();
+
+    if (rank_mpi==0) {
     	cout<<"\nNumber of processors in x direction: "<<px<<endl;
     	if (two_dimension_switch) {
         	cout<<"Number of processors in z direction: "<<P/px<<endl;
@@ -532,13 +539,6 @@ int main(int argc, char *argv[]) {
         MPI_Finalize();
         exit(1);
     } 
-
-
-
-    //Resizing the input fields
-    Read_fields();
-
-
 
 
     //Resize the structure function array according to the type of inputs
@@ -1645,16 +1645,21 @@ void get_Inputs(int argc, char* argv[]) {
     para["program"]["Only_longitudinal"]>>longitudinal;
     para["program"]["2D_switch"]>>two_dimension_switch;
     para["program"]["Processors_X"]>>px;
-    para["grid"]["Nx"]>>Nx;
-    para["grid"]["Ny"]>>Ny;
-    para["grid"]["Nz"]>>Nz;
+
+    para["test"]["test_switch"]>>test_switch;
+    
+    if (test_switch){
+    	para["grid"]["Nx"]>>Nx;
+    	para["grid"]["Ny"]>>Ny;
+    	para["grid"]["Nz"]>>Nz;
+	}
     para["domain_dimension"]["Lx"]>>Lx;
     para["domain_dimension"]["Ly"]>>Ly;
     para["domain_dimension"]["Lz"]>>Lz;
   
     para["structure_function"]["q1"]>>q1;
     para["structure_function"]["q2"]>>q2;
-    para["test"]["test_switch"]>>test_switch;
+    
   
     int option;
     while ((option=getopt(argc, argv, "X:Y:Z:1:2:x:y:z:l:d:p:t:s:U:V:W:Q:P:L:M:h:u:v:w:q:"))!=-1){
