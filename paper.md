@@ -46,38 +46,38 @@ We are not aware of any other open soure or commercial packages for computing st
 
 # Velocity and scalar structure functions
 
-We denote the velocity and scalar fields using $\mathbf{u}$ and $\theta$  respectively. The velocity difference between any two points $\mathbf{r}$ and $\mathbf{r}+\boldsymbol{l}$ is $\delta \mathbf{u} = \mathbf{u(r}+ \boldsymbol{l)}-\mathbf{u(r)}$. The difference in the parallel components of the velocity field along $\boldsymbol{l}$ is $\delta u_\parallel=\delta \mathbf{u}\cdot \hat{\boldsymbol{l}}$.  The corresponding difference in the perpendicular component is $\delta u_\perp= |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|$. Assuming statistical homogeneity, we define the longitudinal velocity structure functions of order $q$ as
-$$ S_q^{u_\parallel}(\mathbf{l}) = \langle (\delta u_\parallel)^q \rangle = \langle [\{\mathbf{u(r+l)}-\mathbf{u(r)}\}\cdot \hat{\mathbf{l}}]^q \rangle, \quad \quad (1)$$ 
+We denote the velocity and scalar fields using $\boldsymbol{u}$ and $\theta$  respectively. The velocity difference between any two points $\boldsymbol{r}$ and $\boldsymbol{r}+\boldsymbol{l}$ is $\delta \boldsymbol{u} = \boldsymbol{u(r}+ \boldsymbol{l)}-\boldsymbol{u(r)}$. The difference in the parallel components of the velocity field along $\boldsymbol{l}$ is $\delta u_\parallel=\delta \boldsymbol{u}\cdot \hat{\boldsymbol{l}}$.  The corresponding difference in the perpendicular component is $\delta u_\perp= |\delta \boldsymbol{u} - \delta u_\parallel \hat{\boldsymbol{l}}|$. Assuming statistical homogeneity, we define the longitudinal velocity structure functions of order $q$ as
+$$ S_q^{u_\parallel}(\boldsymbol{l}) = \langle (\delta u_\parallel)^q \rangle = \langle [\{\boldsymbol{u(r+l)}-\boldsymbol{u(r)}\}\cdot \hat{\boldsymbol{l}}]^q \rangle, \quad \quad (1)$$ 
 and the transverse velocity structure functions of order 
 $q$ as 
-$$ S_q^{u_\perp}(\mathbf{l}) = \langle (\delta u_\perp)^q \rangle = \langle |\delta \mathbf{u} - \delta u_\parallel \hat{\mathbf{l}}|^q \rangle. \quad \quad (2)$$ 
+$$ S_q^{u_\perp}(\boldsymbol{l}) = \langle (\delta u_\perp)^q \rangle = \langle |\delta \boldsymbol{u} - \delta u_\parallel \hat{\boldsymbol{l}}|^q \rangle. \quad \quad (2)$$ 
 Here, $\langle \cdot \rangle$ denotes ensemble averaging. Similarly, we can define the scalar structure functions for the scalar field as 
-$$ S_q^\theta(\mathbf{l}) = \langle (\delta \theta)^q\rangle = \langle [\theta (\mathbf{r+l}) - \theta(\mathbf{r})]^q \rangle. \quad \quad(3)$$
+$$ S_q^\theta(\boldsymbol{l}) = \langle (\delta \theta)^q\rangle = \langle [\theta (\boldsymbol{r+l}) - \theta(\boldsymbol{r})]^q \rangle. \quad \quad(3)$$
 
-For isotropic turbulence (in addition to being homogeneous), the structure functions become functions of $l$, where $l=|\mathbf{l}|$. The second-order velocity structure function $S_q^{u_{\parallel}}(l)$ provides an estimate for the energy in the eddies of size $l$ or less [@Davidson:book:Turbulence]. 
+For isotropic turbulence (in addition to being homogeneous), the structure functions become functions of $l$, where $l=|\boldsymbol{l}|$. The second-order velocity structure function $S_q^{u_{\parallel}}(l)$ provides an estimate for the energy in the eddies of size $l$ or less [@Davidson:book:Turbulence]. 
 
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
-First we present a sketch of the structure function computation for the velocity structure functions.  Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity difference using loops over $\mathbf{r}$ and $\mathbf{l}$. These computations require six nested `for` loops for 3D fields that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over only $\mathbf{l}$, thus requiring three loops instead of six for 3D fields. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  In the following, we provide the algorithm for structure function computation for a 2D velocity field.
+First we present a sketch of the structure function computation for the velocity structure functions.  Typical structure function computations [Eqs (1-3)] in literature involve calculation of the velocity difference using loops over $\boldsymbol{r}$ and $\boldsymbol{l}$. These computations require six nested `for` loops for 3D fields that makes the computations very expensive for large grids. In our code, we employ vectorization and loops over only $\boldsymbol{l}$, thus requiring three loops instead of six for 3D fields. The new algorithm enhances the performance approximately 20 times over the earlier schemes due to vectorization.  In the following, we provide the algorithm for structure function computation for a 2D velocity field.
 
 **Pseudo-code**
 
-*Data*: Velocity field $\mathbf{u}$ in domain $(L_x, L_z)$; number of processors $P$.
+*Data*: Velocity field $\boldsymbol{u}$ in domain $(L_x, L_z)$; number of processors $P$.
 
 *Procedure*:
  
-* Divide $\mathbf{l}$'s among various processors. The process of data division among the processors  has been described later in this section. 
+* Divide $\boldsymbol{l}$'s among various processors. The process of data division among the processors  has been described later in this section. 
  
 * For every processor:
      
-    * for $\mathbf{l}= (l_x,l_z)$ assigned to the processor:
+    * for $\boldsymbol{l}= (l_x,l_z)$ assigned to the processor:
         
-        * Compute $\delta \mathbf{u}(l_x,l_z)$ by taking the difference between two points with the same indices in pink and green subdomains as shown in Fig. \ref{Schematic}. This feature enables vectorized subtraction operation.
+        * Compute $\delta \boldsymbol{u}(l_x,l_z)$ by taking the difference between two points with the same indices in pink and green subdomains as shown in Fig. \ref{Schematic}. This feature enables vectorized subtraction operation.
         
-        * $\delta u_{\parallel}(l_x,l_z) = \delta \mathbf{u} \cdot \hat{\mathbf{l}}$ (Vectorized). 
+        * $\delta u_{\parallel}(l_x,l_z) = \delta \boldsymbol{u} \cdot \hat{\boldsymbol{l}}$ (Vectorized). 
         
-        * $\delta u_{\perp}(l_x,l_z) = |\delta \mathbf{u} - \delta u_{\parallel} \hat{\mathbf{l}}$| (Vectorized). 
+        * $\delta u_{\perp}(l_x,l_z) = |\delta \boldsymbol{u} - \delta u_{\parallel} \hat{\boldsymbol{l}}$| (Vectorized). 
         
         * for order $q$:
         
@@ -91,11 +91,11 @@ First we present a sketch of the structure function computation for the velocity
             
 * Stop
 
-![The velocity difference $\delta \mathbf{u}(\mathbf{l})$ is computed by taking the difference between two points with the same indices in the pink and the green subdomains. For example, $\mathbf{u}(\mathbf{l}) - \mathbf{u}(0,0) = \mathbf{u}_B - \mathbf{u}_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization of the computation. \label{Schematic}](docs/figs/Schematic.png)
+![The velocity difference $\delta \boldsymbol{u}(\boldsymbol{l})$ is computed by taking the difference between two points with the same indices in the pink and the green subdomains. For example, $\boldsymbol{u}(\boldsymbol{l}) - \boldsymbol{u}(0,0) = \boldsymbol{u}_B - \boldsymbol{u}_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization of the computation. \label{Schematic}](docs/figs/Schematic.png)
 
-Since $S_q^u(\mathbf{l})$ is important for intermediate scales (inertial range) only, we vary $\mathbf{l}$ upto half the domain size, that is, upto ($L_x/2, L_z/2$), to save computational cost. The $\mathbf{l}$'s are divided among MPI processors along $x$ and $z$ directions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity difference. After computing the structure function for a given $\mathbf{l}$, each processor communicates the result to the root process, which stores the $S_q^{u_\parallel}(\mathbf{l})$ and $S_q^{u_\perp}(\mathbf{l})$ arrays.
+Since $S_q^u(\boldsymbol{l})$ is important for intermediate scales (inertial range) only, we vary $\boldsymbol{l}$ upto half the domain size, that is, upto ($L_x/2, L_z/2$), to save computational cost. The $\boldsymbol{l}$'s are divided among MPI processors along $x$ and $z$ directions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity difference. After computing the structure function for a given $\boldsymbol{l}$, each processor communicates the result to the root process, which stores the $S_q^{u_\parallel}(\boldsymbol{l})$ and $S_q^{u_\perp}(\boldsymbol{l})$ arrays.
 
-It is clear from Fig. \ref{Schematic} that the sizes of the pink or green subdomains are $(L_x-l_x)(L_z-l_z)$, which are function of $\mathbf{l}$'s.  This function decreases with increasing $\mathbf{l}$ leading to larger computational costs for small $l$ and less cost of larger $l$.   Hence, a straightforward division of the domain among the processors along $x$ and $z$ directions will lead to a load imbalance.   Therefore, we assign both large and small $\mathbf{l}$'s to each processor to achieve equal load distribution. We illustrate the above idea  using the following example.
+It is clear from Fig. \ref{Schematic} that the sizes of the pink or green subdomains are $(L_x-l_x)(L_z-l_z)$, which are function of $\boldsymbol{l}$'s.  This function decreases with increasing $\boldsymbol{l}$ leading to larger computational costs for small $l$ and less cost of larger $l$.   Hence, a straightforward division of the domain among the processors along $x$ and $z$ directions will lead to a load imbalance.   Therefore, we assign both large and small $\boldsymbol{l}$'s to each processor to achieve equal load distribution. We illustrate the above idea  using the following example.
 
 Consider a one-dimensional domain of size $L=15$, for which the possible $l$'s are
 $$l=\{0, 1, 2, 3 ... 15\}.$$ 
@@ -118,7 +118,7 @@ In the next section, we discuss the scaling of our code.
 # Scaling of `fastSF`
 
 `fastSF` is scalable over many processors due to vectorization and equal load distribution. We demonstrate the scaling of `fastSF` for the third-order longitudinal structure function for an idealized velocity field on a $128^3$ grid.  For our computation we employ a maximum of 1024 cores. We take the velocity field as
-$$\mathbf{u} = 
+$$\boldsymbol{u} = 
 \begin{bmatrix} 
 x \\ y \\z
 \end{bmatrix}.$$
