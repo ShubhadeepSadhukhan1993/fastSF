@@ -35,7 +35,7 @@ bibliography: paper.bib
 
 Turbulence is a complex phenomenon in fluid dynamics involving nonlinear interactions between multiple scales. Structure function is a popular diagnostics tool to study the statistical properties of turbulent flows [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]. Some of the earlier works comprising of such analysis are those of @Gotoh:PF2002, @Kaneda:PF2003, and @Ishihara:ARFM2009 for three-dimensional (3D) hydrodynamic turbulence; @Yeung:PF2005 and @Ray:NJP2008 for passive scalar turbulence; @Biferale:NJP2004 for two-dimensional (2D) hydrodynamic turbulence; and @Kunnen:PRE2008, @Kaczorowski:JFM2013, and @Bhattacharya:PF2019 for turbulent thermal convection. Structure functions are two-point statistical quantities; thus, an accurate computation of these quantities requires averaging over many points. However, incorporation of a large number of points makes the computations very expensive and challenging. Therefore, we require an efficient parallel code for accurate computation of structure functions. In this paper, we describe the design and validation of the results of ``fastSF``, a parallel code to compute the structure functions for a given velocity or scalar field. 
 
- ``fastSF``, written in C++, is an application for efficiently computing the structure functions of scalar and vector fields on Cartesian grids of a 2D or 3D periodic box, stored as HDF5 files. The code employs MPI (Message Passing Interface) parallelization with equal load distribution and vectorization for efficiency on SIMD architectures. The user can select the range of the orders of the structure functions to be computed and the computed structure functions are written to HDF5 files that can be further processed by the user.
+ ``fastSF``, written in C++, is an application for computing the structure functions of scalar and vector fields on Cartesian grids of a 2D or 3D periodic box, stored as HDF5 files. The code employs MPI (Message Passing Interface) parallelization with equal load distribution and vectorization for efficiency on SIMD architectures. The user can select the range of the orders of the structure functions to be computed and the computed structure functions are written to HDF5 files that can be further processed by the user.
 
 We are not aware of any other open soure or commercial packages for computing structure functions; prior studies have relied on in-house software that was never publicly released.  As an open source package, `fastSF` provides a standard high-performance implementation and thus facilitates wider use of structure functions.
 
@@ -59,7 +59,7 @@ For isotropic turbulence (in addition to being homogeneous), the structure funct
 In the next section, we provide a brief description of the code.
 
 # Design of the Code
-First we present a sketch of the structure function computation for the velocity structure functions.  We employ vectorization and loops over $\boldsymbol{l}$, thus requiring three loops 3D fields. In the following, we provide the algorithm for structure function computation for a 2D velocity field.
+First we present a sketch of the structure function computation for the velocity structure functions.  We employ vectorization and loops over $\boldsymbol{l}$, thus requiring three loops for 3D fields and two loops for 2D fields. In the following, we provide the algorithm for structure function computation for a 2D velocity field.
 
 **Pseudo-code**
 
@@ -94,7 +94,6 @@ First we present a sketch of the structure function computation for the velocity
 ![The velocity difference $\delta \boldsymbol{u}(\boldsymbol{l})$ is computed by taking the difference between two points with the same indices in the pink and the green subdomains. For example, $\boldsymbol{u}(\boldsymbol{l}) - \boldsymbol{u}(0,0) = \boldsymbol{u}_B - \boldsymbol{u}_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization of the computation. \label{Schematic}](docs/figs/Schematic.png)
 
 Since $S_q^u(\boldsymbol{l})$ is important for intermediate scales (inertial range) only, we vary $\boldsymbol{l}$ upto half the domain size, that is, upto ($L_x/2, L_z/2$), to save computational cost. The $\boldsymbol{l}$'s are divided among MPI processors along $x$ and $z$ directions. Each MPI processor computes the structure functions for the points assigned to it and has access to the entire input data. 
-%Thus, we save considerable time that would otherwise be spent on communication between the processors during the calculation of the velocity difference. 
 After computing the structure function for a given $\boldsymbol{l}$, each processor communicates the result to the root process, which stores the $S_q^{u_\parallel}(\boldsymbol{l})$ and $S_q^{u_\perp}(\boldsymbol{l})$ arrays.
 
 It is clear from Fig. \ref{Schematic} that the sizes of the pink or green subdomains are $(L_x-l_x)(L_z-l_z)$, which are function of $\boldsymbol{l}$'s.  This function decreases with increasing $\boldsymbol{l}$ leading to larger computational costs for small $l$ and less cost of larger $l$.   Hence, a straightforward division of the domain among the processors along $x$ and $z$ directions will lead to a load imbalance.   Therefore, we assign both large and small $\boldsymbol{l}$'s to each processor to achieve equal load distribution. We illustrate the above idea  using the following example.
@@ -133,12 +132,12 @@ Thus, the data-points follow $T^{-1} \sim p$ curve to a good approximation. Henc
 
 # Conclusions
 
-This paper provides a brief description of ``fastSF``, an efficient parallel C++ code that computes structure functions for given velocity and scalar fields. This code is shown to be scalable over many processors. We are currently using this code to investigate the structure functions of two-dimensional turbulence with large-scale forcing. An earlier version of the code was used by @Bhattacharya:PF2019 for analyzing the structure functions of turbulent convection.  We believe that ``fastSF`` will be useful to turbulence community because of its efficiency and scalability.  
+This paper provides a brief description of ``fastSF``, an efficient parallel C++ code that computes structure functions for given velocity and scalar fields. This code is shown to be scalable over many processors. An earlier version of the code was used by @Bhattacharya:PF2019 for analyzing the structure functions of turbulent convection.  We believe that ``fastSF`` will be useful to turbulence community as it facilitates wider use of structure functions.  
 
 
 # Acknowledgements
 
-We thank R. Samuel, A. Chatterjee, S. Chatterjee, and M. Sharma for useful discussions during the development of ``fastSF``. Our computations were performed on Shaheen II at KAUST supercomputing laboratory, Saudi Arabia, under the project k1416. 
+We thank R. Samuel, A. Chatterjee, S. Chatterjee, and M. Sharma for helpful discussions during the development of ``fastSF``. We are grateful to Jed Brown, Ilja Honkonen, and Chris Green for a careful review of our work and their useful suggestions. Our computations were performed on Shaheen II at KAUST supercomputing laboratory, Saudi Arabia, under the project k1416. 
 
 ---
 
