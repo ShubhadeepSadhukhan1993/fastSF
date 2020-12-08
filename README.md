@@ -80,8 +80,6 @@ IMPORTANT:
 
 * Note that `fastSF` is not compatible with higher versions `YAML-cpp`(> 0.3.0). 
 
-* The library `H5SI`has been successfully tested with `HDF5` version 1.8.20. However, `H5SI` may not be compatible with higher versions of `HDF5`. Thus, the users are strongly recommended to install `HDF5` 1.8.20.  
-
 
 ###  Compiling instruction
 
