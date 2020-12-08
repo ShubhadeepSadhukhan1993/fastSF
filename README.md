@@ -183,9 +183,9 @@ This entry is for structure functions for velocity  fields only. You can enter `
 
 The number of processors in x-direction. Only integer values are accepted. Note that this value should be an integer factor of the total number of processors.
 
-#### `grid: Nx, Ny, Nz`
+#### `grid: Nx, Ny, Nz` (Only applicable if test switch is "on", in which case the code generates input fields based on velocity / scalar distribution)
 
-This is only applicable if test switch is "on", in which case the code generates input fields based on velocity / scalar distribution. The number of points along *x*, *y*, and *z* direction respectively of the  grid. Valid for both the vector and scalar fields. 
+The number of points along *x*, *y*, and *z* direction respectively of the  grid. Valid for both the vector and scalar fields. 
 For two dimensional fields you need to provide `Nx` and `Nz`.
 
 Only integer values will be accepted.
