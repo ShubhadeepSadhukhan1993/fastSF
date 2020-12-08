@@ -1498,16 +1498,13 @@ void show_checklist(){
 	
   	cerr<<"Error: Please check the following\n\n";
   	cerr<<"a. 'in' folder contains the input files\n\n";
-  	cerr<<"b. Input file name and the dataset name should be the same (The dataset name will not have .h5 extension). \n\n";
-    cerr<<"c. Unless specified otherwise via command-line arguments, the input files should be as follows:\n";
+    cerr<<"b. Unless specified otherwise via command-line arguments, the input files should be as follows:\n";
   	cerr<<"\tCase Vector:\n";
  	cerr<<"\t\tCase 2D: U.V1r.h5, U.V3r.h5\n";
  	cerr<<"\t\tCase 3D: U.V1r.h5, U.V2r.h5, U.V3r.h5\n";
  	cerr<<"\tCase Scalar: \n\t\tT.Fr.h5\n";
     cerr<<"NOTE: The dataset name should be the same as the file name (without the .h5 extension).\n\n";
-	cerr<<"d. Grid size of the data sould be compatible with specified Nx, Ny, Nz\n";
-	cerr<<"\tCase 2D: Nx, Nz\n";
-	cerr<<"\tCase 3D: Nx, Ny, Nz\n\n";
+	cerr<<"c. All the input datasets must have the same dimensions\n";
 	cerr<<"Please refer to Readme for details\n\n";
     
     

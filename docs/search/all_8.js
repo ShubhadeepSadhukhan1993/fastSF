@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['paper',['paper',['../md_paper.html',1,'']]],
-  ['p',['P',['../fastSF_8cc.html#aef94be98e2c9e4a4dece75f60ca9792c',1,'fastSF.cc']]],
-  ['px',['px',['../fastSF_8cc.html#a6bbc6b7e52b17450c52d8e748d6abae1',1,'fastSF.cc']]]
+  ['nx_19',['Nx',['../fastSF_8cc.html#abfda77b016218238359bcc3e5c1600b0',1,'fastSF.cc']]],
+  ['ny_20',['Ny',['../fastSF_8cc.html#adcc9183c4659dc09e04e5ede1d79215b',1,'fastSF.cc']]],
+  ['nz_21',['Nz',['../fastSF_8cc.html#a7a7576e08f5980d322da5f48c7385edc',1,'fastSF.cc']]]
 ];
