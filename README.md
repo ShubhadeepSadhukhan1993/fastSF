@@ -134,7 +134,9 @@ For scalar field, one dataset is required:
 For vector field, three `hdf5` files are required:
 
 1. A 3D dataset storing the x-component of the vector / velocity field. This dataset has dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. The names of the dataset and the hdf5 file containing the dataset can be arbitrary, but they need to be specified by the user via command line arguments during the execution of `fastSF`. If the user prefers not to use command line arguments, the hdf5 file by default should be named as `U.V1r.h5` and the dataset as `U.V1r`.
+
 2. A 3D dataset storing the y-component of the vector / velocity field. This dataset has dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. The names of the dataset and the hdf5 file containing the dataset can be arbitrary, but they need to be specified by the user via command line arguments during the execution of `fastSF`. If the user prefers not to use command line arguments, the hdf5 file by default should be named as `U.V2r.h5` and the dataset as `U.V2r`.
+
 3. A 3D dataset storing the z-component of the vector / velocity field. This dataset has dimensions (`Nx,Ny,Nz`) storing real double-precision floating point values. The names of the dataset and the hdf5 file containing the dataset can be arbitrary, but they need to be specified by the user via command line arguments during the execution of `fastSF`. If the user prefers not to use command line arguments, the hdf5 file by default should be named as `U.V3r.h5` and the dataset as `U.V3r`.
 
 For scalar field, For vector field, one `hdf5` file is required:
