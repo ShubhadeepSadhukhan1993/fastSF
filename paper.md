@@ -58,9 +58,11 @@ For isotropic turbulence (in addition to being homogeneous), the structure funct
 
 For 3D incompressible hydrodynamic turbulence with homegeneity and isotropy, the third-order longitudinal velocity structure function in the inertial range (scales lying between the large-scale forcing regime and the small-scale dissipation regime) is given by [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]
 $$S_3^{u_\parallel}(l) = -\frac{4}{5} \epsilon l \sim -l, \quad \quad (4)$$
-where $\epsilon$ is the viscous dissipation rate. For an arbitrary order $q$, @She:PRL1994 proposed that the longitudinal structure functions scale as $S_q^{u_\parallel} (l) \sim \zeta_q$, where the exponent $\zeta_q$ is given by
-$$\zeta_q = \frac{q}{9} + 2\left(1 - \left( \frac{2}{3} \right)^{q/3} \right). \quad \quad (5)$$
+where $\epsilon$ is the viscous dissipation rate. 
 ![For 3D homogeneous isotropic turbulence: plots of the negative of normalized third, fifth and seventh-order longitudinal velocity structure functions vs. $l$. The negative of the normalized third-order structure function is close to $4/5$ (dashed line) in the inertial range. \label{SF_Hydro}](docs/figs/SF_hydro.png)
+For an arbitrary order $q$, @She:PRL1994 proposed that the longitudinal structure functions scale as $S_q^{u_\parallel} (l) \sim \zeta_q$, where the exponent $\zeta_q$ is given by
+$$\zeta_q = \frac{q}{9} + 2\left(1 - \left( \frac{2}{3} \right)^{q/3} \right). \quad \quad (5)$$
+
 
 Figure~\ref{SF_Hydro} exhibits the plots of the negative of the normalized 3rd, 5th, and 7th-order longitudinal velocity structure functions computed using the simulation data of 3D hydrodynamic turbulence [@Sadhukhan:PRF2019]. The structure functions are normalized by $(\epsilon l)^{\zeta_q}$, where $zeta_q$ is given by Eq. (5).  In the inertial range (0.2 < l < 0.7), the normalized third-order longitudinal velocity structure function is fairly close to $4/5$ (represented by dashed line), consistent with Kolmogorov's theory. Moreover, the normalized fifth and seventh-order structure functions show a plateau for the same range of l, thus exhibiting consistency with She-Leveque's model.
 
