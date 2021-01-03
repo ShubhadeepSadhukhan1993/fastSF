@@ -56,10 +56,11 @@ $$ S_q^\theta(\boldsymbol{l}) = \langle (\delta \theta)^q\rangle = \langle [\the
 
 For isotropic turbulence (in addition to being homogeneous), the structure functions become functions of $l$, where $l=|\boldsymbol{l}|$. The second-order velocity structure function $S_q^{u_{\parallel}}(l)$ provides an estimate for the energy in the eddies of size $l$ or less [@Davidson:book:Turbulence]. 
 
+![For 3D homogeneous isotropic turbulence: plots of the negative of normalized third, fifth and seventh-order longitudinal velocity structure functions vs. $l$. The negative of the normalized third-order structure function is close to $4/5$ (dashed line) in the inertial range. \label{SF_Hydro}](docs/figs/SF_hydro.png)
+
 For 3D incompressible hydrodynamic turbulence with homegeneity and isotropy, the third-order longitudinal velocity structure function in the inertial range (scales lying between the large-scale forcing regime and the small-scale dissipation regime) is given by [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]
 $$S_3^{u_\parallel}(l) = -\frac{4}{5} \epsilon l \sim -l, \quad \quad (4)$$
 where $\epsilon$ is the viscous dissipation rate. 
-![For 3D homogeneous isotropic turbulence: plots of the negative of normalized third, fifth and seventh-order longitudinal velocity structure functions vs. $l$. The negative of the normalized third-order structure function is close to $4/5$ (dashed line) in the inertial range. \label{SF_Hydro}](docs/figs/SF_hydro.png)
 For an arbitrary order $q$, @She:PRL1994 proposed that the longitudinal structure functions scale as $S_q^{u_\parallel} (l) \sim \zeta_q$, where the exponent $\zeta_q$ is given by
 $$\zeta_q = \frac{q}{9} + 2\left(1 - \left( \frac{2}{3} \right)^{q/3} \right). \quad \quad (5)$$
 
