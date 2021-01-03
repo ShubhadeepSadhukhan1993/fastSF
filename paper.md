@@ -56,7 +56,13 @@ $$ S_q^\theta(\boldsymbol{l}) = \langle (\delta \theta)^q\rangle = \langle [\the
 
 For isotropic turbulence (in addition to being homogeneous), the structure functions become functions of $l$, where $l=|\boldsymbol{l}|$. The second-order velocity structure function $S_q^{u_{\parallel}}(l)$ provides an estimate for the energy in the eddies of size $l$ or less [@Davidson:book:Turbulence]. 
 
-![The velocity difference $\delta \boldsymbol{u}(\boldsymbol{l})$ is computed by taking the difference between two points with the same indices in the pink and the green subdomains. For example, $\boldsymbol{u}(\boldsymbol{l}) - \boldsymbol{u}(0,0) = \boldsymbol{u}_B - \boldsymbol{u}_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization of the computation. \label{Schematic}](docs/figs/SF_hydro.png)
+For 3D incompressible hydrodynamic turbulence with homegeneity and isotropy, the third-order longitudinal velocity structure function in the inertial range (scales lying between the large-scale forcing regime and the small-scale dissipation regime) is given by [@Kolmogorov:Dissipation; @Kolmogorov:Structure; @Frisch:book]
+$$S_3^{u_\parallel}(l) = -\frac{4}{5} \epsilon_u l \sim -l, \quad \quad (4)$$
+where $\epsilon_u$ is the viscous dissipation rate. For an arbitrary order $q$, @She:PRL1994 proposed that the longitudinal structure functions scale as $S_q^{u_\parallel} (l) \sim \zeta_q$, where the exponent $\zeta_q$ is given by
+$$\zeta_q = \frac{q}{9} + 2\left(1 - \left( \frac{2}{3} \right)^{q/3} \right). \quad \quad (5)$$
+
+
+![The velocity difference $\delta \boldsymbol{u}(\boldsymbol{l})$ is computed by taking the difference between two points with the same indices in the pink and the green subdomains. For example, $\boldsymbol{u}(\boldsymbol{l}) - \boldsymbol{u}(0,0) = \boldsymbol{u}_B - \boldsymbol{u}_A$, where $B$ and $A$ are the origins of the green and the pink subdomains. This feature enables vecotrization of the computation. \label{SF_Hydro}](docs/figs/SF_hydro.png)
 
 
 In the next section, we provide a brief description of the code.
