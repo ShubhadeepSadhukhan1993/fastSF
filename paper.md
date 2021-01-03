@@ -65,7 +65,7 @@ For an arbitrary order $q$, @She:PRL1994 proposed that the longitudinal structur
 $$\zeta_q = \frac{q}{9} + 2\left(1 - \left( \frac{2}{3} \right)^{q/3} \right). \quad \quad (5)$$
 
 
-Figure~\ref{SF_Hydro} exhibits the plots of the negative of the normalized 3rd, 5th, and 7th-order longitudinal velocity structure functions computed using the simulation data of 3D hydrodynamic turbulence [@Sadhukhan:PRF2019]. The structure functions are normalized by $(\epsilon l)^{\zeta_q}$, where $zeta_q$ is given by Eq. (5).  In the inertial range (0.2 < l < 0.7), the normalized third-order longitudinal velocity structure function is fairly close to $4/5$ (represented by dashed line), consistent with Kolmogorov's theory. Moreover, the normalized fifth and seventh-order structure functions show a plateau for the same range of l, thus exhibiting consistency with She-Leveque's model.
+Figure~\ref{SF_Hydro} exhibits the plots of the negative of the normalized 3rd, 5th, and 7th-order longitudinal velocity structure functions computed using the simulation data of 3D hydrodynamic turbulence [@Sadhukhan:PRF2019]. The structure functions are normalized by $(\epsilon l)^{\zeta_q}$, where $\zeta_q$ is given by Eq. (5).  In the inertial range (0.2 < l < 0.7), the normalized third-order longitudinal velocity structure function is fairly close to $4/5$ (represented by dashed line), consistent with Kolmogorov's theory. Moreover, the normalized fifth and seventh-order structure functions show a plateau for the same range of l, thus exhibiting consistency with She-Leveque's model.
 
 
 
