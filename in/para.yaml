@@ -2,13 +2,13 @@
 
 program:
     #Please select "true" for computing scalar structure function, "false" for computing velocity structure function:
-    scalar_switch: false
+    scalar_switch: False
   
     #Please select "true" for 2D operations, "false" for 3D operations:
-    2D_switch : false
+    2D_switch : False
 
     #Please select "true" for computing only the longitudinal structure functions, "false" for computing both the transverse and longitudinal structure functions:
-    Only_longitudinal: false
+    Only_longitudinal: False
 
     #Please enter the number of processors in x direction:
     Processors_X: 1
@@ -18,9 +18,9 @@ program:
 #Note: Nx - number of points in the x direction, Ny - number of points in the y-direction, Nz - number of points in the z direction.
 #For 2D, provide Nx and Nz.
 grid :
-    Nx : 32
-    Ny : 32
-    Nz : 32
+    Nx : 8
+    Ny : 8
+    Nz : 8
 
         
 #Please specify the domain dimensions. 
